@@ -35,13 +35,13 @@ minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "n
 ## 발행 시간 표시
 - show_date: true 설정으로 포스트의 발행 일자 표시가 가능
 ```
-defaults:
+`defaults:
   # _posts
   - scope:
       path: ""
       type: posts
     values:
-      show_date: true # 발행 일자 표시
+      show_date: true # 발행 일자 표시`
 ```
 
 ## locale
