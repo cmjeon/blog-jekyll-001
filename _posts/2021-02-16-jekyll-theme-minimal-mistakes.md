@@ -17,7 +17,7 @@ tags:
 1. [minimal mistakes 홈페이지](https://mmistakes.github.io/minimal-mistakes/){:target="_blank"}에서 최신버전 다운로드
 2. 압축해제한 파일들을 현재 블로그에 덮어쓰기
 3. 로컬환경에서 실행
-```
+```bash
 $ bundle exec jekyll serve
 ```
 4. mininal mistakes 테마 적용 확인
@@ -28,7 +28,7 @@ $ bundle exec jekyll serve
 
 ## Skin
 - 스킨은 텍스트 수정으로 10가지 스킨으로 변경가능
-```
+```yml
 minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum" "sunrise"
 ```
 
@@ -46,7 +46,7 @@ defaults:
 
 ## locale
 - 사이트 주언어를 설정 가능
-```
+```yml
 # 한국어-한국으로 설정한 경우
 locale : "ko-KR"
 ```
@@ -56,7 +56,7 @@ locale : "ko-KR"
 
 ## search
 - search를 활성화하면 검색기능 활성화 가능
-```
+```yml
 search : true
 ```
 
@@ -66,12 +66,12 @@ search : true
 $ history
 ```
 - history 중 특정 명령어 검색
-```
+```bash
 # sudo가 포함된 명령어
 $ history | grep sudo
 ```
 - history애 있는 명령어 실행
-```
+```bash
 # 10번 명령어 실행
 $ !10
 ```
