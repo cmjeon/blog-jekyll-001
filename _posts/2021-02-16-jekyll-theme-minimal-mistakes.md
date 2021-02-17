@@ -14,7 +14,7 @@ tags:
 - [깃헙 jekyll theme 토픽](https://github.com/topics/jekyll-theme){:target="_blank"}에서 가장 많은 star를 받은 minimal mistakes를 채택하기로 함
 
 # minimal mistakes 설치하기
-1. [minimal mistakes 홈페이지](https://github.com/minimal-mistakes){:target="_blank"}에서 최신버전 다운로드
+1. [minimal mistakes 홈페이지](https://mmistakes.github.io/minimal-mistakes/){:target="_blank"}에서 최신버전 다운로드
 2. 압축해제한 파일들을 현재 블로그에 덮어쓰기
 3. 로컬환경에서 실행
 ```
