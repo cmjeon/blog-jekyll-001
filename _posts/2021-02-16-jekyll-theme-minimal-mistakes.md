@@ -34,6 +34,7 @@ minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 ## 발행 시간 표시
 - show_date: true 설정으로 포스트의 발행 일자 표시가 가능
+
 ```yml
 defaults:
   # _posts
@@ -45,7 +46,7 @@ defaults:
 ```
 
 ## locale
-- 사이트 주언어를 설정 가능
+- 사이트 메인언어 설정 가능
 ```yml
 # 한국어-한국으로 설정한 경우
 locale : "ko-KR"
