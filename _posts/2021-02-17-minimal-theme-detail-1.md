@@ -1,6 +1,6 @@
 ---
 layout: posts
-title: minimal-mistakes theme 더 자세히 살펴보기 1
+title: jekyll minimal-mistakes theme Quick-Start Guide
 categories: 
   - jekyll
 tags: 
@@ -9,7 +9,7 @@ tags:
   - minimal-mistakes
 ---
 # Quick-Start Guide
-
+- [Quick-Start Guide](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/){:target="_blank"}
 ## Installing the theme
 - minimal mistakes는 gem-based theme임
 - jekyll v3.7+이고 self-hosting을 한다면, theme를 ruby gem으로 설치할 수 있음
@@ -31,3 +31,27 @@ tags:
   ```
   theme: minimal-mistakes-jekyll
   ```
+  1. 실행
+  ```
+  $ bundle update
+  ```
+
+## Remote theme method
+- Remote theme은 Gem-baased theme와 비슷하지만 Gemfile 변경이나 화이트리스트(?)가 필요하지 않음
+- [Remote theme 설치하기](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#remote-theme-method){:target="_blank"}
+
+## remove the Unnecessary
+- 테마를 받은 후 불필요한 파일이나 디렉토리는 삭제해야 함
+```
+# 불필요한 파일, 디렉토리 목록
+.editorconfig
+.gitattributes
+.github
+/docs
+/test
+CHANGELOG.md
+minimal-mistakes-jekyll.gemspec
+README.md
+screenshot-layouts.png
+screenshot.png
+```
