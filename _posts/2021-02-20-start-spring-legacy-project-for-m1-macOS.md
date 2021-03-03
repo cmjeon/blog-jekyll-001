@@ -22,7 +22,7 @@ tags:
 - zulu-community에서 생성해놓은 jdk 다운로드가 필요
 - https://www.azul.com/downloads/zulu-community/?version=java-8-lts&os=macos&architecture=arm-64-bit&package=jdk
 - .dmg 클릭
-- 
+
 # maven 설치
 - 인텔용 brew를 사용하여 설치
 - brew install maven
