@@ -14,7 +14,7 @@ tags:
 1. database : mariadb server 10
 1. database tool : dbeaver
 1. Web/WAS : apache tomcat 9.0
-1. IDE : sts 4 with spring tool 3 add-on)
+1. IDE : sts 4 with spring tool 3 add-on
 1. template : spring legacy project
 
 # java 설치
@@ -22,6 +22,7 @@ tags:
 - zulu-community에서 생성해놓은 jdk 다운로드가 필요
 - https://www.azul.com/downloads/zulu-community/?version=java-8-lts&os=macos&architecture=arm-64-bit&package=jdk
 - .dmg 클릭
+- 
 # maven 설치
 - 인텔용 brew를 사용하여 설치
 - brew install maven
