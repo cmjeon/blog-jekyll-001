@@ -2,6 +2,8 @@
 main:
   - title: "About"
     url: /about
+  - title: "Project"
+    url: /project
   - title: "Posts"
     url: /year-archive/
   # - title: "Theme Guide"
