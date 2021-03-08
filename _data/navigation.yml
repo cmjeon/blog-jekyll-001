@@ -2,10 +2,14 @@
 main:
   - title: "About"
     url: /about
-  - title: "Project"
-    url: /project
+  - title: "Projects"
+    url: /projects
   - title: "Posts"
     url: /year-archive/
+  - title: "Categories"
+    url: /category-archive/
+  - title: "Tags"
+    url: /tags/
   # - title: "Theme Guide"
   #  url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "Sample Collections"
