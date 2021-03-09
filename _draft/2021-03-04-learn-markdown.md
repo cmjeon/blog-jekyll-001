@@ -7,7 +7,7 @@ tags:
   - markdown
 ---
 
-# 정적인 동적인 웹사이트
+## 마크다운
 
 # 참고
 - [https://www.youtube.com/watch?v=kMEb_BzyUqk](https://www.youtube.com/watch?v=kMEb_BzyUqk)(:target="_blank")

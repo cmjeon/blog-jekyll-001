@@ -18,11 +18,9 @@ tags:
 - 늦었다고 생각할 때가 가장 빠를 때이니 지금이라도 이력서를 정리해보자.
 
 ## 이력서를 어떻게 관리할까?
-- 이력서는 직장생활의 실록이지만 채용시장에서 나를 알리는 수단이기도 하다.
-- 채용시장은 정보의 비대칭성이 있는 시장이다.
-- 개인은 회사를 대부분 어느정도 알 수 있지만, 회사는 개인을 알기가 어렵다.
-- 따라서 개인은 회사에게 적극적으로 본인을 알릴 필요가 있고, 그 방법으로 이력서가 주로 선택된다.
-- 그것을 온라인에서 관리할 수 있다면 관리와 홍보 모든 면에서 유리하고 생각된다.
+- 이력서는 직장생활의 실록이기 때문에 늘 최신상태로 관리되고 있어야 한다.
+- 또한 채용시장에서 나를 알리는 수단이기도 하기 때문에 잘 공유할 수 있어야 한다.
+- 따라서 이력서를 쉽게 관리하고 전파할 수 있는 온라인에서의 관리가 유리하고 생각된다.
 
 ## 개발자용 이력서
 - 개발자용 이력서라고 특별한 내용이 있다기 보다는 채용담당자 입장에서 주목할만한 부분을 담는 것이 좋을 것
@@ -33,11 +31,13 @@ tags:
 
 # 참고
 - [https://wonny.space/writing/work/engineer-resume](https://wonny.space/writing/work/engineer-resume){:target="_blank"}
+- [https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72](https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72){:target="_blank"}
 - [https://brunch.co.kr/@adrenalinee31/7](https://brunch.co.kr/@adrenalinee31/7){:target="_blank"}
 - [https://woowabros.github.io/experience/2017/07/17/resume.html](https://woowabros.github.io/experience/2017/07/17/resume.html){:target="_blank"}
 - [https://hyunseob.github.io/resume/](https://hyunseob.github.io/resume/){:target="_blank"}
 - [https://speakerdeck.com/weirdx](https://speakerdeck.com/weirdx){:target="_blank"}
 - [https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongug](https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongug){:target="_blank"}
 - [https://speakerdeck.com/weirdx/99kon-ireohge-gocyeoboja-gaebalja-iryeogseo-jagseong-tips-gimseulgi-peurogeuraemeoseu](https://speakerdeck.com/weirdx/99kon-ireohge-gocyeoboja-gaebalja-iryeogseo-jagseong-tips-gimseulgi-peurogeuraemeoseu){:target="_blank"}
+- [https://speakerdeck.com/weirdx/99kon-sitalculgi-hwanggeongu](https://speakerdeck.com/weirdx/99kon-sitalculgi-hwanggeongu){:target="_blank"op}
 - [https://d2.naver.com/news/3435170](https://d2.naver.com/news/3435170){:target="_blank"}
 - [https://jojoldu.github.io](https://jojoldu.github.io){:target="_blank"}
