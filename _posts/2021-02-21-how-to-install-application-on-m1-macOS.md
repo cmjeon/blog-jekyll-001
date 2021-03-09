@@ -2,9 +2,10 @@
 layout: single
 title: m1 macOS에서 어플리케이션 설치하는 방법
 categories: 
-  - m1 macOS
+  - env/config
 tags:
   - homebrew
+  - installation
   - m1 macOS
 ---
 ## .dmg 다운로드하여 설치

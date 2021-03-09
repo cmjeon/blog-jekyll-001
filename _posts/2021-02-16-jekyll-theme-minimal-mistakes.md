@@ -6,6 +6,7 @@ categories:
 tags:
   - jekyll
   - theme
+  - minimal-mistakes
 ---
 
 ## jekyll 테마

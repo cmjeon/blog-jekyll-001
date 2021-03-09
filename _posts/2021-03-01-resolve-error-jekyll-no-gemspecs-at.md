@@ -5,8 +5,8 @@ categories:
   - jekyll
 tags: 
   - jekyll
-  - minimal mistakes
-  - trouble shooting
+  - minimal-mistakes
+  - error
 ---
 
 - 열심히 글을 쓰고 올리던 올리다가 테마색상을 바꾸고 싶어서 _config.yml를 변경하고 로컬에서 확인해보고 싶었음
@@ -45,8 +45,8 @@ end
 - _config.yml 변경
 
 ```
-# 하단 내용 추가 or theme setting 주석제거
-theme: minimal-mistakes-jekyll
+# 하단 내용 추가 or remote_theme setting 주석제거
+remote_theme: minimal-mistakes-jekyll
 ```
 
 - bundle update & install

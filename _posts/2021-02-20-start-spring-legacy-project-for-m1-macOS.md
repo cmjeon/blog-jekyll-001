@@ -2,9 +2,10 @@
 layout: single
 title: m1 macOS에서 spring legacy project 시작하기
 categories: 
-  - spring
+  - env/config
 tags: 
   - spring
+  - installation
   - m1 macOS
 ---
 

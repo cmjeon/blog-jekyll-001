@@ -2,7 +2,7 @@
 layout: single
 title: jquery ajax의 이해
 categories: 
-  - jquery
+  - frontEnd
 tags: 
   - jquery
   - ajax
@@ -16,35 +16,34 @@ tags:
 ## jquery ajax options 사용법
 - ajax는 옵션들을 object에 넣어서 파라메터로 전달
 ```javascript
-# ajax 예제
 $.ajax({
-  type : "POST",
-  url : "your url",
-  dataType : "json",
-  data : "your Data",
-  traditional : true,    // or false, your choice
-  async : false,    // or true, your choice
-  beforeSend : function(xhr, opts) {
-    // when validation is false
-    if (false) {
-      xhr.abort();
+    type : "POST",
+    url : "your url",
+    dataType : "json",
+    data : "your Data",
+    traditional : true,    // or false, your choice
+    async : false,    // or true, your choice
+    beforeSend : function(xhr, opts) {
+        // when validation is false
+        if (false) {
+            xhr.abort();
+        }
+    },
+    success : function() {
+        // success code
+    },
+    error : function() {
+        // error code
     }
-  },
-  success : function() {
-    // success code
-  },
-  error : function() {
-    // error code
-  }
 });
 ```
 
 ## jquery ajax 주요 options
-## url
+### url
 - 기본옵션, Request가 보내져야 하는 URL
 ```javascript
 $.ajax({
-  url: "test.html",
+    url: "test.html",
 })
 ...
 ```
@@ -56,7 +55,7 @@ $.ajax({
 - cross-domain이나 datatype이 jsonp인 경우는 동기식 호출 불가
 ```javascript
 $.ajax({
-  async:false,
+    async:false,
 })
 ```
 

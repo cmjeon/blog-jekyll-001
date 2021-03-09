@@ -8,6 +8,7 @@ tags:
   - theme
   - minimal-mistakes
 ---
+
 ## Quick-Start Guide
 - [Quick-Start Guide](https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/){:target="_blank"}
 ### Installing the theme

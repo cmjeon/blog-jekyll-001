@@ -2,7 +2,7 @@
 layout: single
 title: mysql 'access denied for user ...' 오류 해결
 categories: 
-  - mysql
+  - env/config
 tags:
   - mysql
   - error
