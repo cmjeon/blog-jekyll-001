@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: single
 title: jekyll 문서 요약 2
 categories: 
   - jekyll
@@ -7,10 +7,10 @@ tags:
   - jekyll
   - jekyll docs
 ---
-# contents
-## collections - 컬렉션
+## jeykll docs - content
+### collections - 컬렉션
 - 컬렉션은 서로 관련된 정보를 그룹화하는데 용이함
-### 셋업
+#### 셋업
 - 컬렉션을 사용하려면 먼저 _config.yml에 컬렉션을 정의해야 함
 
 ```
@@ -18,7 +18,7 @@ tags:
 collections:
   - staff_members
 ```
-### 콘텐츠 추가하기
+#### 콘텐츠 추가하기
 - 컬렉션에 설정한 이름 `staff_members` 에 맞는 폴더인 `<source>/_staff_members` 를 추가함
 - 머릿말이 있다면 먼저 처리되고 이후의 모든 내용은 문서의 content 속성에 들어감
 - 머릿말이 없다면 jekyll은 내용 처리를 수행하지 않음
@@ -33,7 +33,7 @@ position: Developer
 Jane has worked on Jekyll for the past *five years*.
 ```
 
-### 출력
+#### 출력
 - 페이지에서 `site.staff_members`를 사용하여 각 스태프의 내용을 출력할 수 있음
 
 ```
@@ -65,16 +65,17 @@ collections:
 {% endfor %}
 {% endraw %}```
 
-### 고유주소
+#### 고유주소
 - 고유주소 변수로 컬렉션의 url 결과물을 제어할 수 있음
 
-### 문서 순서 조정
+#### 문서 순서 조정
 - 컬렉션 안의 모든 문서들이 머릿말에 date를 가지고 있다면 date를 기준으로 정렬
 - 아니면 문서명을 기준으로 정렬
 - 컬렉션의 메타데이터를 기준으로 정렬방법을 조회할 수 있음
 
 #### 머리말 키에 따른 정렬
 - 메타데이터에 `sort_by`를 설정하면 머리말 내용을 기반하여 문서 정렬이 가능
+
 ```
 # lesson을 기준으로 정렬한 예시
 collections:
@@ -86,6 +87,7 @@ collections:
 
 #### 문서 수동 정렬
 - 메타데이터에서 order 에 원하는 순서로 파일명을 나열하여 수동으로 정렬 가능
+
 ```
 # 수동 정렬 예시
 collections:
@@ -96,11 +98,11 @@ collections:
 ```
 - order에 존재 하지 않는 문서는 정렬된 문서 뒤에 옴 > 날짜나 경로로 정렬
 
-### Liquid 속성
-#### 컬렉션
-
+#### Liquid 속성
+##### 컬렉션
 - 컬렉션은 site.collections 로도 사용가능
 - _config.yml에 정의한 메타데이터와 아래 정보를 사용할 수 있음
+
 ```
 label : 컬렉션의 이름. 예시, my_collection.
 docs : 문서들의 배열.
@@ -110,7 +112,7 @@ directory : 컬렉션 소스 디렉토리 전체 경로
 output : 컬렉션의 문서들이 독립적인 파일로 출력될 것인지에 대한 여부.
 ```
 
-#### 문서
+##### 문서
 - 모든 문서는 머리말에서 지정한 속성과 아래의 기본 속성을 가지고 있음
 
 ```

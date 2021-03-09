@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: single
 title: jquery ajax의 이해
 categories: 
   - jquery
@@ -42,12 +42,7 @@ $.ajax({
 ## jquery ajax 주요 options
 ## url
 - 기본옵션, Request가 보내져야 하는 URL
-<<<<<<< HEAD
-
-```
-=======
 ```javascript
->>>>>>> 55068cd686a32ce09f002700dddeaba5f6186db0
 $.ajax({
   url: "test.html",
 })
@@ -59,12 +54,7 @@ $.ajax({
 - 기본값 true로 비동기식 호출
 - false로 지정하면 동기식 호출을 수행함
 - cross-domain이나 datatype이 jsonp인 경우는 동기식 호출 불가
-<<<<<<< HEAD
-
-```
-=======
 ```javascript
->>>>>>> 55068cd686a32ce09f002700dddeaba5f6186db0
 $.ajax({
   async:false,
 })

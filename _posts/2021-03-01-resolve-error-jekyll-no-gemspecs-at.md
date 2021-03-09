@@ -1,5 +1,5 @@
 ---
-layout: posts
+layout: single
 title: 지킬 'There are no gemspecs' 오류 해결
 categories: 
   - jekyll
