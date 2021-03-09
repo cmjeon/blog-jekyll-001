@@ -1,10 +1,9 @@
 ---
-layout: posts
+layout: single
 title: 코딩학습 참고 사이트
 categories: 
-  - learning programming
+  - learning
 tags: 
-  - functional programming
   - opentutorials
   - inflearn
 ---

@@ -1,11 +1,11 @@
 ---
 layout: posts
-title: 지킬테마에서 저자 프로필을 보이게 하기
+title: minimal-mistakes에서 저자 프로필을 보이게 하기
 categories: 
   - jekyll
 tags: 
   - jekyll
-  - theme
+  - minimal-mistakes
   - author profile
 ---
 # 저자 프로필

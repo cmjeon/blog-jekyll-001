@@ -1,8 +1,8 @@
 ---
-layout: posts
-title: 함수형 프로그래밍의 이해
+layout: single
+title: 함수형 프로그래밍 배우기
 categories: 
-  - learning programming
+  - learning
 tags: 
   - functional programming
 ---
