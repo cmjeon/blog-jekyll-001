@@ -26,7 +26,8 @@ tags:
 
 ## 개발자용 이력서
 - 개발자용 이력서라고 특별한 내용이 있다기 보다는 채용담당자 입장에서 주목할만한 부분을 담는 것이 좋을 것
-- 아마 (과거)지금까지의 경험, (현재)보유 기술과 수준, (미래)입사 후 계획 정도이다.
+- 아마 (과거)지금까지의 이력, (현재)보유 기술과 수준, (미래)입사 후 계획 정도로 생각된다.
+- 여기에 지원 동기와 
 
 ## 
 
@@ -35,4 +36,8 @@ tags:
 - [https://brunch.co.kr/@adrenalinee31/7](https://brunch.co.kr/@adrenalinee31/7){:target="_blank"}
 - [https://woowabros.github.io/experience/2017/07/17/resume.html](https://woowabros.github.io/experience/2017/07/17/resume.html){:target="_blank"}
 - [https://hyunseob.github.io/resume/](https://hyunseob.github.io/resume/){:target="_blank"}
-- [https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongughttps://d2.naver.com/news/3435170](https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongughttps://d2.naver.com/news/3435170){:target="_blank"}
+- [https://speakerdeck.com/weirdx](https://speakerdeck.com/weirdx){:target="_blank"}
+- [https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongug](https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongug){:target="_blank"}
+- [https://speakerdeck.com/weirdx/99kon-ireohge-gocyeoboja-gaebalja-iryeogseo-jagseong-tips-gimseulgi-peurogeuraemeoseu](https://speakerdeck.com/weirdx/99kon-ireohge-gocyeoboja-gaebalja-iryeogseo-jagseong-tips-gimseulgi-peurogeuraemeoseu){:target="_blank"}
+- [https://d2.naver.com/news/3435170](https://d2.naver.com/news/3435170){:target="_blank"}
+- [https://jojoldu.github.io](https://jojoldu.github.io){:target="_blank"}
