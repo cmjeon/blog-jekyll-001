@@ -17,7 +17,7 @@ tags:
 ## 생활코딩 opentutorials
 - https://www.opentutorials.org/course/1
 - 코딩 배우기 좋은 대표적인 사이트이다.
-- eoging님이 비전공자도 이해할 수 있도록 아주 쉽게 설명한다.
+- eogoing님이 비전공자도 이해할 수 있도록 아주 쉽게 설명한다.
 - 그래서 초보자가 개발을 배우고자 한다면 무조건 소개한다.
 
 ## 인프런 inflearn
