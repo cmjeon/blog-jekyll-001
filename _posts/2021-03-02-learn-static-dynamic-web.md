@@ -33,4 +33,4 @@ tags:
 - 상황에 맞게 정적/동적 웹을 사용하는 것이 좋을 것이다.
 
 ## 참고
-https://www.youtube.com/watch?v=C06xRvXIAUk&t=10s
+[https://www.youtube.com/watch?v=C06xRvXIAUk](https://www.youtube.com/watch?v=C06xRvXIAUk){:target="_blank"}

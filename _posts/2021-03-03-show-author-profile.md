@@ -41,4 +41,4 @@ defaults:
 ```
 
 ## 참고
-- https://devinlife.com/howto%20github%20pages/blog-config/#9-_posts-_pages-기본-설정
+- [https://devinlife.com/howto%20github%20pages/blog-config/#9-_posts-_pages-기본-설정](https://devinlife.com/howto%20github%20pages/blog-config/#9-_posts-_pages-기본-설정){:target="_blank"}
