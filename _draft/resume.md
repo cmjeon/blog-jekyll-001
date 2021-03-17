@@ -5,7 +5,7 @@ author_profile: false
 ---
 
 ### 안녕하세요, 웹개발자 전창민입니다.
-#### spring framework, jquery를 이용한 홈페이지, 관리자페이지를 운영하였습니다.
+#### spring framework, jquery, vue.js를 이용한 홈페이지, 관리자페이지를 운영하였습니다.
 ---
 
 ## Contact
@@ -19,7 +19,7 @@ github : https://github.com/cmjeon
 
 ---
 ## 보유 기술
-java, spring framework, javascript, vue, css, jquery, 
+java, spring framework, javascript, node.js, vue.js 
 
 ---
 ## 이력
