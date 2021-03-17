@@ -62,6 +62,7 @@ say_it('안녕');
 ### 고계함수
 - 함수가 값이라면 함수에 다른 함수를 인자로 넣을 수 있다.
 - 인자에 함수를 쓰거나 결과값으로 함수를 반환하는 함수를 '고계함수'라고 한다.
+
 ```javascript
 const calc = (num1, num2, op) => op(num1, num2);
 
@@ -78,6 +79,7 @@ calc(2, 3, power);
 ```
 
 - 함수를 받아서 함수를 반환하는 calcWith2 함수
+
 ```javascript
 const calcWith2 = (op) => (num) => op(2, num);
 // calcWith2는 어떤 함수를 인자로 받고, num을 인자로 받아 인자로 받은 함수에 2와 num을 넣은 결과를 리턴하는 함수를 반환한다.
@@ -97,6 +99,7 @@ multiply(3);
 
 ### 커링
 - 커링은 여러 인자를 받는 함수에 일부 인자만 넣어서 나머지 인자를 받는 다른 함수를 만들어 내는 함수형 프로그래밍 기법이다.
+
 ~~~javascript
 var add_curry = (num1) => (num2) => num1 + num2;
 // add_curry는 num1을 인자로 받고, num2를 인자로 받아서 num1과 num2를 더한 결과를 리턴하는 함수를 반환한다.
@@ -160,4 +163,4 @@ console.log(
 ~~~
 
 ## 참고
-- https://www.youtube.com/watch?v=jVG5jvOzu9Y
+- [https://www.youtube.com/watch?v=jVG5jvOzu9Y](https://www.youtube.com/watch?v=jVG5jvOzu9Y){:target="_blank"}
