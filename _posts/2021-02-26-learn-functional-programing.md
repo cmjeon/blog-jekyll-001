@@ -35,6 +35,7 @@ tags:
 ### 함수도 값이다
 - 함수는 '행위'가 아닌 '값'이다
 - 함수를 함수형이나 변수형으로 선언가능
+
 ```javascript
 //함수형
 function say_it(given) {
@@ -47,7 +48,9 @@ var say_it = function(given) {
 //es6 변수형
 const say_it = (given) => console.log(given);
 ```
+
 - 단순 호출 가능, 콜백 함수로 호출 가능
+
 ```javascript
 say_it('안녕');
 // 안녕
@@ -112,6 +115,7 @@ add2(9);
 
 ### 함수 컴비네이터
 - 다음 배열에서 이과생, 선착순 3명을 뽑아서 문자열로 출력해보자
+
 ~~~javascript
 var students = [
   new Student("홍길동", "문과", "문학"),
@@ -130,6 +134,7 @@ var students = [
 ~~~
 
 - 비함수형 코드 예시
+
 ~~~javascript
 var filtered = [];
 for(var i=0; i<students.length; i++) {
@@ -145,7 +150,9 @@ for(var i=0; i<filtered.length; i++) {
 console.log(result);
 // 전우치(기계) 임꺽정(화학) 연흥부(컴퓨터) 
 ~~~
+
 - 함수형 코드 예시
+
 ~~~javascript
 // lodash 활용
 console.log(
