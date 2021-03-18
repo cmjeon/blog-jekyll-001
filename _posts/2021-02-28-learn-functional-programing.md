@@ -1,6 +1,6 @@
 ---
 layout: single
-title: 함수형 프로그래밍 정리
+title: 함수형 프로그래밍 배우기
 categories: 
   - learning
 tags: 
