@@ -1,6 +1,6 @@
 ---
 layout: single
-title: 프로그래밍 기초 in Python 배우기
+title: 프로그래밍 기초 in Python 배우기 001
 categories: 
   - learning
 tags: 
