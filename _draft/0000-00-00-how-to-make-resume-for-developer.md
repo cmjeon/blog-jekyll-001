@@ -34,7 +34,45 @@ tags:
 
 ## 추구하는 성장 방향
 
-# 참고
+## 이력서는 6개월에 한번씩 점검할 것
+
+- 수치화된 데이터, 기억이 생생할 때 기록
+- 지금까지 업무내용을 회고할 수 있는 기회
+
+## 좋은 이력서란?
+
+- 면접의 기회를 주는 이력서
+
+## 좋은 이력서 작성하는 6가지 팁
+
+### 성취한것 위주로
+
+- 나만의 어떤 방식으로 회사에 기여하였는지?
+
+### 수치화된 결과로
+
+- 숫자로 명시 (00개월간 만든 소프트웨어, 000명의 사용자가 사용, 00% 생산성 향상)
+
+### 타겟을 잘 선정할 것
+
+- 각 회사마다 원하는 스킬이 다르다. 가장 위에 있는 항목이 가장 필요한 스킬
+- 스킬이 위에 있는 항목을 강조하여 작성해보자
+
+### 누구나가 이해하도록
+
+- 전공자/비전공자가 이해하기 쉽도록
+
+### 깨끗, 간결, 문법
+
+- 가독성 높은 폰트
+- 철자 틀리지 않도록
+
+### 전략적으로 구조 작성
+
+- 바쁜 사람도 읽기 쉽도록 한눈에 볼 수 있도록
+- 이름, 소개, 스킬을 강조
+
+## 참고
 - [https://wonny.space/writing/work/engineer-resume](https://wonny.space/writing/work/engineer-resume){:target="_blank"}
 - [https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72](https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72){:target="_blank"}
 - [https://brunch.co.kr/@adrenalinee31/7](https://brunch.co.kr/@adrenalinee31/7){:target="_blank"}
@@ -46,3 +84,4 @@ tags:
 - [https://speakerdeck.com/weirdx/99kon-sitalculgi-hwanggeongu](https://speakerdeck.com/weirdx/99kon-sitalculgi-hwanggeongu){:target="_blank"op}
 - [https://d2.naver.com/news/3435170](https://d2.naver.com/news/3435170){:target="_blank"}
 - [https://jojoldu.github.io](https://jojoldu.github.io){:target="_blank"}
+- [https://youtu.be/9DgiHU-_4dY](https://youtu.be/9DgiHU-_4dY){:target="_blank"}
