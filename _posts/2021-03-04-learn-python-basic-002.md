@@ -45,7 +45,7 @@ so cool
 
 ### 문자열 연산
 
-~~~
+~~~python
 # 문자열 연결
 > a = 'Life is'
 > b = 'so cool'
@@ -60,7 +60,7 @@ so cool
 
 ### 문자열 인덱싱과 슬라이싱
 
-~~~
+~~~python
 # 문자열 인덱스
 > a = 'Life is so cool'
 > a[6]
@@ -92,7 +92,7 @@ Life is so;
 
 ### 문자열 포매팅
 
-~~~
+~~~python
 # 숫자
 > "I went %d days ago." % 3
 
@@ -119,7 +119,7 @@ unit = "weeks"
 
 #### 포맷 코드와 숫자
 
-~~~
+~~~python
 # 정렬과 공백
 > "%10s" % "hi"
 '        hi'
@@ -135,7 +135,7 @@ unit = "weeks"
 
 #### format 함수를 사용한 포맷팅
 
-~~~
+~~~python
 # 값 대입하기
 > "I went {0} {1} ago.".format(3, "weeks")
 'I went 3 weeks ago.'
@@ -166,7 +166,7 @@ unit = "weeks"
 
 - python 3.6 부터 f 문자열 포매팅 사용가능
 
-~~~
+~~~python
 > name = '홍길동'
 > age = 30
 > f'나의 이름은 {name}입니다. 나이는 {age}입니다.'
@@ -200,7 +200,7 @@ pi = 3.42134234
 
 ### 문자열 관련 함수들
 
-~~~
+~~~python
 # 문자 개수
 > "tree".count('e')
 2
