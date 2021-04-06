@@ -1,11 +1,11 @@
 ---
 layout: single
 title: react native 개발 환경 for intel 001
-
 categories: 
-  - learning
+  - env/config
 tags: 
-  - react native basic
+  - react native
+  - development environment
 ---
 
 ## 리액트 네이티브란

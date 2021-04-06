@@ -2,7 +2,7 @@
 layout: single
 title: 프로그래밍 기초 in Python 배우기 002
 categories: 
-  - learning
+  - learn python
 tags: 
   - python
 ---

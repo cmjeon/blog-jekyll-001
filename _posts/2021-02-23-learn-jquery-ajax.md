@@ -1,6 +1,6 @@
 ---
 layout: single
-title: jquery ajax의 이해
+title: jquery ajax의 알아보기
 categories: 
   - frontEnd
 tags: 

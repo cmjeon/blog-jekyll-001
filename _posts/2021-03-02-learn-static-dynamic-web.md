@@ -1,8 +1,8 @@
 ---
 layout: single
-title: 정적 웹사이트와 동적 웹사이트 배우기
+title: 정적 웹사이트와 동적 웹사이트 알아보기
 categories: 
-  - learning
+  - learn etc
 tags: 
   - static page
   - dynamic page

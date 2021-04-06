@@ -2,9 +2,10 @@
 layout: single
 title: react native 개발 환경 for intel 002
 categories: 
-  - learning
+  - env/config
 tags: 
-  - react native basic
+  - react native
+  - development environment
 ---
 
 ## 새 프로젝트 생성
@@ -27,13 +28,16 @@ $ cd my_first_app
 $ npm start
 ~~~
 
-- 새 터미널
+- 새 터미널 열기
+
 ~~~bash
 $ react-native run-ios
 ~~~
 
+- 다른 iPhone 시뮬레이터 실행
+
 ~~~bash
-# 다른 iPhone에서 실행
+# 다른 iPhone 시뮬레이터 실행
 $ react-native run-ios --simulator="iPhone 8 Plus"
 ~~~
 

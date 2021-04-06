@@ -1,8 +1,8 @@
 ---
 layout: single
-title: 정규표현식 배우기
+title: 정규표현식 알아보기
 categories: 
-  - learning
+  - learn etc
 tags: 
   - regex
 ---
