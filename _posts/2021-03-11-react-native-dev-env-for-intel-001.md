@@ -1,6 +1,7 @@
 ---
 layout: single
-title: react native 기초 배우기 001
+title: react native 개발 환경 for intel 001
+
 categories: 
   - learning
 tags: 
@@ -37,6 +38,8 @@ tags:
 - Mac의 경우에만 iOS/Android 지원, iOS 시뮬레이터 사용가능
 
 ## 개발환경 설치
+
+- intel mac 기반 react native 개발환경 구축 방법임
 
 ### xcode-select
 
@@ -130,15 +133,12 @@ $ npm --version
 - Launchpad에서 Android Studio 실행
 
 #### Android Studio 설정
+
 - Welcome > Next
 - Install Type > Next
 - Select UI Theme > Darcula > Next
 - Verify Settings > Finish
 - Android Studio 실행
-
-> Mac m1에서 설치 시 Unable to install Intel HAXM, Yout CPU does not support VT-x. 문제 발생 시
-> 
-
 
 ##### SDK Manager 설정
 
@@ -153,9 +153,6 @@ $ npm --version
 - Select Hardware > 모델 하나 선택 > Next
 - System Image > 최신 버전 Android 선택 > Next
 - Android Virtual Device > Finish
-
-> Mac m1에서 AVD가 생성되지 않는 문제 발생 시
-> https://androidstudio.googleblog.com/2020/12/android-emulator-apple-silicon-preview.html
 
 ### 환경설정
 
@@ -184,9 +181,6 @@ Version ...
 $ java --version
 ~~~
 
-> Mac m1에서 java 11 설치방법
-> 
-
 ### Xcode
 
 - Appstore에서 Xcode 검색 후 설치
@@ -195,9 +189,6 @@ $ java --version
 ### Visual Studio Code
 
 - visual studio code download 검색 > 설치
-
-> Visual Studio Code 필수 extensions
->
 
 ### CocoaPod
 
@@ -231,10 +222,6 @@ $ react-native --version
 react-native-cli: 2.0.1
 react-native: n/a - not inside a React Native project directory
 ~~~
-
-
-
-
 
 ## 참고
 -(https://www.inflearn.com/course/리액트-네이티브-기초)
