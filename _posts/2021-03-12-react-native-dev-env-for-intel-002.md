@@ -15,7 +15,7 @@ tags:
 
 ~~~bash
 # 새 프로젝트 생성
-$ react-native init --ver sion 0.61.5 my_first_app
+$ react-native init --version 0.61.5 my_first_app
 # 폴더 이동
 $ cd my_first_app
 ~~~
