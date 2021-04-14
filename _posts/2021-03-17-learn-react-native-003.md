@@ -1,6 +1,6 @@
 ---
 layout: single
-title: react native 기초 배우기 003 - Button
+title: react native 기초 배우기 003 - Button, TouchEvent 심화
 categories: 
   - learn react native
 tags:
@@ -191,6 +191,10 @@ tags:
   ...
   ~~~
 
+## TouchEvent 심화
+
+- 'Add Number' 버튼을 누르면 랜덤숫자가 추가되고, 숫자를 누르면 해당 숫자가 제거되는 기능을 만들어 보겠음
+
 - app.js 에서 style 수정
 
   ~~~javascript
@@ -201,6 +205,53 @@ tags:
         // justifyContent: 'top' 삭제
       }
     })
+  ~~~
+
+- App.js 에 onAddRandomNum, onNumDelete 추가
+
+  ~~~javascript
+  ...
+    onAddRandomNum = () => {
+      const randomNum = Math.floor(Math.random()*100)+1; // 1~100 사이의 숫자 생성
+      this.setState(prevState => {
+        return random: [...prevState.random, randomNum]
+      })
+    }
+
+    onNumDelete = (position) => {
+      const newArray = this.state.random.filter((num, index)=>{
+        return position != index;
+      })
+      this.setState({
+        random: newArray
+      })
+    }
+  ...
+    <NumList
+      num={this.state.random}
+      delete={this.onNumDelete}
+    />
+  ...
+  ~~~
+
+- numlist.js 에 prop 추가
+
+  ~~~javascript
+  ...
+  import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+  ...
+    return (
+      props.num.map((item, idx)=>(
+        <TouchableOpacity
+          style={styles.numList}
+          key={idx}
+          onPress={()=>props.delete(idx)}
+        >
+          <Text>{item}</Text>
+        </TouchableOpacity>
+      ))
+    )
+  ...
   ~~~
 
 ## 참고
