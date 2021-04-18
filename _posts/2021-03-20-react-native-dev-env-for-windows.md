@@ -117,6 +117,7 @@ tags:
 - 사용자 변수의 새로 만들기 > 변수 이름 : ANDROID_HOME, 변수 값 : {Android SDK Location}
 
 ---
+
 **NOTE**
 
 - Android SDK Location SDK Manager 화면에서 확인 가능
