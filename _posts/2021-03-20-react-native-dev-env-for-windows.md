@@ -118,7 +118,9 @@ tags:
 
 ---
 **NOTE**
+
 - Android SDK Location SDK Manager 화면에서 확인 가능
+
 ---
 
 - adb 설치확인
