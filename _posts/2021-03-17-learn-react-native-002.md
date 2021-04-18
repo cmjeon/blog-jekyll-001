@@ -200,7 +200,9 @@ tags:
   ~~~
 
 ---
+
 **NOTE**
+
 ### {} 와 () 의 차이
  
   ~~~javascript
@@ -213,17 +215,19 @@ tags:
   )
   ~~~
  
-- JSX(javascript xml)
+### JSX(javascript xml)
  
   ~~~javascript
   const element = <h1>Hello, world!</h1>;
   ~~~
 
 ### 참고
+
 - [https://ko.reactjs.org/docs/introducing-jsx.html](https://ko.reactjs.org/docs/introducing-jsx.html)
+
 ---
 
-- state를 통해 header의 메시지 변경
+- state를 통해 header의 메시지를 변경
 
   ~~~javascript
   // App.js
@@ -235,8 +239,11 @@ tags:
     }
   ...
       <View style={styles.mainView}>
-        <Header name={this.state.appName}/>
-      </View>
+        <Header
+          <!-- App.js 의 state.appName의 값을 Header의 name으로 전달 -->
+          name={this.state.appName}
+        />
+        <View style={styles.subView}>
   ...
   }
   ~~~
@@ -247,6 +254,7 @@ tags:
   ...
   const Header = (props) => (
     <View style={styles.header}>
+      <!-- App.js 의 state.appName을 name 으로 수신하여 표시 -->
       <Text>{props.name}</Text>
     </View>
   )
@@ -256,28 +264,28 @@ tags:
 - touchableOpacity 을 통해 touchEvent 생성
 
   ~~~javascript
-  // header.js
+  // App.js
   
   ...
   import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
   ...
-  const Header = (props) => (
-    <TouchableOpacity
-      style={styles.header}
-      // onPress 로 alert 띄우기
-      onPress={()=alert('hello world')}
-      // onLongPress 로 alert 띄우기
-      onLongPress={()=alert('hello world')}
-      // onPressIn 로 alert 띄우기
-      onPressIn={()=alert('hello world')}
-      // onPressOut 로 alert 띄우기
-      onPressOut={()=alert('hello world')}
-    >
-      <View>
-        <Text>{props.name}</Text>
-      </View>
-    </TouchableOpacity>
-  )
+  class App extends Component {
+  ...
+    <View style={styles.subView}>
+      <TouchableOpacity style={styles.subView}>
+        <Text
+          style={styles.mainText}
+          // onPress 로 alert 띄우기
+          onPress={() => { alert('hello world') }}
+          // onLongPress 로 alert 띄우기
+          onLongPress={() => { alert('hello world') }}
+          // onPressIn 로 alert 띄우기
+          onPressIn={() => { alert('hello world') }}
+          // onPressOut 로 alert 띄우기
+          onPressOut={() => { alert('hello world') }}
+        >Hello World</Text>
+      </TouchableOpacity>
+    </View>
   ...
   ~~~
 

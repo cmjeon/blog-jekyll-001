@@ -525,7 +525,7 @@ tags:
   const styles = StyleSheet.create({
     numList: {
       backgroundColor: '#cecece',
-      alginItems: 'center',
+      alignItems: 'center',
       padding: 5,
       width: '100%',
       marginTop: 5

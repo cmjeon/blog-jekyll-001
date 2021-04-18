@@ -52,7 +52,7 @@ tags:
           <View>
             <Text
               style={styles.mainText}
-              onPress={()=>alert('text touch event')}
+              onPress={ () => { alert('text touch event') } }
             >Hello World</Text>
           </View>
           <Generator/>
@@ -79,7 +79,7 @@ tags:
   const styles = StyleSheet.create({
     generator: {
       backgroundColor: '#D197CF',
-      alignItme: 'center',
+      alignItems: 'center',
       padding: 5,
       width: '100%'
     }
@@ -118,7 +118,7 @@ tags:
     return (
   ...
           title="Add Number"
-          onPress={()=>props.add()}
+          onPress={ ()=> { props.add() } }
         />
   ...
   ~~~
@@ -147,7 +147,7 @@ tags:
   const styles = StyleSheet.create({
     numList: {
       backgroundColor: '#cecece',
-      alginItems: 'center',
+      alignItems: 'center',
       padding: 5,
       width: '100%',
       marginTop: 5
@@ -169,7 +169,7 @@ tags:
           <Header name={this.state.appName}/>
   ...
           <Generator add={this.onAddRandomNum}/>
-          <NumList num={this.state.random}/>
+          <NumList numbers={this.state.random}/>
         </View>
       )
   ...
@@ -183,7 +183,8 @@ tags:
   ...
   const NumLisst = (props) => {
     return (
-      props.num.map((item, idx)=>(
+      // props로 numbers을 받아서 표현
+      props.numbers.map((item, idx)=>(
         <View style={styles.numList} key={idx}>
           <Text>{item}</Text>
         </View>
@@ -214,7 +215,7 @@ tags:
     onAddRandomNum = () => {
       const randomNum = Math.floor(Math.random()*100)+1; // 1~100 사이의 숫자 생성
       this.setState(prevState => {
-        return random: [...prevState.random, randomNum]
+        return this.state.random = [...prevState.random, randomNum]
       })
     }
 
@@ -228,7 +229,7 @@ tags:
     }
   ...
     <NumList
-      num={this.state.random}
+      numbers={this.state.random}
       delete={this.onNumDelete}
     />
   ...
