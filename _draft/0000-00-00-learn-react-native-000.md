@@ -724,6 +724,105 @@ tags:
 
 ## TextInput
 
+- 텍스트를 입력할 수 있는 컴포넌트
+- src/input.js 생성
+
+  ~~~javascript
+  // input.js
+
+  import React, { Component } from 'react';
+  import { View, Text, StyleSheet, TextInput } from 'react-native';
+
+  class Input extends Component {
+
+    state = {
+      myTextInput: 'text input'
+    }
+
+    onChangeInput = (event) => {
+      this.setState({
+        myTextInput: event
+      })
+    }
+
+    render() {
+      return (
+        <View style={styles.mainView}>
+          <TextInput
+            value={this.state.myTextInput}
+            style={styles.input}
+            onChangeText={this.onChangeInput}
+          />
+        </View>
+      )
+    }
+  }
+
+  const styles = StyleSheet.create({
+    mainView: {
+      width: '100%'
+    },
+    input: {
+      width: '100%',
+      backgroundColor: '#cecece',
+      marginTop: 20,
+      fontSize: 25,
+      padding: 10
+    }
+  })
+
+  export default Input;
+  ~~~
+
+- App.js 에 추가
+
+  ~~~javascript
+  import React, { Component } from 'react';
+  import { View, Text, }
+  ~~~
+
+### TextInput의 Properties
+
+#### multiline
+
+- 개행을 허용/방지
+
+  ~~~javascript
+  <TextInput
+    multiline={true}
+  >
+  ~~~
+
+#### maxLength
+
+- 입력값의 길이를 제한
+
+  ~~~javascript
+  <TextInput
+    maxLength={100}
+  >
+  ~~~
+
+#### autoCapitalize
+
+- 대문자 자동수정 허용/방지
+
+  ~~~javascript
+  <TextInput
+    autoCapitalize={'none'}
+  >
+  ~~~
+
+#### editable
+
+- 입력을 허용/방지
+
+  ~~~javascript
+  <TextInput
+    editable={true}
+  >
+  ~~~
+
 ## Button, ScrollView, TextInput 심화
 
 ## Picker
