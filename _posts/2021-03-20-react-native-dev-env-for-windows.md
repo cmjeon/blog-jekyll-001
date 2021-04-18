@@ -50,6 +50,7 @@ tags:
   # 설치확인
   > python --version
   Python 3.8.1
+  ~~~
 
 ## React Native CLI 설치
 
