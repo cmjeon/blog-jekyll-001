@@ -1,6 +1,6 @@
 ---
 layout: single
-title: react native 개발 환경 for intel 001
+title: react native 개발 환경 for mac - 001
 categories: 
   - env/config
 tags: 

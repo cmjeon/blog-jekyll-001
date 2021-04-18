@@ -13,14 +13,14 @@ tags:
 
   ~~~bash
   # 새 프로젝트 생성
-  $ react native init --version 0.61.5 react_native_01
+  $ react-native init --version 0.61.5 react_native_01
   # 프로젝트로 이동
   $ cd react_native_01
   ~~~
 
 - 시뮬레이터 실행
   ~~~bash
-  $ react native run-ios
+  $ react-native run-ios
   ~~~
 
 - App.js의 내용이 화면에 출력됨. 어떻게?
