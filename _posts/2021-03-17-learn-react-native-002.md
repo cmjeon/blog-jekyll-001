@@ -201,26 +201,26 @@ tags:
 
 ---
 **NOTE**
-- {} 와 () 의 차이
+### {} 와 () 의 차이
  
-   ~~~javascript
-   eFunc = () => {
-     // return 되는 JSX 컴포넌트가 없음
-   }
+  ~~~javascript
+  eFunc = () => {
+    // return 되는 JSX 컴포넌트가 없음
+  }
  
-   eFunc = () => (
-     // JSX 컴포넌트를 return 할 수 있음
-   )
-   ~~~
+  eFunc = () => (
+    // JSX 컴포넌트를 return 할 수 있음
+  )
+  ~~~
  
 - JSX(javascript xml)
  
-   ~~~javascript
-   const element = <h1>Hello, world!</h1>;
-   ~~~
+  ~~~javascript
+  const element = <h1>Hello, world!</h1>;
+  ~~~
 
-- 참고
-  - [https://ko.reactjs.org/docs/introducing-jsx.html](https://ko.reactjs.org/docs/introducing-jsx.html)
+### 참고
+- [https://ko.reactjs.org/docs/introducing-jsx.html](https://ko.reactjs.org/docs/introducing-jsx.html)
 ---
 
 - state를 통해 header의 메시지 변경
