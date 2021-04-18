@@ -97,3 +97,7 @@ tags:
 - [https://d2.naver.com/news/3435170](https://d2.naver.com/news/3435170){:target="_blank"}
 - [https://jojoldu.github.io](https://jojoldu.github.io){:target="_blank"}
 - [https://youtu.be/9DgiHU-_4dY](https://youtu.be/9DgiHU-_4dY){:target="_blank"}
+
+## 참고이력서
+- [https://www.notion.so/c47951185f404835a982ef97041e59fd](https://www.notion.so/c47951185f404835a982ef97041e59fd){:target="_black"}
+- [https://www.notion.so/BackEnd-Developer-71c046b357d44ed0b42370a28cdf76c2](https://www.notion.so/BackEnd-Developer-71c046b357d44ed0b42370a28cdf76c2){:target="_blank"}

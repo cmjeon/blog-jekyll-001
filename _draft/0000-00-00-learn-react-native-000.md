@@ -13,14 +13,14 @@ tags:
 
   ~~~bash
   # 새 프로젝트 생성
-  $ react native init --version 0.61.5 react_native_01
+  $ react-native init --version 0.61.5 react_native_01
   # 프로젝트로 이동
   $ cd react_native_01
   ~~~
 
 - 시뮬레이터 실행
   ~~~bash
-  $ react native run-ios
+  $ react-native run-ios
   ~~~
 
 - App.js의 내용이 화면에 출력됨. 어떻게?
@@ -633,6 +633,94 @@ tags:
   ~~~
 
 ## ScrollView
+
+- 화면을 스크롤할 수 있는 컴포넌트
+- scrollView
+
+  ~~~javascript
+  ...
+  import React, { Component } from 'react';
+  import { View, Text, StyleSheet, ScrollView } from 'react-native';
+  import Header form './src/header';
+  ...
+  <Generator add={this.onAddRandomNum}/>
+  <ScrollView
+    style={{width: '100%'}}
+  >
+    <NumList
+      num={this.state.random}
+      delete={this.onNumDelete}
+    />
+  </ScrollView>
+  ...
+  ~~~
+
+### ScrollView의 Properties
+
+#### onMomentumScrollBegin
+
+- 스크롤이 움직이기 시작했을 때 트리거되는 함수
+
+  ~~~javascript
+  ...
+  <ScrollView
+    style={{width: '100%'}}
+    onMomentumScrollBegin={()=>alert('begin')}
+  >
+  ...
+  ~~~
+
+#### onMomentumScrollEnd
+
+- 스크롤의 움직임이 끝나면 트리거되는 함수
+
+  ~~~javascript
+  ...
+  <ScrollView
+    style={{width: '100%'}}
+    onMomentumScrollEnd={()=>alert('end')}
+  >
+  ...
+  ~~~
+
+#### onScroll
+
+- 스크롤이 움직이면 트리거되는 함수
+
+  ~~~javascript
+  ...
+  <ScrollView
+    style={{width: '100%'}}
+    onScroll={()=>alert('Scrolling')}
+  >
+  ...
+  ~~~
+
+#### onContentSizeChange
+
+- View의 크리가 바뀌면 트리거되는 함수
+
+  ~~~javascript
+  ...
+  <ScrollView
+    style={{width: '100%'}}
+    onContentSizeChange={(width, height)=>alert(height)}
+  >
+  ...
+  ~~~
+
+#### bounces
+
+- 스크롤이 바운스 되는 것을 허용/방지
+
+  ~~~javascript
+  ...
+  <ScrollView
+    style={{width: '100%'}}
+    bounces={true}
+  >
+  ...
+  ~~~
 
 ## TextInput
 
