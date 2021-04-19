@@ -200,7 +200,9 @@ tags:
   ~~~
 
 ---
+
 **NOTE**
+
 ### {} 와 () 의 차이
  
   ~~~javascript
@@ -220,7 +222,9 @@ tags:
   ~~~
 
 ### 참고
+
 - [https://ko.reactjs.org/docs/introducing-jsx.html](https://ko.reactjs.org/docs/introducing-jsx.html)
+
 ---
 
 - state를 통해 header의 메시지 변경
