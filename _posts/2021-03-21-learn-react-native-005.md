@@ -1,6 +1,6 @@
 ---
 layout: single
-title: react native 기초 배우기 005 - Button ScrollView, TextInput 심화, Picker
+title: react native 기초 배우기 005 - Button, ScrollView, TextInput 심화, Picker
 categories: 
   - learn react native
 tags:
@@ -197,3 +197,4 @@ $ cd ..
 - [https://reactnative.dev/docs/components-and-apis](https://reactnative.dev/docs/components-and-apis)
 - [https://reactnative.dev/docs/scrollview](https://reactnative.dev/docs/scrollview)
 - [https://reactnative.dev/docs/textinput](https://reactnative.dev/docs/textinput)
+- [https://github.com/react-native-picker/picker](https://github.com/react-native-picker/picker)
