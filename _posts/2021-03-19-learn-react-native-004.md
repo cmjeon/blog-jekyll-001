@@ -12,10 +12,10 @@ tags:
 - 화면을 스크롤할 수 있는 컴포넌트
 - scrollView
 
-  ~~~javascript
+  ~~~JSX
   ...
   import React, { Component } from 'react';
-  import { View, Text, StyleSheet, ScrollView } from 'react-native';
+  import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
   import Header form './src/header';
   ...
   <Generator add={this.onAddRandomNum}/>
