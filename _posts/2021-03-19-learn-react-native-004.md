@@ -12,16 +12,18 @@ tags:
 - 화면을 스크롤할 수 있는 컴포넌트
 - scrollView
 
-  ~~~JSX
+  ~~~javascript
   ...
   import React, { Component } from 'react';
   import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
   import Header form './src/header';
   ...
   <Generator add={this.onAddRandomNum}/>
+  {% raw %}
   <ScrollView
     style={{width: '100%'}}
   >
+  {% endraw %}
     <NumList
       num={this.state.random}
       delete={this.onNumDelete}
@@ -38,10 +40,12 @@ tags:
 
   ~~~javascript
   ...
+  {% raw %}
   <ScrollView
     style={{width: '100%'}}
     onMomentumScrollBegin={()=>alert('begin')}
   >
+  {% endraw %}
   ...
   ~~~
 
@@ -51,10 +55,12 @@ tags:
 
   ~~~javascript
   ...
+  {% raw %}
   <ScrollView
     style={{width: '100%'}}
     onMomentumScrollEnd={()=>alert('end')}
   >
+  {% endraw %}
   ...
   ~~~
 
@@ -64,10 +70,12 @@ tags:
 
   ~~~javascript
   ...
+  {% raw %}
   <ScrollView
     style={{width: '100%'}}
     onScroll={()=>alert('Scrolling')}
   >
+  {% endraw %}
   ...
   ~~~
 
@@ -77,10 +85,12 @@ tags:
 
   ~~~javascript
   ...
+  {% raw %}
   <ScrollView
     style={{width: '100%'}}
     onContentSizeChange={(width, height)=>alert(height)}
   >
+  {% endraw %}
   ...
   ~~~
 
@@ -90,10 +100,12 @@ tags:
 
   ~~~javascript
   ...
+  {% raw %}
   <ScrollView
     style={{width: '100%'}}
     bounces={true}
   >
+  {% endraw %}
   ...
   ~~~
 

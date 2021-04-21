@@ -52,8 +52,9 @@ tags:
           title="Add Text Input"
           onPress={this.onAddTextInput}
         />
-
+        {% raw %}
         <ScrollView style={{width: '100%'}}>
+        {% endraw %}
           {
             this.state.alphabet.map((item, idx) => (
               <Text
@@ -148,6 +149,7 @@ $ cd ..
     render() {
       return (
         <View style={styles.container}>
+          {% raw %}
           <Picker
             style={{height:50, width: 250)}}
             selectedValue={this.country}
@@ -155,6 +157,7 @@ $ cd ..
               this.setState({country: val})
             }
           >
+          {% endraw %}
             <Picker.Item label="Korea" value="korea">
             <Picker.Item label="Canada" value="canada">
             <Picker.Item label="China" value="china">

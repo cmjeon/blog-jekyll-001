@@ -58,12 +58,14 @@ tags:
     render() {
       return(
         <View style={styles.mainView}>
+          {% raw %}
           <Image
             style={styles.image}
             source={{uri: `이미지 주소`}}
             resizeMode="contain"
             onLoadEnd={()=>alert('Image Loaded!')}
           >
+          {% endraw %}
           ...
       )
     }
@@ -98,7 +100,9 @@ class ModalComponent extends Component {
 
   render() {
     return (
+      {% raw %}
       <View style={{width: '100%'}}>
+      {% endraw %}
         <Button
           title="Open Modal"
           onPress={this.handleModal}
@@ -107,11 +111,13 @@ class ModalComponent extends Component {
           visible={this.state.modal}
           animationType={'slide'} // none, slide, fade
           onShow={()=>alert('Warning!')}
-        >
+        > 
+          {% raw %}
           <View style={{
             marginTop:60,
             backgroundColor: 'red'
           }}>
+          {% endraw %}
             <Text>This is modal content</Text>
           </View>
           <Button

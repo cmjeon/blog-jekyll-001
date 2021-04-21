@@ -49,6 +49,7 @@ import Slider from '@react-native-community/slider';
   render() {
     return (
       <View style={styles.container}>
+        {% raw %}
         <Slider
           style={{height:40, width:300}}
           value={this.state.value}
@@ -59,6 +60,7 @@ import Slider from '@react-native-community/slider';
           minimumTrackTintColor='blue'
           step={10}
         />
+        {% endraw %}
         <Text
           style={styles.input}
         >
@@ -92,12 +94,14 @@ const style = StyleSheet.create({
           <Text
             style={styles.input}
           >{this.state.value}</Text>
+          {% raw %}
           <ActivityIndicator
             style={{paddingTop: 200}}
             size="large"
             color="green"
             animating={true} // false 로 변경
           />
+          {% endraw %}
           <Picker>
           ...
       )
