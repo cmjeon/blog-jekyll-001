@@ -825,15 +825,422 @@ tags:
 
 ## Button, ScrollView, TextInput 심화
 
+- 버튼을 누르면 텍스트 입력창으로부터 값을 받아 하단의 목록으로 보여주는 App.js
+
+  ~~~javascript
+  import React, { Component } from 'react';
+  import { TextInput, Button, View, StyleSheet, ScrollView } from 'react-native';
+
+  class App extends Component {
+    state = {
+      maTextInput: '',
+      alphabet: ['a','b','c','d']
+    }
+
+    onChangeInput = (event) => {
+      this.setState({
+        myTextInput: event
+      })
+    }
+
+    onAddTextInput = () => {
+      this.setState(prevState => {
+        return {
+          myTextInput: '',
+          alphabet: [...prevState.alphabet, prevState.myTextInput]
+        }
+      }
+    }
+
+    render() {
+      return (
+        <View style={styles.mainView}>
+        <TextInput
+          value={this.state.myTextInput}
+          style={styles.input}
+          onChangeText={this.onChangeInput}
+          multiline={true}
+          maxLength={100}
+          autoCapitalize={'none'}
+          editable={true}
+        >
+        <Button
+          title="Add Text Input"
+          onPress={this.onAddTextInput}
+        />
+
+        <ScrollView style={{width: '100%'}}>
+          {
+            this.state.alphabet.map((item, idx) => (
+              <Text
+                styles={styles.main}
+                key={idx}
+              >
+                {item}
+              </Text>
+            ))
+          }
+      )
+    }
+  }
+
+  const style = StyleSheet.create({
+    mainView: {
+      flex: 1,
+      backgroundColor:'white',
+      paddingTop: 50,
+      alignItems: 'center',
+    },
+    subView: {
+      backgroundColor: 'yellow',
+      marginBottom: 10,
+    }
+    anotherSubView: {
+      flex: 2,
+      backgroundColor: 'yellow',
+      marginBottom: 10,
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+    mainText: {
+      fontSize: 20,
+      fontWeight: 'normal',
+      color: 'red',
+      padding: 20,
+      margin: 20,
+      backgroundColor: 'pink'
+    }
+    input: {
+      width: '100%',
+      backgroundColor: '#cecece',
+      marginTop: 20,
+      fontSize: 25,
+      padding: 10
+    } 
+  })
+  ~~~
+
 ## Picker
+
+- 콤보박스 같은 여러가지 옵션이 있고 그 중에 선택할 수 있는 컴포넌트
+
+### picker 설치
+
+#### picker 다운로드
+
+~~~bash
+# install picker
+$ npm install @react-native-community/picker --save  
+~~~
+
+#### pod install
+
+~~~bash
+$ cd ios
+# pod install
+$ npx pod-install
+$ cd ..
+~~~
+
+#### picker 파일 생성
+
+~~~bash
+# pwd = react_native_01
+$ mkdir src/picker.js
+~~~
+
+~~~javascript
+// picker.js
+
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Picker } from '@react-native-community/picker';
+
+class PickerComponent extends Component {
+  state = {
+    country: 'korea'
+  }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Picker
+          style={{height:50, width: 250)}}
+          selectedValue={this.country}
+          onValueChange={(val, idx) => 
+            this.setState({country: val})
+          }
+        >
+          <Picker.Item label="Korea" value="korea">
+          <Picker.Item label="Canada" value="canada">
+          <Picker.Item label="China" value="china">
+        </Picker>
+      </View>
+    )
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 20,
+    marginBottom: 200,
+    alignItems: 'center'
+  }
+})
+
+export default PickerComponent
+~~~
+
+#### App.js 에 추가
+
+  ~~~javascript
+  ...
+  import { TextInput, Button, View, Text, StyleSheet, ScrollView} from 'react-native';
+  import Picker from './src/picker';
+  ...
+  render() {
+    return (
+      <View style={styles.mainView}>
+      <Picker/>
+      ...
+    )
+  }
+  ~~~
 
 ## Slider
 
+- 가로선이 있고 좌우로 값을 바꿀 수 있는 컴포넌트
+
+### Slider 설치
+
+#### Slider 다운로드
+
+~~~bash
+# install slider
+$ npm install @react-native-community/slider --save  
+~~~
+
+#### pod install
+
+~~~bash
+$ cd ios
+# pod install
+$ npx pod-install
+$ cd ..
+~~~
+
+#### picker 파일 수정
+
+~~~javascript
+...
+import { Picker } from '@react-native-community/picker';
+import Slider from '@react-native-community/slider';
+...
+  state = {
+    country: 'korea',
+    value: 50
+  }
+  sliderValueChange=(value) => {
+    this.setState({
+      value: value
+    })
+  }
+  ...
+  render() {
+    return (
+      <View style={styles.container}>
+        <Slider
+          style={{height:40, width:300}}
+          value={this.state.value}
+          mininumValue={0}
+          maximunValue={100}
+          onValueChange={this.sliderValueChange}
+          maximumTrackTintColor='red'
+          minimumTrackTintColor='blue'
+          step={10}
+        />
+        <Text
+          style={styles.input}
+        >
+        {this.staet.value}
+        </Text>
+        ...
+
+const style = StyleSheet.create({
+  ...
+  input:{
+    width:'100%'
+  }
+})
+~~~
+
 ## ActivityIndicator
+
+- 화면전환 시 표시되는 화면
+
+- picker 파일 수정
+
+  ~~~javascript
+  import React, { Component } from 'react';
+  import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
+  import { Picker } from '@react-native-community/picker';
+  ...
+    render() {
+      return (
+        <View style={styles.container}>
+          ...
+          <Text
+            style={styles.input}
+          >{this.state.value}</Text>
+          <ActivityIndicator
+            style={{paddingTop: 200}}
+            size="large"
+            color="green"
+            animating={true} // false 로 변경
+          />
+          <Picker>
+          ...
+      )
+    }
+  ~~~
 
 ## Image
 
+- 폴더 생성
+
+  ~~~bash
+  # pwd = react_native_01
+  $ mkdir assets/images
+  ~~~
+
+### 로컬에서 파일 가져오기
+
+- 폴더에 이미지 추가(파일명 steak.jpg)
+
+- App.js 수정
+
+  ~~~javascript
+  import React, { Component } from 'react';
+  import { TextInput, Button, View, Text, StyleSheet, ScrollView, Image } from 'react-native';
+  ...
+  import Steak from './assets/images/steak.jpg';
+  ...
+    render() {
+      return(
+        <View style={styles.mainView}>
+          <Image
+            style={styles.image}
+            resizeMode='contain'
+            source={Steak}
+          />
+      )
+    }
+  ...
+  const style = StyleSheet.create({
+    ...
+    image: {
+      width: '100%',
+      height: 700
+    }
+  ~~~
+
+### 원격에서 파일 가져오기
+
+- picsum.photos 접속하여 이미지주소 가져오기
+
+- App.js 수정
+
+  ~~~javascript
+  ...
+    render() {
+      return(
+        <View style={styles.mainView}>
+          <Image
+            style={styles.image}
+            source={{uri: `이미지 주소`}}
+            resizeMode="contain"
+            onLoadEnd={()=>alert('Image Loaded!')}
+          >
+          ...
+      )
+    }
+  ...
+  ~~~
+
 ## Modal
+
+- 화면 가장 위에 표시되는 레이어로 사용자의 다른 작업을 막는 컴포넌트
+
+### modal 파일 생성
+
+~~~bash
+# pwd = react_native_01
+$ mkdir src/modal.js
+~~~
+
+~~~javascript
+import React, { Component } from 'react';
+import { View, Text, Button, Modal } from 'react-native';
+
+class ModalComponent extends Component {
+  state = {
+    modal: false
+  }
+
+  handleModal = () => {
+    this.setState({
+      modal: this.stae.modal ? false : true
+    })
+  }
+
+  render() {
+    return (
+      <View style={{width: '100%'}}>
+        <Button
+          title="Open Modal"
+          onPress={this.handleModal}
+        />
+        <Modal
+          visible={this.state.modal}
+          animationType={'slide'} // none, slide, fade
+          onShow={()=>alert('Warning!')}
+        >
+          <View style={{
+            marginTop:60,
+            backgroundColor: 'red'
+          }}>
+            <Text>This is modal content</Text>
+          </View>
+          <Button
+            title="Go Back"
+            onPress={this.handleModal}
+          />
+        </Modal>
+      </View>
+    )
+  }
+}
+export default ModalComponent;
+~~~
+
+### App.js 에 추가
+
+~~~javascript
+...
+import Steak from './asset/images/steak.jpg'
+import Modal from './src/modal'
+...
+  render() {
+    return(
+      <View>
+        <Modal/>
+      </Veiw>
+    )
+  }
+~~~
+
+
 
 ## 참고
 - [https://www.inflearn.com/course/리액트-네이티브-기초](https://www.inflearn.com/course/리액트-네이티브-기초)

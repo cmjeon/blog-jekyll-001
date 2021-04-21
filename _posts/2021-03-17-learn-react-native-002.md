@@ -205,21 +205,21 @@ tags:
 
 ### {} 와 () 의 차이
  
-  ~~~javascript
-  eFunc = () => {
-    // return 되는 JSX 컴포넌트가 없음
-  }
- 
-  eFunc = () => (
-    // JSX 컴포넌트를 return 할 수 있음
-  )
-  ~~~
+~~~javascript
+eFunc = () => {
+  // return 되는 JSX 컴포넌트가 없음
+}
+
+eFunc = () => (
+  // JSX 컴포넌트를 return 할 수 있음
+)
+~~~
  
 ### JSX(javascript xml)
  
-  ~~~javascript
-  const element = <h1>Hello, world!</h1>;
-  ~~~
+~~~javascript
+const element = <h1>Hello, world!</h1>;
+~~~
 
 ### 참고
 
