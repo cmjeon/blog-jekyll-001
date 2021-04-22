@@ -69,6 +69,7 @@ tags:
       )
     }
   }
+  export default HomeScreen;
   ~~~
 
 - /src/user.js 생성
@@ -99,6 +100,7 @@ tags:
       )
     }
   }
+  export default UserScreen;
   ~~~
 
 ## [Stack] Navigation Params
