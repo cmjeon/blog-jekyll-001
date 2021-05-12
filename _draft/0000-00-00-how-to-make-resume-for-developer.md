@@ -86,18 +86,19 @@ tags:
 
 ## 참고
 - [https://wonny.space/writing/work/engineer-resume](https://wonny.space/writing/work/engineer-resume){:target="_blank"}
-- [https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72](https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72){:target="_blank"}
 - [https://brunch.co.kr/@adrenalinee31/7](https://brunch.co.kr/@adrenalinee31/7){:target="_blank"}
 - [https://woowabros.github.io/experience/2017/07/17/resume.html](https://woowabros.github.io/experience/2017/07/17/resume.html){:target="_blank"}
-- [https://hyunseob.github.io/resume/](https://hyunseob.github.io/resume/){:target="_blank"}
+
 - [https://speakerdeck.com/weirdx](https://speakerdeck.com/weirdx){:target="_blank"}
 - [https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongug](https://speakerdeck.com/weirdx/99con-junieo-gaebaljayi-iryeogseo-sseugi-idongug){:target="_blank"}
 - [https://speakerdeck.com/weirdx/99kon-ireohge-gocyeoboja-gaebalja-iryeogseo-jagseong-tips-gimseulgi-peurogeuraemeoseu](https://speakerdeck.com/weirdx/99kon-ireohge-gocyeoboja-gaebalja-iryeogseo-jagseong-tips-gimseulgi-peurogeuraemeoseu){:target="_blank"}
 - [https://speakerdeck.com/weirdx/99kon-sitalculgi-hwanggeongu](https://speakerdeck.com/weirdx/99kon-sitalculgi-hwanggeongu){:target="_blank"op}
 - [https://d2.naver.com/news/3435170](https://d2.naver.com/news/3435170){:target="_blank"}
-- [https://jojoldu.github.io](https://jojoldu.github.io){:target="_blank"}
 - [https://youtu.be/9DgiHU-_4dY](https://youtu.be/9DgiHU-_4dY){:target="_blank"}
 
 ## 참고이력서
 - [https://www.notion.so/c47951185f404835a982ef97041e59fd](https://www.notion.so/c47951185f404835a982ef97041e59fd){:target="_black"}
 - [https://www.notion.so/BackEnd-Developer-71c046b357d44ed0b42370a28cdf76c2](https://www.notion.so/BackEnd-Developer-71c046b357d44ed0b42370a28cdf76c2){:target="_blank"}
+- [https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72](https://www.notion.so/Wonny-e64e2e55653c4d8b8b632118b36bdd72){:target="_blank"}
+- [https://hyunseob.github.io/resume/](https://hyunseob.github.io/resume/){:target="_blank"}
+- [https://jojoldu.github.io](https://jojoldu.github.io){:target="_blank"}
