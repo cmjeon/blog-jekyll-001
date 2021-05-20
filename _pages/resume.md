@@ -15,8 +15,8 @@ author_profile: false
 ---
 
 e-mail : chmin82@gmail.com   
-blog : cmjeon.github.io   
-github : https://github.com/cmjeon
+blog : [cmjeon.github.io](cmjeon.github.io)   
+github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 ### 소개
 
