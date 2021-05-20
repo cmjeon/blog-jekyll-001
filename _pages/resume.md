@@ -10,16 +10,17 @@ author_profile: false
 구축대상, 고객, 규모가 다른 다양한 프로젝트를 수행하였습니다.   
 더 나은 방식을 고민하면서 일하는 것을 좋아합니다.
 
+### Contact
+
 ---
 
-### Contact
 e-mail : chmin82@gmail.com   
 blog : cmjeon.github.io   
 github : https://github.com/cmjeon
 
----
-
 ### 소개
+
+---
 
 11년차 웹개발자이자 프로젝트 관리자입니다.   
 spring framework(legacy), jquery, vue.js 로 웹서비스 개발했습니다.    
@@ -28,7 +29,6 @@ spring framework(legacy), jquery, vue.js 로 웹서비스 개발했습니다.
 인프라부터 웹서비스, 소규모부터 30인 중규모, 계열사 ~ 공공기관까지 다양한 프로젝트를 수행하였고, PMP 취득으로 프로젝트 수행역량을 키워왔습니다.   
 팀에 새로운 기술을 도입하고 더 나은 방식으로 일하기 위해 고민하였습니다.    
 팀의 표준 개발 화면, 코딩컨벤션을 수립하여 생산성 향상에 기여하였고, 미디어위키를 도입하여 파일방식에서 위키방식으로의 업무처리방식 개방화를 주도하였습니다.
-
 
 ### 기술
 
