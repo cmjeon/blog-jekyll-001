@@ -36,21 +36,16 @@ spring framework(legacy), jquery, vue.js 로 웹서비스 개발했습니다.
 
 업무상 사용경험이 있거나 학습한 기술들입니다.
 
-#### 자격증
-
-- 정보처리기사, 웹디자인기능사, DAsP
-- PMP, OCJP(1.6)
-
 #### 프론트엔드
 
 - HTML5, CSS3, javascript(es6)
 - jquery
-- vue.js
+- vue.js, vuex
 
 #### 백엔드
 
-- java, node.js
-- Spring Framework(legacy), Express
+- java 1.6, node.js
+- Spring Framework(legacy) 3, Express
 - maven
 
 #### DB
@@ -86,12 +81,12 @@ spring framework(legacy), jquery, vue.js 로 웹서비스 개발했습니다.
 #### 글로벌사업팀 (20.04 ~ 21.03)
 
 - 웹기반 증권솔루션 개발 담당자로 `vue.js 기반 웹 거래시스템 프론트엔드` 개발
-- vuex에 상태관리를 집중시킨 `코딩컨벤션`을 수립하고, `표준 개발 화면`를 제작하여 개발표준으로 활용
+- `vuex`에 상태관리를 집중시킨 `코딩컨벤션`을 수립하고, `표준 개발 소스`를 제작하여 개발표준으로 활용
 
 #### 쇼핑몰IT운영팀 (14.11 ~ 20.03)
 
 - 영업시스템 유지운영
-- jQuery, ajax 기반 프론트엔드 운영
+- `jQuery`, `ajax` 기반 프론트엔드 운영
 - Spring Framework(legacy) 기반 백엔드 운영
 - 앱, 키오스크용 API 서버 운영
 - python을 활용한 일간보고서 생성 일부자동화
@@ -158,6 +153,12 @@ spring framework(legacy), jquery, vue.js 로 웹서비스 개발했습니다.
 - 규모 : 10명
 - 역할 : 사업관리자로 `전국단위 사업관리`를 수행
 
+### 자격증
+
+---
+
+- 정보처리기사, 웹디자인기능사, DAsP
+- PMP, OCJP(1.6)
 
 ### 학력
 
