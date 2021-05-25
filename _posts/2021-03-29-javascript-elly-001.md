@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  javascript script async와 defer의 차이점
+title:  javascript-001 - 콘솔에 출력, script async와 defer의 차이점
 categories: 
   - learning javascript
 tags: 
@@ -266,7 +266,7 @@ $ node -v
 
 - js 상단에 `'use strict';` 라고 선언
 - Whole-script strict mode syntax
-- ecma 5 에서 정의되었음
+- ECMA 5 에서 정의되었음
 - 예컨데 선언되지 않은 변수의 사용 등이 불가능해 짐
 - javascript 성능 개선에도 도움
 
