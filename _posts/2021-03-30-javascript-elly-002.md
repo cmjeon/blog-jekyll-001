@@ -1,8 +1,8 @@
 ---
 layout: single
-title:  javascript-001 - 데이터타입, data types, let vs var, hoisting
+title:  javascript-002 - 데이터타입, data types, let vs var, hoisting
 categories: 
-  - learning javascript
+  - learning javascript by ellie
 tags: 
   - javascript
 ---
@@ -170,8 +170,6 @@ text = '8' + '2';
 console.log(`value: ${text}, type: ${typeof text}`); // value: 4, type: number
 console.log(text.charAt(0)); // Uncaught TypeError
 ```
-
-
 
 ## 참고
 - [https://youtu.be/OCCpGh4ujb8]

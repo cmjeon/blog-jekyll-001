@@ -2,7 +2,7 @@
 layout: single
 title:  javascript-001 - 콘솔에 출력, script async와 defer의 차이점
 categories: 
-  - learning javascript
+  - learning javascript by ellie
 tags: 
   - javascript
 ---
