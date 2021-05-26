@@ -7,7 +7,7 @@ tags:
   - javascript
 ---
 
-## Varilable
+## Varilable, rw(read/write)
 
 - let : ES6에서 추가됨
 - mutable
@@ -47,7 +47,7 @@ var age;
 - hoisting : 호이스팅은 선언한 위치에 상관없이 선언을 가장 위로 올려주는 것
 - block scope : block scope를 따지지 않고 어디에서나 사용가능
 
-## Constants
+## Constant, r(readonly)
 
 - 한 번 선언하면 변경할 수 없음
 - immutable
@@ -61,10 +61,19 @@ const daysInWeek = 7;
 const maxNumber = 5;
 ```
 
+---
+
+**NOTE**
+
+- Immutable data types: primitive types, frozen objects (i.e. object.freeze())
+- Mutable data types: all objects by default are mutable in JS
+
+---
+
 ## Variable types
 
 - primitive, single item : number, string, boolean, null, undefined, symbol
-- objective, box container
+- object, box container
 - function, first-class function : 함수를 변수에 할당, 인자로 전달, 리턴타입으로 선언 가능
 
 ## number
