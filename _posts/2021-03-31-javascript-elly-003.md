@@ -262,4 +262,4 @@ for (let i=0; i<=10; i++) {
 
 
 ## 참고
-- [https://youtu.be/YBjufjBaxHo]
+- [https://youtu.be/YBjufjBaxHo](https://youtu.be/YBjufjBaxHo)

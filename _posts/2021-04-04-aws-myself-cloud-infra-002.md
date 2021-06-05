@@ -27,7 +27,7 @@ tags:
 
 1. LAMP 서버 설치 및 테스트   
     1. EC2 생성 시 User Data 스크립트 추가하여 자동으로 설치   
-        1. EC2 서비스 선택   
+        1. EC2 서비스 선택
         1. `Launch Instance` 선택   
         1. `Amazon Linux 2 AMI (HVM), SSD Volume Type` 선택
         1. `t2.micro` 선택
@@ -83,9 +83,9 @@ tags:
         1. pem > ppk 변환
             1. `PUTTYGEN.EXE` 실행
             1. `Load` 선택
-            1. `seoul-lab-web.pem` 열기
-            1. `Save private key` 선택 > `예` 선택
-            1. `seoul-lab-web.ppk`로 저장
+                1. `seoul-lab-web.pem` 열기
+                1. `Save private key` 선택 > `예` 선택
+                1. `seoul-lab-web.ppk`로 저장
     1. `PUTTY.EXE` 실행
         1. Host Name : AWS Instance의 IPv4 Public IP 입력
         1. `SSH` 선택 > `Auth` 선택 > `Browse...` 선택
@@ -156,4 +156,4 @@ tags:
     1. `Create` 선택
 
 ## 참고
-- [https://www.inflearn.com/course/aws-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B8%B0%EB%B3%B8/dashboard]
+- [https://www.inflearn.com/course/aws-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B8%B0%EB%B3%B8/dashboard](https://www.inflearn.com/course/aws-%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%9D%B8%ED%94%84%EB%9D%BC-%EA%B8%B0%EB%B3%B8/dashboard)

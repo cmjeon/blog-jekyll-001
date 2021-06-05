@@ -208,4 +208,4 @@ const add = (a, b) => a + b;
 ```
 
 ## 참고
-- [https://youtu.be/e_lU39U-5bQ]
+- [https://youtu.be/e_lU39U-5bQ](https://youtu.be/e_lU39U-5bQ)

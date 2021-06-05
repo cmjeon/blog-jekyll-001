@@ -167,4 +167,4 @@ console.log(triangle.toString()); // [object Object]
 ```
 
 ## 참고
-- [https://youtu.be/_DLhUBWsRtw]
+- [https://youtu.be/_DLhUBWsRtw](https://youtu.be/_DLhUBWsRtw)

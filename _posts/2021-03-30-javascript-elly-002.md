@@ -181,4 +181,4 @@ console.log(text.charAt(0)); // Uncaught TypeError
 ```
 
 ## 참고
-- [https://youtu.be/OCCpGh4ujb8]
+- [https://youtu.be/OCCpGh4ujb8](https://youtu.be/OCCpGh4ujb8)

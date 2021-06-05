@@ -271,4 +271,4 @@ $ node -v
 - javascript 성능 개선에도 도움
 
 ## 참고
-- [https://www.youtube.com/watch?v=tJieVCgGzhs]
+- [https://www.youtube.com/watch?v=tJieVCgGzhs](https://www.youtube.com/watch?v=tJieVCgGzhs)
