@@ -7,6 +7,8 @@ tags:
   - aws
   - cloud
   - infra
+  - VPC
+  - Bastion
 ---
 
 ## VPC와 중계 서버(Bastion) 구성하기

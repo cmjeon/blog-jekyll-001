@@ -7,6 +7,8 @@ tags:
   - aws
   - cloud
   - infra
+  - S3
+  - CloudFront
 ---
 
 ## 서버리스 웹 호스팅과 CloudFront로 웹 가속화 구성하기

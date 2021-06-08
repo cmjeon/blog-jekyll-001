@@ -7,6 +7,8 @@ tags:
   - aws
   - cloud
   - infra
+  - EC2
+  - Application Load Balancer
 ---
 
 ## EC2-LAMP-ELB 구성하기
