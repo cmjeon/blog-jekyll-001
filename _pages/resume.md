@@ -14,7 +14,7 @@ author_profile: false
 
 ---
 
-e-mail : chmin82@gmail.com   
+e-mail : <chmin82@gmail.com>   
 blog : [cmjeon.github.io](cmjeon.github.io)   
 github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
@@ -23,7 +23,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 ---
 
 11년차 웹개발자이자 프로젝트 관리자입니다.   
-일방문자수 1만명의 홈페이지, 관리자페이지를 운영하였습니다.   
+쇼핑몰의 홈페이지, 관리자시스템, API서버를 운영하였습니다.   
 이벤트 신청/관리, 업무 개선, 정보보안 대응을 위한 기능들을 구현하였습니다.    
 여러 규모와 성격의 프로젝트 수행 경험이 있습니다.   
 PMP 취득으로 프로젝트 수행역량을 키웠습니다.   
