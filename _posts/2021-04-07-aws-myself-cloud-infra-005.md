@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  스스로 구축하는 AWS 클라우드 인프라 - 기본편 004
+title:  스스로 구축하는 AWS 클라우드 인프라 - 기본편 005
 categories: 
   - learning aws cloud infra
 tags: 
