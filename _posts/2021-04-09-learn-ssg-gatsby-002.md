@@ -24,14 +24,14 @@ tags:
 ### AWS Configure
 
 - `aws configure` 를 통해 빠른 구성
-
-```bash
-$ aws configure
-AWS Access Key ID [None]: # AWSAccessKeyId
-AWS Secret Access Key [None]: # AWSSecretKey
-Default region name [None]: # ap-northeast-2
-Default output format [None]: # json
-```
+    ```bash
+    $ aws configure
+    AWS Access Key ID [None]: # AWSAccessKeyId
+    AWS Secret Access Key [None]: # AWSSecretKey
+    Default region name [None]: # ap-northeast-2
+    Default output format [None]: # json
+    ```
+    
 ### S3 만들기
 
 1. S3 서비스 선택
