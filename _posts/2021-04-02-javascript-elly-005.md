@@ -32,7 +32,7 @@ tags:
 - introdued in ES6
 - syntactical sugar over prototype-based inheritance
 
-## Clas declarations
+## Class declarations
 
 ```javascript
 class Person {

@@ -10,14 +10,13 @@ tags:
 
 ## 정적 사이트 생성기 gatsby 배우기 001
 
-### 준비사항
- 
-- v12.13 버전 이상의 node.js
-- git
-- Visual Studio Code
-- Gatsby CLI
+- 준비사항 
+  - v12.13 버전 이상의 node.js
+  - git
+  - Visual Studio Code
+  - Gatsby CLI
 
-#### Gatsby CLI 설치
+### Gatsby CLI 설치
 
 ```bash
 $ npm install -g gatsby-cli
@@ -42,13 +41,11 @@ $ npm run develop
 
 - Browser에서 `http://localhost:8000` 접속
 
-### github 에 저장소 만들고 push
-
-#### 저장소 만들기
+### github 저장소 만들기
 
 - Repository name : my-gatsby-site
 
-#### 저장소에 Push
+### github 저장소에 Push
 
 ```bash
 $ git remote add origin git@github.com:cmjeon/my-gatsby-site.git
@@ -56,13 +53,11 @@ $ git branch -M main
 $ git push -u origin main
 ```
 
-### Gatsby Cloud 에 사이트 생성하기
-
-#### Gatsby Cloud
+### Gatsby Cloud 
 
 - https://www.gatsbyjs.com/dashboard
 
-#### 사이트 생성하기
+### gatsby cloud에서 사이트 생성하기
 
 1. Add a site
 1. Git provider : Github 선택
@@ -76,7 +71,7 @@ $ git push -u origin main
 1. `Skip this step` 선택
 1. `Create site` 선택
 
-#### 사이트 접속하기
+### 사이트 접속하기
 
 - `HOSTED ON GATSBY CLOUD` 하단 URL 복사
 - Browser에서 URL 접속
