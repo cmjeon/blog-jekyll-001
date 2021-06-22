@@ -31,7 +31,7 @@ tags:
     Default region name [None]: # ap-northeast-2
     Default output format [None]: # json
     ```
-    
+
 ### S3 만들기
 
 1. S3 서비스 선택
@@ -49,31 +49,31 @@ tags:
 
 1. 생성된 Bucket 선택
 1. `Properties` 탭 선택
-    1. `Static website hosting` 의 `edit` 선택
+    1. `Static website hosting` 의 `Edit` 선택
     1. `Use this bucket to host a website` 선택
         1. `Static website hosting` 에 `Enable` 선택
         1. `Index document` 에 `index.html` 입력
         1. `Save changes` 선택
-    1. `Permissions` 탭 선택
-        1. `Bucket Policy` 선택
-            1. `arn:aws:s3...` 복사
-            1. `Policy generator` 선택
-                1. Step 1: Select Policy Type
-                    1. Select type of policy `S3 Bucket Policy` 선택
-                1. Step 2: Add Statement(s)
-                    1. Effect : Allow
-                    1. Principal : *
-                    1. Actions : `All Actions` 체크
-                    1. Amazon Resource Name : `arn:aws...` 붙여넣기
-                    1. `Add Statment` 선택
-                1. Step 3: Generate Policy
-                    1. `Generate Policy` 선택
-                1. 내용 복사
-            1. `Bucket Policy` 페이지로 돌아오기
-            1. 정책 부분에 붙여넣기
-            1. `"Resource": "arn:aws:s3..."` 문장 끝에 `/*` 추가
-                - "Resource": "arn:aws:s3:::YOUR S3 BUCKETS NAME/*"
-            1. `Save changes` 선택
+1. `Permissions` 탭 선택
+    1. `Bucket Policy` 의 `Edit` 선택
+        1. Bucket ARN 의 `arn:aws:s3...` 복사
+        1. `Policy generator` 선택
+            1. Step 1: Select Policy Type
+                1. Select type of policy `S3 Bucket Policy` 선택
+            1. Step 2: Add Statement(s)
+                1. Effect : Allow
+                1. Principal : *
+                1. Actions : `All Actions` 체크
+                1. Amazon Resource Name : `arn:aws...` 붙여넣기
+                1. `Add Statment` 선택
+            1. Step 3: Generate Policy
+                1. `Generate Policy` 선택
+            1. Policy JSON Document 내용 복사
+        1. `Bucket Policy` 페이지로 돌아오기
+        1. `Policy` 부분에 붙여넣기
+        1. `"Resource": "arn:aws:s3..."` 문장 끝에 `/*` 추가
+            - "Resource": "arn:aws:s3:::YOUR S3 BUCKETS NAME/*"
+        1. `Save changes` 선택
 
 ### S3 셋업
 
