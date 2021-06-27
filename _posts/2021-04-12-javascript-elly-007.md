@@ -7,84 +7,113 @@ tags:
   - javascript
 ---
 
-## Object
+## Array
 
-### Literals and properties
+### 자료구조
 
-```javascript
-// primitive
-function print(name, age);
-functon print(name, age) {
-  console.log(name);
-  console.log(age);
-}
+- javascript === dynamically typed language 이지만 권장하지 않음
+- 검색, 정렬, 삽입, 삭제의 속도를 고려
 
-const name = 'ellie';
-const age = 4;
-print(name, age);
-
-// object
-function print(person) {
-  console.log(person.name);
-  console.log(person.age);
-}
-
-const ellie = { name : 'ellie', age: 4 };
-print(ellie);
-
-const obj1 = {}; // `object literal` syntax
-const obj2 = new Object(); // `object constructor` syntax
-
-ellie.hasJob = true; // 동적으로 property를 할당 가능
-console.log(ellie.hasJob);
-
-delete ellie.hasJob // 삭제 가능
-console.log(ellie.hasJob);
-```
-
-### Computed properties
+### Declaration
 
 ```javascript
-console.log(ellie.name); // ellie : property name 을 알고 있을 때
-console.log(ellie['name']); // ellie : property name 을 알 수 없을 때 
-console.log(ellie[name]); // undefined
-
-ellie['hasJob'] = true;
-console.log(ellie.hasJob); // true
-
-// ellie.name vs ellie.['name']
-function printValue1(obj, key) {
-  console.log(obj.key);
-}
-
-function printValue2(obj, key) {
-  console.log(obj[key]);
-}
-
-printValue1(ellie, 'name'); // undefined
-printValue2(ellie, 'name'); // ellie
-printValue2(ellie, 'age'); // 4
+const arr1 = new Array();
+const arr2 = [1, 2];
 ```
 
-### Property value shorthand
+### Index position
 
 ```javascript
-const person1 = { name: 'bob', age: 2 };
-const person2 = { name: 'steve', age: 3 };
-const person3 = { name: 'dave', age: 4 };
-const person4 = makePerson('ellie', 30);
-
-function makePerson(name, age) {
-  return {
-    name,
-    age,
-  };
-}
-
-console.log(person4);
+const fruits = ['apple', 'banana'];
+console.log(fruits); // ['apple', 'banana']
+console.log(fruits.length); // 2
+console.log(fruits[0]); // apple
+console.log(fruits[1]); // banana
+console.log(fruits[2]); // undefined
+console.log(fruits[fruits.length - 1]); // banana
 ```
 
+### Looping over an array
 
+```javascript
+const fruits = ['apple', 'banana'];
+
+for (let i=0; i<fruits.length; i++) {
+  console.log(fruits[i]);
+}
+
+for(let value of fruits) {
+  console.log(value);
+}
+
+fruits.forEach((fruit) => console.log(fruit));
+```
+
+### Addtion, deletion, copy, push, pop
+
+```javascript
+const fruits = ['apple', 'banana'];
+
+// push
+fruits.push('strawberry', 'peach');
+console.log(fruits); // ['apple', 'banana', 'strawberry', 'peach'];
+
+// pop
+fruits.pop();
+fruits.pop();
+console.log(fruits); // ['apple', 'banana'];
+
+// unshift : like push
+fruits.unfhift('strawberry', 'lemon']);
+console.log(); // ['strawberry', 'lemon', 'apple', 'banana'];
+
+// shift : like pop
+fruits.shift();
+fruits.shift();
+console.log(); // ['apple', 'banana'];
+
+// shift, unshift is slow than pop, push;
+// shift 와 unshift 는 값을 넣고 빼기 위해 기존의 위치를 이동시키는 방식으로 작업하기 때문
+
+// splice
+fruits.push('strawberry', 'peach', 'lemon');
+console.log(fruits); // ['apple', 'banana', 'strawberry', 'peach', 'lemon']
+
+fruits.splice(1);
+console.log(fruits); // ['apple']
+
+fruits.splice(1, 1);
+console.log(fruits); // ['apple', 'strawberry', 'peach', 'lemon']
+
+fruits.splice(1, 1, 'greenapple', 'watermelon');
+console.log(fruits); // ['apple', 'greenapple', 'watermelon', 'peach', 'lemon']
+
+// concat
+const fruits2 = ['pear','coconut'];
+const newFruits = fruits.concat(fruits2);
+console.log(newFruits);
+```
+
+### Searching
+
+```javascript
+const fruits  = ['apple', 'greenapple', 'watermelon', 'peach', 'lemon'];
+console.log(fruits); // ['apple', 'greenapple', 'watermelon', 'peach', 'lemon']
+
+// indexOF
+console.log(fruits.indexOf('apple')); // 0
+console.log(fruits.indexOf('watermelon')); // 2
+console.log(fruits.indexOf('coconut'); // -1
+
+// includes
+console.log(fruits.includes('watermelon')); // true
+console.log(fruits.includes('coconut')); // false
+
+// lastIndexOf
+fruits.push('apple');
+console.log(fruits.indexOf('apple')); // -1
+console.log(fruits.lastIndexOf('apple')) // 5
+```
 
 ## 참고
-- [https://youtu.be/1Lbr29tzAA8](https://youtu.be/1Lbr29tzAA8)
+- [https://youtu.be/yOdAVDuHUKQ](https://youtu.be/yOdAVDuHUKQ)
