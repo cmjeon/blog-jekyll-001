@@ -9,7 +9,6 @@ tags:
 
 ## Array APIs
 
-
 ### Q1. make a string out of an array
 
 ```javascript
@@ -182,7 +181,6 @@ const result = students
   .join()
 console.log(result); // 90,88,80,66,45
 ```
-
 
 ## 참고
 - [https://youtu.be/3CUjtKJ7PJg](https://youtu.be/3CUjtKJ7PJg)
