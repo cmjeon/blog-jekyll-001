@@ -32,6 +32,7 @@ tags:
         <div id="search-result-view"></div>
       </div>
     </div>
+    ...
   </body>
 </html>
 ```
