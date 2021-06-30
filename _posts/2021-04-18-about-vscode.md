@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  알아두면 슬데있는 VSCode 노하우
+title:  알아두면 쓸데있는 VSCode 노하우
 categories: 
   - about something
 tags: 
