@@ -40,6 +40,7 @@ tags:
 - SearchResultView.js 생성
 
 ```javascript
+import { qs } from "../helper.js";
 import View from "./View.js";
 
 export default class SearchResultView extends View {
@@ -139,7 +140,7 @@ export default class Controller {
   render() {
     if(this.store.serachKeyword.length > 0) {
       this.searchResultView.show(this.store.searchResult);
-      return
+      return;
     }
 
     this.searchResultView.hide();
@@ -157,7 +158,7 @@ export default class Controller {
 
 - Controller.js 수정
 
-````javascript
+```javascript
 ...
 export default class Controller {
   ...
@@ -170,7 +171,7 @@ export default class Controller {
   ...
 }
 
-````
+```
 
 ### 중간정리
 
