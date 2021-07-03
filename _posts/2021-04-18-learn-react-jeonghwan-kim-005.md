@@ -97,6 +97,7 @@ import TabView from "./views/TabView.js";
 function main() {
   ...
   const views = {
+    ...,
     searchResultView: new SearchResultView(),
     tabVew: new TabView()
   }
@@ -107,6 +108,9 @@ function main() {
 - Controller.js 수정
 
 ```javascript
+...
+import { TabType } from "./views/TabView.js";
+
 export default class Controller {
   constructor(store, { searchFormView, searchResultView, tabView }) {
     ...
