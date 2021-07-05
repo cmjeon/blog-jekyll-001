@@ -11,8 +11,9 @@ tags:
 
 ### 리액티브
 
-- 특정 값에 의존해 자동으로 반응하는 것을 `리액티브(reactive) 하다` 고 함
-- 데이터가 변경될 때마다 엘리먼트에 자동으로 반영시키는 방법
+특정 값에 의존해 자동으로 반응하는 것을 `리액티브(reactive) 하다` 고 함
+
+데이터가 변경될 때마다 엘리먼트에 자동으로 반영시키는 방법
 
 ```javascript
 const state = {
@@ -60,7 +61,7 @@ state.data = "Hello World"; // 4
     1. render() 함수는 state.data 를 호출함
     1. state.data 가 호출 되면 get() 함수가 호출됨 // get
 
-- 데이터가 변경될 때 마다 render()가 자동으로 실행되게 변경함
+데이터가 변경될 때 마다 render()가 자동으로 실행되게 변경함
 
 ## 참고
 - [https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%ED%95%99%EC%8A%B5%ED%95%98%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard](https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%ED%95%99%EC%8A%B5%ED%95%98%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard)
