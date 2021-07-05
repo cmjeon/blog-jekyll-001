@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  만들면서 학습하는 리액트(react):소개편 - 데이터를 화면에 출력하는 방법 - 017
+title:  만들면서 학습하는 리액트(react):소개편 - Hello world - 017
 categories: 
   - learning react by jeonghwan-kim
 tags: 
@@ -9,7 +9,7 @@ tags:
 
 ## 소개편 
 
-### 가상돔
+### Hello world
 
 상태변화를 UI에 반영하려면 DOM API 호출이 불가피
 
