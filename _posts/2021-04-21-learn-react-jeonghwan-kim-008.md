@@ -31,6 +31,7 @@ tags:
       <div class="content">
         <div id="tab-view"></div>
         <div id="keyword-list-view"></div>
+        ...
       </div>
     </div>
     ...
@@ -62,7 +63,7 @@ export default class KeywordListView extends View {
 
 class Template {
   getEmptyMessage() {
-    return `<div class="empty-box">추천 검색어가 없습니다</div>`
+    return `<div class="empty-box">추천 검색어가 없습니다</div>`;
   }
 
   getList(data=[]) {
@@ -73,13 +74,25 @@ class Template {
     `
   }
 
-  _getItem(id, keyword) {
+  _getItem({ id, keyword }) {
     return `
       <li data-keyword="${keyword}">
         <span class="number">${id}</span>
         ${keyword}
       </li>
     `
+  }
+}
+```
+
+- main.js 수정
+
+```javascript
+function main() {
+  const views = {
+    ...,
+    tabView: new TabView(),
+    keywordListView: new KeywordListView();
   }
 }
 ```
@@ -94,18 +107,6 @@ export default class Store {
 
   getKeywordList() {
     return this.storage.keywordData;
-  }
-}
-```
-
-- main.js 수정
-
-```javascript
-function main() {
-  const views = {
-    ...,
-    tabView: new TabView(),
-    keywordListView: new KeywordListView();
   }
 }
 ```
@@ -125,6 +126,7 @@ export default class Controller {
     ...
 
     this.tabView.show(this.store.selectedTab);
+
     if(this.store.selectedTab === TabType.KEYWORD) {
       this.keywordListView.show(this.store.getKeywordList())
     } else if (this.store.selectdTab === TabType.HISTORY) {

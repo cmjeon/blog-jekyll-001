@@ -29,7 +29,7 @@ export default class KeywordListView extends View {
   }
   ...
   bindEvents() {
-    delegate()(this.element, "click", "li", event => this.handleClick(event));
+    delegate(this.element, "click", "li", event => this.handleClick(event));
   }
 
   handleClick(event) {

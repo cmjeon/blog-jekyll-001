@@ -20,6 +20,7 @@ tags:
 - Store.js 수정
 
 ```javascript
+...
 import { createNextId } from "./helpers.js";
 ...
 export default class Store {

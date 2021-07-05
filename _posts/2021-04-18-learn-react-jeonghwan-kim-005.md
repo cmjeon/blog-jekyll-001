@@ -61,7 +61,7 @@ export default class TabView extends View {
   }
 
   show() {
-    this.element.innerHTML = this.template.getTabList()
+    this.element.innerHTML = this.template.getTabList();
     super.show();
   }
 }
@@ -70,10 +70,11 @@ class Template {
   getTabList() {
     return `
       <ul class="tabs">
-        ${Object.values[TabType]
+        ${Object.values(TabTypes)
           .map(tabType => ({ tabType, tabLabel: TabLabel[tabType]}))
           .map(this._getTab)
-          .join("")}
+          .join("")
+        }
       </ul>
     `;
   }
@@ -81,7 +82,7 @@ class Template {
   _getTab({ tabType, tabLabel }) {
     return `
       <li data-tab="${tabType}">
-        ${tabLable}
+        ${tabLabel}
       </li>
   }
 }
@@ -109,8 +110,6 @@ function main() {
 
 ```javascript
 ...
-import { TabType } from "./views/TabView.js";
-
 export default class Controller {
   constructor(store, { searchFormView, searchResultView, tabView }) {
     ...
@@ -123,12 +122,17 @@ export default class Controller {
   ...
   render() {
     if(this.store.serachKeyword.length > 0) {
-      this.tabView.hide();
-      this.searchResultView.show(this.store.searchResult);
-      return;
+      return this.renderSearchResult();
     }
+
     this.tabView.show();
+    
     this.searchResultView.hide();
+  }
+
+  renderSearchResult() {
+    this.tabView.hide();
+    this.searchResultView.show(this.store.searchResult);
   }
 }
 ```

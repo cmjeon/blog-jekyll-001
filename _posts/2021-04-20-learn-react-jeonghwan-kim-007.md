@@ -22,7 +22,11 @@ tags:
 ```javascript
 ...
 export default class TabView extends View {
-  ...
+  constructor() {
+    ...
+    this.bindEvents();
+  }
+  
   bindEvents() {
     delegate(this.elelment, "click", "li", event => this.handleClick(event));
   }
@@ -34,6 +38,7 @@ export default class TabView extends View {
   }
   ...
 }
+...
 ```
 
 - Controller.js 수정
@@ -49,7 +54,7 @@ export default class Controller {
 
   changeTab(tab) {
     console.log(tag, "changeTab", tab);
-    this.store.selectedTab = tha;
+    this.store.selectedTab = tab;
     this.render();
   }
 }

@@ -20,7 +20,7 @@ tags:
 - TabView.js 수정
 
 ```javascript
-import { qsAll } from "../helper.js";
+import { qs, qsAll } from "../helper.js";
 ...
 export const TabType = {
   KEYWORD: "KEYWORD",
@@ -65,7 +65,8 @@ export default class Controller {
     }
 
     this.tabView.show(this.store.selectedTab);
-    ...
+    
+    this.searchResultView.hide();
   }
 }
 ```

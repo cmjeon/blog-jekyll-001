@@ -84,7 +84,7 @@ class Template {
     `
   }
 
-  _getItem(id, keyword, date) {
+  _getItem({ id, keyword, date }) {
     return `
       <li data-keyword="${keyword}">
         ${keyword}
@@ -135,7 +135,7 @@ function main() {
 export default class Controller {
   constructor(
     store,
-    { searchFormView, searchResultView, tabView, keywordListView }
+    { searchFormView, searchResultView, tabView, keywordListView, historyListView }
   ){
     ...
     this.keywordListView = keywordListView;
