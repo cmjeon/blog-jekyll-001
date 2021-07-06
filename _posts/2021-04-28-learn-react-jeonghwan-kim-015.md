@@ -46,7 +46,7 @@ state.data = "Hello World"; // 4
 // get
 ```
 
-1. Object.definePropoerty : state 객체에 'data'라는 프로퍼티를 정의하고, 프로퍼티를 호출하면 get() 함수를 호출하고, 프로퍼티에 값을 할당할 때 set() 함수를 호출하게 함
+1. Object.definePropoerty : state 객체에 'data'라는 프로퍼티를 정의하고, state의 data 프로퍼티를 `호출할 때(state.data)` get() 함수를 호출하고, 프로퍼티에 값을 `할당할 때(state.data = "")` set() 함수를 호출하게 함
 1. render() 함수를 호출
     1. render() 함수는 state.data 를 호출함
     1. state.data 가 호출 되면 get() 함수가 호출됨 // get
