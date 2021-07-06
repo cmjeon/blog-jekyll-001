@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  만들면서 학습하는 리액트(react):소개편 - Hello world - 020
+title:  만들면서 학습하는 리액트(react):소개편 - 시작점, 헤더 구현 - 020
 categories: 
   - learning react by jeonghwan-kim
 tags: 

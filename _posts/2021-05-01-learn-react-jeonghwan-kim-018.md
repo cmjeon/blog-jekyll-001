@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  만들면서 학습하는 리액트(react):소개편 - Hello world - 018
+title:  만들면서 학습하는 리액트(react):소개편 - React, ReactDOM, Babel - 018
 categories: 
   - learning react by jeonghwan-kim
 tags: 

@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  만들면서 학습하는 리액트(react):소개편 - Hello world - 019
+title:  만들면서 학습하는 리액트(react):소개편 - 템플릿 언어, JSX - 019
 categories: 
   - learning react by jeonghwan-kim
 tags: 
