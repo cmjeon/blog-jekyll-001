@@ -98,21 +98,23 @@ tags:
 $ npx lite-server --baseDir 1-vanilla/
 ```
 
-- tag 추가
+### tag 추가하기
 
-    ```javascript
-    // main.js
+#### main.js
+
+```javascript
+// main.js
+...
+import storage from "./storage.js";
+
+const tag = "[main]"; // add
+ducument.addEventListener("DomContentLoaded", main);
+function main() {
+    console.log(tag, "main"); // add
+    const store = new Store(storage);
     ...
-    import storage from "./storage.js";
-
-    const tag = "[main]"; // add
-    ducument.addEventListener("DomContentLoaded", main);
-    function main() {
-        console.log(tag, "main"); // add
-        const store = new Store(storage);
-        ...
-    }
-    ```
+}
+```
 
 ## 참고
 - [https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%ED%95%99%EC%8A%B5%ED%95%98%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard](https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%ED%95%99%EC%8A%B5%ED%95%98%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard)
