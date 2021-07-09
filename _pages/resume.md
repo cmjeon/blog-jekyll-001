@@ -98,7 +98,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 - 영업시스템 파트장
 - `jQuery, ajax` 기반 프론트엔드
 - Spring Framework(legacy) 기반 백엔드
-- 모바일앱, 키오스크용 API 서버
+- 모바일앱, 키오스크용 `REST API` 서버 운영
 - `python3` 을 활용한 일간보고서 생성 자동화
   - 새벽 엑셀작업을 대체하기 위해
 - `MediaWiki` 도입
