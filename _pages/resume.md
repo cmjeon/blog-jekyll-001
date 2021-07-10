@@ -130,7 +130,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 ## 프로젝트
 
-### 패션커머스앱 고도화 (21.06 ~ 21.21)
+### 패션 큐레이션 고도화 (21.06 ~ 현재)
 
 - 역할
     - 패션커머스앱 PL로 요구사항 협의부터 업무조율을 수행중입니다.
@@ -214,28 +214,6 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 - 2016.07.19 PMP
 - 2011.03.05 OCJP(1.6)
 - 2009.06.01 정보처리기사
-
-## 학습
-
-- 2021.05 실전 타입스크립트
-- 2021.04 타입스크립트 입문
-- 2021.03 웹사이트제작 반응형웹
-- 2021.01 Javascript 핵심 개념 알아보기 - JS Flow
-- 2020.11 함수형 프로그래밍과 JavaScript ES6+
-- 2020.09 Vue.js 중급강과 -웹앱 제작으로 배워보는 Vue.js, ES6, Vuex
-- 2020.08 Vue.js 끝장내기 - 실무에 필요한 모든 것
-- 2020.06 프론트엔드 개발환경 Webpack, babel, eslint
-- 2020.05 html, css 웹표준
-- 2020.04 Vue.js 시작하기
-- 2020.01 Node.js와 Socket.io를 활용한 웹 서비스 구축
-- 2019.11 Agile 개발방법 Scrum 실무
-- 2019.10 웹 프론트엔드 javascript, jQuery
-- 2019.01 리눅스 Shell 프로그래밍
-- 2018.10 CI 환경구축
-- 2018.08 Linux System Administration 
-- 2018.02 jQueryMobile 초급
-- 2017.12 파이썬 기본 
-- 2017.01 형상관리 기법과 도구의 활용
 
 ## 학력
 
