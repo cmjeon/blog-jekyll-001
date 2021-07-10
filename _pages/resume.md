@@ -101,6 +101,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 - `jQuery, ajax` 프론트엔드
     - 18년 수직마라톤 이벤트 예약/관리 기능 개발
         - 한정수량 물품의 수량 확인 및 중복신청 방지를 위한 `동적선택` 적용
+        
     - 17년 포토페스티벌 참가예약/관리/이벤트 응모 기능 개발
         - 대용량 업로드(10Mb)용 스피너 도입
         - 고객 홈페이지에 이벤트 CRUD, 중간저장 기능
@@ -108,8 +109,10 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 - Spring Framework(legacy) 백엔드
     - 18년 수직마라톤 이벤트 예약/관리 기능 개발
         - 한정수량 물품의 동시신청 방지를 위해 `트랜젝션 처리` 적용(중복접수 발생 0건)
+
     - Spring Framework(legacy) CRUD 표준 개발 템플릿 제작
         - 개발속도 향상 및 표준화
+
     - 인증, 권한, 이메일/SMS 발송 공통기능화(동일기능 개발공수 절감)
 
 - 모바일앱, 키오스크용 `REST API` 서버 운영
