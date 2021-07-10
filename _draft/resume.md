@@ -34,7 +34,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 프로젝트 수행할 때 `고객의 핵심고민을 파악`하고 집중하여 해결합니다.
 
-`팀워크를 중요시`하며, 특히 팀워간 소통과 업무능력 표준화를 위한 노력으로 MediaWiki, 표준 개발 템플릿, Confluence 도입하며 팀에 기여해 왔습니다.   
+`팀워크를 중요시`하며, 특히 팀원간 소통과 업무능력 표준화를 위한 노력으로 MediaWiki, 표준 개발 템플릿, Confluence 도입하며 팀에 기여해 왔습니다.   
 
 ## 기술
 
