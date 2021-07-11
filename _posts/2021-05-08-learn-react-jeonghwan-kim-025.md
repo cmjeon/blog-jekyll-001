@@ -272,6 +272,45 @@ class App extends React.Component {
 }
 ```
 
+### 검색결과 초기화
+
+#### 요구사항
+
+> x 버튼을 클릭하면 검색폼이 초기화 되고, 검색 결과가 사라진다
+
+#### 구현
+
+```javascript
+...
+class App extends React.Component {
+  ...
+  handleReset() {
+    this.setState({
+      searchKeyword: "",
+      submitted: false,
+    });
+  }
+  handleChangeInput(event) {
+    const searchKeyword = event.target.value;
+    if(serachKeyword.length <= 0 && this.state.submitted) {
+      return this.handleReset();
+    }
+    this.setState({ searchKeyword });
+  }
+  ...
+}
+```
+
+### 중간정리
+
+검색결과를 리스트로 렌더링하였음
+
+리액트는 가상돔의 전/후 버전을 비교해서 최소한의 돔 조작을 하면서 성능을 높임
+
+계산 복잡도를 줄이기 위해 리스트일 경우 key 속성을 사용하도록 함
+
+모든 UI가 state에 의존하기 때문에 잘 설계된 state만 관리하면 UI를 예측하기 쉽게 제어할 수 있음
+
 ## 참고
 - [https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%ED%95%99%EC%8A%B5%ED%95%98%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard](https://www.inflearn.com/course/%EB%A7%8C%EB%93%A4%EB%A9%B4%EC%84%9C-%ED%95%99%EC%8A%B5%ED%95%98%EB%8A%94-%EB%A6%AC%EC%95%A1%ED%8A%B8/dashboard)
 - [https://jeonghwan-kim.github.io/series/2021/04/12/lecture-react-usage.html](https://jeonghwan-kim.github.io/series/2021/04/12/lecture-react-usage.html)
