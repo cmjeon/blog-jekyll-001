@@ -25,8 +25,7 @@ class App extends React.Component {
     this.setState(() => {
       return { searchKeyword: ""}
     }, () => {
-      this.setState({ searchKeyword: ""});
-      console.log('TODO: handleReset', this.state.searchKeyword);
+      console.log('handleReset', this.state.searchKeyword);
     });
   }
 
@@ -44,8 +43,8 @@ class App extends React.Component {
       <>
       <div className="container">
         <form
-          onSubmit={ event => this.handleSubmit(event)}
-          onReset={ event => this.handleReset()}
+          onSubmit={ (event) => this.handleSubmit(event)}
+          onReset={ ()) => this.handleReset()}
         >
           ...
         </form>

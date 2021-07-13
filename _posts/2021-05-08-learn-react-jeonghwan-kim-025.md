@@ -33,14 +33,17 @@ class App extends React.Component {
   render() {
     <>
       <div className="container">
+        <form>
         ...
+        </form>
         <div className="content">
           {this.state.searchResult.length > 0 ? (
-            <div>TODO: 검색 결과 목록 표시하기</div>
+            <div>검색 결과 목록 표시하기</div>
           ):(
             <div className="empty-box">검색 결과가 없습니다</div>
           )}
-        </div >
+        </div>
+      </div>
     </>
   }
 }
@@ -48,12 +51,19 @@ class App extends React.Component {
 
 ### 검색 결과가 있을 경우
 
-검색결과를 관리하기 위해 Store.js, storage.js, helpers.js 를 복사해온다
+검색결과를 관리하기 위해 1-vanilla/js 폴더에서 Store.js, storage.js, helpers.js 를 2-react/js 폴더로 복사해온다
 
 ```javascript
 // Store.js
 import storage from './storage.js';
 class Store { // export default 삭제
+  constructor(storage) {
+    ...
+    this.searchKeyword = "";
+    // 삭제 this.searchKeyword = "";
+    // 삭제 this.searchResult = [];
+    // 삭제 this.selectedTab = TabTypes.KEYWORD;
+  }
   ...
 }
 
@@ -63,15 +73,16 @@ export default store;
 
 ```javascript
 // main.js
-import store from './Store.js';
+import store from './js/Store.js';
 
 class App extends React.Component {
   ...
   handleSubmit(event) {
     event.preventDefault();
-    this.search(this.state.searchKeyword)
+    this.search(this.state.searchKeyword);
   }
-  search(keyword) {
+
+  search(searchKeyword) {
     const searchResult = store.search(searchKeyword);
     this.setState({ searchResult });
   }
@@ -103,7 +114,7 @@ class App extends React.Component {
 
 setState는 변경된 필드만 기존 필드와 병합하는 방식으로 필드를 관리함
 
-Store에서는 searchResult를 더이상 보관하지 않음, 그래서 search() 함수를 수정
+Store에서는 storage 외에 다른 변수(searchResult 등)을 더이상 보관하지 않음, 그래서 search() 함수를 수정
 
 ```javascript
 // Store.js
@@ -111,7 +122,7 @@ class Store {
   ...
   search(searchKeyword) {
     return this.storage.productData.filter(
-      (product) => product.name.includes(keyword)
+      (product) => product.name.includes(searchKeyword)
     );
   }
   ...
@@ -146,7 +157,7 @@ li 태그에 key를 등록
 
 ```javascript
 // main.js
-import store from './Store.js';
+import store from './js/Store.js';
 
 class App extends React.Component {
   ...
@@ -175,7 +186,7 @@ class App extends React.Component {
 }
 ```
 
-map의 index를 key로 사용하는 경우가 있는데, 없는거보다는 낫지만 최후의 수단으로 사용
+map의 index를 key로 사용하는 경우가 있는데, 없는 것 보다는 낫지만 최후의 수단으로 사용
 
 검색을 하기도 전에 검색 결과가 없다고 나오는 문제
 
@@ -191,8 +202,8 @@ class App extends React.Component {
   search(searchKeyword) {
     ...
     this.setState({
-      searchResult = store.search(searchKeyword);
-      submitted = true;
+      searchResult : store.search(searchKeyword),
+      submitted : true,
     });
   }
   ...
@@ -204,6 +215,8 @@ class App extends React.Component {
         <div className="content">
           { this.state.submitted && (
             this.state.searchResult.length > 0 ? (
+              ...
+            ):(
               ...
             )
           )}
@@ -244,7 +257,7 @@ class App extends React.Component {
           { this.state.searchResult.map((item, index) => {
             return (
               <li key={item.id}>
-                <img src={item.imageUrl} alt={item.name}} />
+                <img src={item.imageUrl} alt={item.name} />
                 <p>{item.name}</p>
               </li>
             );
@@ -264,7 +277,7 @@ class App extends React.Component {
         </header>
         <div className="container">
           { searchForm }
-          <div className="content">{ this.state.submitted && searchResult }</div>
+          <div className="content">{ this.state.submitted && ( searchResult ) }</div>
         </div>
       </>
     );

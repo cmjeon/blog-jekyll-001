@@ -36,7 +36,7 @@ const header = React.createElement("header", null, h1)
 
 ### JSX
 
-```jsx
+```html
 <h1>Hello world</h1> // React.createElement('h1', null, 'Hello world')
 ```
 

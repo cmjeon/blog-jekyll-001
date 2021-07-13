@@ -64,7 +64,7 @@ const element = (
 
 JSX 는 모양은 HTML이지만 실제로는 자바스크립트라서 사용방법이 HTML과 다름
 
-속성 이름이 HTML의 경우 소문자만 사용하지만 JSX는 카멜 케이스를 사용(onclick -> onClick)
+속성 이름이 HTML의 경우 소문자만 사용하지만 JSX는 CamelCase를 사용(onclick -> onClick)
 
 class -> className
 

@@ -36,11 +36,12 @@ const element = (
 
 - className, autoFocus를 CamelCase로 사용하자
 - `<>`, `</>` 는 fragment
-- 리액트는 리액트 방식의 상태가 필요함
 
 ### 리액트 컴포넌트
 
 > React는 ... "컴포넌트"라고 불리는 작고 고립된 코드의 파편을 이용하여 복잡한 UI를 구성하도록 돕습니다.
+
+리액트는 리액트 방식의 상태가 필요함
 
 컴포넌트는 UI를 나타내는 엘리먼트와 어플리케이션 로직을 포함한 상위 개념
 
@@ -153,7 +154,7 @@ state가 변경되도 컴포넌트의 render 함수가 실행되지 않음
 
 this.forceUpdate() 함수를 호출하면 render() 함수를 호출해서 화면을 갱신해줌
 
-this.forceUpdate() 함수를 호출하기 보다 리액트 컴포넌트가 스스로 render() 함수를 호출하게 하기 위해 변경해보자
+그런데 this.forceUpdate() 함수를 호출하기 보다 리액트 컴포넌트가 스스로 render() 함수를 호출하게 하기 위해 변경해보자
 
 #### main.js
 

@@ -37,7 +37,7 @@ tags:
               <input
                 ...
               />
-              {resetButton}
+              { resetButton }
             </form>
           </div>
           </>

@@ -24,7 +24,7 @@ class App extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('TODO: handleSubmit', this.state.searchKeyword);
+    console.log('handleSubmit', this.state.searchKeyword);
   }
 
   render() {
