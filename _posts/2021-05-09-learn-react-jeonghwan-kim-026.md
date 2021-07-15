@@ -40,7 +40,7 @@ class App extends React.Component {
       <ul className="tabs">
         { Object.values(TabType).map(tabType => {
           return (
-            <li key={keyType}>TabLabel[tabType]</li>
+            <li key={tabType}>{ TabLabel[tabType] }</li>
           )
         })}
       </ul>
