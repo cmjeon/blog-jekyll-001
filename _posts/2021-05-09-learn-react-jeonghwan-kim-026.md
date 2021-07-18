@@ -5,7 +5,6 @@ categories:
   - learning react by jeonghwan-kim
 tags: 
   - react
-  - Big O
 ---
 
 ## 사용편

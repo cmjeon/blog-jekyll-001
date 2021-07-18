@@ -1,11 +1,10 @@
 ---
 layout: single
-title:  만들면서 학습하는 리액트(react):사용편 - 028
+title:  만들면서 학습하는 리액트(react):사용편 - 027
 categories: 
   - learning react by jeonghwan-kim
 tags: 
   - react
-  - Big O
 ---
 
 ## 사용편
