@@ -51,7 +51,7 @@ class App extends React.Component {
 
 ### 검색 결과가 있을 경우
 
-검색결과를 관리하기 위해 1-vanilla/js 폴더에서 Store.js, storage.js, helpers.js 를 2-react/js 폴더로 복사해온다
+검색결과를 관리하기 위해 1-vanilla/js 폴더의 Store.js, storage.js, helpers.js 를 2-react/js 폴더로 복사해온다
 
 ```javascript
 // Store.js
