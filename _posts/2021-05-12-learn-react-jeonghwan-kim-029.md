@@ -65,6 +65,7 @@ package.json 에는 라이브러리가 있음
 package.json 에 명시된 dependencies에 있는 라이브러리들을 다운로드
 
 ```bash
+$ cd 3-component
 $ npm i
 ```
 
@@ -74,7 +75,7 @@ $ npm i
 $ npm start
 ```
 
-index.html 을 살펴보면 css 를 로딩하고 `./main.j` 를 로딩하였음
+index.html 을 살펴보면 css 를 로딩하고 `./main.js` 를 로딩하였음
 
 src 에 App.js 생성
 
@@ -82,7 +83,7 @@ src 에 App.js 생성
 // src/App.js
 import React from 'react';
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     return (
       <>
