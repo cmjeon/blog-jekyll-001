@@ -44,7 +44,7 @@ export default class SearchForm extends React.Component {
           type="text"
           placeholder="검색어를 입력하세요"
           autFocus
-          value="{this.state.searchKeyword}"
+          value={this.state.searchKeyword}
           onChange={(event) => this.handleChangeInput(event)}
         />
         {this.state.searchKeyword.length > 0 && (
@@ -86,37 +86,11 @@ export default class App extends React.Component {
 
 리액트에서는 부모에서 자식으로 데이터를 props로 전달하는 방식은 자연스러움
 
-SearchForm 에서는 엔터를 입력하면 App 으로 무엇인가가 전달되어야 하는 상황임
+그런데 이번 경우는 자식 컴포넌트인 SearchForm 에서는 엔터를 입력하면 부모 컴포넌트인 App 으로 무엇인가가 전달되어야 하는 상황임
 
 SearchForm 에 props 로 callback 함수를 전달해서 해결해보겠음
 
 #### 구현
-
-SearchForm.js 수정
-
-```javascript
-// src/components/SearchForm.js
-...
-export default class SearchForm extends React.Component {
-  ...
-  handleSubmit(event) {
-    event.preventDefault();
-    this.props.onSubmit(this.state.searchKeyword); 
-  } 
-  ...
-  render() {
-    const { searchKeyword } = this.state;
-
-    return (
-      <form
-        onSubmit={(event) => this.handleSubmit(event)}
-      >
-        ...
-      </form>
-    )
-  }
-}
-```
 
 App.js 수정
 
@@ -144,11 +118,64 @@ export default class App extends React.Component {
 }
 ```
 
+SearchForm.js 수정
+
+```javascript
+// src/components/SearchForm.js
+...
+export default class SearchForm extends React.Component {
+  ...
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.state.searchKeyword); 
+  } 
+  ...
+  render() {
+    const { searchKeyword } = this.state;
+
+    return (
+      <form
+        onSubmit={(event) => this.handleSubmit(event)}
+      >
+        ...
+      </form>
+    )
+  }
+}
+```
+
 #### 요구사항
 
 > x 버튼을 클릭하거나 검색어를 삭제하면 검색 결과를 삭제한다
 
 #### 구현
+
+App.js 수정
+
+```javascript
+// src/App.js
+...
+export default class App extends React.Component {
+  ...
+  handleReset() {
+    console.log('TODO: handleReset');
+  }
+  ...
+  render() {
+    return (
+      <>
+        ...
+        <div className="container">
+          <SearchForm
+            onSubmit={(searchKeyword) => this.search(searchKeyword)}
+            onReset={() => this.handleReset()}
+          >
+        </div>
+      </>
+    )
+  }
+}
+```
 
 SearchForm.js 수정
 
@@ -180,33 +207,6 @@ export default class SearchForm extends React.Component {
           <button type="reset" className="btn-reset" />
         )}
       </form>
-    )
-  }
-}
-```
-
-App.js 수정
-
-```javascript
-// src/App.js
-...
-export default class App extends React.Component {
-  ...
-  handleReset() {
-    console.log('TODO: handleReset');
-  }
-  ...
-  render() {
-    return (
-      <>
-        ...
-        <div className="container">
-          <SearchForm
-            onSubmit={(searchKeyword) => this.search(searchKeyword)}
-            onReset={() => this.handleReset()}
-          >
-        </div>
-      </>
     )
   }
 }
@@ -252,6 +252,10 @@ export default class App extends React.Component {
     this.state = { searchKeyword: "" }
   }
   ...
+  search(searchKeyword) {
+    console.log('TODO: search', searchKeyword)
+  }
+  ...
   handleChangeInput(searchKeyword) {
     if(searchKeyword.length <= 0) {
       this.handleReset();
@@ -260,6 +264,7 @@ export default class App extends React.Component {
   }
   ...
   render() {
+    const { searchKeyword } = this.state;
     return (
       <>
         ...
@@ -267,7 +272,7 @@ export default class App extends React.Component {
           <SearchForm
             value={this.state.searchKeyword}
             onChange={(value) => this.handleChangeInput(value)}
-            onSubmit={(searchKeyword) => this.search(searchKeyword)}
+            onSubmit={() => this.search(searchKeyword)}
             onReset={() => this.handleReset()}
           / >
         </div>
@@ -277,7 +282,7 @@ export default class App extends React.Component {
 }
 ```
 
-SearchForm 에서는 관리하는 state 가 없으므로 함수형으로 변경함
+이제 SearchForm 에서는 관리하는 state 가 없으므로 함수형으로 변경함
 
 SearchForm.js 수정
 
@@ -296,7 +301,6 @@ const SearchFrom = ({value, onChange, onSubmit, onReset}) => {
   }
 
   const handleChangeInput = () => {
-    const searchKeyword = event.target.value;
     onChange(event.taget.value); 
   }
 
@@ -364,7 +368,7 @@ App.js 수정
 // src/App.js
 ...
 import SearchResult from './components/SearchResult.js';
-import store from './Store.js'
+import store from './Store.js';
 
 export default class App extends React.Component {
   constructor() {
@@ -378,10 +382,10 @@ export default class App extends React.Component {
   }
   ...
   search(searchKeyword) {
-    const searchResult =  store.search(searchKeyword);
+    const searchResult = store.search(searchKeyword);
     this.setState({
       searchResult,
-      sumbitted:true,
+      submitted:true,
     })
   }
   ...
@@ -424,6 +428,8 @@ src/components에 Tabs.js 생성
 
 ```javascript
 // src/components/Tabs.js
+import React from 'react';
+
 export const TabType = {
   KEYWORD: "KEYWORD",
   HISTORY: "HISTORY",
@@ -442,7 +448,7 @@ const Tabs = ({selectedTab, onChange}) => {
           <li
             key={tabType}
             className={selectedTab === tabType ? "active" : ""}
-            onClick={() => onChange(tabType))}
+            onClick={() => onChange(tabType)}
           >
             {TabLabel[tabType]}
           </li>
@@ -459,6 +465,7 @@ App.js 수정
 ```javascript
 // src/App.js
 ...
+import store from './Store.js'
 import Tabs, {TabType} from './components/Tabs.js'
 
 export default class App extends React.Component {
@@ -472,11 +479,13 @@ export default class App extends React.Component {
   }
   ...
   render() {
+    const { searchKEyword, searchResult, Submitted, selectedTab } = this.state;
     ...
     return (
       <>
         ...
         <div className="contianer">
+          ...
           <div className="content">
             {submitted ? (
               <SearchResult data={searchResult}/>
