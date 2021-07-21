@@ -62,7 +62,7 @@ export default class List extends React.Component {
             </li>
           )
         })}
-
+      </ul>
     )
   }
 }
@@ -100,7 +100,7 @@ App.js 수정
 ```js
 // src/App.js
 ...
-import store from './Store.js';
+import Tabs, { TabType } from './compoents/Tabs.js';
 import keywordList from './components/KeywordList.js';
 
 export default class App extends React.Component {
@@ -179,7 +179,7 @@ App.js 수정
 // src/App.js
 ...
 import store from './Store.js';
-import keywordList from './components/KeywordList.js';
+import KeywordList from './components/KeywordList.js';
 import HistoryList from './components/HistoryList.js';
 
 export default class App extends React.Component {
@@ -215,7 +215,7 @@ export default class App extends React.Component {
 
 ### 조합: 컴포넌트 담기 1
 
-리액트는 클래스 상속으로 컴포넌트 재활용을 권장하지 않는다
+리액트는 클래스 상속으로 컴포넌트 재활용을 권장하지 않음
 
 > Facebook 에서는 수천 개의 React 컴포넌트를 사용하지만, 컴포넌트를 상속 계층 구조로 작성을 권장할만한 사례를 아직 찾지 못했습니다.
 
@@ -231,11 +231,11 @@ import React from 'react';
 const List = ({data=[], onClick, renderItem}) => {
   return (
     <ul className="list">
-      {data.map((item, index) => {
+      {data.map((item, index) => (
         <li key={item.id} onClick={()=>onClick(item.keyword)}>
           {renderItem(item, index)}
         </li>
-      })}
+      ))}
     </ul>
   )
 }
@@ -270,14 +270,14 @@ export default class KeywordList extends React.Component {
       <List
         data={this.state.keywordList}, 
         onClick={this.props.onClick}, 
-        renderItem={(item, index)=>{
+        renderItem={(item, index)=>(
           return (
             <>
               <span className="number">{index + 1}</span>
               <span>{item.keyword}</span>
             </>
           )
-        }}
+        )}
       />
     )
   }
@@ -288,7 +288,7 @@ export default class KeywordList extends React.Component {
 
 HistoryList.js 수정
 
-```js
+```js 
 // src/components/HistoryList.js
 import React from 'react';
 import { formatRelativeDate } from '../helpers.js';
@@ -331,7 +331,7 @@ export default class HistoryList extends React.Component {
               <button
                 className="btn-remove"
                 onClick={(event)=>this.handleClickRemove(event, item.keyword)}
-              >
+              />
             </>;
           )
         }}
@@ -357,25 +357,25 @@ const List = ({
   hasDate = false, 
   onRemove 
 }) => {
-  const handleClickRemove(event, keyword) {
+  const handleClickRemove = (event, keyword) => {
     event.stopPropagation();
     onRemove(keyword),
   }
   return (
     <ul className="list">
-      {data.map((item,index) => {
+      {data.map((item,index) => (
         <li key={item.id} onClick={() => onClick(item.keyword)}>
           {hasIndex && <span className="number">{index + 1}</span>}
           <span>{item.keyword}</span>
-          {hasDate && <span classNAme="date">{formatRelativeDate(item.date)}</span>}
+          {hasDate && <span className="date">{formatRelativeDate(item.date)}</span>}
           {!!onRemove && (
             <button
               className="btn-remove"
               onClick={(event)=>handleClickRemove(event, item.keyword)}
             >
-          )
+          ))
         </li>
-      })}
+      ))}
     </ul >
   )
 }
