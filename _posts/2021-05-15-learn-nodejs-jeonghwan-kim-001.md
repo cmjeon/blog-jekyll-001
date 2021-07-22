@@ -199,7 +199,7 @@ server.listen(port, hostname, () => {
 ```bash
 # node-api 폴더에서
 $ node index.js
-Server runnin at http://localhost:3000/
+Server running at http://localhost:3000/
 ```
 
 접속확인
