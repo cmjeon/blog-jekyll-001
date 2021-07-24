@@ -599,7 +599,10 @@ app.post('/users', function(req, res) {
   const name = req.body.name;
   if(!name) return res.status(400).end();
   if(users.filter((user) => { return user.name === name}).length) return res.status(409).end();
-  ...
+  const id = Date.now();
+  const user = { id, name };
+  users.push(user);
+  res.status(201).json(user);
 });
 ...
 ```
