@@ -70,16 +70,11 @@ nodejs 는 파일형태로 모듈을 관리할 수 있는 CommonJS 로 구현
 
 ### 모듈시스템2
 
-모듈사용 사례
-
-node-api 폴더에 index.js 생성
+http 모듈 사용예시
 
 ```javascript
-// node-api/index.js
-
 // http 라는 모듈을 가져와서 http 라는 변수에 할당
 const http = require('http');
-
 // http 모듈의 createServer() 함수 실행
 http.createServer();
 ```
@@ -170,6 +165,8 @@ end
 This is data file
 ```
 
+비동기는 원래 함수가 호출된 세계와 콜백함수의 세계가 시간적으로 분리되는 개념
+
 ## 노드로 만나는 Hello World
 
 ### Hello World 노드버전
@@ -200,12 +197,14 @@ server.listen(port, hostname, () => {
 # node-api 폴더에서
 $ node index.js
 Server running at http://localhost:3000/
+# 종료는 Ctrl + c
 ```
 
 접속확인
 
 ```bash
 $ curl -X GET 'localhost:3000'
+Hello, World!
 ```
 
 ### 헬로월드 코드읽기
@@ -264,6 +263,23 @@ const server = http.createServer((req, res) => {
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+```
+
+실행
+
+```bash
+# node-api 폴더에서
+$ node index.js
+Server running at http://localhost:3000/
+```
+
+접속확인
+
+```bash
+$ curl -X GET 'localhost:3000'
+Hello, World!
+$ curl -X GET 'localhost:3000/users'
+User list
 ```
 
 ## 참고

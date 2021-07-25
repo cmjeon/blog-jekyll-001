@@ -27,6 +27,7 @@ ExpressJS 기능
 ExpressJS 설치
 
 ```bash
+# node-api/
 $ npm i express
 ```
 
@@ -85,7 +86,7 @@ app.listen(3000, function(){
 실행
 
 ```bash
-# node-api 폴더에서
+# node-api/
 $ node index.js
 Server is running
 ```
@@ -94,6 +95,16 @@ Server is running
 
 ```bash
 $ curl -X GET 'localhost:3000'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>Cannot GET /</pre>
+</body>
+</html>
 ```
 
 서버로그
@@ -123,13 +134,14 @@ function logger2(req, res, next) {
 }
 
 app.use(logger);
+app.use(logger2);
 ...
 ```
 
 실행
 
 ```bash
-# node-api 폴더에서
+# node-api/
 $ node index.js
 Server is running
 ```
@@ -138,6 +150,7 @@ Server is running
 
 ```bash
 $ curl -X GET 'localhost:3000'
+# 실행결과 출력
 ```
 
 서버로그
@@ -157,6 +170,7 @@ I am logger2
 expressJS 에서 외부 logger(morgan) 사용하기
 
 ```bash
+# node-api/
 $ npm insall morgan
 ```
 
@@ -184,6 +198,7 @@ Server is running
 
 ```bash
 $ curl -X GET 'localhost:3000'
+# 실행결과 출력
 ```
 
 서버로그
@@ -192,7 +207,7 @@ $ curl -X GET 'localhost:3000'
 Server is running
 I am logger
 I am logger2
-GET / 404 4.770 ms - 131
+GET / 404 2.096 ms - 139
 ```
 
 ### 에러 미들웨어
@@ -221,6 +236,7 @@ function errormw(err, req, res, next) {
 
 app.use(commonmw);
 app.use(errormw);
+app.use(morgan('dev'));
 
 app.listen(3000, fuction() {
   console.log('Server is running');
@@ -251,7 +267,7 @@ error ouccered
 
 ### 라우팅
 
-요청 URL 에 대해 적절한 핸들러 함수를 연결해주는 기능을 라우티이라고 부름
+요청 URL 에 대해 적절한 핸들러 함수를 연결해주는 기능을 라우팅이라고 부름
 
 어플리케이션의 get(), post() 메소드로 구현할 수 있음
 
@@ -284,6 +300,8 @@ server.listen(port, hostname, () => {
 ```
 
 어떤 요청이 왔을 때 그 요청에 해당하는 응답을 연결시켜 주는 것을 라우팅이라고 함
+
+http 모듈에서는 라우팅이 위처럼 다소 장황하게 작성됨
 
 ### 요청객체와 응답객체
 
@@ -329,7 +347,7 @@ app.listen(3000, function () {
 $ npm install express
 ```
 
-express 는 어디에 설치되나?
+위 명령어로 express 를 설치했는데 어디에 설치되었을까?
 
 node_modules 폴더에 설치됨
 
@@ -357,13 +375,15 @@ package.json 안에 dependencies 에 express 를 추가해줌
 $ npm install express --save
 ```
 
-package.json 의 dependencies 에 모듈이 있는 상황에서는 `npm install` 만으로 모듈들을 설치할 수 있음
+이 후 package.json 의 dependencies 에 모듈이 있는 상황에서는 `npm install` 만으로 모듈들을 설치할 수 있음
 
 ```bash
 $ npm install
 ```
 
 ### npm2
+
+"script" 에 "start" 추가
 
 package.json
 
@@ -491,7 +511,6 @@ app.listen(3000, function() {
 ```bash
 # node-api 폴더에서
 $ npm start
-
 Example app listening on port 3000!
 ```
 
@@ -527,7 +546,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 < Content-Type: application/json; charset=utf-8
 < Content-Length: 71
 ...
-[{"id":1, "name":"alice"}, ...]
+[{"id":1,"name":"alice"},{"id":2,"name":"beck"},{"id":3,"name":"chris"}]
 ```
 
 ## 참고
