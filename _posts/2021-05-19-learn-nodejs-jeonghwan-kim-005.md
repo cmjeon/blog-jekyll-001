@@ -204,6 +204,19 @@ package.json
 }
 ```
 
+mocha 의 watch option 으로 소스 코드 수정 시 마다 테스트코드가 자동으로 돌 수 있도록 함
+
+package.json
+
+```js
+{
+  "script": {
+    "test": "NODE_ENV=test mocah api/user/user.spec.js -w",
+    "start": "node bin/www.js"
+  }
+}
+```
+
 node-api/index.js
 
 ```js
