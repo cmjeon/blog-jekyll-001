@@ -58,12 +58,14 @@ describe('utils.js 모듈의 capitalize() 함수는 ', () => {
 
 ### 모카(mocha) 3
 
+테스트 코드 작성
+
 utils.spec.js
 
 ```js
 // utils.spec.js
 // spec 이라고 쓰여있는 파일은 주로 테스트 코드 파일
-const utils = require('/.utils');
+const utils = require('./utils');
 const assert = require('assert');
 
 describe('utils.js 모듈의 capitalize() 함수는 ', () => {
@@ -79,6 +81,7 @@ describe('utils.js 모듈의 capitalize() 함수는 ', () => {
 mocha 설치
 
 ```bash
+# node-api/
 $ npm install mocha --save-dev
 ```
 
@@ -114,7 +117,7 @@ $ node_modules/.bin/mocha utils.spec.js
 
 [https://github.com/tj/should.js/](https://github.com/tj/should.js/)
 
-노트 assert 말고 서드파티 라이브러리를 사용하라
+nodejs 의 권고 assert 말고 서드파티 라이브러리를 사용하라
 
 슈드(should) 는 검증(assertion) 라이브러리
 
@@ -123,6 +126,7 @@ $ node_modules/.bin/mocha utils.spec.js
 should 설치
 
 ```bash
+# node-api/
 $ npm install should --save-dev
 ```
 
@@ -131,13 +135,13 @@ utils.spec.js
 
 ```js
 // utils.spec.js
-const utils = require('/.utils');
+const utils = require('./utils');
 const should = require('should');
 
 describe('utils.js 모듈의 capitalize() 함수는 ', () => {
   it('문자열의 첫번째 문자를 대문자로 변환한다', () => {
     const result = utils.capitalize('hello')
-    // assert.equal(result, 'Hello');
+    // assert.equal(result, 'Hello'); 삭제
     result.should.be.equal('Hello');
   })
 })
@@ -169,6 +173,8 @@ supertest 설치
 ```bash
 $ npm install supertest --save-dev
 ```
+
+테스트 케이스 생성
 
 index.spec.js
 
