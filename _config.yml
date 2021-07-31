@@ -280,7 +280,7 @@ defaults:
       comments: # true
       share: true
       related: true
-      show_date: true # 발행 일자 표시
+      # show_date: true # 발행 일자 표시
   # _pages
   - scope:
       path: ""
