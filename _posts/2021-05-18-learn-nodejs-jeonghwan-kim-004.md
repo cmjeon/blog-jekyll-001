@@ -517,7 +517,7 @@ index.js
 // node-api/index.js
 ...
 var morgan = require('morgan');
-var badyParser = require('body-parser');
+var bodyParser = require('body-parser');
 ...
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-www-form-urlencoded
@@ -790,27 +790,6 @@ app.put('/users/:id', (req, res) => {
 $ npm test
 # 테스트 성공
 ```
-
-## 코드 리펙토링
-
-### 라우터 클래스
-
-
-
-
-### 컨트롤러 함수로 분리
-
-
-
-### 테스트 코드 이동
-
-
-
-### 테스트 환경 개선
-
-
-
-
 
 ## 참고
 - [https://www.inflearn.com/course/%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-tdd-nodejs-api](https://www.inflearn.com/course/%ED%85%8C%EC%8A%A4%ED%8A%B8%EC%A3%BC%EB%8F%84%EA%B0%9C%EB%B0%9C-tdd-nodejs-api)
