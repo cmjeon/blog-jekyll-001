@@ -34,6 +34,7 @@ $ touch user.spec.js
 
 node-api/index.js 에서 라우팅 부분만 node-api/api/user/index.js 로 복사
 
+app.get ~ app.put 까지가 라우팅 부분
 
 node-api/api/user/index.js
 
@@ -41,26 +42,14 @@ node-api/api/user/index.js
 // node-api/api/user/index.js
 const express = require('express');
 const router = express.Router();
+const ctrl = require('./user.ctrl');
 
-var users = [
-  ...
-];
+router.get('/', ctrl.index);
+router.get('/:id', ctrl.show);
+router.delete('/:id', ctrl.destroy);
+router.post('/', ctrl.create);
+router.put('/:id', ctrl.update);
 
-router.get('/', function(req, res) {
-  ...
-});
-router.get('/:id', function(req, res) {
-  ...
-});
-router.delete('/:id', function(req, res) {
-  ...
-});
-router.post('/', function(req, res) {
-  ...
-});
-router.put('/:id', function(req, res) {
-  ...
-});
 module.exports = router;
 ```
 
@@ -68,13 +57,26 @@ node-api/index.js
 
 ```js
 // node-api/index.js
-...
-var bodyParser = require('body-parser');
+var express = require('express');
+var app = express();
+var morgan = require('morgan');
 var user = require('./api/user');
-...
-app.user(bodyParrser.urlencoded({ extended: true }));
+
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/users', user);
-...
+
+app.get('/', function (req, res) {
+  return res.json('Hello');
+});
+
+app.listen(3000, function () {
+  console.log('Example app listening on port 3000!');
+});
+
+module.exports = app;
 ```
 
 ### 컨트롤러 함수로 분리
@@ -84,71 +86,99 @@ node-api/api/user/user.ctrl.js
 ```js
 // node-api/api/user/user.ctrl.js
 var users = [
-  ...
+  { id: 1, name: 'alice' },
+  { id: 2, name: 'beck' },
+  { id: 3, name: 'chris' },
 ];
 
-const index = function (req, res) {
+let count = users.length;
+
+const index = (req, res) => {
   req.query.limit = req.query.limit || 10;
   const limit = parseInt(req.query.limit, 10);
-  if(Number.isNaN(limit)) {
+  if (Number.isNaN(limit)) {
     return res.status(400).end();
   }
   res.json(users.slice(0, limit));
 }
 
-const show = function(req, res) {
+const show = (req, res) => {
   const id = parseInt(req.params.id, 10);
-  if(Number.isNaN(id)) {
+  if (Number.isNaN(id)) {
     return res.status(400).end();
   }
-  const user = users.filter((user) => { user.id = id })[0];
-  if(!user) {
-    return res.status(404).end();
+  const user = users.filter((user) => {
+    return user.id == id;
+  })[0];
+  if (!user) {
+    return res.status(400).end();
   }
-  res.json(user);
+  return res.json(user);
 }
 
-const destroy = function(req, res) {
+const destroy = (req, res) => {
   const id = parseInt(req.params.id, 10);
-  if(Number.isNaN(id)) return res.status(400).end();
-  const user = users.find((user) => { user == id });
-  if(!user) return res.status(404).end();
-  users = users.filter((user) => { user.id !== id });
+  if (Number.isNaN(id)) {
+    return res.status(400).end();
+  }
+  users = users.filter((user) => {
+    return user.id !== id;
+  });
   res.status(204).end();
 }
 
-const create = function(req, res) {
+const create = (req, res) => {
   const name = req.body.name;
-  if(!name) return res.status(400).end();
-  if(users.filter((user) => { return user.name === name}).length) return res.status(409).end();
-  const id = Date.now();
+  if (!name) {
+    return res.status(400).end();
+  }
+
+  const checkName = users.filter((user) => {
+    return user.name == name;
+  })[0];
+  if (checkName) {
+    return res.status(409).end();
+  }
+  count++;
+  const id = count;
   const user = { id, name };
   users.push(user);
   res.status(201).json(user);
 }
 
 const update = (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  if(Number.isNaN(id)) return res.status(400).end();
-  
   const name = req.body.name;
-  if(!name) return res.status(400).end();
-  if(users.filter((users) => {user.name === name}).length) return res.status(409).end();
+  const id = parseInt(req.params.id, 10);
+  if (!name) {
+    return res.status(400).end();
+  }
+  if (Number.isNaN(id)) {
+    return res.status(400).end();
+  }
+  const userByName = users.filter((user) => {
+    return user.name === name;
+  })[0];
+  if (userByName) {
+    return res.status(409).end();
+  }
+  const user = users.filter((user) => {
+    return user.id === id;
+  })[0];
+  if (!user) {
+    return res.status(404).end();
+  }
 
-  const uesr = users.filter((user) => { user.id === id})[0];
-  if(!user) return res.status(404).end();
-  
   user.name = name;
   res.json(user);
 }
 
-module.experts = {
+module.exports = {
   index: index,
   show: show,
   destroy: destroy,
   create: create,
-  update: update
-}
+  update: update,
+};
 ```
 
 node-api/api/user/index.js
@@ -169,11 +199,172 @@ module.exports = router;
 
 ### 테스트 코드 이동
 
-node-api/index.spec.js 의 내용을 node-api/api/user/user-spec.js 로 복사
+node-api/index.spec.js 의 내용을 node-api/api/user/user.spec.js 로 복사
 
 ```js
-...
-cons app = require('../../index');
+// node-api/api/user/user.spec.js
+const app = require('../../index.js');
+const request = require('supertest');
+const should = require('should');
+
+describe('GET /users', () => {
+  describe('성공시', () => {
+    it('유저 객체를 담은 배열로 응답한다', (done) => { // done
+      request(app)
+        .get('/users')
+        .end((err, res) => {
+          res.body.should.be.instanceOf(Array);
+          done();
+        });
+    });
+    it('최대 limit 갯수만큼 응답한다', (done) => {
+      request(app)
+        .get('/users?limit=2')
+        .end((err, res) => {
+          res.body.should.be.lengthOf(2);
+          done();
+        });
+    });
+  });
+  describe('실패시', () => {
+    it('limit 이 숫자형이 아니면 400을 응답한다', (done) => {
+      request(app)
+        .get('/users?limit=two')
+        .expect(400)
+        .end(done);
+    });
+  });
+});
+describe('GET /users/:id', () => {
+  describe('성공시', () => {
+    it('id가 2인 유저 객체를 반환한다', (done) => {
+      request(app)
+        .get('/users/2')
+        .end((err, res) => {
+          res.body.should.have.property('id', 2);
+          done();
+        });
+    });
+  });
+  describe('실패시', () => {
+    it('id가 숫자가 아닐 경우 400으로 응답한다', (done) => {
+      request(app)
+        .get('/users/one')
+        .expect(400)
+        .end(done);
+    });
+  });
+  it('id로 유저를 찾을 수 없을 경우 404으로 응답한다', (done) => {
+    request(app)
+      .get('/users/999')
+      .expect(400)
+      .end(done);
+  });
+});
+describe('DELETE /users/:id', () => {
+  describe('성공시', () => {
+    it('204를 응답한다', (done) => {
+      request(app)
+        .delete('/users/1')
+        .expect(204)
+        .end(done);
+    });
+  });
+  describe('실패시', () => {
+    it('id 가 숫자가 아닐경우 400으로 응답한다', (done) => {
+      request(app)
+        .delete('/users/one')
+        .expect(400)
+        .end(done);
+    });
+  });
+});
+describe('POST /users', () => {
+  describe('성공시', () => {
+    let name = 'daniel';
+    let body;
+    before((done) => {
+      request(app)
+        .post('/users')
+        .send({ name: 'daniel' })
+        .expect(201)
+        .end((err, res) => {
+          body = res.body;
+          done();
+        });
+    });
+    it('생성된 유저 객체를 반환한다', (done) => {
+      body.should.have.property('id');
+      done();
+    });
+    it('입력한 name을 반환한다', (done) => {
+      body.should.have.property('name', name);
+      done();
+    });
+  });
+  describe('실패시', () => {
+    it('name 파라메터 누락 시 400 을 반환한다', (done) => {
+      request(app)
+        .post('/users')
+        .send({})
+        .expect(400)
+        .end(done);
+    });
+    it('name 이 중복일 경우 409 를 반환한다', (done) => {
+      request(app)
+        .post('/users')
+        .send({ name: 'daniel' })
+        .expect(409)
+        .end(done);
+    })
+  });
+});
+describe('PUT /users/:id', () => {
+  describe('성공시', () => {
+    it('변경된 name 을 반환한다', (done) => {
+      const name = 'charlie';
+      request(app)
+        .put('/users/3')
+        .send({
+          name: name
+        })
+        .end((err, res) => {
+          res.body.should.have.property('name', name);
+          done();
+        })
+    });
+  });
+  describe('실패시', () => {
+    it('정수가 아닌 id 일 경우 400 을 반환한다.', (done) => {
+      request(app)
+        .put('/users/one')
+        .send({})
+        .expect(400)
+        .end(done);
+    });
+    it('name 이 없을 경우 400을 반환한다', (done) => {
+      request(app)
+        .put('/users/1')
+        .send({})
+        .expect(400)
+        .end(done);
+    });
+    it('없는 유저일 경우 404 을 반환한다', (done) => {
+      request(app)
+        .put('/users/999')
+        .send({ name: 'foo' })
+        .expect(404)
+        .end(done);
+    });
+    it('이름이 중복일 경우 409 을 반환한다', (done) => {
+      request(app)
+        .put('/users/3')
+        .send({ name: 'beck' })
+        .expect(409)
+        .end(done);
+    });
+  })
+});
 ```
 
 package.json
