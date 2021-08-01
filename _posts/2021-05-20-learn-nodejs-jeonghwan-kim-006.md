@@ -33,7 +33,7 @@ In Memory DB
 
 - insert table('name') value('alice');
 - select * from users;
-- update users set name='bek' where id=1;
+- update users set name='beck' where id=1;
 - delete from users where id=1;
 
 ORM(Object Relational Mapping)
@@ -52,8 +52,8 @@ ORM(Object Relational Mapping)
 -> User.create({name: 'alice'})
 - select * from users;   
 -> User.findAll();
-- update users set name='bek' where id=1;   
--> User.update({name: 'bek'}, {where:{id:1}});
+- update users set name='beck' where id=1;   
+-> User.update({name: 'beck'}, {where:{id:1}});
 - delete from users where id=1;   
 -> destory({where:{id:1}});
 
@@ -72,28 +72,26 @@ sequelize, sqlite3 설치
 
 ```bash
 # sequelize, sqlite3 설치
-$ npm i sequelize sqlite --save
+$ npm i sequelize sqlite3 --save
 ```
 
 node-api/models.js
 
 ```js
 // node-api/models.js
-const Sequelize = require('sequelize');
+const { Sequelize, Model, DataTypes } = require('sequelize');
+
 const sequelize = new Sequelize({
   dialect: 'sqlite',
   storage: './db.sqlite'
 });
 
-const User = sequelize.define('User', {
-  name: Sequelize.STRING // varchar 255
-});
+class User extends Model { }
+User.init({
+  name: DataTypes.STRING,
+}, { sequelize, modelName: 'user' });
 
-module.exports = {
-  Sequelize,
-  sequelize,
-  User
-}
+module.exports = { Sequelize, Model, User, sequelize };
 ```
 
 ### 데이터베이스 - ORM 동기화
@@ -101,10 +99,13 @@ module.exports = {
 node-api/bin/sync-db.js
 
 ```js
-const models = require('../models');
+const { Sequelize, Model, User, sequelize } = require('../models');
+
+// 원래의 DB를 삭제하고 새로 생성
+sequelize.sync({ force: true });
 
 module.exports = () => {
-  return models.Sequelize.sync(force: true); // 원래의 DB를 삭제하고 새로 생성
+  return sequelize.sync({ force: true });
 }
 ```
 
@@ -124,8 +125,8 @@ syncDb().then( () => {
   console.log('Sync database!');
   app.listen(3000, () => {
     console.log('Server is running on 3000 port');
-  })
-})
+  });
+});
 ```
 
 ### 데이터베이스와 index 컨트롤러 연동 1
@@ -137,14 +138,16 @@ describe, it 에 only() 함수로 해당 테스크 테이스만 실행할 수 �
 node-api/api/user/user.spec.js
 
 ```js
-...
-const app = require('../../index');
-const models = require('../../models);
+// node-api/api/user/user.spec.js
+const app = require('../../index.js');
+const request = require('supertest');
+const should = require('should');
+const { User, sequelize } = require('../../models');
 
 describe('GET /users는', () => {
   describe('성공시', () => {
-    before(( ) => {
-      return models.sequelize.sync({force: true}); // create table
+    before(() => {
+      return sequelize.sync({ force: true }); // create table
     });
     it.only('유저 객체를 담은 배열로 응답한다', (done) => { 
       ...
@@ -157,26 +160,22 @@ node-api/api/user/user.ctrl.js
 
 ```js
 // node-api/api/user/user.ctrl.js
-const models = require('../../models');
+const { User } = require('../../models');
 
-/* 삭제
-var users = [
-  ...
-];
-*/
-
-const index = function(req, res) {
-  req.query.limite = req.query.limit(2);
+const index = (req, res) => {
+  req.query.limit = req.query.limit || 10;
   const limit = parseInt(req.query.limit, 10);
-  if(Number.isNaN(limit)) {
+  if (Number.isNaN(limit)) {
     return res.status(400).end();
   }
 
-  models.User.findAll({})
-    .then(users => {
-      res.json(users);
-    })
+  User.findAll({
+    limit: limit
+  }).then(users => {
+    res.json(users);
+  });
 }
+...
 ```
 
 ### 데이터베이스와 index 컨트롤러 연동 2
@@ -195,15 +194,15 @@ const models = require('../../models');
 describe.only('GET /users는', () => {
   describe('성공시', () => {
     const users = [
-      {name: 'alice'},
-      {name: ' bek'},
-      {name: 'chris'},
+      { name: 'alice' },
+      { name: 'beck' },
+      { name: 'chris' },
     ]
-    before(( ) => {
-      return models.sequelize.sync({force: true}); // create table
+    before(() => {
+      return sequelize.sync({ force: true }); // create table
     });
-    before((done) => {
-      return models.User.bulkCreate(users); // insert data
+    before(() => {
+      return User.bulkCreate(users);
     });
     it('유저 객체를 담은 배열로 응답한다', (done) => { // only 로 해당 테스크 테이스만 실행할 수 있음
       ...
@@ -216,7 +215,7 @@ node-api/api/user/user.ctrl.js
 
 ```js
 // node-api/api/user/user.ctrl.js
-const models = require('../../models');
+const { User } = require('../../models');
 
 const index = function(req, res) {
   req.query.limite = req.query.limit(2);
@@ -225,7 +224,7 @@ const index = function(req, res) {
     return res.status(400).end();
   }
 
-  models.User.findAll({ 
+  User.findAll({ 
     limit: limit
   })
     .then(users => {
@@ -266,22 +265,24 @@ node-api/api/user/user.ctrl.js
 
 ```js
 // node-api/api/user/user.ctrl.js
-const models = require('../../models');
+const { User } = require('../../models');
 
 const index = function(req, res) {
   ...
 }
 
-const show = function(req, res) {
+const show = (req, res) => {
   const id = parseInt(req.params.id, 10);
-  if(Number.isNaN(id)) return res.status(400).end();
+  if (Number.isNaN(id)) {
+    return res.status(400).end();
+  }
 
-  models.User.findOne({
+  User.findOne({
     where: {
       id: id
     }
   }).then(user => {
-    if(!user) return res.status(404).end();
+    if (!user) return res.status(404).end();
     res.json(user);
   })
 }
@@ -306,7 +307,7 @@ node-api/api/user/user.ctrl.js
 
 ```js
 // node-api/api/user/user.ctrl.js
-const models = require('../../models');
+const { User } = require('../../models');
 
 const index = function(req, res) {
   ...
@@ -317,15 +318,17 @@ const show = function(req, res) {
 }
 
 const destroy = (req, res) => {
-  ...
-  if(Number.isNaN(id)) return res.status(400).end();
-  model.User.destory({
-    where:{
+  const id = parseInt(req.params.id, 10);
+  if (Number.isNaN(id)) {
+    return res.status(400).end();
+  }
+  User.destroy({
+    where: {
       id: id
     }
-  }).then(user => {
+  }).then(() => {
     res.status(204).end();
-  })
+  });
 }
 ...
 ```
@@ -334,7 +337,7 @@ const destroy = (req, res) => {
 
 only 이동
 
-before 복사
+각 상위 describe 에 before 복사
 
 node-api/api/user/user.spec.js
 
@@ -344,7 +347,7 @@ node-api/api/user/user.spec.js
 describe.only('POST /users', () => {
   const users = [
     {name: 'alice'},
-    {name: ' bek'},
+    {name: 'beck'},
     {name: 'chris'},
   ]
   before(( ) => {
@@ -364,14 +367,23 @@ node-api/models.js
 
 ```js
 // node-api/models.js
-...
-const User = sequelize.define('User', {
+const { Sequelize, Model, DataTypes } = require('sequelize');
+
+const sequelize = new Sequelize({
+  dialect: 'sqlite',
+  storage: './db.sqlite',
+  logging: false,
+});
+
+class User extends Model { }
+User.init({
   name: {
-    type: Sequelize.STRING,
+    type: DataTypes.STRING,
     unique: true
   }
-})
-...
+}, { sequelize, modelName: 'user' });
+
+module.exports = { Sequelize, Model, User, sequelize };
 ```
 
 node-api/api/user/user.ctrl.js
@@ -383,29 +395,22 @@ const models = require('../../models');
 const index = function(req, res) {
   ...
 }
-
 const show = function(req, res) {
   ...
 }
-
 const destroy = (req, res) => {
   ...
 }
-
 const create = (req, res) => {
   const name = req.body.name;
-  if(!name) return res.status(400).end();
-  models.User.create({name})
-    .then(user => {
-      res.status(201).json(user);
-    })
-    .catch(err => {
-      if(err.name === 'SequelizeUniqueConstraintError') {
-        return res.status(409).end();
-      }
-      res.status(500).end();
-    })
-
+  if (!name) {
+    return res.status(400).end();
+  }
+  User.create({ name }).then((user) => {
+    return res.status(201).json(user);
+  }).catch((err) => {
+    return res.status(409).end();
+  });
 }
 ...
 ```
@@ -424,7 +429,7 @@ node-api/api/user/user.spec.js
 describe('PUT /users/:id', () => {
   const users = [
     {name: 'alice'},
-    {name: ' bek'},
+    {name: 'beck'},
     {name: 'chris'},
   ]
   before(( ) => {
@@ -462,32 +467,33 @@ const create = (req, res) => {
 
 const update = (req, res) => {
   const id = parseInt(req.params.id, 10);
-  if(Number.isNaN(id)) return res.status(400).end();
+  if (Number.isNaN(id)) return res.status(400).end();
 
   const name = req.body.name;
-  if(!name) return res.status(400).end();
+  if (!name) return res.status(400).end();
 
-  model.User.findIne({
-    where: {
-      id:id
-    }
-  })
-    .then(user => {
-      if(!user) return res.status(404).end();
-      user.name = name;
-      user.save()
-        .then(user => {
-          res.json(user);
-        })
-        .catch(err => {
-          if(err.name === 'SequelizeUniqueConstraintError') {
-            return res.status(409).end();
-          }
-          res.status(500).end();
-        });
+  User.findOne({
+    where: { id }
+  }).then((user) => {
+    if (!user) return res.status(404).end();
+    user.name = name;
+    user.save().then(() => {
+      res.json(user);
+    }).catch((err) => {
+      if (err.name === 'SequelizeUniqueConstraintError') {
+        return res.status(409).end();
+      }
     });
+  });
 }
-...
+
+module.exports = {
+  index: index,
+  show: show,
+  destroy: destroy,
+  create: create,
+  update: update,
+};
 ```
 
 ## 끗

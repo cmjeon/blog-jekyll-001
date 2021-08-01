@@ -282,7 +282,7 @@ describe('GET /users/:id는', () => {
     it('id로 유저를 찾을 수 없을 경우 404으로 응답한다', (done) => {
       request(app)
         .get('/users/999')
-        .expect(400)
+        .expect(404)
         .end(done);
     });
   })
@@ -745,7 +745,7 @@ describe('PUT /users/:id는', () => {
     it('이름이 중복일 경우 409 응답', (done) => {
       request(app)
         .put('/users/3')
-        .send({name: 'bek'})
+        .send({name: 'beck'})
         .expect(409)
         .end(done);
     });

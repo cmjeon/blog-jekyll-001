@@ -257,7 +257,7 @@ describe('GET /users/:id', () => {
   it('id로 유저를 찾을 수 없을 경우 404으로 응답한다', (done) => {
     request(app)
       .get('/users/999')
-      .expect(400)
+      .expect(404)
       .end(done);
   });
 });
@@ -382,27 +382,16 @@ package.json
 
 ### 테스트 환경 개선
 
-package.json
+실행 시 `NODE_ENV` 를 통해 `test` 변수를 전달
 
-```js
-{
-  ...
-  "script": {
-    "test": "NODE_ENV=test mocha api/user/user.spec.js",
-    "start": "node index.js"
-  },
-  ...
-}
-```
-
-mocha 의 watch option 으로 소스 코드 수정 시 마다 테스트코드가 자동으로 돌 수 있도록 함
+mocha 의 watch option `-w` 으로 소스 코드 수정 시 마다 테스트코드가 자동으로 돌 수 있도록 함
 
 package.json
 
 ```js
 {
   "script": {
-    "test": "NODE_ENV=test mocah api/user/user.spec.js -w",
+    "test": "NODE_ENV=test mocha api/user/user.spec.js -w",
     "start": "node bin/www.js"
   }
 }
@@ -412,40 +401,62 @@ node-api/index.js
 
 ```js
 // node-api/index.js
-...
+var express = require('express');
+var app = express();
+var morgan = require('morgan');
 var user = require('./api/user');
 
-if(process.env.NODE_ENV !== 'test') {
-  app.user(morgan('dev'))
+if (process.env.NODE_ENV !== 'test') {
+  app.use(morgan('dev'));
 }
 
-app.use(bodyParser.json());
-...
-/* 삭제
-app.listen(3000, function() {
-  ...
-})
-*/
-export module = app;
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/users', user);
+
+app.get('/', function (req, res) {
+  return res.json('Hello');
+});
+
+module.exports = app;
 ```
 
 node-api/bin/www.js
 
 ```js
+// node-api/bin/www.js
 const app = require('../index');
 app.listen(3000, () => {
   console.log('Server is running on 3000 port');
 });
 ```
 
-package.js
+package.json
 
 ```js
+// node-api/package.json
 {
-  "script": {
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "4.17.1",
+    "morgan": "1.10.0"
+  },
+  "devDependencies": {
+    "mocha": "9.0.2",
+    "should": "^13.2.3",
+    "supertest": "6.1.4"
+  },
+  "scripts": {
     "test": "NODE_ENV=test mocha api/user/user.spec.js",
     "start": "node bin/www.js"
-  }
+  },
+  "author": "",
+  "license": "ISC"
 }
 ```
 
