@@ -207,7 +207,6 @@ describe('GET /users는', () => {
   ...
 });
 describe('GET /users/:id는', () => {
-  ...
   describe('성공시', () => {
     it('id 가 1인 유저 객체를 반환한다', (done) => {
       request(app)
@@ -235,7 +234,9 @@ index.js
 ...
 app.get('/users/:id', function(req, res) {
   const id = parseInt(req.params.id, 10);
-  const user = users.filter((user) => { user.id = id })[0];
+  const user = users.filter((user) => { 
+    return user.id == id 
+  })[0];
   res.json(user);
 });
 ...
@@ -385,7 +386,6 @@ $ npm test
 실패
 
 > id 가 숫자가 아닐 경우 400으로 응답한다   
-> id 로 유저를 찾을 수 없을 경우 404로 응답한다
 
 index.spec.js
 
