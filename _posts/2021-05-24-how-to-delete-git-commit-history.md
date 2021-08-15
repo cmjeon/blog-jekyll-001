@@ -21,11 +21,17 @@ gitguadian 의 메일을 받았음
 
 ## 해결방안
 
-history 에서 파일을 삭제하고 적용
+history 에서 파일을 삭제
 
 ```bash
 $ git filter-branch --force --index-filter "git rm --cached --ignore-unmatch 'file_path/file_name'" --prune-empty --tag-name-filter cat -- --all
+```
 
+file_path/file_name 에 지우고자 하는 파일을 입력하면 됨
+
+그리고 github에 강제로 적용해야함
+
+```bash
 $ git push origin main --force
 ```
 
@@ -37,7 +43,7 @@ $ git commit -m "Update .gitignore (file_name)"
 $ git push orign main
 ```
 
-file_path/file_name 에 지우고자 하는 파일을 입력하면 됨
+
 
 ## 참고
 
