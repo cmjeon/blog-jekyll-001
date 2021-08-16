@@ -2,7 +2,7 @@
 layout: single
 title:  nvm, nodejs, npm 설치하기 - 001
 categories: 
-  - how to install
+  - env/config
 tags: 
   - nvm
   - nodejs
