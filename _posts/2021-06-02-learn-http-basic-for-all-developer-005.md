@@ -137,10 +137,78 @@ Content-Type: application/json
 
 ### HTTP API 설계 예시
 
+#### HTTP API - 컬렉션
 
+POST 기반 등록
 
+    - 회원 목록 /members -> GET
+    - 회원 등록 /members -> POST
+    - 회원 조회 /members/{id} -> GET
+    - 회원 수정 /members/{id} -> PATCH, PUT, POST
+        - 기존 데이터를 완전히 대치할 수 없으면 PATCH
+        - 기존 데이터를 완전히 대치할 수 있으면 PUT (ex 게시판 글 수정)
+        - 기존 데이터 대치여부가 애매하면 POST
+    - 회원 삭제 /members/{id} -> DELETE
 
+- 클라이언트는 등록될 리소스의 URI를 모름
+- 서버가 새로 등록될 리소스 URI 를 생성해줌
+- 컬렉션(Collection)
+    - 서버가 관리하는 리소스 디렉토리
+    - 서버가 리소스의 URI 를 생성하고 관리
+
+#### HTTP API - 스토어
+
+PUT 기반 등록
+
+    - 파일 목록 /files -> GET
+    - 파일 조회 /files/{filename} -> GET
+    - 파일 등록 /files/{filename} -> PUT
+    - 파일 삭제 /files/{filename} -> DELETE
+    - 파일 대량 등록 /files -> POST
+
+- 클라이언트가 리소스 URI를 알고 있어야 함
+- 클라이언트가 직접 리소스의 URI를 지정
+- 스토어(Store)
+    - 클라이언트가 관리하는 리소스 저장소
+    - 클라이언트가 리소스의 URI 를 알고 관리
+
+#### HTML FORM 사용
+
+HTML FORM 은 GET, POST 만 지원
+
+ajax 같은 기술을 사용하여 해결 가능 -> 회원 API 참고
+
+    - 회원 목록 /members -> GET
+    - 회원 등록폼 /members/new -> GET
+    - 회원 등록 /members/new, /members -> POST
+    - 회원 조회 /members/{id} -> GET
+    - 회원 수정폼 /members/{id}/edit -> GET
+    - 회원 수정 /members/{id}/edit, /members/{id} -> POST
+    - 회원 삭제 /members/{id}/delete -> POST
+
+GET, POST 만 지원되는 경우는 컨트롤 URI 를 이용하여 처리
+
+POST 메소드로 /new, /edit, /delete 등 컨트롤 URI 를 처리
+
+#### 주요 URI 설계 개념
+
+- 문서(document)
+    - 단일 개념(파일 하나, 객체 인스턴스, 데이터베이스 row)   
+    /members/100, /files/star.jpg
+- 컬렉션(collection)
+    - 서버가 관리하는 리소스 디렉터리
+    - 서버가 리소스의 URI를 생성하고 관리   
+      예) /members
+- 스토어(store)
+    - 클라이언트가 관리하는 자원 저장소
+    - 클라이언트가 리소스의 URI를 알고 관리   
+      예) /files
+- 컨트롤러(controller), 컨트롤 URI
+    - 문서, 컬렉션, 스토어로 해결하기 어려운 추가 프로세스 실행
+    - 동사를 직접 사용   
+      예) /members/{id}/delete
 
 ## 참고
 
 - [https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC](https://www.inflearn.com/course/http-%EC%9B%B9-%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC)
+- [https://restfulapi.net/resource-naming](https://restfulapi.net/resource-naming)
