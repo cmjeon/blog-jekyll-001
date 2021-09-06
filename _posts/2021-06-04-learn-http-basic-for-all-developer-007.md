@@ -423,7 +423,16 @@ path 에 선언한 경로를 포함한 하위 경로 페이지에서만 쿠키 �
 
 #### 쿠키 - 보안
 
-
+- Secure
+  - 쿠키는 http, https를 구분하지 않고 전송
+  - Secure를 적용하면 https인 경우에만 전송
+- HttpOnly
+  - XSS(Cross-Site Scripting) 공격 방지
+  - 자바스크립트에서 접근 불가(document.cookie)
+  - HTTP 전송에만 사용
+- SameSite
+  - XSRF(Cross-Site Request Forgery) 공격 방지
+  - 요청 도메인과 쿠키에 설정된 도메인이 같은 경우만 쿠키 전송
 
 ## 참고
 
