@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  모든 개발자를 위한 HTTP 웹 기본 지식 - 007
+title:  모든 개발자를 위한 HTTP 웹 기본 지식 - 009
 categories: 
   - learning http basic by younghan kim
 tags: 
