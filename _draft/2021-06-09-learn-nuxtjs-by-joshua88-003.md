@@ -12,9 +12,33 @@ tags:
 
 ### 백엔드 API 서버 구성
 
+https://github.com/joshua1988/learn-nuxt/tree/master/backend 접속
 
+```bash
+$ git clone https://github.com/joshua1988/learn-nuxt.git
+
+$ cd learn-nuxt
+```
+
+backend 폴더를 진행중인 프로젝트 폴더에 복사
+
+json 서버 실행
+
+```bash
+$ cd backend
+
+$ npm i
+
+$ npm run dev
+```
+
+localhost:3000 에서 json 서버 실행 확인
 
 ### JSON Server 소개
+
+https://jsonplaceholder.typicode.com/
+
+https://github.com/typicode/json-server
 
 
 
