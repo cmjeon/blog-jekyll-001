@@ -96,7 +96,7 @@ analytics:
 author:
   name             : "Jeon Chang Min"
   avatar           : "/assets/images/only-today.jpg"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  # avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "이제라도 매일 배운 것을 기록하며 살겠습니다."
   location         : "Seoul"
   # email            : "chmin82@gmail.com"
