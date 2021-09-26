@@ -25,6 +25,7 @@ backend 폴더를 진행중인 프로젝트 폴더에 복사
 json 서버 실행
 
 ```bash
+# 진행중인 프로젝트 폴더에서
 $ cd backend
 
 $ npm i
@@ -32,7 +33,9 @@ $ npm i
 $ npm run dev
 ```
 
-localhost:3000 에서 접속
+localhost:3000 에서 backend 가 실행됨
+
+프로젝트에서 nuxtjs 를 실행하고 있다면 종료 후 `npm run dev` 해야 함
 
 localhost:3000 에서 json 서버 접속 확인
 
@@ -44,18 +47,25 @@ https://github.com/typicode/json-server
 
 json Server는 mock API 를 제공
 
-구글에서 json server github 검색 > github repo 확인 시 파일기반의 REST API 서버를 확인할 수 있음
+nuxtjs 의 데이터 요청 속성 (data fetching) 을 통해 아래 데이터 조회가능
+
+    - localhost:3000/products
+    - localhost:3000/carts
+
+구글에서 json server github 검색 > github repo 확인하면 파일기반의 REST API 서버 생성에 대해 참고할 수 있음
 
 ### axios 설치 및 API 호출
 
 nuxtjs 를 중지한 후 json 서버가 3000 에 실행시키고 nuxtjs 를 재실행할 것
 
 ```bash
+# backend 폴더로 이동
 $ cd backend
 
 $ npm run dev
 # port 3000 에 json server 가 실행됨
 
+# 프로젝트 폴더로 이동
 $ cd ..
 
 $ npm run dev
@@ -65,6 +75,7 @@ $ npm run dev
 axios 설치
 
 ```bash
+# 프로젝트 폴더에서
 $ npm i axios
 ```
 
@@ -97,6 +108,8 @@ nuxt.config.js 파일에 포트를 지정
 ```js
 {
   ...
+  },
+  // server setup
   server : {
     port:5000,
   }
@@ -133,6 +146,11 @@ export default {
       products: [],
     }
   },
+  async created() {
+    const response = await axios.get('http://localhost:3000/products')
+    console.log(response)
+    this.products = response.data
+  }
   ...
 }
 </script>
@@ -140,7 +158,9 @@ export default {
 
 HMR(Hot Module Replacement) 에 의해 화면이 변경되면서 표시됨
 
-CSR 은 데이터가 표시되는 시간이 무조건 필요하고, 이는 네트워크 반응속도에 따라 콘텐츠가 느리게 표현될 수 있음
+CSR 으로는 데이터가 표시되는 시간이 무조건 필요함
+
+이는 네트워크 반응속도에 따라 콘텐츠가 느리게 표현될 수 있음. 최소 깜빡이는 현상이 나타남
 
 이를 SSR 인 nuxtjs 을 통해 해결할 수 있음
 
@@ -149,6 +169,12 @@ CSR 은 데이터가 표시되는 시간이 무조건 필요하고, 이는 네�
 ### Nuxt 데이터 호출 방식 안내
 
 [https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html](https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html)
+
+CSR 에서는 라이프 사이클 훅을 사용하여 컴포넌트가 생성되자마자 서버에 데이터를 요청해 받아온 값을 화면에 표시하였음
+
+SSR 에서는 서버에서 데이터를 모두 포함한 페이지를 클라이언트로 전달해야 함
+
+nuxsjs 에서는 asyncData, fetch 라는 2가지 인스턴스 옵션 속성을 이용하여 처리할 수 있음
 
 #### asyncData 속성
 
@@ -177,7 +203,17 @@ asyncData 를 추가
 
 eslint-plugin-vue 에 의해 asyncData 를 추가하면 export default 의 상단으로 이동됨
 
+상단으로 이동되지 않으면 아래 강의노트 참고하여 .eslintrc.js 파일 수정
+
+[https://www.inflearn.com/course/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%EC%A0%84/lecture/61087?tab=curriculum](https://www.inflearn.com/course/%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EC%8B%A4%EC%A0%84/lecture/61087?tab=curriculum)
+
 [https://eslint.vuejs.org/rules/order-in-components.html](https://eslint.vuejs.org/rules/order-in-components.html)
+
+ESLint와 Prettier 설정 하기
+
+[https://joshua1988.github.io/vue-camp/format/official.html](https://joshua1988.github.io/vue-camp/format/official.html)
+
+pages/main.vue 에 asyncData() 적용
 
 ```vue
 ...
@@ -194,6 +230,8 @@ export default {
 ```
 
 this.products 의 this 에서 오류가 발생
+
+왜 this 가 사용이 불가능할까?
 
 ### asyncData 속성 안내 및 코드 수정
 
@@ -219,9 +257,13 @@ asyncData 는 비동기데이터를 호출하는 인스턴스 속성임
 
 asyncData 는 기본적으로 페이지를 진입하기 전에 호출하여 뷰 인스턴스 데이터 객체로 리턴함
 
+따라서 asyncData 는 컴포넌트가 생성되기 전에 실행되므로 컴포넌트 생성 이 후 사용가능한 this 는 사용이 불가함
+
 따라서 asnycData 에 문제가 있으면 페이지가 표시되지 않음
 
 ### asyncData 속성 주의사항
+
+pages 폴더에 있는 컴포넌트가 아니면 asyncData() 입력 시 오류 발생
 
 ```vue
 <template>
@@ -232,7 +274,7 @@ asyncData 는 기본적으로 페이지를 진입하기 전에 호출하여 뷰 
 </template>
 <script>
 import axios from 'axios';
-import ProductList form '~/components/ProductList.vue';
+import ProductList from '~/components/ProductList.vue';
 // ...
 </script>
 ```
