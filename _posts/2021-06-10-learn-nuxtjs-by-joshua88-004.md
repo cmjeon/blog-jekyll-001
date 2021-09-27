@@ -259,7 +259,7 @@ export default {
 
 asyncData 의 context 속성
 
-[https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html#asyncdata%EC%9D%98-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0](https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html#asyncdata%EC%9D%98-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0)
+[https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html#asyncdata%EC%9D%98-%ED%8C%8C%EB%9D%BC%EB%AF%B8%ED%84%B0](https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html#asyncData의 파라미터)
 
 [https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html#asyncdata%E1%84%8B%E1%85%B4-%E1%84%91%E1%85%A1%E1%84%85%E1%85%A1%E1%84%86%E1%85%B5%E1%84%90%E1%85%A5](https://joshua1988.github.io/vue-camp/nuxt/data-fetching.html#asyncdata%E1%84%8B%E1%85%B4-%E1%84%91%E1%85%A1%E1%84%85%E1%85%A1%E1%84%86%E1%85%B5%E1%84%90%E1%85%A5)
 
