@@ -83,7 +83,7 @@ db.json 을 github 에 업로드 함으로써 손쉽게 API 서버를 만들 수
 
     특정 resources 에도 접근가능함
 
-    [my-json-server.typicode.com/cmjeon/inflearn_nuxtjs001_api/products](my-json-server.typicode.com/cmjeon/inflearn_nuxtjs001_api/products)
+    [https://my-json-server.typicode.com/cmjeon/inflearn_nuxtjs001_api/products](https://my-json-server.typicode.com/cmjeon/inflearn_nuxtjs001_api/products)
 
 1. POSTMAN 등을 통해 GET, POST, PUT, PATCH, DELETE 사용
 
