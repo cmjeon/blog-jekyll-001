@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  javascript-011 - 프로미스 개념부터 활용까지 Javascript Promise
+title:  javascript-012 - 비동기의 꽃 Javascript async 와 await
 categories: 
   - learning javascript by ellie
 tags: 
