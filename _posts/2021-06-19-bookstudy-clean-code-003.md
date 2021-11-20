@@ -1,6 +1,6 @@
 ---
 layout: single
-title: 클린코드 스터디 - 002
+title: 클린코드 스터디 - 003
 categories: 
   - bookstudy - cleancode
 tags: 
