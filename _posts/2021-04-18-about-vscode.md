@@ -5,6 +5,7 @@ categories:
   - about something
 tags: 
   - vscode
+  - IDE
 ---
 
 ## 단축키
