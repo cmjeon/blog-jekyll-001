@@ -48,7 +48,7 @@ $ ffmpeg -i { inputFileName } -r 30 -vf scale=1920:-1 -f gif { outputFileName }
 
 `-f gif`  : 출력 파일의 포맷, gif 임
 
-해당 옵션으로 변환한 결과 
+해당 옵션으로 변환한 결과 16MB 짜리 .mov 파일이 3.4MB .gif 파일로 변환되었고, 원본대비 약 20% 정도의 용량으로 작아짐
 
 ## 참고 
 - [http://www.ffmpeg.org/](http://www.ffmpeg.org/)

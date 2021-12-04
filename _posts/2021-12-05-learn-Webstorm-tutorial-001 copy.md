@@ -36,7 +36,7 @@ IDE 내에 튜토리얼이 있어서 이를 해보고 내용을 기록하려고 
 
 1. 객체나 함수 등에 커서를 올리고 `F1` 을 누르면 관련 문서가 제안됨
   
-![Code Completion](assets/images/20211204-01.gif)
+![Code Completion](/assets/images/20211204-01.gif)
 
 ### 
 
