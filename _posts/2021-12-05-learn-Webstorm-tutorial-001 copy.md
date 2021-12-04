@@ -20,7 +20,7 @@ Webstorm 유료툴이라 지금까지는 Visual Studio Code 를 썼기때문에 
 
 가격은 개인용으로 첫 1년이 8만원 정도, 2년, 3년까지 점점 저렴해짐
 
-[Webstorm 가격](https://www.jetbrains.com/ko-kr/webstorm/buy/)
+[Webstorm 가격](https://www.jetbrains.com/ko-kr/webstorm/buy/){:target="_blank"}
 
 꽤 괜찮은 가격이라는 생각이 듬
 
@@ -36,7 +36,7 @@ IDE 내에 튜토리얼이 있어서 이를 해보고 내용을 기록하려고 
 
 1. 객체나 함수 등에 커서를 올리고 `F1` 을 누르면 관련 문서가 제안됨
   
-[![Code Completion](/assets/images/20211204-01.gif)](/assets/images/20211204-01.gif)
+[![Code Completion](/assets/images/20211205-01.gif)](/assets/images/20211205-01.gif)
 
 ### 
 
