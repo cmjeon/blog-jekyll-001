@@ -40,11 +40,33 @@ IDE 내에 튜토리얼이 있어서 이를 해보고 내용을 기록하려고 
 
 ### The Power of Code Inspections
 
-1. 함수안에서 사용되는 변수가 선언되지 않았다면 변수에 커서를 올리고 `F2`을 눌러보면 개선가능한 방법을 제안해줌
+1. 소스코드에서 `F2`을 누르면 개선가능한 항목을 선택하고 개선방법을 제안해줌
 
 1. 변수에 커서를 올리고 `Opt + Enter` 을 누르면 개선가능한 방법 목록이 표시됨
 
-1. 
+1. 목록중에 하나를 선택하고 `Enter` 을 선택함
+
+1. 우측 상단에 녹색 체크마크가 있다면 개선가능한 항목은 모두 수정된 상태임
+
+1. function 에 커서를 올리고 `Opt + Enter` 을 누르고 `Convert to arrow function` 을 선택하면 화살표 함수로 변경가능
+
+[![Code Completion](/assets/images/20211205-02.gif)](/assets/images/20211205-02.gif)
+
+### Refactorings in a Nutshell
+
+1. `Ctrl + t` 을 누르고 `Rename...` 을 선택하여 리팩터링을 진행할 수 있음
+
+1. 특정 요소의 프로퍼티를 선택하고 `Cmd + Opt + v` 를 누르면 새로운 이름의 변수로 생성가능
+
+[![Code Completion](/assets/images/20211205-03.gif)](/assets/images/20211205-03.gif)
+
+### Code Editing Tops and Tricks
+
+
+
+### Efficient Navigation
+
+
 
 ## 참고 
 - []()
