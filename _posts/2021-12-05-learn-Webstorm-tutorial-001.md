@@ -32,9 +32,9 @@ IDE 내에 튜토리얼이 있어서 이를 해보고 내용을 기록하려고 
 
 1. 키를 입력할 때마다 뭔가를 제안해줌. 그리고 엔터나 탭을 누르면 제안중에 가장 위의 제안이 선택됨
 
-1. 파라미터가 필요한 곳에 커서를 올리고 `Cmd + p` 을 누르면 어떤 파라미터가 들어와야 하는지 제안해줌
+1. 파라미터가 필요한 곳을 선택하고 `Cmd + p` 을 누르면 어떤 파라미터가 들어와야 하는지 제안해줌
 
-1. 객체나 함수 등에 커서를 올리고 `F1` 을 누르면 관련 문서가 표시되고 이동할 수 있음
+1. 객체나 함수 등을 선택하고 `F1` 을 누르면 관련 문서가 표시되고 이동할 수 있음
   
 [![Code Completion](/assets/images/20211205-01.gif)](/assets/images/20211205-01.gif)
 
@@ -42,13 +42,13 @@ IDE 내에 튜토리얼이 있어서 이를 해보고 내용을 기록하려고 
 
 1. 소스코드에서 `F2`을 누르면 개선가능한 항목을 선택하고 개선방법을 제안해줌
 
-1. 변수에 커서를 올리고 `Opt + Enter` 을 누르면 개선가능한 방법 목록이 표시됨
+1. 변수를 선택하고 `Opt + Enter` 을 누르면 개선가능한 방법 목록이 표시됨
 
 1. 목록중에 하나를 선택하고 `Enter` 을 선택함
 
 1. 우측 상단에 녹색 체크마크가 있다면 개선가능한 항목은 모두 수정된 상태임
 
-1. function 에 커서를 올리고 `Opt + Enter` 을 누르고 `Convert to arrow function` 을 선택하면 화살표 함수로 변경가능
+1. function 으ㄹ 선택하고 `Opt + Enter` 을 누르고 `Convert to arrow function` 을 선택하면 화살표 함수로 변경가능
 
 [![Code Completion](/assets/images/20211205-02.gif)](/assets/images/20211205-02.gif)
 
@@ -62,11 +62,41 @@ IDE 내에 튜토리얼이 있어서 이를 해보고 내용을 기록하려고 
 
 ### Code Editing Tops and Tricks
 
+1. `Cmd + Opt + l' 을 누르면 들여쓰기 조정(reformat)
 
+1. `Opt + ↑/↓` 을 누르면 누를 때마다 블럭지정이 커짐/작아짐
+
+1. 블럭지정 후 `Cmd + Opt + /` 을 누르면 주석처리
+
+1. 블럭지정 후 `Opt + ⌫` 을 누르면 삭제
+
+1. 블럭지정 후 `Cmd + Shift + ↑/↓` 을 누르면 블럭이 위/아래로 이동
+
+1. HTML 에서 특정 태그를 선택하고 `Ctrl + g` 를 누르면 누를 때마다 같은 태그를 더 선택함
+
+1. `Cmd + d` 을 누르면 라인 복제
+
+1. `Cmd + ⌫` 을 누르면 라인 삭제
+
+[![Code Completion](/assets/images/20211205-04.gif)](/assets/images/20211205-04.gif)
 
 ### Efficient Navigation
 
+1. `Cmd + e` 을 누르면 최근파일 열기 팝업
 
+1. 최근파일 열기 팝업에서 `Structure` 탭 선택 or `Cmd + 7` 을 선택하면 `Structure` 탭 표시
+
+1. `Structure` 탭에서 문자 입력하여 요소탐색 가능
+
+1. `Structure` 탭에서 요소를 선택한 후 `Opt + F7` 을 선택하면 `Find` 탭 표시
+
+1. `Shift + ESC` 을 누르면 하단에 표시된 탭 닫기
+
+1. `Shift` 을 두번 눌러 `모든 곳을 검색` 창 열기
+
+1. `Cmd + b` 을 누르면 해당 변수가 정의된 곳으로 이동
+
+[![Code Completion](/assets/images/20211205-05.gif)](/assets/images/20211205-05.gif)
 
 ## 참고 
 - []()
