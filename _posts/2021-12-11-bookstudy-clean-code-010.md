@@ -78,8 +78,9 @@ public class SelectSql extends Sql {
   public selectSql(String table, Columns[] columns);
   @Override
   public String generate();
-  ...
 }
+
+...
 ```
 
 위처럼 Sql을 추상클래스로 생성하여, 모든 클래스를 Sql클래스에서 파생하는 클래스로 만들었다.
