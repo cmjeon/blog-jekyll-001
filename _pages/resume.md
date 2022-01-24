@@ -36,31 +36,31 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 업무상 사용경험이 있거나 학습한 기술입니다.
 
-#### 프론트엔드
+### 프론트엔드
 
 - HTML5, CSS3, javascript(es6)
 - jQuery
-- vue.js, vuex
+- vue.js, vuex, nuxt
 
-#### 백엔드
+### 백엔드
 
 - java 1.6, node.js
 - Spring Framework(legacy) 3, Express
 - maven
 
-#### DB
+### DB
 
 - Oracle 11g
 - MS-SQL
 - Mariadb
 
-#### DevOps
+### DevOps
 
 - svn, git
 - AWS ec2, S3, CloudFront
 - docker
 
-#### etc
+### etc
 
 - Mediawiki
 - python3
@@ -75,7 +75,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 ### 온라인서비스개발팀 (21.10 ~ 현재)
 
-- 호텔채널 업무 담당
+- 결제담당
 
 ### 이커머스운영팀 (21.04 ~ 21.09)
 
@@ -152,7 +152,15 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 ## 프로젝트
 
-### 패션 큐레이션 고도화 (21.06 ~ 현재)
+### 결제시스템 고도화 (22.01 ~ )
+
+[역할]
+-
+
+[성과]
+-
+
+### 패션 큐레이션 고도화 (21.06 ~ 21.09)
 
 [역할]
 - 패션커머스앱 PL로 요구사항 협의부터 업무조율 수행
