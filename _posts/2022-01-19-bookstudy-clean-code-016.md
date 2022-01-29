@@ -126,11 +126,11 @@ Serial Number 라는 용어는 제품 식별 번호로 알맞고, 클래스명�
 
 // ASIS
 public abstract class SerialDate implements Comparable, Serializable, MonthConstants {
-	...
+ ...
 
 // TOBE
 public abstract class DayDate implements Comparable, Serializable {
-	...
+ ...
 ```
 
 p.481 B-3 은 MonthConstants 클래스는 달을 정의하는 static final 상수 모음임 [J2]
@@ -140,35 +140,35 @@ MonthConstant는 enum 으로 정의함
 ```java
 // ASIS
 public interface MonthConstants {
-	public static final int JANUARY = 1;
-	public static final int FEBRUARY = 2;
-	...
-	public static final int DECEMBER = 12;
+ public static final int JANUARY = 1;
+ public static final int FEBRUARY = 2;
+ ...
+ public static final int DECEMBER = 12;
 }
 
 // TOBE
 public abstract class DayDate implements Comparable, Serializable {
-	public static enum Month {
-		JANUARY(1),
-		FABRUARY(2),
-		MARCH(3),
-		...
-		NOVEMBER(11),
-		DECOMBER(12);
+ public static enum Month {
+  JANUARY(1),
+  FABRUARY(2),
+  MARCH(3),
+  ...
+  NOVEMBER(11),
+  DECOMBER(12);
 
-		Month(int index) {
-			this.index = index;
-		}
+  Month(int index) {
+   this.index = index;
+  }
 
-		public static Month make(int monthIndex) {
-			for (Month m : Month.values()) {
-				if(m.index == monthIndex)
-					return m;
-			}
-			throw new IllegalArgumentException("Invalid month index " + monthIndex);
-		}
-		public final int index;
-	}
+  public static Month make(int monthIndex) {
+   for (Month m : Month.values()) {
+    if(m.index == monthIndex)
+     return m;
+   }
+   throw new IllegalArgumentException("Invalid month index " + monthIndex);
+  }
+  public final int index;
+ }
 }
 ```
 
@@ -225,65 +225,65 @@ ABSTRACT FACTORY 패턴을 적용하여 DayDateFactory 을 만들고 DayDate 인
 ```java
 // ASIS
 public SerialDate getDate(final int year) {
-	...
-	SerialDate reuslt = null;
-	final SerialDate base = this.subrule.getDate(year);
-	if(base != null) {
-		switch(this.relative) {
-			case(SerialDate.PRECEDING):
-				result = SerialDate.getPreviousDayOfWeek(this.dayOfWeek, base);
-				break;
-			case(SerialDate.NEAREST):
-				result = SerialDate.getNearestDayOfWeek(this.dayOfWeek, base);
-				break;
-			case(SerialDate.FOLLOWING):
-				result = SerialDate.getFollowingDayOfWeek(this.dayOfWeek, base);
-				break;
-			default:
-				break;
-		}
-	}
-	return result;
+ ...
+ SerialDate reuslt = null;
+ final SerialDate base = this.subrule.getDate(year);
+ if(base != null) {
+  switch(this.relative) {
+   case(SerialDate.PRECEDING):
+    result = SerialDate.getPreviousDayOfWeek(this.dayOfWeek, base);
+    break;
+   case(SerialDate.NEAREST):
+    result = SerialDate.getNearestDayOfWeek(this.dayOfWeek, base);
+    break;
+   case(SerialDate.FOLLOWING):
+    result = SerialDate.getFollowingDayOfWeek(this.dayOfWeek, base);
+    break;
+   default:
+    break;
+  }
+ }
+ return result;
 }
 ...
 public static SerialDate getPreviousDayOfWeek(final int targetWeekday, final SerialDate base) {
-	...
-	final int adjust;
-	final int baseDOW = base.getDayOfWeek();
-	if(baseDOW > targetWeekday) {
-		...
-	}
-	return SerialDate.addDays(adjust, base);
+ ...
+ final int adjust;
+ final int baseDOW = base.getDayOfWeek();
+ if(baseDOW > targetWeekday) {
+  ...
+ }
+ return SerialDate.addDays(adjust, base);
 }
 ...
 public static SeiralDate addDays(final int days, final SerialDate base) {
-	final int serialDayNumber = base.toSerial() + days;
-	return SerialDate.createInstance(serialDayNumber);
+ final int serialDayNumber = base.toSerial() + days;
+ return SerialDate.createInstance(serialDayNumber);
 }
 
 // TOBE
 public abstract class DayDate implements Comparabl, Serializable {
-	...
-	public DayDate getPreviousDayOfWeek(Day targetDayOfWeek) {
-		int offsetToTarget = targetDayOfWeek.toInt() = getDayOfWeek().toInt();
-		if(offsetToTarget >= 0)
-			offsetToTarget -= 7;
-		return plusDays(offsetToTarget);
-	}
-	...
-	public DayDate plusDays(int days) {
-		return DayDateFactory.makeDate(getOrdinalDay() + days);
-	}
+ ...
+ public DayDate getPreviousDayOfWeek(Day targetDayOfWeek) {
+  int offsetToTarget = targetDayOfWeek.toInt() = getDayOfWeek().toInt();
+  if(offsetToTarget >= 0)
+   offsetToTarget -= 7;
+  return plusDays(offsetToTarget);
+ }
+ ...
+ public DayDate plusDays(int days) {
+  return DayDateFactory.makeDate(getOrdinalDay() + days);
+ }
 
 public abstract class DayDateFactory {
-	private static DayDateFactory factory = new SpreadsheetDateFactory();
-	public static void setInstance(DayDateFactory factory) {
-		DayDateFactory.factory = factory;
-	}
-	...
-	public static DayDate makeDate(int ordinal) {
-		return factory._makeDate(oridnal);
-	}
+ private static DayDateFactory factory = new SpreadsheetDateFactory();
+ public static void setInstance(DayDateFactory factory) {
+  DayDateFactory.factory = factory;
+ }
+ ...
+ public static DayDate makeDate(int ordinal) {
+  return factory._makeDate(oridnal);
+ }
 }
 
 public class SpreadsheetDateFactory extends DayDateFactory { 
@@ -294,11 +294,11 @@ public class SpreadsheetDateFactory extends DayDateFactory {
 }
 
 public class SpreadsheetDate extends DayDate {
-	...
-	public SpreadsheetDate(int serial) {
-		...
-		calcDayMonthYear();
-	}
+ ...
+ public SpreadsheetDate(int serial) {
+  ...
+  calcDayMonthYear();
+ }
 }
 ```
 
@@ -330,12 +330,12 @@ public static final int LAST_WEEK_IN_MONTH = 0;
 
 // TOBE
 public enum WeekInMonth {
-	FIRST(1), SECOND(2), THIRD(3), FOURTH(4), LAST(0);
-	public final int index;
+ FIRST(1), SECOND(2), THIRD(3), FOURTH(4), LAST(0);
+ public final int index;
 
-	WeekInMonth(int index) {
-		this.index = index;
-	}
+ WeekInMonth(int index) {
+  this.index = index;
+ }
 }
 ```
 
@@ -351,7 +351,7 @@ public static final int INCLUDE_BOTH = 3;
 
 // TOBE
 public enum WeekdayRange {
-	LAST, NEAREST, NEXT
+ LAST, NEAREST, NEXT
 }
 ```
 
@@ -370,17 +370,17 @@ p454 l.259 ~ l.263 의 for 안에 if 가 두번 나오는 것 수정 [G5]
 ```java
 // ASIS
 public static int stringToWeekdayCode(String s) {
-	...
-	for(int i = 0; i < weekDayNames.length; i++) {
-		if(s.equals(shortWeekdayNames[i])) {
-			result = i;
-			break;
-		}
-		if(s.equls(weekDayNames[i])) {
-			result = i;
-			break;
-		}
-	return result;
+ ...
+ for(int i = 0; i < weekDayNames.length; i++) {
+  if(s.equals(shortWeekdayNames[i])) {
+   result = i;
+   break;
+  }
+  if(s.equls(weekDayNames[i])) {
+   result = i;
+   break;
+  }
+ return result;
 }
 
 // TOBE
@@ -398,14 +398,14 @@ p.454 l.288 ~ p.455 ~ l.316 의 getMonths 2개는 합치고 이름을 서술적�
 ```java
 // ASIS
 public static String[] getMonths() {
-	return getMonths(false);
+ return getMonths(false);
 }
 public static String[] getMonth(final boolean shortened) {
-	if(shortened) {
-		return DATE_FORMAT_SYMBOLS.getShortMonths();
-	} else {
-		return DATE_FORMAT_SYMBOLS.getMonths();
-	}
+ if(shortened) {
+  return DATE_FORMAT_SYMBOLS.getShortMonths();
+ } else {
+  return DATE_FORMAT_SYMBOLS.getMonths();
+ }
 }
 
 // TOBE
@@ -425,54 +425,54 @@ p.456 l.377 ~ p.457 l.426 의 monthCodeToString, stringToMonthCode 메서드 2�
 ```java
 // ASIS
 public static String monthCodeToString(final int month, final boolean shorened) {
-	...
-	final String[] months;
-	if(shortened) {
-		months = DATE_FORMAT_SYMBOLS.getShortMonths();
-	} else {
-		months = DATE_FORMAT_SYMBOLS.getMonths();
-	}
-	return months[month - 1];
+ ...
+ final String[] months;
+ if(shortened) {
+  months = DATE_FORMAT_SYMBOLS.getShortMonths();
+ } else {
+  months = DATE_FORMAT_SYMBOLS.getMonths();
+ }
+ return months[month - 1];
 }
 
 public static int stringToMonthCode(String s) {
-	final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
-	final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
-	
-	int result = -1;
-	s = s.trim();
-	try {
-		result = Integer.parseInt(s);
-	} catch(NumberFormatException e) {
-	}
-	if((result < 1)}}(result > 12)) {
-		for(int i = 0; i < monthNames.length; i++) {
-			if(s.equals(shortMonthNames[i])) {
-				result = i + 1;
-				break;
-			}
-			if(s.equals(monthNames[i])) {
-				result = i + 1;
-				break;
-			}
-		}
-	}
+ final String[] shortMonthNames = DATE_FORMAT_SYMBOLS.getShortMonths();
+ final String[] monthNames = DATE_FORMAT_SYMBOLS.getMonths();
+ 
+ int result = -1;
+ s = s.trim();
+ try {
+  result = Integer.parseInt(s);
+ } catch(NumberFormatException e) {
+ }
+ if((result < 1)}}(result > 12)) {
+  for(int i = 0; i < monthNames.length; i++) {
+   if(s.equals(shortMonthNames[i])) {
+    result = i + 1;
+    break;
+   }
+   if(s.equals(monthNames[i])) {
+    result = i + 1;
+    break;
+   }
+  }
+ }
 }
 
 // TOBE
 public String toString() {
-	return dateFormatSymbols.getMonths()[index - 1;
+ return dateFormatSymbols.getMonths()[index - 1;
 }
 public static Month parse(String s) {
-	s = s.trim();
-	for(Month m : Month.values())
-		if(m.matches(s))
-			return m;
-	try {
-		return fromInt(Integer.parseInt(s));
-	} catch (Number?FormatException e) {
-	}
-	throw new IllegalArgumentException("Invalid month " + s);
+ s = s.trim();
+ for(Month m : Month.values())
+  if(m.matches(s))
+   return m;
+ try {
+  return fromInt(Integer.parseInt(s));
+ } catch (Number?FormatException e) {
+ }
+ throw new IllegalArgumentException("Invalid month " + s);
 }
 ```
 
