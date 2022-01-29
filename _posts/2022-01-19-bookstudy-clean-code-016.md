@@ -34,17 +34,17 @@ stringToMonthCode 는 아래처럼 변경되어야 함
 
 ```java
 if((result < 1) || (result > 12)) {
-	result = -1;
-	for(int i = 0; i < monthNames.length; i++) {
-		if(s.equalsIgnoreCase(shortMonthNames[i])) {
-			result = i + 1;
-			break;
-		}
-		if(s.equalsIgnoreCase(monthNames[i])) {
-			result = i + 1;
-			break;
-		}
-	}
+  result = -1;
+  for(int i = 0; i < monthNames.length; i++) {
+    if(s.equalsIgnoreCase(shortMonthNames[i])) {
+      result = i + 1;
+      break;
+    }
+    if(s.equalsIgnoreCase(monthNames[i])) {
+      result = i + 1;
+      break;
+    }
+  }
 }
 ```
 
@@ -63,7 +63,7 @@ int delta =targetDOW - base.getDayOfWeek();
 int positiveDelta = delta + 7;
 int adjust = positiveDelta % 7;
 if(adjust > 3)
-	adjest -= 7;
+  adjest -= 7;
 
 return SerialDate.addDays(adjust, base);
 ```
