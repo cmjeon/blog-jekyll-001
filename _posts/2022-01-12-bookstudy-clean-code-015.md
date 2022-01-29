@@ -51,9 +51,9 @@ private String **suffix**;
 
 ```java
 public String compace(String message){
-	if (expected == null || actual == null || arStringEqual())
-		return Assert.format(message, expected, actual);
-	...
+    if (expected == null || actual == null || arStringEqual())
+        return Assert.format(message, expected, actual);
+    ...
 }
 ```
 
@@ -61,12 +61,12 @@ public String compace(String message){
 
 ```java
 public String compace(String message){
-	if(shouldNotCompact())
-		return Assert.format(message, expected, actual);
-	...
+    if(shouldNotCompact())
+        return Assert.format(message, expected, actual);
+    ...
 }
 private boolean shouldNotCompact(){
-	return expected == null || actual \\ null || areStringEqal();
+    return expected == null || actual \\ null || areStringEqal();
 }
 ```
 
@@ -94,25 +94,25 @@ String compactActual = compactString(**actual**);
 
 ```java
 public String compace(String message){
-	if(shouldNotCompact())
-		return Assert.format(message, expected, actual);
-	...
+    if(shouldNotCompact())
+        return Assert.format(message, expected, actual);
+    ...
 }
 private boolean shouldNotCompact(){
-	return expected == null || actual \\ null || areStringEqal();
+    return expected == null || actual \\ null || areStringEqal();
 }
 ```
-
+    
 - 변경 후
 
 ```java
 public String compace(String message){
-	if(canBeCompacted())
-		return Assert.format(message, expected, actual);
-	...
+    if(canBeCompacted())
+        return Assert.format(message, expected, actual);
+    ...
 }
 private boolean canBeCompacted(){
-	return expected == null || actual \\ null || areStringEqal();
+    return expected == null || actual \\ null || areStringEqal();
 }
 ```
 
@@ -122,10 +122,10 @@ private boolean canBeCompacted(){
 
 ```java
 private void compactExpectedAndActual() { 
-	findCommonPrefix(); 
-	findCommonSuffix(); 
-	compactExpected = compactString(expected); 
-	compactActual = compactString(actual); 
+    findCommonPrefix(); 
+    findCommonSuffix(); 
+    compactExpected = compactString(expected); 
+    compactActual = compactString(actual); 
 }
 ```
 
@@ -133,10 +133,10 @@ private void compactExpectedAndActual() {
 
 ```java
 private void compactExpectedAndActual() { 
-	**prefixIndex** = findCommonPrefix(); 
-	**suffixIndex** = findCommonSuffix(); 
-	compactExpected = compactString(expected); 
-	compactActual = compactString(actual); 
+    **prefixIndex** = findCommonPrefix(); 
+    **suffixIndex** = findCommonSuffix(); 
+    compactExpected = compactString(expected); 
+    compactActual = compactString(actual); 
 }
 ```
 
@@ -148,10 +148,10 @@ private void compactExpectedAndActual() {
 
 ```java
 private void compactExpectedAndActual() { 
-	prefixIndex = findCommonPrefix(); 
-	suffixIndex = findCommonSuffix(); 
-	compactExpected = compactString(expected); 
-	compactActual = compactString(actual); 
+    prefixIndex = findCommonPrefix(); 
+    suffixIndex = findCommonSuffix(); 
+    compactExpected = compactString(expected); 
+    compactActual = compactString(actual); 
 }
 ```
 
@@ -159,10 +159,10 @@ private void compactExpectedAndActual() {
 
 ```java
 private void compactExpectedAndActual() { 
-	prefixIndex = findCommonPrefix(); 
-	suffixIndex = findCommonSuffix(prefixIndex); 
-	compactExpected = compactString(expected); 
-	compactActual = compactString(actual); 
+    prefixIndex = findCommonPrefix(); 
+    suffixIndex = findCommonSuffix(prefixIndex); 
+    compactExpected = compactString(expected); 
+    compactActual = compactString(actual); 
 }
 ```
 
@@ -170,19 +170,19 @@ private void compactExpectedAndActual() {
 
 ```java
 private void compactExpectedAndActual() { 
-	findCommonPrefixAndSuffix();
-	compactExpected = compactString(expected); 
-	compactActual = compactString(actual); 
+    findCommonPrefixAndSuffix();
+    compactExpected = compactString(expected); 
+    compactActual = compactString(actual); 
 }
 
 private void **findComonPrefixAndSuffix**(){
-	findCommonPrefix();
-	...
+    findCommonPrefix();
+    ...
 }
 
 private void **findCommonPrefix**(){
-	prefixIndex = 0;
-	...
+    prefixIndex = 0;
+    ...
 }
 ```
 
