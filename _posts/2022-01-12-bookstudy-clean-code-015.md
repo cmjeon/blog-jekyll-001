@@ -38,10 +38,10 @@ private String fSuffix;
 
 ```java
 private int contextLength;
-private String **expected**;
-private String **actual**;
-private String **prefix**;
-private String **suffix**;
+private String expected;
+private String actual;
+private String prefix;
+private String suffix;
 ```
 
 #### 의도를 명확히 표현하기 위해 조건문을 캡슐화 해라
@@ -82,8 +82,8 @@ String actual = compactString(this.actual);
 - 변경 후
 
 ```java
-String compactExpected = compactString(**expected**); 
-String compactActual = compactString(**actual**);
+String compactExpected = compactString(expected); 
+String compactActual = compactString(actual);
 ```
 
 #### 부정문이 아닌 긍정문 으로 만들어 조건문을 반전한다
@@ -133,8 +133,8 @@ private void compactExpectedAndActual() {
 
 ```java
 private void compactExpectedAndActual() { 
-    **prefixIndex** = findCommonPrefix(); 
-    **suffixIndex** = findCommonSuffix(); 
+    prefixIndex = findCommonPrefix(); 
+    suffixIndex = findCommonSuffix(); 
     compactExpected = compactString(expected); 
     compactActual = compactString(actual); 
 }
@@ -175,12 +175,12 @@ private void compactExpectedAndActual() {
     compactActual = compactString(actual); 
 }
 
-private void **findComonPrefixAndSuffix**(){
+private void findComonPrefixAndSuffix(){
     findCommonPrefix();
     ...
 }
 
-private void **findCommonPrefix**(){
+private void findCommonPrefix(){
     prefixIndex = 0;
     ...
 }
