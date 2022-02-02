@@ -1,6 +1,6 @@
 ---
 layout: single
-title: 리팩토링2 스터디 - 002
+title: 리팩토링2 스터디 - 003
 categories: 
   - bookstudy - refactoring2
 tags: 
