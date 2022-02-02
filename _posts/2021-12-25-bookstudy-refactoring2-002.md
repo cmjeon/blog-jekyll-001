@@ -327,6 +327,5 @@ tags:
     - 마이클 페더스 “레거시 코드 활용 전략”
     - 제이 필즈와 셰인 하비 “Refactoring: Ruby Edition”
 
-
 # 참고
 - 

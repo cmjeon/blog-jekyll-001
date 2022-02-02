@@ -217,7 +217,7 @@ tags:
 - 메시지 체인의 다양한 연결점에 적용할 수 있는 ‘위임 숨기기’
 - 최종 결과 객체를 사용하는 코드 일부를 따로 빼내는 ‘함수 추출하기’, ‘함수 옮기기’
 
-```jsx
+```js
 // 메시지 체인 예시
 managerName = aPerson.department.manager.name;
 
