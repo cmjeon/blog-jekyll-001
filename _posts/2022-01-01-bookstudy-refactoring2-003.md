@@ -309,4 +309,4 @@ function getManagerName(aPerson) {
 주석을 남겨야겠다는 생각이 들면, 가장 먼저 주석이 필요 없는 코드로 리팩터링해본다.
 
 # 참고
-- 
+- [리팩터링 2판](http://www.yes24.com/Product/Goods/89649360){:target="_blank"}

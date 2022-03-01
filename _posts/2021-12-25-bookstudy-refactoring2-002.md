@@ -328,4 +328,4 @@ tags:
     - 제이 필즈와 셰인 하비 “Refactoring: Ruby Edition”
 
 # 참고
-- 
+- [리팩터링 2판](http://www.yes24.com/Product/Goods/89649360){:target="_blank"}
