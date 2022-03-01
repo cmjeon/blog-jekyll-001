@@ -1046,4 +1046,4 @@ get telephoneNumber() {
 이런 경우라면 전화번호를 값 객체로 만드는 것이 나으니 ‘참조를 값으로 바꾸기' 부터 적용한다.
 
 # 참고
-- 
+- [리팩터링 2판](http://www.yes24.com/Product/Goods/89649360){:target="_blank"}
