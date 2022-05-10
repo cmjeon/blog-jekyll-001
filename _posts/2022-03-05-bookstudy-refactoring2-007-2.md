@@ -170,5 +170,108 @@ set trackingNumber(arg) {
 
 ## 7.7 위임 숨기기 Hide Delegate
 
+```js
+// ASIS
+manager = aPerson.department.manager;
+
+// TOBE
+manager = aPerson.manager;
+
+class Person {
+  get manager() {
+    return this.department.manager;
+  }
+}
+```
+
+### 배경
+
+모듈화 설계의 핵심은 캡슐화이다.
+
+캡슐화가 잘 되어 있으면 변경 시에 고려해야할 모듈 수가 적어져서 코드를 변경하기 쉽다.
+
+캡슐화란 필드를 숨기는 것 외에도 더 많은 역할이 있다.
+
+예컨데 서버 객체의 필드가 가리키는 객체의 메서드를 호출하려면 클라이언트는 이 위임 객체를 알아야 한다.
+
+이 위임 객체의 인터페이스가 바뀌면 클라이언트의 코드 수정이 필요하다.
+
+만약 서버 자체에 위임 메소드를 만들어서 위임 객체의 존재를 숨길 수 있다면 위임 객체가 수정되더라도 서버 코드만 고치면 될 것이다.
+
+### 절차
+
+1. 위임 객체의 각 메소드에 해당하는 위임 메소드를 서버 객체에 생성한다.
+2. 클라이언트가 위임 객체를 대신 서버 객체를 호출하도록 수정한다. 하나씩 바꿀 때마다 테스트한다.
+3. 모두 수정했다면, 서버로부터 위임 객체를 얻는 접근자를 제거한다.
+4. 테스트한다.
+
+### 예시
+
+사람과 부서가 정의되어 있다.
+
+```js
+// Person 클래스
+constructor(name) {
+  this._name = name;
+}
+get name() {
+  return this._name;
+}
+get department() {
+  return this._department;
+}
+set department(arg) {
+  this._department = arg;
+}
+
+// Department 클래스
+get chargeCode() {
+  return this._chargeCode;
+}
+set chargeCode(arg) {
+  this._chargeCode = arg;
+}
+get manager() {
+  return this._manager;
+}
+set manager(arg) {
+  this._manager = arg;
+}
+
+// 클라이언트
+manager = aPerson.department.manager;
+manager = aPerson.department.chargeCode;
+```
+
+1. Person 클래스에 위임 메소드를 정의한다.
+
+```js
+// Person 클래스
+get manager() {
+  return this._department.manager;
+}
+```
+
+2. 클라이언트가 Person 클래스의 메소드를 사용하도록 고친다.
+
+```js
+// 클라이언트
+manager = aPerson.manager;
+```
+
+3. 같은 방식으로 chargeCode 도 Person 클래스에 정의하고, 클라이언트도 수정한다.
+
+```js
+// Person 클래스
+get chargeCode() {
+  return this._department.chargeCode;
+}
+
+// 클라이언트
+manager = aPerson.chargeCode;
+```
+
+4. Person 클래스의 department() 접근자를 삭제한다.
+
 # 참고
 - [리팩터링 2판](http://www.yes24.com/Product/Goods/89649360){:target="_blank"}
