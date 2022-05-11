@@ -341,9 +341,49 @@ manager = aPerson.department.manager;
 
 3. 클라이언트를 모두 고쳤으면 Person 클래스의 manager() 메서드를 삭제한다. 이런 위임 메소드가 더는 남지 않을 때까지 이 작업을 반복한다.
 
+## 7.9 알고리즘 교체하기 Substitute Algorithm
 
+```js
+// ASIS
+function foundPerson(people) {
+  for(let i = 0; i < people.length; i++) {
+    if(people[i] === "Don") {
+      return "Don";
+    }
+    if(people[i] === "John") {
+      return "John";
+    }
+    if(people[i] === "Kent") {
+      return "Kent"
+    }
+  }
+  return "";
+}
 
+// TOBE
+function foundPerson(people) {
+  const candidates = ["Don", "John", "Kent"];
+  return people.find(p => candidates.includes(p)) || '';
+}
+```
 
+### 배경
+
+목적을 달성하는 방법은 여러 가지가 있지만 분명 더 쉬운 방법은 존재한다.
+
+알고리즘도 더 간명한 방법을 찾아내면 복잡한 기존 코드를 간명한 코드로 고치는 것이 좋다.
+
+이 작업을 착수하려면 반드시 메소드를 가능한 잘게 나눴는지 확인해야 한다.
+
+거대하고 복잡한 알고리즘은 교체하기 어려우니 알고리즘을 간소화하는 작업부터 하자.
+
+### 절차
+
+1. 교체할 코드를 함수 하나에 모은다.
+2. 이 함수만을 이용해 동작을 검증하는 테스트를 마련한다.
+3. 대체할 알고리즘을 준비한다.
+4. 정적 검사를 수행한다.
+5. 기존 알고리즘과 새 알고리즘의 결과를 비교하는 테스트를 수행한다. 구 결과가 같다면 리팩터링이 끝난다. 그렇지 않다면 기존 알고리즘을 참고해서 새 알고리즘을 디버깅하고 테스트한다.
 
 # 참고
 - [리팩터링 2판](http://www.yes24.com/Product/Goods/89649360){:target="_blank"}
