@@ -22,12 +22,13 @@ tags:
 ```js
 // ASIS
 function printOwing(invoive) {
-	printBanner();
-	let outstanding = calculateOutstanding();
-	
-	// 세부 사항 출력
-	console.log(`고객명: ${invoice.customer}`);
-	console.log(`채무액: ${outstanding}`);
+  printBanner();
+  let outstanding = calculateOutstanding();
+
+  // 세부 사항 출력
+  console.log(`고객명: ${invoice.customer}`);
+  console.log(`채무액: ${outstanding}`);
+}
 
 // TOBE
 function printOwing(invoice) {
@@ -53,14 +54,14 @@ function printOwing(invoice) {
 ```js
 // (목적)무슨 일을 하는가? > 강조(hightlist)
 function highlight() {
-	// (구현)어떻게 하는가? > 반전(reverse)
-	reverse();
+  // (구현)어떻게 하는가? > 반전(reverse)
+  reverse();
 }
 
 // 무슨 일을 하는가? > 반전(reverse)
 function reverse() {
-	// 어떻게 하는가?
-	...
+  // 어떻게 하는가?
+  ...
 }
 ```
 
@@ -89,27 +90,27 @@ function reverse() {
 ```js
 // ASIS
 function printOwing(invoice) {
-	...
-	let outstanding = 0
-	for (const o if invoice.orders) {
-		outstanding += o.amount;
-	}
-	...
+  ...
+  let outstanding = 0
+  for (const o if invoice.orders) {
+    outstanding += o.amount;
+  }
+  ...
 }
 
 // TOBE
 function printOwing(invoice) {
-	...
-	const outstanding = calculateOutstanding(invoice);
-	...
+  ...
+  const outstanding = calculateOutstanding(invoice);
+  ...
 }
 
 function calculateOutstanding(invoice) {
-	let outstanding = 0
-	for (const o if invoice.orders) {
-		outstanding += o.amount;
-	}
-	return outstanding;
+  let outstanding = 0
+  for (const o if invoice.orders) {
+    outstanding += o.amount;
+  }
+  return outstanding;
 }
 ```
 
@@ -118,16 +119,16 @@ function calculateOutstanding(invoice) {
 ```js
 // ASIS
 function getRating(driver) {
-	return moreThanFiveLateDeliveries(driver) ? 2 : 1;
+  return moreThanFiveLateDeliveries(driver) ? 2 : 1;
 }
 
 function moreThanFiveLateDeliveries(driver) {
-	return driver.numberOFLateDeliveries > 5
+  return driver.numberOFLateDeliveries > 5
 }
 
 // TOBE
 function getRating(driver) {
-	return (driver.numberOfLateDelieries > 5) ? 2 : 1;
+  return (driver.numberOfLateDelieries > 5) ? 2 : 1;
 }
 ```
 
@@ -152,22 +153,22 @@ function getRating(driver) {
 ```js
 // ASIS
 function reportLines(aCustomer) {
-	const lines = [];
-	gatherCustomerData(lines, aCustomer);
-	return lines;
+  const lines = [];
+  gatherCustomerData(lines, aCustomer);
+  return lines;
 }
 
 function gatherCustomerData(out, aCustomer) {
-	out.push(["name", aCustomer.name]);
-	out.push(["location", aCustomer.location]);
+  out.push(["name", aCustomer.name]);
+  out.push(["location", aCustomer.location]);
 }
 
 // TOBE
 function reportLines(aCustomer) {
-	const lines = [];
-	out.push(["name", aCustomer.name]);
-	out.push(["location", aCustomer.location]);
-	return lines;
+  const lines = [];
+  out.push(["name", aCustomer.name]);
+  out.push(["location", aCustomer.location]);
+  return lines;
 }
 ```
 
@@ -205,52 +206,52 @@ return basePrice - quantityDiscount + shipping;
 ```js
 // ASIS
 class Order {
-	constructor(aRecord) {
-		this._data = aRecord;
-	}
-	
-	get quantity() {
-		return this._data.quantity;
-	}
-	
-	get itemPrice() {
-		return this._data.itemPrice;
-	}
-	
-	get price() {
-		return order.quantity * order.itemPrice - Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 + Math.min(order.quantity * order.itemPrice * 0.1, 100);
-	}
+  constructor(aRecord) {
+    this._data = aRecord;
+  }
+  
+  get quantity() {
+    return this._data.quantity;
+  }
+  
+  get itemPrice() {
+    return this._data.itemPrice;
+  }
+  
+  get price() {
+    return order.quantity * order.itemPrice - Math.max(0, order.quantity - 500) * order.itemPrice * 0.05 + Math.min(order.quantity * order.itemPrice * 0.1, 100);
+  }
 }
 
 // TOBE
 class Order {
-	constructor(aRecord) {
-		this._data = aRecord;
-	}
+  constructor(aRecord) {
+    this._data = aRecord;
+  }
+  
+  get quantity() {
+    return this._data.quantity;
+  }
+	
+  get itemPrice() {
+    return this._data.itemPrice;
+  }
+	
+  get price() {
+    return basePrice - quantityDiscount + shipping;
+  }
+	
+  get basePrice() {
+    return order.quantity * order.itemPrice;
+  }
+	
+  get quantityDiscount() {
+    return Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
+  }
 
-	get quantity() {
-		return this._data.quantity;
-	}
-	
-	get itemPrice() {
-		return this._data.itemPrice;
-	}
-	
-	get price() {
-		return basePrice - quantityDiscount + shipping;
-	}
-	
-	get basePrice() {
-		return order.quantity * order.itemPrice;
-	}
-	
-	get quantityDiscount() {
-		return Math.max(0, order.quantity - 500) * order.itemPrice * 0.05;
-	}
-
-	get shipping() {
-		return Math.min(basePrice * 0.1, 100);
-	}
+  get shipping() {
+    return Math.min(basePrice * 0.1, 100);
+  }
 }
 ```
 
@@ -286,12 +287,12 @@ return anOrder.basePrice > 1000;
 ```js
 // ASIS
 function circum(radius) {
-	...
+  ...
 }
 
 // TOBE
 function circumference(radius) {
-	...
+  ...
 }
 ```
 
@@ -353,12 +354,12 @@ function circumference(radius) {
 ```js
 // ASIS
 function circum(radius) {
-	return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 
 // TOBE
 function circumference(radius) {
-	return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 
 ```
@@ -368,23 +369,23 @@ function circumference(radius) {
 ```js
 // ASIS
 function circum(radius) {
-	return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 
 // ING-1
 function circum(radius) {
-	return circumference(radius);
+  return circumference(radius);
 }
 
 function circumference(radius) {
-	return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 
 // 클라이언트들이 circum 함수에서 circumference 함수를 호출하도록 변경한다.
 
 // TOBE
 function circumference(radius) {
-	return 2 * Math.PI * radius;
+  return 2 * Math.PI * radius;
 }
 ```
 
@@ -393,7 +394,7 @@ function circumference(radius) {
 ```js
 // ASIS
 addReservation(customer) {
-	this._reservations.push(customer);
+  this._reservations.push(customer);
 }
 ```
 
@@ -404,11 +405,11 @@ addReservation(customer) {
 ```js
 // ING-1
 addReservation(customer) {
-	this.zz_addReservation(customer);
+  this.zz_addReservation(customer);
 }
 
 zz_addReservation(customer) {
-	this._reservations.push(customer);
+  this._reservations.push(customer);
 }
 ```
 
@@ -417,12 +418,12 @@ zz_addReservation(customer) {
 ```js
 // TOBE
 addReservation(customer) {
-	this.zz_addReservation(customer, false);
+  this.zz_addReservation(customer, false);
 }
 
 zz_addReservation(customer, isPriority) {
-	assert(isPriority === true || isPriority === false);
-	this._reservations.push(customer);
+  assert(isPriority === true || isPriority === false);
+  this._reservations.push(customer);
 }
 ```
 
@@ -432,7 +433,7 @@ zz_addReservation(customer, isPriority) {
 // ASIS
 const newEnglanders = someCustomers.filter(c => isNewEngland(c));
 function isNewEngland(aCustomer) {
-	return ["MA","CT","ME","VT","NH","RI"].includes(aCustomer.address.state);
+  return ["MA","CT","ME","VT","NH","RI"].includes(aCustomer.address.state);
 }
 ```
 
@@ -443,8 +444,8 @@ function isNewEngland(aCustomer) {
 ```js
 // ING-1
 function isNewEngland(aCustomer) {
-	const stateCode = aCustomer.address.state;
-	return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
+  const stateCode = aCustomer.address.state;
+  return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
 }
 ```
 
@@ -453,12 +454,12 @@ function isNewEngland(aCustomer) {
 ```js
 // ING-2
 function isNewEngland(aCustomer) {
-	const stateCode = aCustomer.address.state;
-	xxNewinNewEngland(stateCode);
+  const stateCode = aCustomer.address.state;
+  xxNewinNewEngland(stateCode);
 }
 
 function xxNewinNewEngland(stateCode) {
-	return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
+  return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
 }
 ```
 
@@ -467,11 +468,11 @@ function xxNewinNewEngland(stateCode) {
 ```js
 // ING-3
 function isNewEngland(aCustomer) {
-	xxNewinNewEngland(aCustomer.address.state);
+  xxNewinNewEngland(aCustomer.address.state);
 }
 
 function xxNewinNewEngland(stateCode) {
-	return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
+  return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
 }
 ```
 
@@ -482,11 +483,11 @@ function xxNewinNewEngland(stateCode) {
 const newEnglanders = someCustomers.filter(c => xxNewinNewEngland(c.address.state));
 
 function isNewEngland(aCustomer) {
-	xxNewinNewEngland(aCustomer.address.state);
+  xxNewinNewEngland(aCustomer.address.state);
 }
 
 function xxNewinNewEngland(stateCode) {
-	return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
+  return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
 }
 ```
 
@@ -497,7 +498,7 @@ function xxNewinNewEngland(stateCode) {
 const newEnglanders = someCustomers.filter(c => inNewEngland(c.address.state));
 
 function inNewEngland(stateCode) {
-	return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
+  return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
 }
 ```
 
