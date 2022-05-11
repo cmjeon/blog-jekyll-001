@@ -273,5 +273,77 @@ manager = aPerson.chargeCode;
 
 4. Person 클래스의 department() 접근자를 삭제한다.
 
+## 7.8 중개자 제거하기 Remove Middle Man
+
+```js
+// ASIS
+manager = aPerson.manager;
+
+class Person {
+  get manager() {
+    return this.department.manager;
+  }
+}
+
+// TOBE
+manager = aPerson.department.manager;
+```
+### 배경
+
+앞 절의 위임 숨기기에서 클라이언트가 위임 객체의 또 다근 기능을 사용하고 싶게 될 때마다 서버 객체에 위임 메소드를 추가해야 한다.
+
+이렇게 기능을 추가하다 보면 서버 객체의 위임 메소드들이 점점 성가시게 되고 서버 객체는 그저 중개자 역할로 전락할 수가 있다.
+
+이런 경우 차라리 클라이언트가 위임 객체를 직접 호출하는 것이 낫다.
+
+6개월 전에는 바람직했던 캡슐화가 이제는 어색할 수 있다. 시스템이 바뀌면 ‘적절하다'의 기준도 바뀌기 마련이기 때문이다.
+
+### 절차
+
+1. 위임 객체를 얻는 게터를 만든다.
+2. 위임 메소드를 호출하는 클라이언트가 모두 이 게터를 거치도록 수정한다. 하나씩 바꿀 때마다 테스트 한다.
+3. 모두 수정했다면 위임 메소드를 삭제한다.
+
+### 예시
+
+앞 절에서 만든 Department 객체를 통해 manager 를 찾는 Person 클래스를 살펴보자
+
+```js
+// 클라이언트
+manager = aPerson.manager;
+
+// Person 클래스
+get manager() {
+  return this._department.manager;
+}
+
+// Department 클래스
+get manager() {
+  return this._manager;
+}
+```
+
+1. Person 클래스에 Department 를 얻는 게터를 만든다.
+
+```js
+// Person 클래스
+get department() {
+  return this._department;
+}
+```
+
+2. 이제 각 클라이언트가 부서 객체를 직접 사용하도록 수정한다.
+
+```js
+// 클라이언트
+manager = aPerson.department.manager;
+```
+
+3. 클라이언트를 모두 고쳤으면 Person 클래스의 manager() 메서드를 삭제한다. 이런 위임 메소드가 더는 남지 않을 때까지 이 작업을 반복한다.
+
+
+
+
+
 # 참고
 - [리팩터링 2판](http://www.yes24.com/Product/Goods/89649360){:target="_blank"}
