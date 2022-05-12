@@ -92,7 +92,7 @@ class Person {
     this._lastName = data.lastName;
     this._firstName = data.firstName;
   }
-
+  
   get lastName() { return this._lastName; }
   get firstName() { return this._firstName; }
 }
@@ -197,18 +197,18 @@ const cpyNm = companyName;
 // 예시
 // ASIS
 const station = {
-    name: "ZB1",
-    readings: [
-        {temp: 47, time: "2016-11-10 09:10"},
-        {temp: 53, time: "2016-11-10 09:20"},
-        {temp: 58, time: "2016-11-10 09:30"},
-        {temp: 53, time: "2016-11-10 09:40"},
-        {temp: 51, time: "2016-11-10 09:50"},
-    ]
+  name: "ZB1",
+  readings: [
+    { temp: 47, time: "2016-11-10 09:10" },
+    { temp: 53, time: "2016-11-10 09:20" },
+    { temp: 58, time: "2016-11-10 09:30" },
+    { temp: 53, time: "2016-11-10 09:40" },
+    { temp: 51, time: "2016-11-10 09:50" },
+  ]
 };
 
 function readingsOutsideRange(station, min, max) {
-    return station.readings.filter(r => r.temp < min || r.temp > max);
+  return station.readings.filter(r => r.temp < min || r.temp > max);
 }
 
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling);
@@ -224,16 +224,16 @@ alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operating
 / TOBE
 // Step 1 묶은 데이터를 표현하는 클래스 선언
 class NumberRange {
-    constructor(min, max) {
-        this._data = {min: min, max: max};
-    }
-    get min() {return this._data.min;}
-    get max() {return this._data.max;}
+  constructor(min, max) {
+    this._data = {min: min, max: max};
+  }
+  get min() { return this._data.min; }
+  get max() { return this._data.max; }
 }
 
 // Step 2 readingOutsideRange() 매개변수에 객체 추가
 function readingOutsideRange(station, min, max, range) {
-    return station.readings.filter(r => r.temp < min || r.temp > max);
+  return station.readings.filter(r => r.temp < min || r.temp > max);
 }
 
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling, null);
@@ -244,14 +244,14 @@ alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operating
 
 // Step 4 매개변수 max 변경
 function readingOutsideRange(station, min, range) {
-    return station.readings.filter(r => r.temp < min || r.temp > range.max);
+  return station.readings.filter(r => r.temp < min || r.temp > range.max);
 }
 
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, range);
 
 // Step 5 매개변수 min 변경
 function readingOutsideRange(station, range) {
-    return station.readings.filter(r => r.temp < range.min || r.temp > range.max);
+  return station.readings.filter(r => r.temp < range.min || r.temp > range.max);
 }
 
 alerts = readingsOutsideRange(station, range);
@@ -268,15 +268,15 @@ alerts = readingsOutsideRange(station, range);
 ```js
 // Step 6 허용범위 메서드 추가
 class NumberRange {
-    constructor(min, max) {
-        this._data = {min: min, max: max};
-    }
-    get min() {return this._data.min;}
-    get max() {return this._data.max;}
-
-    contain(arg) {
-        return (arg >= this.min || arg <= this.max);
-    };
+  constructor(min, max) {
+    this._data = { min: min, max: max };
+  }
+  get min() { return this._data.min; }
+  get max() { return this._data.max; }
+   
+  contain(arg) {
+    return (arg >= this.min || arg <= this.max);
+  };
 }
 ```
 
@@ -340,22 +340,22 @@ const aReading = acquireReading();
 const basicChargeAmount = calculateBaseCharge(aReading);
 
 function calculateBaseCharge(aReading) {
-    return baseRate(aReading.month, aReading.year) * aReading.quantity;
+  return baseRate(aReading.month, aReading.year) * aReading.quantity;
 }
 
 // Step 1 레코드를 클래스로 변환하기 위해 레코드 캡슐화
 class Reading {
-    constructor(data) {
-        this._customer = data.customer;
-        this._quantity = data.quantity;
-        this._month = data.month;
-        this._year = data.year;
-    }
+  constructor(data) {
+    this._customer = data.customer;
+    this._quantity = data.quantity;
+    this._month = data.month;
+    this._year = data.year;
+  }
 
-    get customer() {return this._customer;}
-    get quantity() {return this._quantity;}
-    get month() {return this._month;}
-    get year() {return this._year;}
+  get customer() { return this._customer; }
+  get quantity() { return this._quantity; }
+  get month() { return this._month; }
+  get year() { return this._year; }
 }
 
 // Step 2 calculateBaseCharge() 옮기기
@@ -365,21 +365,19 @@ const basicChargeAmount = calculateBaseCharge(aReading);
 
 // Step 3 새로 만든 클래스로 calucateBaseCharge() 옮기기
 class Reading {
-    constructor(data) {
-        this._customer = data.customer;
-        this._quantity = data.quantity;
-        this._month = data.month;
-        this._year = data.year;
-    }
+  constructor(data) {
+    this._customer = data.customer;
+    this._quantity = data.quantity;
+    this._month = data.month;
+    this._year = data.year;
+  }
 
-    get customer() {return this._customer;}
-    get quantity() {return this._quantity;}
-    get month() {return this._month;}
-    get year() {return this._year;}
+  get customer() { return this._customer; }
+  get quantity() { return this._quantity; }
+  get month() { return this._month; }
+  get year() { return this._year; }
 
-    get calculateBaseCharge() {
-        return baseRate(this.month, this.year) * this.quantity;
-    }
+  get calculateBaseCharge() { return baseRate(this.month, this.year) * this.quantity; }
 }
 
 const rawReading = acquireReading();
@@ -388,21 +386,21 @@ const basicChargeAmount = aReading.calculateBaseCharge;
 
 // Step 4 함수 이름 변경
 class Reading {
-    constructor(data) {
-        this._customer = data.customer;
-        this._quantity = data.quantity;
-        this._month = data.month;
-        this._year = data.year;
-    }
+  constructor(data) {
+    this._customer = data.customer;
+    this._quantity = data.quantity;
+    this._month = data.month;
+    this._year = data.year;
+  }
 
-    get customer() {return this._customer;}
-    get quantity() {return this._quantity;}
-    get month() {return this._month;}
-    get year() {return this._year;}
+  get customer() {return this._customer;}
+  get quantity() {return this._quantity;}
+  get month() {return this._month;}
+  get year() {return this._year;}
 
-    get baseCharge() {
-        return baseRate(this.month, this.year) * this.quantity;
-    }
+  get baseCharge() {
+    return baseRate(this.month, this.year) * this.quantity;
+  }
 }
 
 const rawReading = acquireReading();
@@ -416,24 +414,24 @@ const taxableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.ye
 
 // Step 6 세금을 부과할 소비량을 계산하는 코드를 함수로 추출
 class Reading {
-    constructor(data) {
-        this._customer = data.customer;
-        this._quantity = data.quantity;
-        this._month = data.month;
-        this._year = data.year;
-    }
+  constructor(data) {
+    this._customer = data.customer;
+    this._quantity = data.quantity;
+    this._month = data.month;
+    this._year = data.year;
+  }
 
-    get customer() {return this._customer;}
-    get quantity() {return this._quantity;}
-    get month() {return this._month;}
-    get year() {return this._year;}
+  get customer() {return this._customer;}
+  get quantity() {return this._quantity;}
+  get month() {return this._month;}
+  get year() {return this._year;}
 
-    get baseCharge() {
-        return baseRate(this.month, this.year) * this.quantity;
-    }
-    get taxableCharge() {
-        return Math.max(0, this.baseCharge - taxThreshold(this.year))
-    }
+  get baseCharge() {
+   return baseRate(this.month, this.year) * this.quantity;
+  }
+  get taxableCharge() {
+    return Math.max(0, this.baseCharge - taxThreshold(this.year))
+  }
 }
 
 // Step 7 클라이언트 3 수정
@@ -468,10 +466,10 @@ function taxableCharge(aReading) {}
 
 // TOBE
 function enrichReading(argReading) {
-    const aReading = _.cloneDeep(argReading)
-    aReading.baseCharge = base(aReading);
-    aReading.taxableCharge = taxableCharge(aReading);
-    return aReading;
+  const aReading = _.cloneDeep(argReading)
+  aReading.baseCharge = base(aReading);
+  aReading.taxableCharge = taxableCharge(aReading);
+  return aReading;
 }
 
 // 예시
@@ -491,13 +489,13 @@ const aReading = acquireReading();
 const basicChargeAmount = calculateBaseCharge(aReading);
 
 function calculateBaseCharge(aReading) {
-    return baseRate(aReading.month, aReading.year) * aReading.quantity;
+  return baseRate(aReading.month, aReading.year) * aReading.quantity;
 }
 
 // Step 1 입력 객체를 그대로 복사해 반환하는 변환 함수 만듬
 function enrichReading(original) {
-    const result = _.cloneDeep(original);
-    return result
+  const result = _.cloneDeep(original);
+  return result
 }
 // Step 2 계산 로직에 측정값을 전달하기 전에 부가 정보를 덧붙이도록 수정한다
 // 클라이언트 3
@@ -506,9 +504,9 @@ const aReading = enrichReading(rawReading);
 const basicChargeAmount = calculateBaseCharge(aReading);
 
 function enrichReading(original) {
-    const result = _.cloneDeep(original);
-    result.baseCharge = calculateBaseCharge(result);
-    return result;   
+  const result = _.cloneDeep(original);
+  result.baseCharge = calculateBaseCharge(result);
+  return result;   
 }
 // Step3 함수를 사용하던 클라이언트가 부가 정보를 담은 필드를 사용하도록 수정
 // 클라이언트 3
@@ -519,10 +517,10 @@ const basicChargeAmount = aReading.baseCharge
 // enrichReading() 처럼 정보를 추가해 반환할 때 원본 측정값 레코드는 변경하지 않아야 한다. 이를 위한 테스트 코드를 작성한다.
 // Step 4
 it('check reading unchanged', function () {
-    const baseReading = {customer: "ivan", quantity: 15, month: 5, year: 2017};
-    const oracle = _.cloneDeep(baseReading);
-    enrichReading(baseReading);
-    assert.deepEqual(baseReading, oracle);
+  const baseReading = {customer: "ivan", quantity: 15, month: 5, year: 2017};
+  const oracle = _.cloneDeep(baseReading);
+  enrichReading(baseReading);
+  assert.deepEqual(baseReading, oracle);
 });
 // 클라이언트 1
 const rawReading = acquireReading();
@@ -535,10 +533,10 @@ const aReading = enrichReading(rawReading);
 const taxableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
 
 function enrichReading(original) {
-    const result = _.cloneDeep(original);
-    result.baseCharge = calculateBaseCharge(result);
-    result.taxableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
-    return result;   
+  const result = _.cloneDeep(original);
+  result.baseCharge = calculateBaseCharge(result);
+  result.taxableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
+  return result;   
 }
 // Step 6 계산 코드를 변환 함수로 옮겨서 새로 만든 필드를 사용하여 원본 코드 수정
 const rawReading = acquireReading();
@@ -589,143 +587,143 @@ const orderRecord = parseOrder(order);
 const orderPrice = price(orderRecord, priceList);
 
 function parseOrder(aString) {
-    const value = aString.split(/\s+/);
-    return ({
-        productID: value[0].split("-")[1],
-        quantity: parseInt(values[1]),
-    });
+  const value = aString.split(/\s+/);
+  return ({
+    productID: value[0].split("-")[1],
+    quantity: parseInt(values[1]),
+  });
 }
 
 function price(order, priceList) {
-    return order.quantity * priceList[order.productID];
+  return order.quantity * priceList[order.productID];
 }
 
 // 예시 상품의 결제 금액을 계산하는 코드
 // ASIS
 function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = quantity * shippingPerCase;
-    const price = basePrice - discount + shippingCost
-    return price;
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = basePrice - discount + shippingCost
+  return price;
 }
 
 // Step 1 배송비 계산 부분을 함수로 추출
 function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const price = applyShipping(basePrice, shippingMethod, quantity, discount);
-    return price
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  const price = applyShipping(basePrice, shippingMethod, quantity, discount);
+  return price
 }
 
 function applyShipping(basePrice, shippingMethod, quantity, discount) {
-    const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = quantity * shippingPerCase;
-    const price = basePrice - discount + shippingCost;
-    return price;
+  const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = basePrice - discount + shippingCost;
+  return price;
 }
 
 // Step 2 첫 번째 단계와 두 번째 단계가 주고받을 중간 데이터 구조를 만든다
 function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const priceData = {}; // 중간 데이터 구조
-    const price = applyShipping(priceData, basePrice, shippingMethod, quantity, discount);
-    return price
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  const priceData = {}; // 중간 데이터 구조
+  const price = applyShipping(priceData, basePrice, shippingMethod, quantity, discount);
+  return price
 }
 
 function applyShipping(priceData, basePrice, shippingMethod, quantity, discount) {
-    const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = quantity * shippingPerCase;
-    const price = basePrice - discount + shippingCost;
-    return price;
+  const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = basePrice - discount + shippingCost;
+  return price;
 }
 
 // Step 3 applyShipping()에 전달되는 매개변수 중 basePrice는 첫 번째 단계에서 생성되니 중간 데이터 구조로 옮기고 매개변수 목록에서 삭제
 function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const priceData = {basePrice: basePrice}; // 중간 데이터 구조
-    const price = applyShipping(priceData, shippingMethod, quantity, discount);
-    return price
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  const priceData = {basePrice: basePrice}; // 중간 데이터 구조
+  const price = applyShipping(priceData, shippingMethod, quantity, discount);
+  return price
 }
 
 function applyShipping(priceData, shippingMethod, quantity, discount) {
-    const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = quantity * shippingPerCase;
-    const price = priceData.basePrice - discount + shippingCost;
-    return price;
+  const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = quantity * shippingPerCase;
+  const price = priceData.basePrice - discount + shippingCost;
+  return price;
 }
 
 // Step 4 quantity를 중간 데이터로 이동
 function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const priceData = {basePrice: basePrice, quantity: quantity}; // 중간 데이터 구조
-    const price = applyShipping(priceData, shippingMethod, discount);
-    return price
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  const priceData = {basePrice: basePrice, quantity: quantity}; // 중간 데이터 구조
+  const price = applyShipping(priceData, shippingMethod, discount);
+  return price
 }
 
 function applyShipping(priceData, shippingMethod, discount) {
-    const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = priceData.quantity * shippingPerCase;
-    const price = priceData.basePrice - discount + shippingCost;
-    return price;
+  const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
+  const price = priceData.basePrice - discount + shippingCost;
+  return price;
 }
 
 // Step 5 Discount 처리
 function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const priceData = {basePrice: basePrice, quantity: quantity, discount: discount}; // 중간 데이터 구조
-    const price = applyShipping(priceData, shippingMethod);
-    return price
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  const priceData = {basePrice: basePrice, quantity: quantity, discount: discount}; // 중간 데이터 구조
+  const price = applyShipping(priceData, shippingMethod);
+  return price
 }
 
 function applyShipping(priceData, shippingMethod) {
-    const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = priceData.quantity * shippingPerCase;
-    const price = priceData.basePrice - priceData.discount + shippingCost;
-    return price;
+  const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
+  const price = priceData.basePrice - priceData.discount + shippingCost;
+  return price;
 }
 
 // Step 6 첫 번째 단계 코드를 함수로 추출하고 데이터 구조 반환
 function priceOrder(product, quantity, shippingMethod) {
-    const priceData = calculatePricingData(product, quantity);
-    const price = applyShipping(priceData, shippingMethod);
-    return price
+  const priceData = calculatePricingData(product, quantity);
+  const price = applyShipping(priceData, shippingMethod);
+  return price
 }
 
 function calculatePricingData(product, quantity) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    return {basePrice: basePrice, quantity: quantity, discount: discount}
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  return {basePrice: basePrice, quantity: quantity, discount: discount}
 }
 
 function applyShipping(priceData, shippingMethod) {
-    const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = priceData.quantity * shippingPerCase;
-    const price = priceData.basePrice - priceData.discount + shippingCost;
-    return price;
+  const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
+  const price = priceData.basePrice - priceData.discount + shippingCost;
+  return price;
 }
 
 // Step 7 함수 인라인
 function priceOrder(product, quantity, shippingMethod) {
-    const priceData = calculatePricingData(product, quantity);
-    return applyShipping(priceData, shippingMethod);
+  const priceData = calculatePricingData(product, quantity);
+  return applyShipping(priceData, shippingMethod);
 }
 
 function calculatePricingData(product, quantity) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    return {basePrice: basePrice, quantity: quantity, discount: discount}
+  const basePrice = product.basePrice * quantity;
+  const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+  return {basePrice: basePrice, quantity: quantity, discount: discount}
 }
 
 function applyShipping(priceData, shippingMethod) {
-    const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
-    const shippingCost = priceData.quantity * shippingPerCase;
-    return priceData.basePrice - priceData.discount + shippingCost;
+  const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountFee : shippingMethod.feePerCase;
+  const shippingCost = priceData.quantity * shippingPerCase;
+  return priceData.basePrice - priceData.discount + shippingCost;
 }
 ```
 
@@ -736,22 +734,22 @@ JSON 파일에 담긴 주문의 개수를 세는 자바 프로그램
 ```java
 // 예시 2 명령줄 프로그램 쪼개기(자바) JSON 파일에 담긴 주문의 개수를 세는 자바 프로그램
 public static void main(String[] args) {
-    try {
-        if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-        String filename = args[args.length - 1];
-        File input = Paths.get(filename).toFile();
-        ObjectMapper mapper = new ObjectMapper();
-        Order[] orders = mapper.readValue(input, Order[].class);
-        if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-            System.out.println(Stream.of(orders)
-                                    .filter(o -> "ready".equals(o.status))
-                                    .count());
-         else 
-            System.out.println(orders.length);
-    } catch (Exception e) {
-        System.err.println(e);
-        System.exit(1);
-    }
+   try {
+      if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+      String filename = args[args.length - 1];
+      File input = Paths.get(filename).toFile();
+      ObjectMapper mapper = new ObjectMapper();
+      Order[] orders = mapper.readValue(input, Order[].class);
+      if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+         System.out.println(Stream.of(orders)
+               .filter(o -> "ready".equals(o.status))
+               .count());
+      else 
+         System.out.println(orders.length);
+   } catch (Exception e) {
+      System.err.println(e);
+      System.exit(1);
+   }
 }
 // 위 코드는 두 가지 일을 한다.
 // 하나 주문 목록을 읽어서 개수를 센다.
@@ -762,26 +760,26 @@ public static void main(String[] args) {
 // 일반적인 JUnit 호출로 자바 프로세스 하나에서 테스트 할 수 있는 상태로 만든다.
 // 핵심 작업을 수행하는 코드 전부를 함수로 추출
 public static void main(String[] args) {
-    try {
-        run(args)
-    } catch (Exception e) {
-        System.err.println(e);
-        System.exit(1);
-    }
+  try {
+    run(args)
+  } catch (Exception e) {
+    System.err.println(e);
+    System.exit(1);
+  }
 }
 
 static void run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    String filename = args[args.length -1];
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        System.out.println(Stream.of(orders)
-                                .filter(o -> "ready".equals(o.status))
-                                .count());
-        else 
-        System.out.println(orders.length);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  String filename = args[args.length -1];
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    System.out.println(Stream.of(orders)
+        .filter(o -> "ready".equals(o.status))
+        .count());
+  else 
+    System.out.println(orders.length);
 }
 
 // Step 2값을 리턴하고 표출하도록 수정
@@ -790,59 +788,59 @@ static void run(String[] args) throws IOException {
 // 험블 객체 패턴(Humble Object Pattern)
 // 단, 여기서는 객체가 아니라 main() 메서드에 적용
 public static void main(String[] args) {
-    try {
-        System.out.println(run(args))
-    } catch (Exception e) {
-        System.err.println(e);
-        System.exit(1);
-    }
+  try {
+    System.out.println(run(args))
+  } catch (Exception e) {
+    System.err.println(e);
+    System.exit(1);
+  }
 }
 
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    String filename = args[args.length -1];
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  String filename = args[args.length -1];
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 // Step 3 두 번째 단계에 해당하는 코드를 독립된 함수로 추출
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    String filename = args[args.length -1];
-    return countOrders(args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  String filename = args[args.length -1];
+  return countOrders(args, filename);
 }
 
 private static long countOrders(String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 // Step 4 중간 데이터 구조 추가
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    String filename = args[args.length -1];
-    return countOrders(commandLine, args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  String filename = args[args.length -1];
+  return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {}
@@ -850,150 +848,150 @@ private static class CommandLine {}
 // Step 5 countOrders로 전달되는 인수를 확인, args는 첫 번째 단계에서 사용하기 떄문에 두 번째 단계까지 올 필요가 없다.
 // args를 사용하는 부분을 찾아서 그 결과를 추출한다
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    String filename = args[args.length -1];
-    return countOrders(commandLine, args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  String filename = args[args.length -1];
+  return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    boolean onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-    if (onlyCountReady)
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  boolean onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+  if (onlyCountReady)
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {}
 
 // Step 6 중간 데이터 구조로 옮긴다
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    String filename = args[args.length -1];
-    return countOrders(commandLine, args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  String filename = args[args.length -1];
+  return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-    if (commandLine.onlyCountReady)
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+  if (commandLine.onlyCountReady)
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {
-    boolean onlyCountReady;
+  boolean onlyCountReady;
 }
 
 // Step 7 onlyCountReady에 값을 설정하는 문장을 호출한 곳으로 옮긴다
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    String filename = args[args.length -1];
-    commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-    return countOrders(commandLine, args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  String filename = args[args.length -1];
+  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+  return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (commandLine.onlyCountReady)
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (commandLine.onlyCountReady)
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {
-    boolean onlyCountReady;
+  boolean onlyCountReady;
 }
 
 // Step 8 filename 매개변수를 중간 데이터 구조인 CommandLine에 옮긴다.
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    commandLine.filename = args[args.length -1];
-    commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-    return countOrders(commandLine);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  commandLine.filename = args[args.length -1];
+  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+  return countOrders(commandLine);
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (commandLine.onlyCountReady)
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (commandLine.onlyCountReady)
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {
-    boolean onlyCountReady;
-    String filename
+  boolean onlyCountReady;
+  String filename
 }
 
 // Step 9 첫번째 코드를 메서드로 추출한다
 static long run(String[] args) throws IOException {
-    CommandLine commandLine = parseCommandLine(args)
-    return countOrders(commandLine);
+  CommandLine commandLine = parseCommandLine(args)
+  return countOrders(commandLine);
 }
 
 private static CommandLine parseCommandLine(String[] args) {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    commandLine.filename = args[args.length -1];
-    commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-    return commandLine
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  commandLine.filename = args[args.length -1];
+  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+  return commandLine
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (commandLine.onlyCountReady)
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (commandLine.onlyCountReady)
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {
-    boolean onlyCountReady;
-    String filename
+  boolean onlyCountReady;
+  String filename
 }
 
 // Step 10 이름 바꾸기 인라인하기 적용
 static long run(String[] args) throws IOException {
-    return countOrders(parseCommandLine(args));
+  return countOrders(parseCommandLine(args));
 }
 
 private static CommandLine parseCommandLine(String[] args) {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine result = new CommandLine();
-    result.filename = args[args.length -1];
-    result.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-    return result
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine result = new CommandLine();
+  result.filename = args[args.length -1];
+  result.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+  return result
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (commandLine.onlyCountReady)
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (commandLine.onlyCountReady)
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {
-    boolean onlyCountReady;
-    String filename
+  boolean onlyCountReady;
+  String filename
 }
 ```
 
@@ -1006,234 +1004,234 @@ private static class CommandLine {
 // 명령줄 인수를 담은 문자열 배열을 두 번째 단계에 적합한 인터페이스로 바꿔주는 변환기(transformer) 객체를 만듬
 
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    String filename = args[args.length -1];
-    return countOrders(commandLine, args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  String filename = args[args.length -1];
+  return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static class CommandLine {}
 
 // Step 1 레코드 구조 대신 동작까지 포함하는 최상위 클래스로 생성
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine();
-    String filename = args[args.length -1];
-    return countOrders(commandLine, args, filename);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine();
+  String filename = args[args.length -1];
+  return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 public class CommandLine {
-    String[] args;
+  String[] args;
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 }
 
 // Step 2 임시 변수를 질의 함수로 바꾸기
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine(args);
-    return countOrders(commandLine, args, filename(args));
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine(args);
+  return countOrders(commandLine, args, filename(args));
 }
 
 private static String filename(String[] args) {
-    return args[args.length -1];
+  return args[args.length -1];
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 public class CommandLine {
-    String[] args;
+  String[] args;
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 }
 
 // Step 3 질의 함수를 클래스로 옮기기
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine(args);
-    return countOrders(commandLine, args, commandLine.filename());
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine(args);
+  return countOrders(commandLine, args, commandLine.filename());
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-    File input = Paths.get(filename).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(filename).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 public class CommandLine {
-    String[] args;
+  String[] args;
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 
-    String filename() {
-        return args[args.length -1];
-    }
+  String filename() {
+    return args[args.length -1];
+  }
 }
 
 // Step 4  함수 선언 바꾸기 
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine(args);
-    return countOrders(commandLine, args);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine(args);
+  return countOrders(commandLine, args);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args) throws IOException {
-    File input = Paths.get(commandLine.filename()).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(commandLine.filename()).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 public class CommandLine {
-    String[] args;
+  String[] args;
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 
-    String filename() {
-        return args[args.length -1];
-    }
+  String filename() {
+    return args[args.length -1];
+  }
 }
 
 // Step 5 args 제거하기 위한 조건식 추출
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine(args);
-    return countOrders(commandLine, args);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine(args);
+  return countOrders(commandLine, args);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args) throws IOException {
-    File input = Paths.get(commandLine.filename()).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (onlyCountReady(args))
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(commandLine.filename()).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (onlyCountReady(args))
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 private static boolean onlyCountReady(String[] args) {
-    return Stream.of(args).anyMatch(arg -> "-r".equals(arg))
+  return Stream.of(args).anyMatch(arg -> "-r".equals(arg))
 }
 
 public class CommandLine {
-    String[] args;
+  String[] args;
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 
-    String filename() {
-        return args[args.length -1];
-    }
+  String filename() {
+    return args[args.length -1];
+  }
 }
 
 // Step 6 클래스에 함수 옮기기 
 static long run(String[] args) throws IOException {
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-    CommandLine commandLine = new CommandLine(args);
-    return countOrders(commandLine);
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  CommandLine commandLine = new CommandLine(args);
+  return countOrders(commandLine);
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-    File input = Paths.get(commandLine.filename()).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (commandLine.onlyCountReady())
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(commandLine.filename()).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (commandLine.onlyCountReady())
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 public class CommandLine {
-    String[] args;
+  String[] args;
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 
-    String filename() {
-        return args[args.length -1];
-    }
+  String filename() {
+    return args[args.length -1];
+  }
 
-    boolean onlyCountReady() {
-        return Stream.of(args).anyMatch(arg -> "-r".equals(arg))
-    }
+  boolean onlyCountReady() {
+    return Stream.of(args).anyMatch(arg -> "-r".equals(arg))
+  }
 }
 
 // Step 7 문장을 함수로 옮기기
 static long run(String[] args) throws IOException {
-    CommandLine commandLine = new CommandLine(args);
-    return countOrders(commandLine);
+  CommandLine commandLine = new CommandLine(args);
+  return countOrders(commandLine);
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-    File input = Paths.get(commandLine.filename()).toFile();
-    ObjectMapper mapper = new ObjectMapper();
-    Order[] orders = mapper.readValue(input, Order[].class);
-    if (commandLine.onlyCountReady())
-        return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-    else 
-        return orders.length;
+  File input = Paths.get(commandLine.filename()).toFile();
+  ObjectMapper mapper = new ObjectMapper();
+  Order[] orders = mapper.readValue(input, Order[].class);
+  if (commandLine.onlyCountReady())
+    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+  else 
+    return orders.length;
 }
 
 public class CommandLine {
-    String[] args;
-    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+  String[] args;
+  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
 
-    public CommandLine(String[] args) {
-        this.args = args;
-    }
+  public CommandLine(String[] args) {
+    this.args = args;
+  }
 
-    String filename() {
-        return args[args.length -1];
-    }
+  String filename() {
+    return args[args.length -1];
+  }
 
-    boolean onlyCountReady() {
-        return Stream.of(args).anyMatch(arg -> "-r".equals(arg))
-    }
+  boolean onlyCountReady() {
+    return Stream.of(args).anyMatch(arg -> "-r".equals(arg))
+  }
 }
 ```
 
