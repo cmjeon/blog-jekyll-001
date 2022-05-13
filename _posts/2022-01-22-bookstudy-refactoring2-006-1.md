@@ -403,7 +403,6 @@ addReservation(customer) {
 1. 새로운 함수를 생성한다.
 
 ```js
-// ING-1
 addReservation(customer) {
   this.zz_addReservation(customer);
 }
@@ -413,7 +412,7 @@ zz_addReservation(customer) {
 }
 ```
 
-1. 파라미터를 추가한다.
+2. 파라미터를 추가한다.
 
 ```js
 // TOBE
@@ -442,17 +441,15 @@ function isNewEngland(aCustomer) {
 1. 파라미터로 사용할 코드를 변수로 추출한다.
 
 ```js
-// ING-1
 function isNewEngland(aCustomer) {
   const stateCode = aCustomer.address.state;
   return ["MA","CT","ME","VT","NH","RI"].includes(stateCode);
 }
 ```
 
-1. 새로운 함수를 생성한다.
+2. 새로운 함수를 생성한다.
 
 ```js
-// ING-2
 function isNewEngland(aCustomer) {
   const stateCode = aCustomer.address.state;
   xxNewinNewEngland(stateCode);
@@ -463,10 +460,9 @@ function xxNewinNewEngland(stateCode) {
 }
 ```
 
-1. 변수를 인라인한다.
+3. 변수를 인라인한다.
 
 ```js
-// ING-3
 function isNewEngland(aCustomer) {
   xxNewinNewEngland(aCustomer.address.state);
 }
@@ -476,10 +472,9 @@ function xxNewinNewEngland(stateCode) {
 }
 ```
 
-1. 새 함수를 호출하도록 변경한다.
+4. 새 함수를 호출하도록 변경한다.
 
 ```js
-// ING-4
 const newEnglanders = someCustomers.filter(c => xxNewinNewEngland(c.address.state));
 
 function isNewEngland(aCustomer) {
@@ -491,7 +486,7 @@ function xxNewinNewEngland(stateCode) {
 }
 ```
 
-1. 새 함수의 이름을 변경한다.
+5`. 새 함수의 이름을 변경한다.
 
 ```js
 // TOBE

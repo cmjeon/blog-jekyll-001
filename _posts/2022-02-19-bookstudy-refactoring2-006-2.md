@@ -45,46 +45,58 @@ export function setDefaultOwner(arg) { defaultOwnerData = arg; }
 1. 변수로의 접근과 갱신을 전담하는 캡슐화 함수들을 만든다.
 2. 정적 검사를 수행한다.
 3. 변수를 직접 참조하던 부분을 모두 적절한 캡슐화 함수 호출로 바꾼다. 하나씩 바꿀 때마다 테스트 한다
-4. 변수의 접근 범위를 제한한다
-    
-    → 변수로의 직접 접근을 막을 수 없을 때도 있다. 그럴 때는 변수 이름을 바꿔서 테스트해보면 해당 변수를 참조하는 곳을 쉽게 찾아낼 수 있다
-    
+4. 변수의 접근 범위를 제한한다 
+   1. 변수로의 직접 접근을 막을 수 없을 때도 있다. 그럴 때는 변수 이름을 바꿔서 테스트해보면 해당 변수를 참조하는 곳을 쉽게 찾아낼 수 있다    
 5. 테스트한다
 6. 변수 값이 레코드라면 레코드 캡슐활하기를 적용할지 고려해본다
 
 ### 예시
 
 ```js
-let defaultOwner = {firstName: "마틴", lastName: "파울러"};
+let defaultOwner = { firstName: "마틴", lastName: "파울러" };
 //참조하는 코드
 spaceship.owner = defaultOwner;
-
 //갱신하는 코드
-defaultOwner = {firstName: "레베카", lastName: "파슨스"};
+defaultOwner = { firstName: "레베카", lastName: "파슨스" };
+```
 
-//데이터를 읽고 쓰는 함수 정의
-function defaultOwner() {return defaultOwnerData;}
-function setDefaultOwner(arg) {defaultOwnerData = arg;}
+1. 데이터를 읽고 쓰는 함수를 정의한다.
 
-//getter, setter로 호출부 변경
+```js
+function defaultOwner() { return defaultOwnerData; }
+function setDefaultOwner(arg) { defaultOwnerData = arg; }
+```
+
+2. getter, setter 로 호출부를 변경한다.
+
+```js
 spaceship.owner = defaultOwner();
-setDefaultOwner({firstName: "레베카", lastName: "파슨스"});
+setDefaultOwner({ firstName: "레베카", lastName: "파슨스" });
+```
 
-//가시범위 제한
-let defaultOwnerData = {firstName: "마틴", lastName: "파울러"};
-export function defaultOwner() {return defaultOwnerData;}
-export function setDefaultOwner(arg) {defaultOwnerData = arg;}
+3. 가시범위를 제한한다.
 
-//값 캡슐화하기
+```js
+let defaultOwnerData = { firstName: "마틴", lastName: "파울러" };
+export function defaultOwner() { return defaultOwnerData; }
+export function setDefaultOwner(arg) { defaultOwnerData = arg; }
+```
+
+4. 값을 갭슐화한다.
+
+```js
 const owner1 = defaultOwner();
 assert("파울러", owner1.lastName, "처음 값 확인");
 const owner2 = defaultOwner();
 owner2.lastName = "파슨스";
 assert.equal("파슨스", owner1.lastName, "owner2를 변경한 후"); //성공할까? 
 console.log(defaultOwner())
+```
 
-//게터가 데이터의 복제본을 반환하도록 함수 수정
-export function defaultOwner() {return Object.assign({},defaultOwnerData);}
+5. 게터가 데이터의 복제본을 반환하도록 함수 수정한다.
+
+```js
+export function defaultOwner() { return Object.assign({},defaultOwnerData); }
 
 //레코드 캡슐화하기
 class Person {
@@ -104,11 +116,11 @@ class Person {
 
 복제본 만들기와 클래스로 감싸는 방식은 레코드 구조에서 깊이가 1인 속성들까지만 효과가 있다. 더 깊이 들어가면 복제본과 객체 래핑 단계가 더 늘어나게 된다
 
-### 결론
+데이터 캡슐화의 구체적인 대상과 방법은 캡슐화할 데이터를 사용하는 방식과 그 데이터를 어떻게 변경하려는 지에 따라 달라진다. 
 
-데이터 캡슐화의 구체적인 대상과 방법은 캡슐화할 데이터를 사용하는 방식과 그 데이터를 어떻게 변경하려는 지에 따라 달라진다. 하지만 분명한 사실은  데이터의 사용 범위가 넓을수록 적절히 캡슐화하는 게 좋다는 것이다.
+하지만 분명한 사실은  데이터의 사용 범위가 넓을수록 적절히 캡슐화하는 게 좋다는 것이다.
 
-## 6.7 변수 이름 바꾸기 Rename Variable
+## 변수 이름 바꾸기 Rename Variable
 
 ### 절차
 
