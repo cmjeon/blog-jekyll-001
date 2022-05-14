@@ -38,7 +38,7 @@ Key 와 Value 로 이루어진 가벼운 포맷
 json 은 직렬화와 역직렬화가 핵심임
 
 object - stringify -> string
-object <- parse - string
+string - parse -> object
 
 ### Object to JSON
 
@@ -104,7 +104,6 @@ const obj2 =JSON.parse(json, (key, value) => {
 });
 
 console.log(obj2.birthDate.getDate()); // 정상 : key 가 birthDate 인 경우 Date 객체를 생성하였음
-
 ```
 
 ## 더 공부할 수 있는 사이트
