@@ -17,7 +17,7 @@ tags:
 
 함수 구성과 이름 짓기는 가장 기본적인 저수준 리팩터링이다. 일단 함수를 만들고 나면 다시 고수준으로 묶어야 한다.
 
-## 함수 추출하기 Extract Function
+## 6.1 함수 추출하기 Extract Function
 
 ```js
 // ASIS
@@ -85,7 +85,7 @@ function reverse() {
 6. 테스트한다.
 7. 다른 코드에 방금 추출한 것과 똑같거나 비슷한 코드가 없는지 살핀다. 있다면 방금 추출한 새 함수를 호출하도록 바꿀지 검토한다.
 
-#### 예시: 지역 변수의 값을 변경할 때
+### 예시: 지역 변수의 값을 변경할 때
 
 ```js
 // ASIS
@@ -114,7 +114,7 @@ function calculateOutstanding(invoice) {
 }
 ```
 
-## 함수 인라인하기 Inline Function
+## 6.2 함수 인라인하기 Inline Function
 
 ```js
 // ASIS
@@ -172,7 +172,7 @@ function reportLines(aCustomer) {
 }
 ```
 
-## 변수 추출하기 Extract Variable
+## 6.3 변수 추출하기 Extract Variable
 
 ```js
 // ASIS
@@ -257,7 +257,7 @@ class Order {
 
 객체는 특정 로직과 데이터를 외부에 공유하려할 때 정보를 설명해주는 문맥이 되어줄 수 있는 장점이 있다.
 
-## 변수 인라인하기 Inline Variable
+## 6.4 변수 인라인하기 Inline Variable
 
 ```js
 // ASIS
@@ -282,7 +282,7 @@ return anOrder.basePrice > 1000;
 6. 변수 선언문과 대입문을 지운다.
 7. 테스트한다.
 
-## 함수 선언 바꾸기 Change Function Declaration
+## 6.5 함수 선언 바꾸기 Change Function Declaration
 
 ```js
 // ASIS
