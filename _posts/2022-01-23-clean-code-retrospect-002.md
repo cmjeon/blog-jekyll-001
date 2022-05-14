@@ -1,10 +1,11 @@
 ---
 layout: single
-title: 클린코드 스터디 리뷰 - 002
+title: 클린코드 스터디 회고 - 002
 categories: 
   - bookstudy - cleancode
 tags: 
   - cleancode
+  - retrospect
 ---
 
 # 클린코드 리뷰 - 002
