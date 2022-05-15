@@ -1,10 +1,10 @@
 ---
 layout: single
 title: 리팩토링2 스터디 - 006 - 2
-categories: 
-  - bookstudy - refactoring2
-tags: 
-  - refactoring2
+categories:
+- bookstudy - refactoring2
+  tags:
+- refactoring2
 ---
 
 # 6장 기본적인 리팩터링
@@ -45,8 +45,8 @@ export function setDefaultOwner(arg) { defaultOwnerData = arg; }
 1. 변수로의 접근과 갱신을 전담하는 캡슐화 함수들을 만든다.
 2. 정적 검사를 수행한다.
 3. 변수를 직접 참조하던 부분을 모두 적절한 캡슐화 함수 호출로 바꾼다. 하나씩 바꿀 때마다 테스트 한다
-4. 변수의 접근 범위를 제한한다 
-   1. 변수로의 직접 접근을 막을 수 없을 때도 있다. 그럴 때는 변수 이름을 바꿔서 테스트해보면 해당 변수를 참조하는 곳을 쉽게 찾아낼 수 있다    
+4. 변수의 접근 범위를 제한한다
+  1. 변수로의 직접 접근을 막을 수 없을 때도 있다. 그럴 때는 변수 이름을 바꿔서 테스트해보면 해당 변수를 참조하는 곳을 쉽게 찾아낼 수 있다
 5. 테스트한다
 6. 변수 값이 레코드라면 레코드 캡슐활하기를 적용할지 고려해본다
 
@@ -104,7 +104,7 @@ class Person {
     this._lastName = data.lastName;
     this._firstName = data.firstName;
   }
-  
+
   get lastName() { return this._lastName; }
   get firstName() { return this._firstName; }
 }
@@ -116,7 +116,7 @@ class Person {
 
 복제본 만들기와 클래스로 감싸는 방식은 레코드 구조에서 깊이가 1인 속성들까지만 효과가 있다. 더 깊이 들어가면 복제본과 객체 래핑 단계가 더 늘어나게 된다
 
-데이터 캡슐화의 구체적인 대상과 방법은 캡슐화할 데이터를 사용하는 방식과 그 데이터를 어떻게 변경하려는 지에 따라 달라진다. 
+데이터 캡슐화의 구체적인 대상과 방법은 캡슐화할 데이터를 사용하는 방식과 그 데이터를 어떻게 변경하려는 지에 따라 달라진다.
 
 하지만 분명한 사실은  데이터의 사용 범위가 넓을수록 적절히 캡슐화하는 게 좋다는 것이다.
 
@@ -126,8 +126,8 @@ class Person {
 
 1. 폭넓게 쓰이는 변수라면 변수 캡슐화하기를 고려한다
 2. 이름을 바꿀 변수를 참조하는 곳을 모두 찾아서, 하나씩 변경한다
-	1. 다른 코드베이스에서 참조하는 변수는 외부에 공개된 변수이므로 이 리팩토링을 적용할 수 없다
-	2. 변수 값이 변하지 않는다면 다른 이름으로 복제본을 만들어서 하나씩 점진적으로 변경한다. 하나씩 바꿀 때마다 테스트한다
+  1. 다른 코드베이스에서 참조하는 변수는 외부에 공개된 변수이므로 이 리팩토링을 적용할 수 없다
+  2. 변수 값이 변하지 않는다면 다른 이름으로 복제본을 만들어서 하나씩 점진적으로 변경한다. 하나씩 바꿀 때마다 테스트한다
 3. 테스트한다
 
 ### 예시1
@@ -146,17 +146,17 @@ tpHd = obj['articleTitle'];
 result += `<h1>${title()}</h1>`;
 setTitle(obj['articleTitle']);
 
-function title() { return tpHd; }; 
+function title() { return tpHd; };
 function setTitle(arg) { tpHd = arg; }
 
 // Step 2 변수이름 변경
 let _title = "untitled"
 
-function title() { return _title; }; 
+function title() { return _title; };
 function setTitle(arg) { _title = arg; }
 ```
 
-변수를 읽기도하고 수정도 하는 경우 
+변수를 읽기도하고 수정도 하는 경우
 
 1. 변수 캡슐화 하기
 2. 게터, 세터를 만들어서 읽기 쓰기를 함수로 사용하도록 변경한다
@@ -192,8 +192,8 @@ const cpyNm = companyName;
 ### 절차
 
 1. 적당한 데이터 구조가 아직 마련되어 있지 않다면 새로 만든다
-    1. 클래스로 만들면 동작까지 함께 묶기 좋아진다
-    2. 데이터 구조를 값 객체(Value Object)로 만든다
+  1. 클래스로 만들면 동작까지 함께 묶기 좋아진다
+  2. 데이터 구조를 값 객체(Value Object)로 만든다
 2. 테스트한다
 3. 함수 선언 바꾸기로 새 데이터 구조를 매개변수로 추가한다
 4. 테스트한다
@@ -285,7 +285,7 @@ class NumberRange {
   }
   get min() { return this._data.min; }
   get max() { return this._data.max; }
-   
+
   contain(arg) {
     return (arg >= this.min || arg <= this.max);
   };
@@ -319,9 +319,9 @@ class NumberRange {
 ### 절차
 
 1. 함수들이 공유하는 공통 데이터 레코드를 캡슐화한다.
-    1. 공통 데이터가 레코드 구조로 묶여 있지 않다면 먼저 매개변수 객체 만들기로 데이터를 하나로 묶는 레코드를 만든다.
+  1. 공통 데이터가 레코드 구조로 묶여 있지 않다면 먼저 매개변수 객체 만들기로 데이터를 하나로 묶는 레코드를 만든다.
 2. 공통 레코드를 사용하는 함수 각각을 새 클래스로 옮긴다
-    1. 공통 레코드의 멤버는 함수 호출문의 인수 목록에서 제거한다.
+  1. 공통 레코드의 멤버는 함수 호출문의 인수 목록에서 제거한다.
 3. 데이터를 조작하는 로직들은 함수로 추출해서 새 클래스로 옮긴다
 
 ### 예시
@@ -439,7 +439,7 @@ class Reading {
   get year() {return this._year;}
 
   get baseCharge() {
-   return baseRate(this.month, this.year) * this.quantity;
+    return baseRate(this.month, this.year) * this.quantity;
   }
   get taxableCharge() {
     return Math.max(0, this.baseCharge - taxThreshold(this.year))
@@ -463,9 +463,9 @@ const taxableCharge = aReading.taxableCharge;
 ### 절차
 
 1. 변환할 레코드를 입력받아서 값을 그대로 반환하는 함수를 만든다
-    1. 이 작업은 대체로 깊은 복사로 처리해야 한다. 변환 함수가 원본 레코드를 바꾸지 않는지 검사하는 테스트를 마련해두면 도움이 될 때가 많다
+  1. 이 작업은 대체로 깊은 복사로 처리해야 한다. 변환 함수가 원본 레코드를 바꾸지 않는지 검사하는 테스트를 마련해두면 도움이 될 때가 많다
 2. 묶을 함수 중 함수 하나를 골라서 본문 코드를 변환 함수로 옮기고, 처리 결과를 레코드에 새 필드로 기록한다. 그런 다음 클라이언트 코드가 이 필드를 사용하도록 수정한다.
-    1. 로직이 복잡하면 함수 추출하기부터 한다
+  1. 로직이 복잡하면 함수 추출하기부터 한다
 3. 테스트한다.
 4. 나머지 관련 함수도 위 과정을 따라 처리한다.
 
@@ -518,7 +518,7 @@ const basicChargeAmount = calculateBaseCharge(aReading);
 function enrichReading(original) {
   const result = _.cloneDeep(original);
   result.baseCharge = calculateBaseCharge(result);
-  return result;   
+  return result;
 }
 // Step3 함수를 사용하던 클라이언트가 부가 정보를 담은 필드를 사용하도록 수정
 // 클라이언트 3
@@ -548,7 +548,7 @@ function enrichReading(original) {
   const result = _.cloneDeep(original);
   result.baseCharge = calculateBaseCharge(result);
   result.taxableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
-  return result;   
+  return result;
 }
 // Step 6 계산 코드를 변환 함수로 옮겨서 새로 만든 필드를 사용하여 원본 코드 수정
 const rawReading = acquireReading();
@@ -579,10 +579,10 @@ const taxableCharge = aReading.taxableCharge;
 3. 중간 데이터 구조를 만들어서 앞에서 추출한 함수의 인수로 추가한다.
 4. 테스트한다.
 5. 추출한 두 번째 단계 함수의 매개변수를 하나씩 검토한다. 그중 첫 번째 단계에서 사용되는 것은 중간 데이터 구조로 옮긴다. 하나씩 옮길 때마다 테스트한다.
-    1. 간혹 두 번째 단계에서 사용하면 안 되는 매개변수가 있다. 
-    2. 이럴 때는 각 매개변수를 사용한 결과를 중간 데이터 구조의 필드로 추출하고, 이 필드의 값을 설정하는 문장을 호출한 곳으로 옮긴다.
+  1. 간혹 두 번째 단계에서 사용하면 안 되는 매개변수가 있다.
+  2. 이럴 때는 각 매개변수를 사용한 결과를 중간 데이터 구조의 필드로 추출하고, 이 필드의 값을 설정하는 문장을 호출한 곳으로 옮긴다.
 6. 첫 번째 단계 코드를 함수로 추출하면서 중간 데이터 구조를 반환하도록 만든다.
-    1. 이때 첫 번째 단계를 변환기 Transformer 객체로 추출해도 좋다.
+  1. 이때 첫 번째 단계를 변환기 Transformer 객체로 추출해도 좋다.
 
 ### 예시1
 
@@ -746,27 +746,32 @@ JSON 파일에 담긴 주문의 개수를 세는 자바 프로그램
 ```java
 // 예시 2 명령줄 프로그램 쪼개기(자바) JSON 파일에 담긴 주문의 개수를 세는 자바 프로그램
 public static void main(String[] args) {
-   try {
-      if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-      String filename = args[args.length - 1];
-      File input = Paths.get(filename).toFile();
-      ObjectMapper mapper = new ObjectMapper();
-      Order[] orders = mapper.readValue(input, Order[].class);
-      if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-         System.out.println(Stream.of(orders)
-               .filter(o -> "ready".equals(o.status))
-               .count());
+  try {
+    if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+    String filename = args[args.length - 1];
+    File input = Paths.get(filename).toFile();
+    ObjectMapper mapper = new ObjectMapper();
+    Order[] orders = mapper.readValue(input, Order[].class);
+    if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+      System.out.println(Stream.of(orders)
+        .filter(o -> "ready".equals(o.status))
+        .count());
       else 
-         System.out.println(orders.length);
-   } catch (Exception e) {
-      System.err.println(e);
-      System.exit(1);
-   }
+        System.out.println(orders.length);
+  } catch (Exception e) {
+    System.err.println(e);
+    System.exit(1);
+  }
 }
-// 위 코드는 두 가지 일을 한다.
-// 하나 주문 목록을 읽어서 개수를 센다.
-// 둘 명령줄 인수를 담은 배열을 읽어서 프로그램 동작을 결정한다.
-// 이 두 가지 일을 분리하면 프로그램에 지정할 수 있는 옵션이나 스위치가 늘어나도 코드를 수정하기 쉽다.
+```
+
+위 코드는 두 가지 일을 한다.
+
+하나 주문 목록을 읽어서 개수를 센다.
+
+둘 명령줄 인수를 담은 배열을 읽어서 프로그램 동작을 결정한다.
+
+이 두 가지 일을 분리하면 프로그램에 지정할 수 있는 옵션이나 스위치가 늘어나도 코드를 수정하기 쉽다.
 
 // Step 1 자바로 작성된 명령줄 프로그램을 테스트하기 어려움, 과정이 느리고 복잡
 // 일반적인 JUnit 호출로 자바 프로세스 하나에서 테스트 할 수 있는 상태로 만든다.
@@ -788,9 +793,9 @@ static void run(String[] args) throws IOException {
   Order[] orders = mapper.readValue(input, Order[].class);
   if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
     System.out.println(Stream.of(orders)
-        .filter(o -> "ready".equals(o.status))
-        .count());
-  else 
+      .filter(o -> "ready".equals(o.status))
+      .count());
+  else
     System.out.println(orders.length);
 }
 
@@ -800,59 +805,59 @@ static void run(String[] args) throws IOException {
 // 험블 객체 패턴(Humble Object Pattern)
 // 단, 여기서는 객체가 아니라 main() 메서드에 적용
 public static void main(String[] args) {
-  try {
-    System.out.println(run(args))
-  } catch (Exception e) {
-    System.err.println(e);
-    System.exit(1);
-  }
+try {
+System.out.println(run(args))
+} catch (Exception e) {
+System.err.println(e);
+System.exit(1);
+}
 }
 
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  String filename = args[args.length -1];
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+String filename = args[args.length -1];
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 // Step 3 두 번째 단계에 해당하는 코드를 독립된 함수로 추출
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  String filename = args[args.length -1];
-  return countOrders(args, filename);
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+String filename = args[args.length -1];
+return countOrders(args, filename);
 }
 
 private static long countOrders(String[] args, String filename) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 // Step 4 중간 데이터 구조 추가
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine commandLine = new CommandLine();
-  String filename = args[args.length -1];
-  return countOrders(commandLine, args, filename);
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine commandLine = new CommandLine();
+String filename = args[args.length -1];
+return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (Stream.of(args).anyMatch(arg -> "-r".equals(arg)))
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {}
@@ -860,150 +865,150 @@ private static class CommandLine {}
 // Step 5 countOrders로 전달되는 인수를 확인, args는 첫 번째 단계에서 사용하기 떄문에 두 번째 단계까지 올 필요가 없다.
 // args를 사용하는 부분을 찾아서 그 결과를 추출한다
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine commandLine = new CommandLine();
-  String filename = args[args.length -1];
-  return countOrders(commandLine, args, filename);
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine commandLine = new CommandLine();
+String filename = args[args.length -1];
+return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  boolean onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-  if (onlyCountReady)
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+boolean onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+if (onlyCountReady)
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {}
 
 // Step 6 중간 데이터 구조로 옮긴다
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine commandLine = new CommandLine();
-  String filename = args[args.length -1];
-  return countOrders(commandLine, args, filename);
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine commandLine = new CommandLine();
+String filename = args[args.length -1];
+return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-  if (commandLine.onlyCountReady)
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+if (commandLine.onlyCountReady)
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {
-  boolean onlyCountReady;
+boolean onlyCountReady;
 }
 
 // Step 7 onlyCountReady에 값을 설정하는 문장을 호출한 곳으로 옮긴다
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine commandLine = new CommandLine();
-  String filename = args[args.length -1];
-  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-  return countOrders(commandLine, args, filename);
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine commandLine = new CommandLine();
+String filename = args[args.length -1];
+commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+return countOrders(commandLine, args, filename);
 }
 
 private static long countOrders(CommandLine commandLine, String[] args, String filename) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (commandLine.onlyCountReady)
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (commandLine.onlyCountReady)
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {
-  boolean onlyCountReady;
+boolean onlyCountReady;
 }
 
 // Step 8 filename 매개변수를 중간 데이터 구조인 CommandLine에 옮긴다.
 static long run(String[] args) throws IOException {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine commandLine = new CommandLine();
-  commandLine.filename = args[args.length -1];
-  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-  return countOrders(commandLine);
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine commandLine = new CommandLine();
+commandLine.filename = args[args.length -1];
+commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+return countOrders(commandLine);
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (commandLine.onlyCountReady)
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (commandLine.onlyCountReady)
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {
-  boolean onlyCountReady;
-  String filename
+boolean onlyCountReady;
+String filename
 }
 
 // Step 9 첫번째 코드를 메서드로 추출한다
 static long run(String[] args) throws IOException {
-  CommandLine commandLine = parseCommandLine(args)
-  return countOrders(commandLine);
+CommandLine commandLine = parseCommandLine(args)
+return countOrders(commandLine);
 }
 
 private static CommandLine parseCommandLine(String[] args) {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine commandLine = new CommandLine();
-  commandLine.filename = args[args.length -1];
-  commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-  return commandLine
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine commandLine = new CommandLine();
+commandLine.filename = args[args.length -1];
+commandLine.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+return commandLine
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (commandLine.onlyCountReady)
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (commandLine.onlyCountReady)
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {
-  boolean onlyCountReady;
-  String filename
+boolean onlyCountReady;
+String filename
 }
 
 // Step 10 이름 바꾸기 인라인하기 적용
 static long run(String[] args) throws IOException {
-  return countOrders(parseCommandLine(args));
+return countOrders(parseCommandLine(args));
 }
 
 private static CommandLine parseCommandLine(String[] args) {
-  if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
-  CommandLine result = new CommandLine();
-  result.filename = args[args.length -1];
-  result.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
-  return result
+if (args.length == 0) throw new RuntimeException("파일명을 입력하세요.");
+CommandLine result = new CommandLine();
+result.filename = args[args.length -1];
+result.onlyCountReady = Stream.of(args).anyMatch(arg -> "-r".equals(arg));
+return result
 }
 
 private static long countOrders(CommandLine commandLine) throws IOException {
-  File input = Paths.get(filename).toFile();
-  ObjectMapper mapper = new ObjectMapper();
-  Order[] orders = mapper.readValue(input, Order[].class);
-  if (commandLine.onlyCountReady)
-    return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
-  else 
-    return orders.length;
+File input = Paths.get(filename).toFile();
+ObjectMapper mapper = new ObjectMapper();
+Order[] orders = mapper.readValue(input, Order[].class);
+if (commandLine.onlyCountReady)
+return Stream.of(orders).filter(o -> "ready".equals(o.status)).count();
+else
+return orders.length;
 }
 
 private static class CommandLine {
-  boolean onlyCountReady;
-  String filename
+boolean onlyCountReady;
+String filename
 }
 ```
 
