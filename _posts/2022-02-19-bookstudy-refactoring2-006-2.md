@@ -9,7 +9,7 @@ categories:
 
 # 6장 기본적인 리팩터링
 
-## 변수 캡슐화하기 Encapsulate Variable
+## 6.6 변수 캡슐화하기 Encapsulate Variable
 
 ```js
 // ASIS
@@ -53,36 +53,49 @@ export function setDefaultOwner(arg) { defaultOwnerData = arg; }
 ### 예시
 
 ```js
+// defaultOwner.js
 let defaultOwner = { firstName: "마틴", lastName: "파울러" };
+
 //참조하는 코드
 spaceship.owner = defaultOwner;
+
 //갱신하는 코드
 defaultOwner = { firstName: "레베카", lastName: "파슨스" };
 ```
 
 1. 데이터를 읽고 쓰는 함수를 정의한다.
-
+  
 ```js
-function defaultOwner() { return defaultOwnerData; }
-function setDefaultOwner(arg) { defaultOwnerData = arg; }
+function defaultOwner() { return defaultOwnerData; } // here
+function setDefaultOwner(arg) { defaultOwnerData = arg; } // here
 ```
 
 2. getter, setter 로 호출부를 변경한다.
 
 ```js
-spaceship.owner = defaultOwner();
-setDefaultOwner({ firstName: "레베카", lastName: "파슨스" });
+spaceship.owner = getDefaultOwner(); // here       
+setDefaultOwner({ firstName: "레베카", lastName: "파슨스" }); // here
 ```
 
 3. 가시범위를 제한한다.
 
 ```js
+// defaultOwner.js
 let defaultOwnerData = { firstName: "마틴", lastName: "파울러" };
-export function defaultOwner() { return defaultOwnerData; }
+export function getDefaultOwner() { return defaultOwnerData; } // here
+export function setDefaultOwner(arg) { defaultOwnerData = arg; } // here
+```
+
+4. 필자는 게터앞에 get 을 붙이는 것을 싫어해서 get 을 제거한다고 한다.
+
+```js
+// defaultOwner.js
+let defaultOwnerData = { firstName: "마틴", lastName: "파울러" };
+export function defaultOwner() { return defaultOwnerData; } // here
 export function setDefaultOwner(arg) { defaultOwnerData = arg; }
 ```
 
-4. 값을 갭슐화한다.
+5. 값을 갭슐화한다.
 
 ```js
 const owner1 = defaultOwner();
@@ -93,12 +106,30 @@ assert.equal("파슨스", owner1.lastName, "owner2를 변경한 후"); //성공�
 console.log(defaultOwner())
 ```
 
-5. 게터가 데이터의 복제본을 반환하도록 함수 수정한다.
+6. 게터가 데이터의 복제본을 반환하도록 함수 수정한다.
 
 ```js
-export function defaultOwner() { return Object.assign({},defaultOwnerData); }
+// defaultOwner.js
+let defaultOwnerData = { firstName: "마틴", lastName: "파울러" };
+export function defaultOwner() { 
+  return Object.assign({}, defaultOwnerData); // here
+}
+export function setDefaultOwner(arg) {
+  defaultOwnerData = arg;
+}
+````
 
-//레코드 캡슐화하기
+7. 하지만 공유 데이터를 변경하기를 원하는 경우를 위해 레코드 캡슐화하기를 수행한다.
+  
+```js
+let defaultOwnerData = { firstName: "마틴", lastName: "파울러" };
+export function defaultOwner() {
+  return new Person(defaultOwnerData); // here
+}
+export function setDefaultOwner(arg) {
+  defaultOwnerData = arg;
+}
+
 class Person {
   constructor(data) {
     this._lastName = data.lastName;
@@ -120,7 +151,7 @@ class Person {
 
 하지만 분명한 사실은  데이터의 사용 범위가 넓을수록 적절히 캡슐화하는 게 좋다는 것이다.
 
-## 변수 이름 바꾸기 Rename Variable
+## 6.7 변수 이름 바꾸기 Rename Variable
 
 ### 절차
 
