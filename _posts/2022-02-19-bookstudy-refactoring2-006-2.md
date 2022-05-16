@@ -230,6 +230,18 @@ const cpyNm = companyName;
 
 ## 6.8 매개변수 객체 만들기 Introduce Parameter Object
 
+```js
+// ASIS
+function amountInvoiced(startDate, endDate) { ... }
+function amountReceived(startDate, endDate) { ... }
+function amountOverdue(startDate, endDate) { ... }
+
+// TOBE
+function amountInvoiced(aDateRange) { ... }
+function amountReceived(aDateRange) { ... }
+function amountOverdue(aDateRange) { ... }
+```
+
 ### 배경
 
 데이터 뭉치를 데이터 구조로 묶으면 데이터 사이의 관계가 명확해진다는 이점이 있다.
@@ -252,11 +264,9 @@ const cpyNm = companyName;
 
 ### 예시
 
-온도 측정값 배열에서 정상 작동 범위를 벗어난 것이 있는지 검사하는 코드
+온도 측정값 배열에서 정상 작동 범위를 벗어난 것이 있는지 검사하는 코드이다.
 
 ```js
-// 예시
-// ASIS
 const station = {
   name: "ZB1",
   readings: [
@@ -267,23 +277,21 @@ const station = {
     { temp: 51, time: "2016-11-10 09:50" },
   ]
 };
+```
 
+다음은 정상 범위를 벗어난 측정값을 찾는 함수이다.ㄴ
+
+```js
 function readingsOutsideRange(station, min, max) {
   return station.readings.filter(r => r.temp < min || r.temp > max);
 }
-
+// 호출문
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling);
 ```
 
 1. 먼저 묶은 데이터를 표현하는 클래스 선언
-2. 새로만든 객체를 readingsOutsideRange()함수 선언문에 추가
-3. 새로운 객체 생성 후 호출 문에 추가
-4. readingsOutsideRange 함수 선언문에서 min, max 변수를 객체로 전환
-5. 호출문도 변경
 
 ```js
-/ TOBE
-// Step 1 묶은 데이터를 표현하는 클래스 선언
 class NumberRange {
   constructor(min, max) {
     this._data = {min: min, max: max};
@@ -291,26 +299,38 @@ class NumberRange {
   get min() { return this._data.min; }
   get max() { return this._data.max; }
 }
+```
 
-// Step 2 readingOutsideRange() 매개변수에 객체 추가
+2. 새로만든 객체를 readingsOutsideRange()함수 선언문에 추가하고 호출부에서는 null 을 넣어둔다.
+
+```js
 function readingOutsideRange(station, min, max, range) {
   return station.readings.filter(r => r.temp < min || r.temp > max);
 }
 
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling, null);
+```
 
-// Step 3 호출문 변경
+3. 온도 범위를 객체 형태로 전달하도록 호출문을 바꾼다.
+
+```js
 const range = new NumberRange(operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling);
+
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling, range);
 
-// Step 4 매개변수 max 변경
+4. readingsOutsideRange 함수 선언문에서 max 변수를 객체로 전환
+
+```js
 function readingOutsideRange(station, min, range) {
-  return station.readings.filter(r => r.temp < min || r.temp > range.max);
+return station.readings.filter(r => r.temp < min || r.temp > range.max);
 }
 
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, range);
+```
 
-// Step 5 매개변수 min 변경
+5. min 변수를 객체로 전환
+
+```js
 function readingOutsideRange(station, range) {
   return station.readings.filter(r => r.temp < range.min || r.temp > range.max);
 }
@@ -327,18 +347,13 @@ alerts = readingsOutsideRange(station, range);
 위에 예에서 온도가 허용 범위 안에 있는지 검사하는 메서드를 클래스에 추가할 수 있다.
 
 ```js
-// Step 6 허용범위 메서드 추가
-class NumberRange {
-  constructor(min, max) {
-    this._data = { min: min, max: max };
-  }
-  get min() { return this._data.min; }
-  get max() { return this._data.max; }
-
-  contain(arg) {
-    return (arg >= this.min || arg <= this.max);
-  };
+function readingsOutsideRange(station, range) {
+  return station.readings
+    .filter(r => !range.contains(r.temp));
 }
+
+// NumberRange 클래스
+contains(arg) { return (arg >= this.min && arg <= this.max); }
 ```
 
 코드에 범위 개념이 필요하면 최댓값과 최솟값 쌍을 사용하는 코드를 범위 객체로 바꾸자.
