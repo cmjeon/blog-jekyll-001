@@ -317,6 +317,7 @@ alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operating
 const range = new NumberRange(operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling);
 
 alerts = readingsOutsideRange(station, operatingPlan.temperatureFloor, operatingPlan.temperatureCeiling, range);
+```
 
 4. readingsOutsideRange 함수 선언문에서 max 변수를 객체로 전환
 
