@@ -393,15 +393,8 @@ contains(arg) { return (arg >= this.min && arg <= this.max); }
 
 정부에서 차 tea 를 제공하는 예
 
-1. 레코드를 클래스로 변환하기 위해 레코드를 캡슐화한다
-2. 이미 만들어져 있는 calculateBaseCharge 함수를 옮긴다.
-3. 함수의 이름을 변경한다 → baseCharge
-4. 세금을 부과할 소비량을 계산하는 코드를 함수로 추출한다
-5. 세금 계산 함수를 Reading 클래스로 옮긴다.
-
 ```js
-// 예시 정부에서 차를 수돗물처럼 제공하는 예
-reading = {customer: "ivan", quantity: 10, month: 5, year: 2017};
+reading = { customer: "ivan", quantity: 10, month: 5, year: 2017 };
 
 // 클라이언트 1
 const aReading = acquireReading();
@@ -419,8 +412,11 @@ const basicChargeAmount = calculateBaseCharge(aReading);
 function calculateBaseCharge(aReading) {
   return baseRate(aReading.month, aReading.year) * aReading.quantity;
 }
+```
 
-// Step 1 레코드를 클래스로 변환하기 위해 레코드 캡슐화
+1. 레코드를 클래스로 변환하기 위해 레코드를 캡슐화한다
+
+```js
 class Reading {
   constructor(data) {
     this._customer = data.customer;
@@ -434,32 +430,81 @@ class Reading {
   get month() { return this._month; }
   get year() { return this._year; }
 }
+```
 
-// Step 2 calculateBaseCharge() 옮기기
-const rawReading = acquireReading();
-const aReading = new Reading(rawReading);
+2. 이미 만들어져 있는 calculateBaseCharge 함수를 새로 만든 클래스로 옮긴다.
+
+```js
+const rawReading = acquireReading(); // here
+const aReading = new Reading(rawReading); // here
 const basicChargeAmount = calculateBaseCharge(aReading);
 
-// Step 3 새로 만든 클래스로 calucateBaseCharge() 옮기기
 class Reading {
-  constructor(data) {
-    this._customer = data.customer;
-    this._quantity = data.quantity;
-    this._month = data.month;
-    this._year = data.year;
+
+  ...
+
+  get calculateBaseCharge() {
+    return baseRate(this.month, this.year) * this.quantity;
   }
-
-  get customer() { return this._customer; }
-  get quantity() { return this._quantity; }
-  get month() { return this._month; }
-  get year() { return this._year; }
-
-  get calculateBaseCharge() { return baseRate(this.month, this.year) * this.quantity; }
 }
 
+// 클라이언트 3
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
 const basicChargeAmount = aReading.calculateBaseCharge;
+```
+
+함수의 이름을 변경한다 calculateBaseCharge → baseCharge
+
+```js
+class Reading {
+  
+  ...
+
+  get baseCharge() { // here
+    return baseRate(this.month, this.year) * this.quantity;
+  }
+}
+
+// 클라이언트 3
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
+const basicChargeAmount = aReading.baseCharge; // here
+
+// 클라이언트 1
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
+const baeCharge = aReading.baseCharge;
+
+// 클라이언트 2
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
+const taxableCharge = MAth.max(0, aReading.baseCharge - taxThreshold(aReading.year));
+```
+
+4. 세금을 부과할 소비량을 계산하는 코드를 함수로 추출한다
+
+```js
+
+```
+
+5. 세금 계산 함수를 Reading 클래스로 옮긴다.
+
+```js
+// 예시 정부에서 차를 수돗물처럼 제공하는 예
+
+
+
+
+
+
+// Step 1 레코드를 클래스로 변환하기 위해 레코드 캡슐화
+
+
+// Step 2 calculateBaseCharge() 옮기기
+
+
+// Step 3 새로 만든 클래스로 calucateBaseCharge() 옮기기
 
 // Step 4 함수 이름 변경
 class Reading {
