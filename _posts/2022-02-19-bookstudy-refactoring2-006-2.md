@@ -435,6 +435,7 @@ class Reading {
 2. 이미 만들어져 있는 calculateBaseCharge 함수를 새로 만든 클래스로 옮긴다.
 
 ```js
+// 클라이언트 3
 const rawReading = acquireReading(); // here
 const aReading = new Reading(rawReading); // here
 const basicChargeAmount = calculateBaseCharge(aReading);
@@ -454,7 +455,7 @@ const aReading = new Reading(rawReading);
 const basicChargeAmount = aReading.calculateBaseCharge;
 ```
 
-함수의 이름을 변경한다 calculateBaseCharge → baseCharge
+3. 함수의 이름을 변경한다 calculateBaseCharge → baseCharge
 
 ```js
 class Reading {
@@ -474,89 +475,36 @@ const basicChargeAmount = aReading.baseCharge; // here
 // 클라이언트 1
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
-const baeCharge = aReading.baseCharge;
+const baeCharge = aReading.baseCharge; // here
 
 // 클라이언트 2
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
-const taxableCharge = MAth.max(0, aReading.baseCharge - taxThreshold(aReading.year));
+const taxableCharge = MAth.max(0, aReading.baseCharge - taxThreshold(aReading.year)); // here
 ```
 
 4. 세금을 부과할 소비량을 계산하는 코드를 함수로 추출한다
 
 ```js
+function taxableChargeFn(aReading) {
+  return Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
+}
 
+// 클라이언트 3
+const rawReading = acquireReading();
+const aReading = new Reading(rawReading);
+const basicChargeAmount = taxableChargeFn(aReading); // here
 ```
 
 5. 세금 계산 함수를 Reading 클래스로 옮긴다.
 
 ```js
-// 예시 정부에서 차를 수돗물처럼 제공하는 예
-
-
-
-
-
-
-// Step 1 레코드를 클래스로 변환하기 위해 레코드 캡슐화
-
-
-// Step 2 calculateBaseCharge() 옮기기
-
-
-// Step 3 새로 만든 클래스로 calucateBaseCharge() 옮기기
-
-// Step 4 함수 이름 변경
-class Reading {
-  constructor(data) {
-    this._customer = data.customer;
-    this._quantity = data.quantity;
-    this._month = data.month;
-    this._year = data.year;
-  }
-
-  get customer() {return this._customer;}
-  get quantity() {return this._quantity;}
-  get month() {return this._month;}
-  get year() {return this._year;}
-
-  get baseCharge() {
-    return baseRate(this.month, this.year) * this.quantity;
-  }
+// Reading 클래스
+get taxableCharge(aReading) {
+  return Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
 }
 
-const rawReading = acquireReading();
-const aReading = new Reading(rawReading);
-const basicChargeAmount = aReading.baseCharge;
-
-// Step 5 클라이언트 2 세금 계산하는 클라이언트 인라인
-const rawReading = acquireReading();
-const aReading = new Reading(rawReading);
-const taxableCharge = Math.max(0, aReading.baseCharge - taxThreshold(aReading.year));
-
-// Step 6 세금을 부과할 소비량을 계산하는 코드를 함수로 추출
-class Reading {
-  constructor(data) {
-    this._customer = data.customer;
-    this._quantity = data.quantity;
-    this._month = data.month;
-    this._year = data.year;
-  }
-
-  get customer() {return this._customer;}
-  get quantity() {return this._quantity;}
-  get month() {return this._month;}
-  get year() {return this._year;}
-
-  get baseCharge() {
-    return baseRate(this.month, this.year) * this.quantity;
-  }
-  get taxableCharge() {
-    return Math.max(0, this.baseCharge - taxThreshold(this.year))
-  }
-}
-
-// Step 7 클라이언트 3 수정
+// 클라이언트 3 수정
 const rawReading = acquireReading();
 const aReading = new Reading(rawReading);
 const taxableCharge = aReading.taxableCharge;
