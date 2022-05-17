@@ -111,7 +111,7 @@ result += `<h1>${getRawDataOfOrganization().name}<h1>`;
 getRawDataOfOrganization().name = newName;
 ```
 
-1. 레코드를 클래스로 변경한다.
+2. 레코드를 클래스로 변경한다.
 
 ```js
 // Organization 클래스
@@ -135,7 +135,7 @@ function getOrganization() {
 }
 ```
 
-1. 게터와 세터를 만든다.
+3. 게터와 세터를 만든다.
 
 ```js
 // Organization 클래스
@@ -148,7 +148,7 @@ get name() {
 }
 ```
 
-1. 레코드를 사용하던 코드를 모두 세터를 사용하도록 고친다.
+4. 레코드를 사용하던 코드를 모두 세터를 사용하도록 고친다.
 
 ```js
 // 클라이언트
@@ -157,7 +157,7 @@ result += `<h1>${getOrganization().name}<h1>`;
 getOrganization().name = newName;
 ```
 
-1. 임시 함수를 제거한다.
+5. 임시 함수를 제거한다.
 
 ```js
 // Organization 클래스
@@ -168,7 +168,7 @@ function getRawDataOfOrganization() {
 **/
 ```
 
-1. _data 필드를 객체 안에 바로 펼친다.
+6. _data 필드를 객체 안에 바로 펼친다.
 
 ```js
 // TOBE
@@ -254,7 +254,7 @@ function compareUsage(customerID, laterYear, month) {
 }
 ```
 
-1. 전체 데이터 구조를 표현하는 클래스를 정의하고 반환하는 함수를 만든다.
+2. 전체 데이터 구조를 표현하는 클래스를 정의하고 반환하는 함수를 만든다.
 
 ```js
 // CustomerData 클래스
@@ -278,7 +278,7 @@ function getRawDataOfCustomers() {
 }
 ```
 
-1. 데이터 구조 안으로 들어가는 코드를 세터로 뽑아내는 작업을 하고, CustomerData 클래스로 옮긴다.
+3. 데이터 구조 안으로 들어가는 코드를 세터로 뽑아내는 작업을 하고, CustomerData 클래스로 옮긴다.
 
 ```js
 // CustomerData 클래스
@@ -293,19 +293,19 @@ getCustomerData().setUsage(customerID, year, month, amount);
 덩치 큰 데이터 구조를 다룰 때는 쓰기 부분에 집중해야 한다. 캡슐화에서는 값을 수정하는 부분을 명확하게 드러내고 한 곳에 모아두는 일이 중요하다.
 
 - 쓰기 부분을 수정하고 확인하는 방법
-    1. lodash 의 cloneDeep 을 활용하여 깊은 복사
+  1. lodash 의 cloneDeep 을 활용하여 깊은 복사
     
-    ```js
-    get rawData() {
-    	return _.cloneDeep(this._data);
-    }
-    ```
-    
-    1. 데이터 구조의 읽기전용 프록시를 반환
+     ```js
+     get rawData() {
+       return _.cloneDeep(this._data);
+     }
+     ```
+     
+  2. 데이터 구조의 읽기전용 프록시를 반환
 
-읽기를 다루는 방법
+읽기를 다루는 방법도 있다.
 
-1. 읽는 코드를 모두 독립 함수로 추출하고 CustomerData 클래스로 옮긴다.
+1. 세터 때와 같은 방법이 있다. 즉, 읽는 코드를 모두 독립 함수로 추출하고 CustomerData 클래스로 옮긴다.
 
 ```js
 // CustomerData 클래스
@@ -326,7 +326,7 @@ function compareUsage(customerID, laterYear, month) {
 
 위 방법은 클래스의 모든 쓰임을 명시적인 API로 제공한다는 것이다. 하지만 읽는 패턴이 다양하면 코드량이 늘어난다.
 
-1. 클라이언트가 데이터 구조를 요청할 때 실제 데이터를 제공하는 것이다. 하지만 클라이언트가 데이터를 직접 수정하지 못하게 막을 방법이 없기 때문에 복제된 데이터를 제공한다.
+2. 클라이언트가 데이터 구조를 요청할 때 실제 데이터를 제공하지만 클라이언트가 데이터를 직접 수정하지 못하게 막을 방법이 없기 때문에 복제된 데이터를 제공하는 것이다.
 
 ```js
 // CustomerData 클래스
@@ -347,11 +347,13 @@ function compareUsage(customerID, laterYear, month) {
 
 위 방법은 간단하지만 데이터 구조가 커지면 복제비용이 커진다.
 
-1. 레코드 캡슐화를 재귀적으로 수행한다. 
-    1. 고객 정보 데이터를 클래스로 바꾼 뒤, 레코드를 다루는 코드를 ‘컬렉션 캡슐화하기’ 로 고객 정보를 다루는 클래스를 생성한다.
-    2. 자유로운 갱신을 막기위해 접근자를 만든다.
-    3. 이 방법은 데이터 구조가 거대하면 일이 상당히 커지고, 데이터 구조를 사용할 일이 없다면 효과도 별로 없다.
-    4. 클래스를 만들 때 게터는 데이터 구조를 깊이 탐색하게 만들되 객체로 감싸서 반환하는게 효과적일 수 있다.
+3. 레코드 캡슐화를 재귀적으로 수행하는 것이다.
+
+   1. 고객 정보 데이터를 클래스로 바꾼 뒤, 레코드를 다루는 코드를 ‘컬렉션 캡슐화하기’ 로 고객 정보를 다루는 클래스를 생성한다.
+   2. 자유로운 갱신을 막기위해 접근자를 만든다.
+ 
+이 방법은 데이터 구조가 거대하면 일이 상당히 커지고, 데이터 구조를 사용할 일이 없다면 효과도 별로 없다. 
+새로 만든 클래스와 게터를 잘 혼합해서 게터는 데이터 구조를 깊이 탐색하게 만들되 객체로 감싸서 반환하는게 효과적일 수 있다.
 
 ## 7.2 컬렉션 캡슐화하기 Encapsulate Collecetion
 
@@ -477,7 +479,7 @@ class Person {
 }
 ```
 
-1. 컬렉션의 변경자를 호출하던 코드를 찾아서 방금 추가한 메서드를 사용하도록 변경한다.
+2. 컬렉션의 변경자를 호출하던 코드를 찾아서 방금 추가한 메서드를 사용하도록 변경한다.
 
 ```js
 // 클라이언트
@@ -563,7 +565,7 @@ class Order {
 	}
 ```
 
-1. Priority 클래스를 만든다.
+2. Priority 클래스를 만든다.
 
 ```js
 class Priority {
@@ -581,7 +583,7 @@ class Priority {
 
 클라이언트 입장에서는 속성 자체를 받은게 아닌 속성을 문자열로 표현한 값을 요청한 것이 되기 때문이다.
 
-1. Priority 클래스를 사용하도록 접근자를 수정한다.
+3. Priority 클래스를 사용하도록 접근자를 수정한다.
 
 ```js
 // Order 클래스
@@ -593,7 +595,7 @@ set priority(aString) {
 }
 ```
 
-1. Order 클래스의 게터명을 toString 을 반환하는 것을 명시하도록 변경한다.
+4. Order 클래스의 게터명을 toString 을 반환하는 것을 명시하도록 변경한다.
 
 ```js
 // Order 클래스
@@ -776,7 +778,7 @@ get price() {
 }
 ```
 
-1. 대입문의 우변을 게터로 추출한다.
+2. 대입문의 우변을 게터로 추출한다.
 
 ```js
 // Order 클래스
@@ -794,7 +796,7 @@ get basePrice() { // here
 }
 ```
 
-1. 테스트 한 뒤 변수를 인라인 한다.
+3. 테스트 한 뒤 변수를 인라인 한다.
 
 ```js
 // Order 클래스
@@ -807,7 +809,7 @@ get price() {
 }
 ```
 
-1. discountFactor 도 같은 순서로 처리하기 위해 const 로 선언하고 테스트해본 뒤, 문제 없으면 게터로 추출한다.
+4. discountFactor 도 같은 순서로 처리하기 위해 const 로 선언하고 테스트해본 뒤, 문제 없으면 게터로 추출한다.
 
 ```js
 // Order 클래스
@@ -825,7 +827,7 @@ get discountFactor() { // here
 }
 ```
 
-1. 변수를 인라인 한다.
+5. 변수를 인라인 한다.
 
 ```js
 // Order 클래스
@@ -929,7 +931,7 @@ class TelephoneNumber {
 }
 ```
 
-1. Person 클래스의 인스턴스를 생성할 때 전화번호 인스턴스도 함께 생성한다.
+2. Person 클래스의 인스턴스를 생성할 때 전화번호 인스턴스도 함께 생성한다.
 
 ```js
 // Person 클래스
@@ -947,7 +949,7 @@ set officeAreaCode(arg) {
 
 ```
 
-1. Person 클래스의 officeAreaCode 필드를 TelephoneNumber 클래스로 옮긴다.
+3. Person 클래스의 officeAreaCode 필드를 TelephoneNumber 클래스로 옮긴다.
 
 ```js
 // Person 클래스
@@ -959,7 +961,7 @@ set officeAreaCode(arg) {
 }
 ```
 
-1. TelephoneNumber 클래스에 officeNumber 를 생성하고, Person 클래스의 officeNumber 필드를 새 클래스로 옮긴다.
+4. TelephoneNumber 클래스에 officeNumber 를 생성하고, Person 클래스의 officeNumber 필드를 새 클래스로 옮긴다.
 
 ```js
 // TelephoneNumber 클래스
@@ -979,7 +981,7 @@ set officeNumber(arg) {
 }
 ```
 
-1. 테스트 후 telephoneNumber() 메서드도 TelephoneNumber 클래스로 옮긴다.
+5. 테스트 후 telephoneNumber() 메서드도 TelephoneNumber 클래스로 옮긴다.
 
 ```js
 // TelephoneNumber 클래스
@@ -993,7 +995,7 @@ get telephoneNumber() {
 }
 ```
 
-1. 새로 만든 클래스는 전화번호를 뜻하므로 office 라는 단어를 쓸 이유가 없고, 마찬가지로 전화번호라는 뜻도 메서드 이름에 쓸 이유가 없다.
+6. 새로 만든 클래스는 전화번호를 뜻하므로 office 라는 단어를 쓸 이유가 없고, 마찬가지로 전화번호라는 뜻도 메서드 이름에 쓸 이유가 없다.
 
 ```js
 // TelephoneNumber 클래스
@@ -1025,7 +1027,7 @@ set officeNumber(arg) {
 }
 ```
 
-1. 마지막으로 사람이 읽기 좋은 포맷으로 출력하는 메소드를 추가한다.
+7. 마지막으로 사람이 읽기 좋은 포맷으로 출력하는 메소드를 추가한다.
 
 ```js
 // TelephoneNumber 클래스
