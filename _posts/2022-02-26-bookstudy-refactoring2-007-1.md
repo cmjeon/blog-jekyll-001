@@ -100,40 +100,40 @@ organization.name = newName;
 
 1. 이 상수를 임시함수로 캡슐화하고, 사용하는 코드를 그에 맞게 변경한다.
 
-```js
-function getRawDataOfOrganization() { // here
-	return organization;
-}
-
-// 클라이언트
-result += `<h1>${getRawDataOfOrganization().name}<h1>`;
-
-getRawDataOfOrganization().name = newName;
-```
+    ```js
+    function getRawDataOfOrganization() { // here
+      return organization;
+    }
+    
+    // 클라이언트
+    result += `<h1>${getRawDataOfOrganization().name}<h1>`;
+    
+    getRawDataOfOrganization().name = newName;
+    ```
 
 2. 레코드를 클래스로 변경한다.
 
-```js
-// Organization 클래스
-class Organization { // here
-	constructor(data) {
-		this._data = data;
-	}
-}
-
-const organization = new Organization({ // here
-	name: "애크미 구스베리",
-	country: "GB"
-});
-
-function getRawDataOfOrganization() {
-	return organization._data;
-}
-
-function getOrganization() {
-	return organization;
-}
-```
+    ```js
+    // Organization 클래스
+    class Organization { // here
+      constructor(data) {
+        this._data = data;
+      }
+    }
+    
+    const organization = new Organization({ // here
+      name: "애크미 구스베리",
+      country: "GB"
+    });
+    
+    function getRawDataOfOrganization() {
+      return organization._data;
+    }
+    
+    function getOrganization() {
+      return organization;
+    }
+    ```
 
 3. 게터와 세터를 만든다.
 
