@@ -87,8 +87,8 @@ class Organization {
 ```js
 // ASIS
 const organization = {
-	name: "애크미 구스베리",
-	country: "GB"
+  name: "애크미 구스베리", 
+  country: "GB"
 }
 
 // 클라이언트
@@ -137,60 +137,58 @@ organization.name = newName;
 
 3. 게터와 세터를 만든다.
 
-```js
-// Organization 클래스
-set name(name) {
-	this._data.name = name;
-}
-
-get name() {
-	return this._data.name;
-}
-```
+    ```js
+    // Organization 클래스
+    set name(name) {
+      this._data.name = name;
+    }
+    
+    get name() {
+      return this._data.name;
+    }
+    ```
 
 4. 레코드를 사용하던 코드를 모두 세터를 사용하도록 고친다.
 
-```js
-// 클라이언트
-result += `<h1>${getOrganization().name}<h1>`;
-
-getOrganization().name = newName;
-```
+    ```js
+    // 클라이언트
+    result += `<h1>${getOrganization().name}<h1>`;
+    
+    getOrganization().name = newName;
+    ```
 
 5. 임시 함수를 제거한다.
 
-```js
-// Organization 클래스
-/**
-function getRawDataOfOrganization() {
-	return organization._data;
-}
-**/
-```
+    ```js
+    // Organization 클래스
+    function getRawDataOfOrganization() { // 삭제
+      return organization._data;
+    }
+    ```
 
 6. _data 필드를 객체 안에 바로 펼친다.
 
-```js
-// TOBE
-class Organization {
-	constructor(data) {
-		this._name = data.name;
-		this._country = data.country;
-	}
-	get name() {
-		return this._name;
-	}
-	set name(name) {
-		this._name = name;
-	}
-	get country() {
-		return this._country;
-	}
-	set country(countryCode) {
-		this._name = countryCode;
-	}
-}
-```
+  ```js
+  // TOBE
+  class Organization {
+    constructor(data) {
+      this._name = data.name;
+      this._country = data.country;
+    }
+    get name() {
+      return this._name;
+    }
+    set name(name) {
+      this._name = name;
+    }
+    get country() {
+      return this._country;
+    }
+    set country(countryCode) {
+      this._name = countryCode;
+    }
+  }
+  ```
 
 ### 예시: 중첩된 레코드 캡슐화하기
 
