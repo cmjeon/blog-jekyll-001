@@ -98,97 +98,97 @@ result += `<h1>${organization.name}</h1?`;
 organization.name = newName;
 ```
 
-1. 이 상수를 임시함수로 캡슐화하고, 사용하는 코드를 그에 맞게 변경한다.
+이 상수를 임시함수로 캡슐화하고, 사용하는 코드를 그에 맞게 변경한다.
 
-    ```js
-    function getRawDataOfOrganization() { // here
-      return organization;
-    }
+```js
+function getRawDataOfOrganization() { // here
+  return organization;
+}
     
-    // 클라이언트
-    result += `<h1>${getRawDataOfOrganization().name}<h1>`;
+// 클라이언트
+result += `<h1>${getRawDataOfOrganization().name}<h1>`;
     
-    getRawDataOfOrganization().name = newName;
-    ```
+getRawDataOfOrganization().name = newName;
+```
 
-2. 레코드를 클래스로 변경한다.
+레코드를 클래스로 변경한다.
 
-    ```js
-    // Organization 클래스
-    class Organization { // here
-      constructor(data) {
-        this._data = data;
-      }
-    }
-    
-    const organization = new Organization({ // here
-      name: "애크미 구스베리",
-      country: "GB"
-    });
-    
-    function getRawDataOfOrganization() {
-      return organization._data;
-    }
-    
-    function getOrganization() {
-      return organization;
-    }
-    ```
-
-3. 게터와 세터를 만든다.
-
-    ```js
-    // Organization 클래스
-    set name(name) {
-      this._data.name = name;
-    }
-    
-    get name() {
-      return this._data.name;
-    }
-    ```
-
-4. 레코드를 사용하던 코드를 모두 세터를 사용하도록 고친다.
-
-    ```js
-    // 클라이언트
-    result += `<h1>${getOrganization().name}<h1>`;
-    
-    getOrganization().name = newName;
-    ```
-
-5. 임시 함수를 제거한다.
-
-    ```js
-    // Organization 클래스
-    function getRawDataOfOrganization() { // 삭제
-      return organization._data;
-    }
-    ```
-
-6. _data 필드를 객체 안에 바로 펼친다.
-
-  ```js
-  // TOBE
-  class Organization {
-    constructor(data) {
-      this._name = data.name;
-      this._country = data.country;
-    }
-    get name() {
-      return this._name;
-    }
-    set name(name) {
-      this._name = name;
-    }
-    get country() {
-      return this._country;
-    }
-    set country(countryCode) {
-      this._name = countryCode;
-    }
+```js
+// Organization 클래스
+class Organization { // here
+  constructor(data) {
+    this._data = data;
   }
-  ```
+}
+
+const organization = new Organization({ // here
+  name: "애크미 구스베리",
+  country: "GB"
+});
+
+function getRawDataOfOrganization() {
+  return organization._data;
+}
+
+function getOrganization() {
+  return organization;
+}
+```
+
+게터와 세터를 만든다.
+
+```js
+// Organization 클래스
+set name(name) {
+  this._data.name = name;
+}
+
+get name() {
+  return this._data.name;
+}
+```
+
+레코드를 사용하던 코드를 모두 세터를 사용하도록 고친다.
+
+```js
+// 클라이언트
+result += `<h1>${getOrganization().name}<h1>`;
+
+getOrganization().name = newName;
+```
+
+임시 함수를 제거한다.
+
+```js
+// Organization 클래스
+function getRawDataOfOrganization() { // 삭제
+  return organization._data;
+}
+```
+
+_data 필드를 객체 안에 바로 펼친다.
+
+```js
+// TOBE
+class Organization {
+  constructor(data) {
+    this._name = data.name;
+    this._country = data.country;
+  }
+  get name() {
+    return this._name;
+  }
+  set name(name) {
+    this._name = name;
+  }
+  get country() {
+    return this._country;
+  }
+  set country(countryCode) {
+    this._name = countryCode;
+  }
+}
+```
 
 ### 예시: 중첩된 레코드 캡슐화하기
 
@@ -227,7 +227,7 @@ function compareUsage(customerID, lateYear, month) {
 }
 ```
 
-1. 변수 캡슐화를 시작한다.
+변수 캡슐화를 시작한다.
 
 ```js
 // 최상위
@@ -252,7 +252,7 @@ function compareUsage(customerID, laterYear, month) {
 }
 ```
 
-2. 전체 데이터 구조를 표현하는 클래스를 정의하고 반환하는 함수를 만든다.
+전체 데이터 구조를 표현하는 클래스를 정의하고 반환하는 함수를 만든다.
 
 ```js
 // CustomerData 클래스
@@ -276,7 +276,7 @@ function getRawDataOfCustomers() {
 }
 ```
 
-3. 데이터 구조 안으로 들어가는 코드를 세터로 뽑아내는 작업을 하고, CustomerData 클래스로 옮긴다.
+데이터 구조 안으로 들어가는 코드를 세터로 뽑아내는 작업을 하고, CustomerData 클래스로 옮긴다.
 
 ```js
 // CustomerData 클래스
@@ -303,7 +303,7 @@ getCustomerData().setUsage(customerID, year, month, amount);
 
 읽기를 다루는 방법도 있다.
 
-1. 세터 때와 같은 방법이 있다. 즉, 읽는 코드를 모두 독립 함수로 추출하고 CustomerData 클래스로 옮긴다.
+첫번째 세터 때와 같은 방법이 있다. 즉, 읽는 코드를 모두 독립 함수로 추출하고 CustomerData 클래스로 옮긴다.
 
 ```js
 // CustomerData 클래스
@@ -324,7 +324,7 @@ function compareUsage(customerID, laterYear, month) {
 
 위 방법은 클래스의 모든 쓰임을 명시적인 API로 제공한다는 것이다. 하지만 읽는 패턴이 다양하면 코드량이 늘어난다.
 
-2. 클라이언트가 데이터 구조를 요청할 때 실제 데이터를 제공하지만 클라이언트가 데이터를 직접 수정하지 못하게 막을 방법이 없기 때문에 복제된 데이터를 제공하는 것이다.
+두번째 클라이언트가 데이터 구조를 요청할 때 실제 데이터를 제공하지만 클라이언트가 데이터를 직접 수정하지 못하게 막을 방법이 없기 때문에 복제된 데이터를 제공하는 것이다.
 
 ```js
 // CustomerData 클래스
@@ -345,7 +345,7 @@ function compareUsage(customerID, laterYear, month) {
 
 위 방법은 간단하지만 데이터 구조가 커지면 복제비용이 커진다.
 
-3. 레코드 캡슐화를 재귀적으로 수행하는 것이다.
+세번째 레코드 캡슐화를 재귀적으로 수행하는 것이다.
 
    1. 고객 정보 데이터를 클래스로 바꾼 뒤, 레코드를 다루는 코드를 ‘컬렉션 캡슐화하기’ 로 고객 정보를 다루는 클래스를 생성한다.
    2. 자유로운 갱신을 막기위해 접근자를 만든다.
