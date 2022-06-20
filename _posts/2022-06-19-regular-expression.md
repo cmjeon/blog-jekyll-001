@@ -19,7 +19,7 @@ g 위치는 flags g는 정규표현식에 맞는 모든 문자열을 찾는 것
 
 flags 는 이번 내용에서 생략
 
-https://regexr.com/ 에서 직접 해보자
+[https://regexr.com/](https://regexr.com/){:target="_blank"} 에서 직접 해보자
 
 아래에서 표현한 regex 는 모두 /{표현식}/g 의 표현식 부분에 들어감
 
