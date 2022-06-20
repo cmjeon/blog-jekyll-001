@@ -243,7 +243,7 @@ One ring to bring them all and in the darkness bind them
 r.*
 ```
 
-수량자 뒤의 ?는 앞의 수량자를 가장 적게 일치시킴
+수량자 뒤의 ?는 앞의 수량자를 가장 적게 일치시킴 lazy quantifier
 
 ```
 - source
