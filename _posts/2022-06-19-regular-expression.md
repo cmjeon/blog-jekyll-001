@@ -145,7 +145,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789
 
 소괄호는 표현된 단어 자체를 찾음
 
-소괄호 안의 | 은 or 의 의미함
+소괄호 안의 `|` 은 or 의 의미함
 
 ```
 - source
