@@ -377,4 +377,3 @@ If 문을 안써서 좋지만 복잡해지면 가독성이 낮아진다.
 - [http://academy.dream-coding.com/](http://academy.dream-coding.com/){:target="_blank"}
 - [https://www.youtube.com/watch?v=CjoDIgDOHA4](https://www.youtube.com/watch?v=CjoDIgDOHA4){:target="_blank"}
 - [http://zvon.org/](http://zvon.org/){:target="_blank"}
-- [http://regexone.com/](http://regexone.com/){:target="_blank"}
