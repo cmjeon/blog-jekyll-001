@@ -88,7 +88,7 @@ nvm 이 설치되었다면 node 설치는 nvm 명령을 통해 진행 가능
 $ nvm ls-remote
 
 # 최신버전의 node 설치
-$ nvm install 
+$ nvm install --lts 
 
 # 특정버전의 node 설치
 $ nvm install x.xx.x
