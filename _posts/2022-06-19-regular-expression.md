@@ -2,7 +2,7 @@
 layout: single
 title: 정규표현식 실습해보자
 categories: 
-  - https://regexr.com
+  - learn etc
 tags: 
   - regex
 ---
