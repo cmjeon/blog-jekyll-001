@@ -2,9 +2,9 @@
 layout: single
 title: 리팩토링2 스터디 - 006 - 2
 categories:
-- bookstudy - refactoring2
-  tags:
-- refactoring2
+  - bookstudy - refactoring2 
+tags:
+  - refactoring2
 ---
 
 # 6장 기본적인 리팩터링
