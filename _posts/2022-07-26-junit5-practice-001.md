@@ -21,7 +21,7 @@ JUnit 5 의 세부모듈
 
 - Jupiter : TestEngine API 구현체로 JUnit 5 를 제공 -> 우리가 주로 사용할 구현체
   - Jupiter 의 친구들 : AssertJ, Hemcrest, Truth
-- JUnit Platform : 시행가능한 런처 제공, TestEngine API 제공
+- JUnit Platform : 실행가능한 런처 제공, TestEngine API 제공
 - Vintage : JUnit 4, 3 를 지원하느 구현체
 
 ## 시작하기
@@ -82,7 +82,7 @@ maven 의존성 추가
 전략을 담은 클래스를 임포트
 
 ```java
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class) : UnderScore 를 공백으로 만들어줌
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class) // UnderScore 를 공백으로 만들어줌
 ```
 
 ## Assertion
@@ -124,7 +124,9 @@ assertEquals(StudyStatus.DRAFT, study.getStatus(), "스터디를 처음 만들�
 assertEquals(StudyStatus.DRAFT, study.getStatus(), () -> "스터디를 처음 만들면 상태값이 DRAFT 여야 한다.");
 ```
 
-그냥 문자열로 써도 되는데 람다식으로 쓰는 이유는? 오류발생 시에만 문자열 연산을 해주기 위해
+그냥 문자열로 써도 되는데 람다식으로 쓰는 이유는? 
+
+-> 오류발생 시에만 문자열 연산을 해주기 위해
 
 ### assertAll
 
@@ -145,7 +147,7 @@ assertAll(
 ```java
 assertThrows(IllegalArgumentException.class, () -> new Study(-10));
 
-// 메시지 확이 가능
+// 메시지 확인 가능
 IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> new Study(-10));
 String message = exception.getMessage();
 assertEquals("limit 는 0 보다 커야 한다.", message);
@@ -249,14 +251,15 @@ assumingThat("LOCAL".equalsIgnoreCase("TEST_ENV"), () -> {
 ```java
 @DisplayName("파라미터 테스트")
 @ParameterizedTest(name="{index} {displayName} message={0}")
+@ValueSource(strings = {"날씨가", "정말, "많이", "더워졌습니다"})
 ```
 
-### 인자값 소스
+### 인자값 source
 
-valueSource 로 다양한 값을 전달할 수 있음
+기본적으로 valueSource 로 다양한 값을 전달할 수 있음
 
 ```java
-@ValueSource(strings = {"날씨가", "많이", "덥습니다.", "진짜로"})
+@ValueSource(strings = {"날씨가", "정말, "많이", "더워졌습니다"})
 ```
 
 인자값의 소스를 정하는 다양한 어노테이션이 있음
@@ -283,11 +286,24 @@ valueSource 로 다양한 값을 전달할 수 있음
 
 ### SimpleArgumentConverter
 
-SimpleArgumentConverter 상속 받은 구현체 제공
+인자를 객체로 받고 싶다? 
+
+-> SimpleArgumentConverter 상속 받은 구현체를 생성
+
+```java
+static class StudyConverter extends SimpleArgumentConverter {
+    @Override
+    protected Object convert(Object source, Class<?> targetType) throws ArgumentConversionException {
+        assertEquals(Study.class, targetType, "Can Only ...");
+        return new Study(Integer.parseInt(source.toString()));
+    }
+}
+```
 
 @ConvertWith 사용
 
 ```java
+@ValueSource(strings = {"날씨가", "정말, "많이", "더워졌습니다"})
 void parameterizedTest(@ConvertWith(StudyConverter.class) Study study) {
     System.out.println(study.getLimit());
 }
@@ -318,6 +334,15 @@ void parameterizedTest(ArgumentsAccessor argumentsAccessor) {
 ### ArgumentsAggregator
 
 ArgumentsAggregator 구현하여 사용할 수도 있음
+
+```java
+static class StudyAggregator implements ArgumentsAggregator {
+    @Override
+    public Object aggregateArguments(ArgumentsAccessor argumentsAccessor, ParameterContext parameterContext) throws ArgumentsAggregationException {
+        return new Study(argumentsAccessor.getInteger(0), argumentsAccessor.getString(1));
+    }
+}
+```
 
 @AggregateWith 사용
 
