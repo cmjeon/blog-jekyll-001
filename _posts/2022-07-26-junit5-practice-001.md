@@ -32,9 +32,11 @@ https://start.spring.io/ 에서 Spring web 추가하여 생성
 
 테스트하고자 하는 파일에서 cmd + shift + t 로 테스트파일 생성 가능
 
-### 스프링부터 프로젝트가 아니라면?
+### 스프링부트 프로젝트가 아니라면?
 
 maven 의존성 추가
+
+단 java 1.8 이상이어야 함 
 
 ```xml
 <dependency>
