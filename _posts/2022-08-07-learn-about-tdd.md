@@ -7,8 +7,6 @@ tags:
   - "TDD"
 ---
 
-# TDD 알아보기
-
 ## TDD 란?
 
 Test Driven Development

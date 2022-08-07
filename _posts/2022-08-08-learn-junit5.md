@@ -7,8 +7,6 @@ tags:
   - "JUnit5"
 ---
 
-# JUnit 5 알아보기
-
 ## JUnit 5 란?
 
 [https://junit.org/junit5/docs/current/user-guide/](https://junit.org/junit5/docs/current/user-guide/){:target="_blank"}
