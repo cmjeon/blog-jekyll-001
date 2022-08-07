@@ -137,16 +137,19 @@ Fixture : Collaborator 를 직접 생성, 복잡, 재사용 가능
 
 Mock : Mock 객체를 생성, 간단, 재사용 불가
 
-## Classic TDD 와 Mockist TDD
-
-
-
-## 각 테스트 특징
-
-
-
 ## Inside-out 와 Outside-in
 
+### Inside-out(Classicist)
+
+개발이 내부(도메인)에서 시작해서 점점 외부(API)로 구현 
+
+시스템 전반에 대한 완전한 이해없이 시작 가능
+
+### Outside-in(Mockist)
+
+개발이 외부(API)에서 시작해서 점점 세부적(도메인)인 사항을 구현
+
+객체지향적인 코드 작성이 가능
 
 ## 단위테스트 목적
 
