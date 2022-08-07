@@ -99,9 +99,54 @@ TAD 는 프로덕션 코드에 딱 맞는 테스트 케이스만을 해 봄 -> �
 
 무엇이 단위인가? 소스 한 줄? 메서드? 클래스?
 
-마틴파울러는 행동을 단위로 보았다? -> 그러면 메서드? -> 인터페이스
+마틴파울러는 행동을 단위로 보았다? -> 그러면 메서드? -> 인터페이스?
 
 [https://martinfowler.com/bliki/UnitTest.html](https://martinfowler.com/bliki/UnitTest.html){:target="_blank"}
+
+실제 깨체를 사용한 테스트 : Sociable Test -> Classicist, 상태검증, Inside-out,
+
+가짜 객체(Double) 을 사용한 테스트 : Solitary Test -> Mockist, 행위검증, Outside-in,
+
+## Test Double
+
+Double 은 실제 객체를 사용하기 어려울 경우 사용하는 가짜 객체를 일컬음
+
+종류 : Dummy, Spy, Fake, Stub, Mock
+
+Mock 은 호출하는 메소드의 반환값을 프로그래밍 해놓은 객체
+
+## SUT 와 Collaborator
+
+SUT System Under Test : 테스트 하려는 그 객체
+
+Collaborator : SUT 가 의존하는 객체
+
+## 상태검증과 행위검증
+
+테스트 성패는 무엇이 기준인가?
+
+상태검증 : 객체의 상태를 직접적으로 검증 -> Classicist 
+
+행위검증 : 행동이 이루어졌는지 검증 -> Mockist
+
+## Fixture 와 Mock
+
+사전준비하는 방법
+
+Fixture : Collaborator 를 직접 생성, 복잡, 재사용 가능
+
+Mock : Mock 객체를 생성, 간단, 재사용 불가
+
+## Classic TDD 와 Mockist TDD
+
+
+
+## 각 테스트 특징
+
+
+
+## Inside-out 와 Outside-in
+
 
 ## 단위테스트 목적
 
