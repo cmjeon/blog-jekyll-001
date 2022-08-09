@@ -47,6 +47,19 @@ JUnit 5 는 Java 8 이상 버전에서 동작
 $ git checkout mock-testcase
 ```
 
+## 테스트 관련 IntelliJ 단축키
+
+- 테스트할 클래스를 열고 shift + command + t : 테스트 클래스 생성
+- 메소드를 선택하고 shift + ctrl + r : 해당 메소드 테스트 케이스 실행
+- 클래스를 선택하고 shift + ctrl + r : 해당 클래스 테스트 케이스 실행
+
+
+
+
+
+
+
+
 # 참고
 
 - [https://junit.org/junit5/docs/current/user-guide/](https://junit.org/junit5/docs/current/user-guide/){:target="_blank"}
