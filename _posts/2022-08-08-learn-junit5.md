@@ -72,12 +72,17 @@ $ git checkout mock-testcase
 
 @AfterEach : 각 @Test, @RepeatedTest, @ParameterizedTest, @TestFactory 들 후에 실행됨을 나타낸다.
 
-@BeforeAll : 
+@BeforeAll : 모든 @Test, @RepeatedTest, @ParameterizedTest, @TestFactory 들 전에 실행됨을 나타낸다. 
 
+@AfterAll : 모든 @Test, @RepeatedTest, @ParameterizedTest, @TestFactory 들 후에 실행됨을 나타낸다.
 
+@Tag : 테스트 필터링을 위해 선언한다.
 
+@Disabled : 테스트 메소드가 아님을 나타냄
 
+@Timeout : 테스트에 성공에 주어진 시간을 나타냄 
 
+### Meta-Annotations(Compose Annotations)
 
 
 # 참고
