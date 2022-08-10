@@ -54,6 +54,26 @@ $ git checkout mock-testcase
 - 클래스를 선택하고 shift + ctrl + r : 해당 클래스 테스트 케이스 실행
 
 
+## Annotation
+
+대표적인 Annotation 을 소개한다.
+
+전체 Annotation 은 [https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations](https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations){:target="_blank"} 에서 확인
+
+@Test : 이 메소드가 테스트임을 나타낸다. denote
+
+@ParameterizedTest : 메개변수화된 테스트임을 나타낸다.
+
+@RepeatedTest : 반복테스트임을 나타낸다.
+
+@DisplayName : 테스트에 표시될 이름을 선언한다.
+
+@BeforeEach : 각 @Test, @RepeatedTest, @ParameterizedTest, @TestFactory 들 전에 실행됨을 나타낸다.
+
+@AfterEach : 각 @Test, @RepeatedTest, @ParameterizedTest, @TestFactory 들 후에 실행됨을 나타낸다.
+
+@BeforeAll : 
+
 
 
 
