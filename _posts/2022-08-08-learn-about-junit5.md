@@ -3,6 +3,7 @@ layout: single
 title: "JUnit 5 알아보기"
 categories: 
   - "learn etc"
+  - "Java Test"
 tags: 
   - "JUnit5"
 ---
@@ -82,7 +83,119 @@ $ git checkout mock-testcase
 
 @Timeout : 테스트에 성공에 주어진 시간을 나타냄 
 
-### Meta-Annotations(Compose Annotations)
+### Meta-Annotations(Composed Annotations)
+
+커스텀 Annotation 을 만들 수 있는 방법
+
+@Fast 만들기
+
+```java
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+import org.junit.jupiter.api.Tag;
+
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Retention(RetentionPolicy.RUNTIME)
+@Tag("fast")
+public @interface Fast {
+}
+```
+
+@Fast 사용하기
+
+```java
+@Fast
+@Test
+void myFastTest() {
+    // ...
+}
+```
+
+## Definitions 정의
+
+### Platform Concepts
+
+컨테이너 : 다른 컨테이너나 테스트를 자식으로 가지고 있는 테스트 트리의 노드
+
+테스트 : 실행되어 예상되는 동작을 확인하는 테스트 트리의 노드
+
+### Jupiter Concepts
+
+라이프사이클 메서드 : @BeforeAll, @AfterAll, @BeforeEach, @AfterEach 같은 메소드
+
+테스트 클래스 : 하나 이상의 테스트 메서드나 컨테이너를 포함하는 최상위 클래스, static or @Nested 클래스
+
+테스트 메서드 : @Test, @RepeatedTest, @ParameterizedTest, @TestFactory, @TestTemplate 으로 지정된 메소드
+
+## Test Classes And Methods
+
+테스트 메서드, 라이프사이클 메서드는 테스트 클래스에 선언되거나, 수퍼클래스에서 상속되거나, 인터페이스에서 구현되거나 할 수 있다.
+
+테스트 메서드, 라이프사이클 메서드는 abstract 가 아니어야 하고 리턴값이 void 이어야 한다. 단, 값을 반환하는 @TestFactory 는 제외
+
+테스트 클래스, 테스트 메서드, 라이프사이클 메서드는 public 일 필요는 없지만 private 는 안된다. -> 일반적으로는 public 도 생략하는 것이 좋다
+
+## Display Names
+
+테스트 클래스, 테스트 메서드의 이름을 지정하는 Annotation
+
+@DisplayNameGenerators 보다 우선적으로 표현된다.
+
+### Display Name Generators
+
+@DisplayNameGeneration 를 통해 이름을 자동으로 생성할 수 있다.
+
+DisplayNameGenerator 종류
+
+- Standard : argument 를 포함한 메서드명 그대로 표현
+- Simple : 메서드명에서 뒤에 () 제거하고 표현
+- ReplaceUnderscores : _ 를 공백으로 표현
+- IndicativeSentences : 테스트 클래스명 + separator + 메소드명으로 표현
+    
+  ```java
+  @IndicativeSentencesGeneration(separator = " -> ", generator = DisplayNameGenerator.ReplaceUnderscores.class)
+  class this_is_my_test_class {
+    @Test
+    void it_is_my_test_method() {
+      
+    }
+  }
+  ```
+  
+### Setting the Default Display Name Generator
+
+Display Name Generator 는 properties 에 등록하여 기본 생성자로 선언할 수 있다.
+
+```properties
+# src/test/resources/junit-platform.properties
+junit.jupiter.displayname.generator.default = \
+    org.junit.jupiter.api.DisplayNameGenerator$ReplaceUnderscores
+```
+
+Display Name 은 아래와 같은 순서로 표현됨
+
+1. @DisplayName
+2. @DisplayNameGeneration
+3. default DisplayNameGenerator
+4. org.junit.jupiter.api.DisplayNameGenerator.Standard
+
+## Assertions
+
+> IntelliJ 에서 Gradle 실행 시 Display Name Generators 가 작동하지 않으면 preferences > Build, Executrion, Deployment > Build Tools > Gradle 에 들어가서 Run Tests using 을 IntelliJ IDEA 로 변경 
+
+
+
+
+
+
+
+
+
+
+
 
 
 # 참고
