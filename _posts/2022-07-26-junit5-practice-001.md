@@ -3,6 +3,7 @@ layout: single
 title: "JUnit 5 연습하기 - 001"
 categories: 
   - "learn etc"
+  - "Java Test"
 tags: 
   - "JUnit 5"
 ---
