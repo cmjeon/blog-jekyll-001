@@ -184,6 +184,38 @@ Display Name 은 아래와 같은 순서로 표현됨
 
 ## Assertions
 
+JUnit Jupiter 가 제공하는 기능
+
+모든 Jupiter Assertion 은 org.junit.jupiter.api.Assertions 클래스의 static 메서드이다.
+
+Java 8 lambdas 사용가능
+
+### Kotlin Assertion Support
+
+JUnit Jupiter 는 Kotlin 에서 사용가능한 assertion 메소드도 제공한다.
+
+### Third-party Assertion Libraries
+
+JUnit Jupiter 외에 다른 기능이 필요할 수도 있다(ex matcher)
+
+이럴 때는 AssertJ, Hamcrest, Truth 를 사용할 수 있다.
+
+matcher 와 풍부한 API 의 조합을 사용해서 assertion 을 더 설명적이고 읽기 쉽게 만들 수 있다.
+
+JUnit Jupiter 의 Assertion 클래스는 assertThat 메서드를 제공하지 않기 때문에 Thrid-party 의 matcher 를 사용하는 것이 좋다.
+
+## Assumptions
+
+JUnit Jupiter 의 assumptions 은 람다표현식 가능하고, static 이어야 한다.
+
+## Disabling Tests
+
+클래스나 메서드에 @Disabled Annotation 으로 비활성화 할 수 있다.
+
+## Conditional Test Execution
+
+JUnit Jupiter 의 ExecutionCondition 확장 API 를 사용하면 
+
 > IntelliJ 에서 Gradle 실행 시 Display Name Generators 가 작동하지 않으면 preferences > Build, Executrion, Deployment > Build Tools > Gradle 에 들어가서 Run Tests using 을 IntelliJ IDEA 로 변경 
 
 
