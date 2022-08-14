@@ -182,6 +182,8 @@ Display Name 은 아래와 같은 순서로 표현됨
 3. default DisplayNameGenerator
 4. org.junit.jupiter.api.DisplayNameGenerator.Standard
 
+> IntelliJ 에서 Gradle 실행 시 Display Name Generators 가 작동하지 않으면 preferences > Build, Executrion, Deployment > Build Tools > Gradle 에 들어가서 Run Tests using 을 IntelliJ IDEA 로 변경
+
 ## Assertions
 
 JUnit Jupiter 가 제공하는 기능
@@ -214,19 +216,101 @@ JUnit Jupiter 의 assumptions 은 람다표현식 가능하고, static 이어야
 
 ## Conditional Test Execution
 
-JUnit Jupiter 의 ExecutionCondition 확장 API 를 사용하면 
+JUnit Jupiter 의 ExecutionCondition 은 특정 기반으르 테스트틀 활성화/비활성화 할 수 있다. (ex @Disabled)
 
-> IntelliJ 에서 Gradle 실행 시 Display Name Generators 가 작동하지 않으면 preferences > Build, Executrion, Deployment > Build Tools > Gradle 에 들어가서 Run Tests using 을 IntelliJ IDEA 로 변경 
+org.junit.jupiter.api.condition 패키지에서 선언적으로 컨테이너 및 테스트를 활성화/비활성화할 수 있는 조건을 지원한다.
 
+여러 ExecutionCondition 이 등록되면 조건 중 하나라도 비활성화되면 테스트는 비활성화 된다.
 
+### Operating System and Architecture Conditions
 
+@EnabledOnOs, @DisabledOnOs 으로 특정 운영체제나 아키텍쳐 에서 활성화/비활성화 할 수 있다.
 
+### Java Runtime Environment Conditions
 
+@EnabledOnJre, @DisabledOnJre 으로 특정 JRE 에서 활성화/비활성화 할 수 있다.
 
+@EnabledForJreRange, @DisabledForJreRange 로 특정 범위안의 JRE 에서 활성화/비활성화 할 수 있다. (기본적으로 가장 하단은 JAVA_8)
 
+### System Property Conditions
 
+@EnabledIfSystemProperty, @DisabledIfSystemProperty 로 JVM System Property 의 값을 기반으로 활성화/비활성화 할 수 있다.
 
+### Environment Variable Conditions
 
+@EnabledIfEnvironmentVariable, @DisabledIfEnvironmentVariable 로 환경변수의 값을 기반으로 활성화/비활성화 할 수 있다.
+
+### Custom Conditions
+
+@EnabledIf 로 조건 메서드를 기반으로 활성화/비활성화 할 수 있다.
+
+조건 메서드는 테스트 클래스 밖에 있을 수 있다.
+
+## Tagging and Filtering
+
+@Tag 를 통해 테스트의 검색, 실행을 필터링하는데 사용할 수 있다.
+
+## Test Execution Order
+
+테스트 클래스, 테스트 메서드의 순서를 보장되지는 않는다.
+
+### Method Order
+
+실행 순서를 적용해야하는 경우에 사용에 사용한다.
+
+@TestMethodOrder Annotation 을 지정하고 MethodOrderer 구현체를 지정한다.
+
+MethodOrderer 인터페이스의 구현체를 만들거나 내장된 MethodOrderer 구현체를 사용할 수 있다.
+
+- DisplayName: DisplayName 영문자 순으로
+- MethodName: 메서드명 영문자순으로(6.0 에서 제거될 예정)
+- OrderAnnotation: @Order 에 정의된 순서 순으로
+- Random: 무작위 순으로
+- Alphanumeric: 메서드명과 parameter 목록 순으로
+
+### Setting the Default Method Orderer
+
+Method Orderer 는 properties 에 등록하여 기본 생성자로 선언할 수 있다.
+
+```properties
+# src/test/resources/junit-platform.properties
+junit.jupiter.testmethod.order.default = \
+    org.junit.jupiter.api.MethodOrderer$OrderAnnotation
+```
+
+### Class Order
+
+테스트 클래스는 실행 순서에 의존하지 않지만 어떤 경우에는 실행 순서를 적용해야할 때도 있다.
+
+테스트 클래스는 빌드 시간을 최적화하기 위해 아래 시나리오 모드를 사용
+
+- fail fast: 이전에 실패한 테스트와 더 빠른 테스트 먼저 실행
+- shortest test plan execution duration: 병렬 실행이 활성화된 상태에서 긴 테스트를 먼저 실행
+
+ClassOrderer 인터페이스를 구현한 구현체를 사용한다.
+
+사용자 정의 ClassOrderer 를 구현하거나 다음 내장 ClassOrderer 구현체 중 하나를 사용한다.
+
+- ClassName: 클래스명 영문자 순으로
+- DisplayName: DisplayName 영문자 순으로
+- OrderAnnotation: @Order 에 정의된 순서 순으로
+- Random: 무작위 순으로
+
+Class Orderer 는 properties 에 등록하여 기본 생성자로 선언할 수 있다.
+
+```properties
+# src/test/resources/junit-platform.properties
+junit.jupiter.testclass.order.default = \
+    org.junit.jupiter.api.ClassOrderer$OrderAnnotation
+```
+
+ClassOrderer 는 모든 테스트 클래스 @Nested 클래스에 적용
+
+> 최상위 클래스들 끼리 순서가 정렬되고, @Nested 클래스는 상위 클래스의 다른 @Nested 클래스와 관련하여 순서가 정렬된다.
+
+@Nested 클래스의 실행 순서를 구성하려면 상위 클래스에 @TestClassOrder 를 선언한다.
+
+## Test Instance Lifecycle
 
 
 
