@@ -360,6 +360,21 @@ static 이 아닌 테스트 클래스만 @Nested 를 사용할 수 있다.
 
 ## Dependency Injection for Constructors and Methods
 
+JUnit Jupiter 의 주요 변경사항 중 하나는 테스트 생성자와 테스트 메서드 모두 parameter 를 가질 수 있다는 것이다.
+
+ParameterResolver 는 런타임에 parameter 를 동적으로 처리할 수 있다.
+
+3개의 내장 resolver 가 있다.
+
+- TestInfoParameterResolver: 생성자나 메서드의 parameter 가 TestInfo 형이면 TestInfoParameterResolver 는 TestInfo 인스턴스를 제공한다.
+- RepetitionInfoParameterResolver: @RepeatedTest, @BeforeEach, @AfterEach 메서드의 parameter 가 RepetitionInfo 형이면 RepetitionInfoParameterResolver 는 RepetitionInfo 인스턴스를 제공한다.
+- TestReporterParameterResolver: 생성자나 메서드의 parameter 가 TestReporter 형이면 TestReporterParameterResolver 는 TestReporter 인스턴스를 제공한다.
+
+## Test Interfaces and Default Methods
+
+
+
+
 
 
 
