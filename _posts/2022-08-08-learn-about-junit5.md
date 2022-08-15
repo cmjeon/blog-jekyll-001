@@ -344,6 +344,24 @@ Djunit.jupiter.testinstance.lifecycle.default=per_class
 
 ## Nested Tests
 
+@Nested 테스트는 테스트 작성자에게 여러 테스트 그룹간의 관계를 표현할 수 있는 기능을 제공한다.
+
+외부 테스트의 전제 조건은 내부 테스트에 사용됩니다.
+
+예컨데 @Nested 안에 @BeforeEach annotation 은 하위 테스트에 사용된다.
+
+상위 테스트의 설정 코드가 항상 실행되기 때문에 하위 테스트만 실행할 수도 있다.
+
+static 이 아닌 테스트 클래스만 @Nested 를 사용할 수 있다.
+
+내부 클래스의 정적 메서드를 허용하지 않기 때문에 @Nested 클래스는 @BeforeAll, @AfterAll 이 기본적으로 작동하지 않는다.
+
+@Nested 테스트 클래스에 @TestInstance(Lifecycle.PER_CLASS) annotation 을 추가해서 우회할 수 있다.
+
+## Dependency Injection for Constructors and Methods
+
+
+
 
 # 참고
 
