@@ -312,6 +312,37 @@ ClassOrderer 는 모든 테스트 클래스 @Nested 클래스에 적용
 
 ## Test Instance Lifecycle
 
+JUnit 은 각 테스트 메서드를 실행하기 위해 각 테스트 클래스의 새 인스턴스를 만들어서 실행한다.
+
+이 메서드별 테스트 인스턴스의 생명 주기는 JUnit Jupiter 의 기본 동작이다.
+
+JUnit Jupiter 가 동일한 테스트 인스턴스에서 모든 테스트 메서드를 실행하도록 하려면 @TestInstance(LifeCycle.PER_CLASS) annotation 을 추가핸다.
+
+PER_CLASS 라면 테스트 메서드의 상태를 @BeforeEach, @AfterEach 에서 재설정해야 할 수 도 있다.
+
+PER_CLASS 모드는 PER_METHOD 모드에 비해 @BeforeAll, @AfterAll 을 static 이 아닌 메서드로 선언가능한 이점이 있다.
+
+그래서 @Nested 테스트 클래스에서 @BeforeAll, @AfterAll 메서드를 사용할 수 있다.
+
+### Changing the Default Test Instance Lifecycle
+
+@TestInstance annotation 이 없으면 기본 생명 주기 모드인 PER_METHOD 를 사용한다. 
+
+Junit.jupiter.testinstance.lifecycle.default 의 구성 매개변수를 설정하여 기본 테스트 인스턴스 생명 주기 모드를 변경할 수 있다.
+
+```properties
+# src/test/resources
+junit.jupiter.testinstance.lifecycle.default = per_class
+```
+
+JVM 설정에서 변경할 수도 있다.
+
+```java
+# JVM 설정
+Djunit.jupiter.testinstance.lifecycle.default=per_class
+```
+
+## Nested Tests
 
 
 # 참고
