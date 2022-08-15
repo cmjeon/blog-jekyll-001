@@ -372,7 +372,21 @@ ParameterResolver 는 런타임에 parameter 를 동적으로 처리할 수 있�
 
 ## Test Interfaces and Default Methods
 
+@ExtendWith, @Tag 를 테스트 인터페이스에 선언해서 테스트 인터페이스를 구현하는 클래스가 자동으로 상속하도록 할 수 있다.
 
+## Repeated Tests
+
+## Parameterized Tests
+
+## Test Templates
+
+## Dynamic Tests
+
+## Timeouts
+
+## Parallel Execution
+
+## Built-in Extensions
 
 
 
