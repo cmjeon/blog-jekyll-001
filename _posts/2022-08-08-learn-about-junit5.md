@@ -376,6 +376,25 @@ ParameterResolver 는 런타임에 parameter 를 동적으로 처리할 수 있�
 
 ## Repeated Tests
 
+@RepeatedTest 로 원하는 횟수만큼 테스트를 반복할 수 있다.
+
+아래의 placeholders 를 지원한다.
+- {displayName}: 테스트 이름
+- {currentRepetition}: 현재 반복수
+- {totalRepetitions}: 총 반복횟수
+
+기본 표시이름은 "repetition {currentRepetition} of {totalRepetitions}" 이다.
+
+RepeatedTest.LONG_DISPLAY_NAME 은 "{displayName} :: repetition {currentRepetition} of {totalRepetitions}" 이다.
+
+@RepeatedTest, @BeforeEach, @AfterEach 에는 RepetitionInfo 인스턴스를 주입할 수 있다.
+
+### Repeated Test Examples
+
+RepetitionInfo 인스턴스를 사용하여 테스트 이름을 사용자 지정 이름으로 표시하는 예시를 보여준다.
+
+[https://junit.org/junit5/docs/current/user-guide/#writing-tests-repeated-tests-examples](https://junit.org/junit5/docs/current/user-guide/#writing-tests-repeated-tests-examples){:target="_blank"}
+
 ## Parameterized Tests
 
 ## Test Templates
