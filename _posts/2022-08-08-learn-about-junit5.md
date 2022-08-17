@@ -397,6 +397,30 @@ RepetitionInfo 인스턴스를 사용하여 테스트 이름을 사용자 지정
 
 ## Parameterized Tests
 
+다른 변수로 여러번 테스트 하는 것이 가능하다.
+
+@Test 대신 @ParameterizedTest 를 사용한다.
+
+최소 하나의 Source annotation 을 선언해줘야 한다.
+
+### Required Setup
+
+@ParameterizedTest 를 사용하려면 junit-jupiter-params artifact 를 dependency 에 추가해야 한다.
+
+### Consuming Arguments
+
+@ParameterizedTest 는 일반적으로 인수 소스 인덱스, 매개변수 인덱스의 1:1 관계인 인수를 사용한다.
+
+ParameterizedTest 에서 집계 aggregate 된 인수를 사용할 수도 있다.
+
+ParameterResolver 에서 추가 인수를 제공할 수도 있다.
+
+@ParameterizedTest 메서드는 다음 규칙을 따르는 매개변수가 선언되어야 한다.
+
+- 0개 이상의 인덱싱된 인수를 먼저 선언해야 한다.
+- 0개 이상의 aggregator 가 선언되어야 한다.
+- ParameterResolver 에서 제공하는 0개 이상의 인수는 마지막에 선언된다.
+
 ## Test Templates
 
 ## Dynamic Tests
