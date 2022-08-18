@@ -421,6 +421,86 @@ ParameterResolver 에서 추가 인수를 제공할 수도 있다.
 - 0개 이상의 aggregator 가 선언되어야 한다.
 - ParameterResolver 에서 제공하는 0개 이상의 인수는 마지막에 선언된다.
 
+인덱스된 인수는 ArgumentsProvider 에 의해 공급되는 인수이다.
+
+매개변수 목록에서 동일한 인덱스의 인수들이 parameterized methods 에 전달된다.
+
+aggregator 는 argumentsAccessor 형의 매개변수이거나 @AggregateWith annotation 이 있는 매개변수이다.
+
+### Sources of Arguments
+
+#### @ValueSource
+
+단일 배열을 지정할 수 있으며 테스트 호출당 단일인수를 제공한다.
+
+```java
+@ParameterizedTest
+@ValueSource(ints = { 1, 2, 3 })
+void testWithValueSource(int argument) {
+    assertTrue(argument > 0 && argument < 4);
+}
+```
+
+#### Null And Empty Sources
+
+- @NullSource: 테스트 메소드에 null 인수를 제공한다.
+- @EmptySource: 테스트 메소드에 빈 인수를 제공한다.
+- @NullAndEmptySource: @NullSource, @EmptySource 의 합성 annotation
+
+#### @EnumSource
+
+Enum 을 상수를 소스로 제공한다.
+
+```java
+@ParameterizedTest
+@EnumSource(ChronoUnit.class)
+void testWithEnumSource(TemporalUnit unit) {
+    assertNotNull(unit);
+}
+```
+
+annotation 의 값은 선택사항이고, 생략하면 메서드의 첫번째 매개변수의 형식을 사용된다.
+
+테스트 메서드의 매개변수를 ChronoUnit 으로 변경하면 @EnumSource 의 값은 생략가능하다.
+
+[https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-EnumSource](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-EnumSource){target="_blank"}
+
+#### @MethodSource
+
+@MethodsSource 는 다른 팩토리 메서드를 참조할 수 있다.
+
+```java
+@ParameterizedTest
+@MethodSource("stringProvider")
+void testWithExplicitLocalMethodSource(String argument) {
+    assertNotNull(argument);
+}
+
+static Stream<String> stringProvider() {
+    return Stream.of("apple", "banana");
+}
+```
+
+Collection, Iterator, Iterable, 객체배열 등 Stream 으로 변환가능한 것을 리턴하면 된다.
+
+팩토리 메서드 이름이 제공되지 않으면 @ParameterizedTest 와 동일한 이름의 메서드를 참조한다.
+
+[https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-MethodSource](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-sources-MethodSource){target="_blank"}
+
+#### @CsvSource
+
+#### @CsvFileSource
+
+#### @ArgumentsSource
+
+### Argument Conversion
+
+### Argument Aggregation Custom Aggregators
+
+### Customizing Display Names
+
+### Lifecycle and Interoperability
+
 ## Test Templates
 
 ## Dynamic Tests
