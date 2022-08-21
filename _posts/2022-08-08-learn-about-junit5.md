@@ -537,6 +537,26 @@ numLinesToSkip 속석으로 헤더를 무시하도록 할 수도 있다.
 
 #### @ArgumentsSource
 
+@ArgumentsSource 는 ArgumentProvider 클래스를 통해 인수를 공급한다.
+
+ArgumentProvider 클래스는 ArgumentsProvider 인터페이스의 구현체로 만들어진다.
+
+```java
+@ParameterizedTest
+@ArgumentsSource(MyArgumentsProvider.class)
+void testWithArgumentsSource(String argument) {
+    assertNotNull(argument);
+}
+
+public class MyArgumentsProvider implements ArgumentsProvider {
+
+    @Override
+    public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
+        return Stream.of("apple", "banana").map(Arguments::of);
+    }
+}
+```
+
 ### Argument Conversion
 
 ### Argument Aggregation Custom Aggregators
