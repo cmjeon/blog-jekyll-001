@@ -489,6 +489,42 @@ Collection, Iterator, Iterable, 객체배열 등 Stream 으로 변환가능한 �
 
 #### @CsvSource
 
+@CsvSource 를 사용해서 여러 인수를 테스트에 사용할 수 있다.
+
+```java
+@ParameterizedTest
+@CsvSource({
+    "apple,         1",
+    "banana,        2",
+    "'lemon, lime', 0xF1",
+    "strawberry,    700_000"
+})
+void testWithCsvSource(String fruit, int rank) {
+    assertNotNull(fruit);
+    assertNotEquals(0, rank);
+}
+```
+
+첫번째 인수는 CSV 헤더로 사용될 수 있다.
+
+```java
+@ParameterizedTest(name = "[{index}] {arguments}")
+@CsvSource(useHeadersInDisplayName = true, textBlock = """
+    FRUIT,         RANK
+    apple,         1
+    banana,        2
+    'lemon, lime', 0xF1
+    strawberry,    700_000
+    """)
+void testWithCsvSource(String fruit, int rank) {
+    // ...
+}
+```
+
+기본 구분자는 쉼표(,) 이지만 delimiter 속성을 이용해 다른 문자를 사용할 수 있고, delimiterString 을 사용해서 문자열을 구분자로 사용할 수 있다.
+
+기본적으로 작은 따옴표를 사용하지만 quoteCharacter 속석으로 변경할 수 있다.
+
 #### @CsvFileSource
 
 #### @ArgumentsSource
