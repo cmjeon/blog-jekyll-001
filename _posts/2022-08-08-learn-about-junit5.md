@@ -505,7 +505,7 @@ void testWithCsvSource(String fruit, int rank) {
 }
 ```
 
-첫번째 인수는 CSV 헤더로 사용될 수 있다.
+첫번째 레코드는 CSV 헤더로 사용될 수 있다.
 
 ```java
 @ParameterizedTest(name = "[{index}] {arguments}")
@@ -525,7 +525,15 @@ void testWithCsvSource(String fruit, int rank) {
 
 기본적으로 작은 따옴표를 사용하지만 quoteCharacter 속석으로 변경할 수 있다.
 
+useHeadersInDisplayName 속성으로 인수를 테스트이름에 표현할 수 있다.
+
 #### @CsvFileSource
+
+@CsvFileSource 를 사용하면 클래스 경로 또는 로컬 파일 시스템에서 파일을 사용할 수 있다.
+
+첫번째 레코드는 CSV 헤더로 사용될 수 있다.
+
+numLinesToSkip 속석으로 헤더를 무시하도록 할 수도 있다.
 
 #### @ArgumentsSource
 
