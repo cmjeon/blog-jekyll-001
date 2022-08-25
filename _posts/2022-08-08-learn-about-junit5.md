@@ -559,7 +559,82 @@ public class MyArgumentsProvider implements ArgumentsProvider {
 
 ### Argument Conversion
 
-### Argument Aggregation Custom Aggregators
+확대 변환 Widening Conversion : 상위크기의 컨버전을 지원한다.
+
+- byte to short, int, long, float, or double
+- short to int, long, float, or double
+- char to int, long, float, or double
+- int to long, float, or double
+- long to float or double
+- float to double
+
+암시적 변환 Implicit Conversion : JUnit jupiter 는 암시적 유형 변환기를 제공한다.
+
+[https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-argument-conversion-implicit](https://junit.org/junit5/docs/current/user-guide/#writing-tests-parameterized-tests-argument-conversion-implicit){target="_blank"}
+
+대체 문자열-객체 변환 : Fallback String-to-Object Conversion : 문자열을 객체로 바꿔준다.
+
+> factory method : 단일 String 인수를 받고 대상 형식의 인스턴스를 반환하는 메서드. 대상 형식에 선언된 비공개가 아닌 정적 메서드
+> 메서드의 이름은 임의적일 수 있다.
+
+> factory constructor : 단일 String 인수를 허용하는 대상 형식에 선언된 비공개가 아닌 생성자
+
+여러 개의 팩토리 메서드 있어도 무시됨.
+
+팩토리 메서드와 팩토리 생성자가 함께 있으면 팩토리 생성자가 무시됨
+
+```java
+@ParameterizedTest
+@ValueSource(strings = "42 Cats") // 문자열이 book 객체로 변환되었음
+void testWithImplicitFallbackArgumentConversion(Book book) {
+    assertEquals("42 Cats", book.getTitle());
+}
+
+public class Book {
+
+    private final String title;
+
+    private Book(String title) {
+        this.title = title;
+    }
+
+    public static Book fromTitle(String title) {
+        return new Book(title);
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+}
+```
+
+명시적 변환 Explicit Conversion : @ConvertWith 을 사용하여 매개변수로 사용할 ArgumentConverter 를 지정할 수 있다.
+
+```java
+@ParameterizedTest
+@EnumSource(ChronoUnit.class)
+void testWithExplicitArgumentConversion(
+        @ConvertWith(ToStringArgumentConverter.class) String argument) {
+
+    assertNotNull(ChronoUnit.valueOf(argument));
+}
+
+public class ToStringArgumentConverter extends SimpleArgumentConverter {
+
+    @Override
+    protected Object convert(Object source, Class<?> targetType) {
+        assertEquals(String.class, targetType, "Can only convert to String");
+        if (source instanceof Enum<?>) {
+            return ((Enum<?>) source).name();
+        }
+        return String.valueOf(source);
+    }
+}
+```
+
+### Argument Aggregation 
+
+Custom Aggregators
 
 ### Customizing Display Names
 
