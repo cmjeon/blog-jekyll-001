@@ -95,7 +95,7 @@ analytics:
 # Site Author
 author:
   name             : "Jeon Chang Min"
-  avatar           : "/assets/images/only-today.jpg"
+  avatar           : "/assets/images/just-today.jpg"
   # avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "이제라도 매일 배운 것을 기록하며 살겠습니다."
   location         : "Seoul"
@@ -172,8 +172,11 @@ exclude:
   - Rakefile
   - README
   - tmp
-  - /docs # ignore Minimal Mistakes /docs
-  - /test # ignore Minimal Mistakes /test
+  - _posts/**/*.jpg
+  - _posts/**/*.png
+  - _posts/**/*.gif
+#  - /docs # ignore Minimal Mistakes /docs
+#  - /test # ignore Minimal Mistakes /test
 keep_files:
   - .git
   - .svn
@@ -183,7 +186,6 @@ markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 
 # Conversion
 markdown: kramdown
-highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
@@ -193,6 +195,7 @@ incremental: false
 kramdown:
   input: GFM
   hard_wrap: false
+  syntax_highlighter: rouge
   auto_ids: true
   footnote_nr: 1
   entity_output: as_char
@@ -200,6 +203,14 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
+# Collections
+#collections:
+#  docs:
+#    output: true
+#    permalink: /:collection/:path/
+#  books:
+#    output: true
+#    permalink: /:collection/:path/
 
 # Sass/SCSS
 sass:
@@ -209,7 +220,8 @@ sass:
 
 
 # Outputting
-permalink: /:categories/:slug/
+permalink: /:title/ # Post 의 URL 이 타이틀로만 생성
+#permalink: /:categories/:title/ # Post 의 URL 이 카테고리 + 타이틀로 생성
 paginate: 10 # amount of posts to show
 paginate_path: /page:num/
 timezone: Asia/Seoul # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
@@ -221,6 +233,7 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jemoji
   - jekyll-include-cache
 
 # mimic GitHub Pages with --safe
@@ -229,8 +242,8 @@ whitelist:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
+  - jemoji
   - jekyll-include-cache
-
 
 # Archives
 #  Type
@@ -291,9 +304,26 @@ defaults:
       layout: single
       author_profile: true
   # _docs
-  - scope:
-      path: ""
-      type: docs
-    values:
-      sidebar:
-        nav: "docs"
+#  - scope:
+#      path: ""
+#      type: docs
+#    values:
+#      layout: single
+#      read_time: false
+#      author_profile: false
+#      share: false
+#      comments: false
+#      sidebar:
+#        nav: "docs"
+  # _books
+#  - scope:
+#      path: ""
+#      type: books
+#    values:
+#      layout: single
+#      read_time: false
+#      author_profile: false
+#      share: false
+#      comments: false
+#      sidebar:
+#        nav: "books"

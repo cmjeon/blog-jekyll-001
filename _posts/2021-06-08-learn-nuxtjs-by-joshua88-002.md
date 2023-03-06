@@ -142,9 +142,11 @@ vue-router 에서 페이지를 이동할 때마다 호출하는 페이지 컴포
 
 layouts에 정의한 헤더의 값을 어떻게 바꿀 수 있을까?
 
-```
+{% raw %}
+```html
 <h1>{{ $route.name }} 페이지</h1>
 ```
+{% endraw %}
 
 라우터의 정보를 바로 헤더의 값으로 활용할 수 있음
 
@@ -154,7 +156,8 @@ layouts 로의 분리를 통해 pages 는 본연의 내용에 충실할 수 있�
 
 layouts/default.vue 수정
 
-```
+{% raw %}
+```html
 <template>
   <div>
     <header>
@@ -167,6 +170,7 @@ layouts/default.vue 수정
 </template>
 ...
 ```
+{% endraw %}
 
 <NuxtLink> 는 <router-link> 와 동일
 

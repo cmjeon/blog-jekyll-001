@@ -5,3 +5,7 @@
 github pages 에서 정적 사이트를 만들 수 있다는 얘기를 듣고 대뜸 만들었다.
 
 jekyll 로 구성되어 있다.
+
+```bash
+$ bundle exec jekyll serve --livereload
+```

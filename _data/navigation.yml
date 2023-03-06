@@ -1,24 +1,32 @@
 # main links
 main:
   - title: "Resume"
-    url: /resume
+    url: /resume/
   # - title: "About"
   #  url: /about
-  # - title: "Projects"
-  #  url: /projects
+#  - title: "Books"
+#    url: /books/10step-3step
+#  - title: "Posts"
+#    url: /posts/javascript/
   - title: "Posts"
     url: /year-archive/
   - title: "Categories"
     url: /categories/
-  # - title: "Tags"
-  #  url: /tags/
+  - title: "Tags"
+    url: /tags/
   # - title: "Theme Guide"
   #  url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
-  
+
+books:
+  - title: 나를 향해 걷는 열 걸음
+    children:
+      - title: "세 번째 걸음"
+        url: /books/10step-3step
+
 docs:
   - title: Getting Started
     children:
@@ -26,40 +34,3 @@ docs:
         url: /docs/quick-start-guide/
       - title: "Structure"
         url: /docs/structure/
-      - title: "Installation"
-        url: /docs/installation/
-      - title: "Upgrading"
-        url: /docs/upgrading/
-
-  - title: Customization
-    children:
-      - title: "Configuration"
-        url: /docs/configuration/
-      - title: "Navigation"
-        url: /docs/navigation/
-      - title: "UI Text"
-        url: /docs/ui-text/
-      - title: "Authors"
-        url: /docs/authors/
-      - title: "Layouts"
-        url: /docs/layouts/
-
-  - title: Content
-    children:
-      - title: "Working with Posts"
-        url: /docs/posts/
-      - title: "Working with Pages"
-        url: /docs/pages/
-      - title: "Working with Collections"
-        url: /docs/collections/
-      - title: "Helpers"
-        url: /docs/helpers/
-      - title: "Utility Classes"
-        url: /docs/utility-classes/
-
-  - title: Extras
-    children:
-      - title: "Stylesheets"
-        url: /docs/stylesheets/
-      - title: "JavaScript"
-        url: /docs/javascript/
