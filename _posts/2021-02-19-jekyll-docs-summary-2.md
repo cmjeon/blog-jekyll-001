@@ -63,7 +63,8 @@ collections:
   </h2>
   <p>{{ staff_member.content | markdownify }}</p>
 {% endfor %}
-{% endraw %}```
+{% endraw %}
+```
 
 #### 고유주소
 - 고유주소 변수로 컬렉션의 url 결과물을 제어할 수 있음
