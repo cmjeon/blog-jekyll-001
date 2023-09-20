@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcmjeon_github_io=self.webpackChunkcmjeon_github_io||[]).push([[7008],{876:s=>{s.exports=JSON.parse('{"label":"UI/UX Design","permalink":"/blog-docusaurus-002/blog/tags/ui-ux-design","allTagsPath":"/blog-docusaurus-002/blog/tags","count":1}')}}]);

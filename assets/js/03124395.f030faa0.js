@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcmjeon_github_io=self.webpackChunkcmjeon_github_io||[]).push([[2042],{5653:a=>{a.exports=JSON.parse('{"label":"LaLa Land","permalink":"/blog-docusaurus-002/blog/tags/la-la-land","allTagsPath":"/blog-docusaurus-002/blog/tags","count":1}')}}]);

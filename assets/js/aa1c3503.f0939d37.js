@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcmjeon_github_io=self.webpackChunkcmjeon_github_io||[]).push([[3081],{8371:o=>{o.exports=JSON.parse('{"label":"mockupworld","permalink":"/blog-docusaurus-002/blog/tags/mockupworld","allTagsPath":"/blog-docusaurus-002/blog/tags","count":1}')}}]);

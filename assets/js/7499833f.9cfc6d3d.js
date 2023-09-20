@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcmjeon_github_io=self.webpackChunkcmjeon_github_io||[]).push([[9749],{7970:o=>{o.exports=JSON.parse('{"label":"GoodNotes \uc5f0\ub3d9","permalink":"/blog-docusaurus-002/blog/tags/good-notes-\uc5f0\ub3d9","allTagsPath":"/blog-docusaurus-002/blog/tags","count":1}')}}]);

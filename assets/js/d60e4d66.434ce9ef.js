@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcmjeon_github_io=self.webpackChunkcmjeon_github_io||[]).push([[6842],{8454:s=>{s.exports=JSON.parse('{"label":"slidev","permalink":"/blog-docusaurus-002/blog/tags/slidev","allTagsPath":"/blog-docusaurus-002/blog/tags","count":1}')}}]);

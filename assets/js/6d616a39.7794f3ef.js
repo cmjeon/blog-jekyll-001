@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkcmjeon_github_io=self.webpackChunkcmjeon_github_io||[]).push([[5357],{2166:u=>{u.exports=JSON.parse('{"label":"heroku","permalink":"/blog-docusaurus-002/blog/tags/heroku","allTagsPath":"/blog-docusaurus-002/blog/tags","count":2}')}}]);
