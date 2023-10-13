@@ -296,6 +296,8 @@ defaults:
       share: true
       related: true
       excerpt_separator: <!--more-->
+      classes: wide
+      toc: true
       # show_date: true # 발행 일자 표시
   # _pages
   - scope:
