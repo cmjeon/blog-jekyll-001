@@ -47,7 +47,7 @@ java 에서 종종 만나는 NullPointerException
 
 ### 참고
 
-- [https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html
+- [https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html)
 - [https://www.oracle.com/technical-resources/articles/java/java8-optional.html](https://www.oracle.com/technical-resources/articles/java/java8-optional.html)
 - 이팩티브 자바 3판, 아이템 55 적절한 경우 Optional을 리턴하라.
 
@@ -107,9 +107,9 @@ OnlineClass onlineClass =
     optional.orElseGet(App::createNewOnlineClass());
 ```
 
-[https://ysjune.github.io/posts/java/orelsenorelseget](https://ysjune.github.io/posts/java/orelsenorelseget)
-
-[https://kdhyo98.tistory.com/40](https://kdhyo98.tistory.com/40)
+### 참고
+- [https://ysjune.github.io/posts/java/orelsenorelseget](https://ysjune.github.io/posts/java/orelsenorelseget)
+- [https://kdhyo98.tistory.com/40](https://kdhyo98.tistory.com/40)
 
 ### orElseThrow()
 
@@ -145,12 +145,11 @@ System.out.println(integer.isPresent());
 optional 안의 인스턴스가 optional 인 경우에 사용
 
 ### 참고
-- 
 - [https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#put-K-V-](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html#put-K-V-)
 
 ## Data 와 Time API
 
-지금까지 사용된 java.util.Date 클래스는 mutalble 해서 thread safe 하지가 않았다.
+지금까지 사용된 java.util.Date 클래스는 mutable 해서 thread safe 하지가 않았다.
 
 그래서 Java 8 부터는 새로운 Date-Time API 를 생성함
 
@@ -286,7 +285,6 @@ System.out.println("hello : " + Thread.currentThread().getName());
   - 다른 쓰레드가 끝날 때까지 기다린다.
 
 ### 참고
-- 
 - [https://docs.oracle.com/javase/tutorial/essential/concurrency/](https://docs.oracle.com/javase/tutorial/essential/concurrency/)
 - [https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#interrupt--](https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html#interrupt--)
 
@@ -468,7 +466,6 @@ future.get();
 ```
 
 ### 참고
-- 
 - [https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html)
 - [https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletionStage.html)
 - [https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ForkJoinPool.html](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ForkJoinPool.html)

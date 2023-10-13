@@ -4,7 +4,7 @@ title: "아틀라스 전차전"
 categories:
   - "아틀라스 전차전"
 tags:
-  - "books"
+  - "역사"
 ---
 
 [https://www.yes24.com/Product/Goods/90925510](https://www.yes24.com/Product/Goods/90925510)

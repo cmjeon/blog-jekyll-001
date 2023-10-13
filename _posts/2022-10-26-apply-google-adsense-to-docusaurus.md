@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "docusaurus navbar 에 github 아이콘 설정하기"
+title: "docusaurus Google Adsense 적용하기"
 categories:
   - "docusaurus"
 tags:

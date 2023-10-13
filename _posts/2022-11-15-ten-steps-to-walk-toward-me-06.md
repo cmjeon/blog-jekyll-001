@@ -3,7 +3,6 @@ layout: single
 title: "나를 향해 걷는 열 걸음 - 네 번째 걸음"
 categories:
   - "나를 향해 걷는 열 걸음"
-  - "books"
 tags:
   - "최진석"
 ---
