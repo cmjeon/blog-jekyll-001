@@ -7,8 +7,6 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 1장 오브젝트와 의존관계
 
 ## 1.3 DAO 의 확장

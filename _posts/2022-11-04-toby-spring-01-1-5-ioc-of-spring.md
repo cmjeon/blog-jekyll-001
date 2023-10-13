@@ -7,15 +7,13 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 1장 오브젝트와 의존관계
 
 ## 1.5 스프링의 IoC
 
-스프링의 핵심을 담당하는 건 빈 팩토리 또는 애플리케이션 컨텍스트라고 불리는 것이다.
+스프링의 핵심을 담당하는 건 '빈 팩토리' 또는 '애플리케이션 컨텍스트'라고 불리우는 것이다.
 
-이 두가지는 앞에서 만든 DaoFactory 를 일반화 한 것이다.
+이 두가지는 앞에서 만든 DaoFactory 를 일반화한 것이다.
 
 ### 1.5.1 오브젝트 팩토리를 이용한 스프링 IoC
 
@@ -49,7 +47,7 @@ public class DaoFactory {
 }
 ```
 
-UserDaoTest 에서 DaoFactory 를 이용하여 애플리케이션 컨텍스트를 생성한다.
+UserDaoTest 에서 @Configuration 설정을 추가한 DaoFactory 를 이용하여 애플리케이션 컨텍스트를 생성한다.
 
 ```java
 public class UserDaoTest {

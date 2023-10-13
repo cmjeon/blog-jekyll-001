@@ -7,8 +7,6 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 1장 오브젝트와 의존관계
 
 ## 1.4 제어의 역전(IoC)
@@ -17,7 +15,7 @@ tags:
 
 UserDaoTest 가 하던 UserDao 에 ConnectionMaker 을 등록하는 일을 맡길 UserDaoFactory 를 만든다.
 
-```java title="UserDaoFactory.java"
+```java
 public class UserDaoFactory {
 
   public UserDao userDao() {
@@ -33,11 +31,9 @@ public class UserDaoFactory {
 }
 ```
 
-<!--truncate-->
-
 이제 UserDaoTest 에서는 UserDao 를 사용하기만 하면 된다.
 
-```java title="UserDaoTest.java"
+```java
 public class UserDaoTest {
 
   public static void main(String[] args) throws ClassNotFoundException, SQLException {
@@ -48,7 +44,7 @@ public class UserDaoTest {
 }
 ```
 
-UserDao 와 ConnectionMaker 는 각각 데이터로직와 기술로직을 담당하게 된다.
+이제 UserDao 와 ConnectionMaker 는 각각 데이터로직와 기술로직을 담당하게 된다.
 
 UserDaoFactory 는 오브젝트간의 구조와 관계를 정의하는 역할을 맡게 된다.
 
@@ -56,9 +52,9 @@ UserDaoFactory 를 만듦으로써 애플리케이션의 구성요소 역할을 
 
 ### 1.4.2 오브젝트 팩토리의 활용
 
-만약 DaoFactory 에 다른 Dao 가 추가된다면 ConnectionMaker 를 생성하는 코드가 반복된다.
+만약 다른 Dao 가 추가된다면 DaoFactory 에 해당 Dao 용 ConnectionMaker 를 생성하는 코드가 반복된다.
 
-```java {4,8,12} title="DaoFactory.java"
+```java
 public class DaoFactory {
 
 	public UserDao userDaoO {
@@ -78,7 +74,7 @@ public class DaoFactory {
 
 따라서 ConnectionMaker 를 생성하는 코드를 추출한다.
 
-```java {15-17} title="DaoFactory.java"
+```java
 public class DaoFactory {
 
 	public UserDao userDaoO {

@@ -167,8 +167,8 @@ public void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLE
   } catch (SQLException e) {
     throw e; 
   } finally {
-    if (ps != null) { try { ps.closeO; } catch (SQLException e) {} } 
-    if (c != null) { try {c.closeO; } catch (SQLException e) {} }
+    if (ps != null) { try { ps.close(); } catch (SQLException e) {} } 
+    if (c != null) { try {c.close(); } catch (SQLException e) {} }
   }
   
 }

@@ -7,8 +7,6 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 1장 오브젝트와 의존관계
 
 ## 1.8 XML 을 이용한 설정
@@ -54,9 +52,9 @@ ref 애트리뷰트는 주입할 오브젝트를 정의한 빈의 DI 이다.
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi=Mhttp://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
   <bean id="connectionMaker" class="springbook.user.dao.DConnectionMaker" />
   <bean id="userDao" class="springbook.user.dao.UserDao">
@@ -72,7 +70,7 @@ UserDaoTest 의 애플리케이션 컨텍스트 생성 부분을 수정한다.
 public class UserDaoTest {
 
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		ApplicationContext context = new GenericXmlApplicationContext "applicationcontext.xml");
+		ApplicationContext context = new GenericXmlApplicationContext("applicationcontext.xml");
 
 		// ...
 	}
@@ -120,7 +118,7 @@ public class DaoFactory {
 
   @Bean
   public DataSource dataSource() {
-    SimpleDriverDataSource dataSource = new SimpleDriverDataSource ();
+    SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
 
     dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
     dataSource.setUrl("jdbc:mysql://localhost/springbook?characterEncoding=UTF-8");
@@ -145,9 +143,9 @@ XML 설정 방식으로 변경해서 작업해본다.
 ```xml
 <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
     <property name="driverClass" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost/springbook?characterEncoding=UTF-8" />
-		<property name="username" value="spring" />
-		<property name="password" value="book" />
+    <property name="url" value="jdbc:mysql://localhost/springbook?characterEncoding=UTF-8" />
+    <property name="username" value="spring" />
+    <property name="password" value="book" />
 </bean>
 ```
 
