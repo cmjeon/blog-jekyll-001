@@ -2,9 +2,9 @@
 layout: single
 title: "docusaurus Algolia 적용하기"
 categories:
-  - "javascript"
+  - "docusaurus"
 tags:
-  - "functional programming"
+  - "algolia"
 ---
 
 [https://docsearch.algolia.com/docs/legacy/run-your-own](https://docsearch.algolia.com/docs/legacy/run-your-own) 문서를 보고 Algolia 를 적용했다.

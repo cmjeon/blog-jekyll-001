@@ -7,8 +7,6 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 3장 템플릿
 
 객체지향 설계의 핵심 원칙인 개방 폐쇄 원칙 OCP 을 다시 한번 생각해보자

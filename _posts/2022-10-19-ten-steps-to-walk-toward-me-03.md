@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 세 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 알베르 카뮈의 '페스트'
 
 작품을 이해할 때 작가에 대해 살펴보는 것도 의미가 있다.

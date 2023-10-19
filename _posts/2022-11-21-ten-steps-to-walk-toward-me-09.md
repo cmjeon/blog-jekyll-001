@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 아홉 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 루쉰의 '아Q정전'
 
 > 자기 자신을 향해 걷는 일이 제일 힘들다. 나는 내 속에서 스스로 솟아나는 것 바로 그것을 살아보려고 했다. 그것이 왜 그토록 어려웠을까? - 데미안

@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 다섯 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 어니스트 헤밍웨이의 '노인과 바다'
 
 full commitment 완전한 전념

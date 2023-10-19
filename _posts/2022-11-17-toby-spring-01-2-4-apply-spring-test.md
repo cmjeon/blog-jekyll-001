@@ -111,7 +111,6 @@ DI 를 사용하면 UserDao 가 사용할 DataSource 오브젝트를 테스트 �
 test-applicationContext.xml 을 만들고 테스트코드에 해당 파일을 애플리케이션 컨텍스트로 사용하게 하면 된다.
 
 ```java
-// highlist-next-line
 @ContextConfiguration(locations="/test-applicationContext.xml")
 public class UserDaoTest {
     

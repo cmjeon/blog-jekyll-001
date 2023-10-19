@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 일곱 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 조너선 스위프트의 '걸리버 여행기'
 
 영웅들은 전부 자기를 섬기는 사람들이다.

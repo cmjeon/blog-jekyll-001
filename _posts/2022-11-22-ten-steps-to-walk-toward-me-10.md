@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 열 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 유성룡의 '징비록'
 
 우리가 더 나은 사회로 도약하기 위해서는 생각하는 힘을 키워야 한다.

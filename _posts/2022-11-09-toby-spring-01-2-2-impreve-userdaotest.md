@@ -7,8 +7,6 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 2장 테스트
 
 ## 2.2 UserDaoTest 개선
@@ -151,5 +149,7 @@ JUnit 은 assertThat() 메소드를 이용해 검증을 했을 때 기대한 결
 따라서 assertThat() 의 조건을 만족시키지 못하면 테스트는 더 이상 진행되지 않고 JUnit 은 테스트가 실패했음을 알린다.
 
 > 본문의 JUnit 은 4 버전이고, 현재 나온 JUnit 은 5 버전으로 사용방법이 다소 상이하다.
+> 
 > JUnit 5 버전의 작성법은 아래를 참고한다.
+> 
 > [https://junit.org/junit5/docs/current/user-guide/#writing-tests](https://junit.org/junit5/docs/current/user-guide/#writing-tests)

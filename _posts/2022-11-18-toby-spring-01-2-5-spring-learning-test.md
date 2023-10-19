@@ -7,8 +7,6 @@ tags:
   - "spring"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 2장 테스트
 
 ## 2.5 학습 테스트로 배우는 스프링

@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 네 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 헤르만 헤세의 '데미안'
 
 자기만의 행복을 생산하려는 존재가 아니라 정해진 행복에 다가가려고 애쓰는 사람들은 오히려 소외된다.

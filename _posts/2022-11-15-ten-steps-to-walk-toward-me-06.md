@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 여섯 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 조지 오웰의 '동물농장'
 
 자기를 섬기는 사람들이 정치적 행위를 할 때, 그들의 정치는 매우 건강하다.

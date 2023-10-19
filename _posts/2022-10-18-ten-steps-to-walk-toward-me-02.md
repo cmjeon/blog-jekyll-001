@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 두 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 생텍쥐페리의 '어린 왕자'
 
 '어린 왕자'를 읽으면 인간과 인생에 대한 생텍쥐페리의 깊은 통찰을 느낄 수 있다.

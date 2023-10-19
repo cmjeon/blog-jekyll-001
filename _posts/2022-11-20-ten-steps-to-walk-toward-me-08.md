@@ -9,8 +9,6 @@ tags:
 
 ## 나를 향해 걷는 열 걸음 - 여덟 번째 걸음
 
-[https://product.kyobobook.co.kr/detail/S000061451086](https://product.kyobobook.co.kr/detail/S000061451086)
-
 ### 이솝의 '이솝우화'
 
 이야기는 한 곳에 멈춰 있는 논증이나 논변과는 다른 표현 형식이다.
