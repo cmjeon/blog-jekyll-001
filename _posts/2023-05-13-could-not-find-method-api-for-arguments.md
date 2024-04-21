@@ -2,7 +2,8 @@
 layout: single
 title: "jsonwebtoken 사용을 위해 gradle 에 api 추가하다가 만난 오류"
 categories:
-  - "오류"
+  - "오류1"
+related: true
 ---
 
 ## 오류 상황
