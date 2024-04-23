@@ -4,14 +4,10 @@ title: "1장 오브젝트와 의존관계 - 1.1 초난감 DAO"
 categories:
   - "토비의 스프링 3.1"
 tags:
-  - "spring"
+  - "오브젝트와 의존관계"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
-'토비의 스프링 3.1' 은 스프링 개발자만이 아닌 모든 개발자라면 반드시 읽어야 하는 프로그래밍 원리를 담고 있는 책이다.
-
-# 1장 오브젝트와 의존관계
+> '토비의 스프링 3.1' 은 스프링 개발자만이 아닌 모든 개발자라면 반드시 읽어야 하는 프로그래밍 원리를 담고 있는 책이다.
 
 스프링이 지원하는 세가지 핵심 프로그래밍 모델
 
@@ -21,7 +17,7 @@ tags:
 
 스프링을 사용한다는 것은 이 세가지 요소를 적극적으로 활용한다는 것이다.
 
-## 1장 오브젝트와 의존관계 - 1.1 초난감 DAO
+## 1.1 초난감 DAO
 
 스프링은 오브젝트에 관심을 둔다.
 
@@ -58,21 +54,27 @@ public class User {
 }
 ```
 
+**Note:**<br>
+1장_ 오브젝트와 의존관계, 55.<br>
+자바빈(JavaBean)은 두 가지 관례를 따라 만들어진 오브젝트를 가리킨다.<br>
+디폴트 생성자 : 프레임워크에서 리플렉션을 이용해 오브젝트를 생성하기 위해 필요하다.<br> 
+프로퍼티 : 자바빈이 노출하는 이름을 가진 속성을 프로퍼티라고 한다. 프로퍼티는 set, get 메소드를 이용해 수정, 조회할 수 있다.
+{: .notice--primary}
+
 ### 1.1.2 UserDao
 
 UserDao 는 User 객체를 DB 에 저장하고 불러올 수 있는 클래스이다.
 
 DB 를 사용하기 위해서는 JDBC 를 이용해야 된다.
 
-이를 위해 UserDao 를 구현해본다.
+이를 위해 UserDao 를 구현해 본다.
 
-UserDao 는 User 데이터를 DB 에 저장하는 메소드와 저장된 User 데이터를 가져오는 메소드를 가지고 있다.
+구현된 UserDao 는 User 데이터를 DB 에 저장하는 add 메소드와 저장된 User 데이터를 가져오는 get 메소드를 가지고 있다.
 
 ```java
 public class UserDao {
 
   public void add(User user) throws ClassNotFoundException, SQLException {
-
     // DB 연결을 위한 커넥션을 가져온다.
     Class.forName("com.mysql.jdbc.Driver");
     Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook?characterEncoding=UTF-8", "spring", "book");
@@ -83,16 +85,15 @@ public class UserDao {
     ps.setString(2, user.getName());
     ps.setString(3, user.getPassword());
 
-    // 작업한다.(데이터를 DB 에 추가한다.)
+    // 데이터를 DB 에 추가한다.
     ps.executeUpdate();
 
-    // statement 와 connection 을 반환한다.
+    // resultSet, prepareStatement, connection 을 반환한다.
     ps.close();
     c.close();
   }
 
   public User get(String id) throws ClassNotFoundException, SQLException {
-
     // DB 연결을 위한 커넥션을 가져온다.
     Class.forName("com.mysql.jdbc.Driver");
     Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook?characterEncoding=UTF-8", "spring", "book");
@@ -101,7 +102,6 @@ public class UserDao {
     PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
     ps.setString(1, id);
 
-    // 작업한다.
     // 데이터를 DB 에서 가져온다.
     ResultSet rs = ps.executeQuery();
     rs.next();
@@ -112,7 +112,7 @@ public class UserDao {
     user.setName(rs.getString("name"));
     user.setPassword(rs.getString("password"));
 
-    // statement 와 connection 을 반환한다.
+    // resultSet, prepareStatement, connection 을 반환한다.
     rs.close();
     ps.close();
     c.close();
@@ -126,7 +126,7 @@ public class UserDao {
 
 ### 1.1.3 main() 을 이용한 DAO 테스트 코드
 
-이제 UserDao 에 main() 메소드를 만들어서 UserDao 를 테스트해본다.
+만들어진 코드의 기능을 검증하기 위해 UserDao 에 main() 메소드를 만들어서 UserDao 를 테스트 해본다.
 
 ```java
 public class UserDao {
@@ -155,7 +155,7 @@ public class UserDao {
 }
 ```
 
-테스트를 실행해보면 잘 작동하는 것을 확인할 수 있다.
+테스트용 main 메소드를 실행해보면 잘 작동하는 것을 확인할 수 있다.
 
 위의 UserDao 는 기능과 테스트는 돌아가지만 안타깝게도 객체지향적으로 만들어진 코드는 아니다.
 

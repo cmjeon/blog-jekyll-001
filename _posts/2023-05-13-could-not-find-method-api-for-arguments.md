@@ -20,19 +20,19 @@ build.gradle 파일에 plugins { ... } 영역이 있다.
 
 이 영역 내에 id 'java' 를 id 'java-library' 로 변경한다.
 
-```
+```groovy
 // ASIS
 plugins {
-	id 'java'
+    id 'java'
 }
 
 ...
 ```
 
-```
+```groovy
 // TOBE
 plugins {
-	id 'java-library'
+    id 'java-library'
 }
 
 ...
