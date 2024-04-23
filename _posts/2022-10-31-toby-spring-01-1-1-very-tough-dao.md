@@ -29,6 +29,7 @@ tags:
 
 ```java
 public class User {
+
   String id;
   String name;
   String password;
@@ -51,15 +52,17 @@ public class User {
   public void setPassword(String password) {
     this.password = password;
   }
+
 }
 ```
 
-**Note:**<br>
-1장_ 오브젝트와 의존관계, 55.<br>
+<div class="notice--primary" markdown="1">
 자바빈(JavaBean)은 두 가지 관례를 따라 만들어진 오브젝트를 가리킨다.<br>
 디폴트 생성자 : 프레임워크에서 리플렉션을 이용해 오브젝트를 생성하기 위해 필요하다.<br> 
-프로퍼티 : 자바빈이 노출하는 이름을 가진 속성을 프로퍼티라고 한다. 프로퍼티는 set, get 메소드를 이용해 수정, 조회할 수 있다.
-{: .notice--primary}
+프로퍼티 : 자바빈이 노출하는 이름을 가진 속성을 프로퍼티라고 한다. 프로퍼티는 set, get 메소드를 이용해 수정, 조회할 수 있다.<br>
+<br>
+1장_ 오브젝트와 의존관계, 55.<br>
+</div>
 
 ### 1.1.2 UserDao
 
