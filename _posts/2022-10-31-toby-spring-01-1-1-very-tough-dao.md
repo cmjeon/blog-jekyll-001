@@ -25,7 +25,7 @@ tags:
 
 ### 1.1.1 User
 
-여기 User 클래스가 있다.
+사용자 정보를 저장하기 위해 자바빈 규약을 따르는 User 클래스를 만든다.
 
 ```java
 public class User {
