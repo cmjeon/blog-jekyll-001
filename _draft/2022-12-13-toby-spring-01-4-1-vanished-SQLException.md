@@ -1,6 +1,6 @@
 ---
 # layout: single
-title: "5장 서비스 추상화 - 5.1 사용자 레벨 관리 기능 추가"
+title: "4장 예외 - 4.1 사라진 SQLException"
 # excerpt: "DAO 에 트랜잭션을 적용해보면서 스프링이 어떻게 성격이 비슷한 여러 기술을 추상화하고, 일관된 방법으로 사용할 수 있도록 지원하는지 알아봅니다."
 categories:
   - "토비의 스프링 3.1"
@@ -8,63 +8,53 @@ tags:
   - "서비스 추상화"
 ---
 
-## 5.1 사용자 레벨 관리 기능 추가
+## 4.1 사라진 SQLException
 
-UserDao 에 비즈니스 로직을 추가해 봅니다.
-
-사용자 관리 기능에서 구현해야하는 비즈니스 로직은 다음과 같습니다.
-
-- 사용자의 레벨은 BASIC, SILVER, GOLD 세 가지 중 하나다.
-- 사용자가 처음 가입하면 BASIC 레벨이 되며, 이후 활동에 따라서 한 단계씩 업그레이드될 수 있다.
-- 가입 후 50회 이상 로그인을 하면 BASIC 에서 SILVER 레벨이 된다.
-- SILVER 레벨이면서 30번 이상 추천을 받으면 GOLD 레벨이 된다.
-- 사용자 레벨의 변경 작업은 일정한 주기를 가지고 일괄적으로 진행된다. 변경 작업 전에는 조건을 충족하더라도 레벨의 변경이 일어나지 않는다.
-
-### 5.1.1 필드 추가
-
-#### Level 이늄
-
-User 테이블에 레벨을 저장할 필드가 필요합니다.
-
-DB 의 필드에는 문자보다는 레벨을 코드화해서 숫자로 넣는 것이 좋습니다.
-
-반대로 소스코드에서는 숫자로 쓰는 것 보다는 문자가 좋은데, 이럴 때 이늄 Enum 을 사용하는 것이 좋습니다.
+deleteAll() 메소드의 정의를 들여다보면 JdbcTemplate 적용 이전에 있었던 throws SQLException 이 사라진 것을 알 수 있다.
 
 ```java
-public enum Level {
-  BASIC(1), 
-  SILVER(2), 
-  GOLD(3);
-
-  private final int value;
-		
-  Level(int value) {
-    this.value = value;
-  }
-
-  // 오브젝트 -> 코드
-  public int intValue() {
-    return value;
-  }
-	
-  // 코드 -> 오브젝트
-  public static Level valueOf(int value) {
-    switch(value) {
-      case 1: return BASIC;
-      case 2: return SILVER;
-      case 3: return GOLD;
-      default: throw new AssertionError("Unknown value: " + value);
-    }
-  }
+// JdbcTemplate 적용 전
+public void deleteAll() throws SQLException {
+    this. jdbcContext.executeSql("delete from users");
 }
 ```
 
-이늄 Enum 은 겉으로는 타입을 가지고 있지만 내부에는 DB 에 저장할 코드숫자를 가지고 있습니다.
+```java
+// JdbcTemplate 적용 후
+public void deleteAll() {
+    this.jdbcTemplate.update("delete from users");
+}
+```
 
-<div class="notice--primary" markdown="1">
+### 4.1.1 초난감 예외처리
+
+#### 예외 블랙홀
+
+예외가 발생하면 그것을 catch 블록을 써서 잡아내는 것까지는 좋은데 그러곤 아무것도 하지 않고 별문제 없는 것처럼 넘어가 버리는 건 정말 위험한 일이다.
+
+기능이 비정상적으로 동작하거나, 메모리나 리소스가 소진되거나 예상치 못한 다른 문제를 일으킬 수 있다.
+
+또한, 예외가 화면에 출력시키는 것만으로도 부족하다.
+
+예외는 처리되어야 하기 때문에 catch 블록을 이용해 화면에 메시지를 출력한 것은 예외를 처리한 게 아니다.
+
+예외를 처리할 때 반드시 지켜야 할 핵심 원칙은 한 가지다. 
+
+모든 예외는 적절하게 복구되든지 아니면 작업을 중단시키고 운영자 또는 개발자에게 분명하게 통보되어야 한다.
+
+굳이 예외를 잡아서 뭔가 조치를 취할 방법이 없다면 잡지 말아야 한다.
+
+메소드에 throws 선언해서 메소드 밖으로 던지고 자신을 호출한 코드에 예외처리 책임을 전가해버려라.
+
+#### 무의미하고 무책임한 throws
+
+
+
+
+**Info:**<br>
 코드는 이늄으로 관리되어야 합니다.<br>
-소스코드에서 코드를 문자나 숫자로 받게하면 엉뚱한 값이나 범위를 벗어나는 값을 넣게 될 수도 있습니다.<br>
-</div>
+소스코드에서 코드를 문자나 숫자로 받게하면 엉뚱한 값이나 범위를 벗어나는 값을 넣게 될 수도 있습니다.
+{: .notice--info}
 
 #### User 필드 추가
 
@@ -530,9 +520,9 @@ upgradeLevels() 메소드에는 아래와 같은 문제점이 있습니다.
 
 upgradeLevels() 메소드를 리팩토링하기 위해서 레벨을 업그레이드하는 기본 흐름을 만들어 봅니다.
 
-<div class="notice--primary" markdown="1">
-비즈니스 로직을 추상적인 것과 구체적인 것으로 나눌 수 있는 기준은 구현의 변경가능성입니다.<br>
-</div>
+**Info:**<br>
+비즈니스 로직을 추상적인 것과 구체적인 것으로 나눌 수 있는 기준은 구현의 변경가능성입니다.
+{: .notice--info}
 
 ```java
 public void upgradeLevels() {
@@ -623,9 +613,9 @@ public enum Level {
 
 사용자의 레벨이 바뀌는 로직도 UserService 보다 User 에서 처리하도록 합니다.
 
-<div class="notice--primary" markdown="1">
-객체의 내부 정보가 변경되는 것은 객체 스스로 다루는 것이 적절합니다.<br>
-</div>
+**Info:**<br>
+객체의 내부 정보가 변경되는 것은 객체 스스로 다루는 것이 적절합니다.
+{: .notice--info}
 
 ```java
 public class User {
@@ -689,10 +679,10 @@ public class UserService {
 
 독립적으로 테스트하도록 만든다면 테스트 코드도 단순해 집니다.
 
-<div class="notice--primary" markdown="1">
+**Info:**<br>
 객체지향적 코드는 다른 객체의 데이터를 가져와서 작업하지 않고 그 객체에 작업을 해달라고 요청합니다.<br>
-오브젝트에게 데이터를 요구하지 말고 작업을 요청하라는 것이 객체지향 프로그래밍의 가장 기본이 되는 원리입니다.<br>
-</div>
+오브젝트에게 데이터를 요구하지 말고 작업을 요청하라는 것이 객체지향 프로그래밍의 가장 기본이 되는 원리입니다.
+{: .notice--info}
 
 #### User 테스트
 

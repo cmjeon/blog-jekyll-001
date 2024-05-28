@@ -564,10 +564,10 @@ getSql() 메소드에서는 SqlRegistry 타입의 오브젝트에게 요청해�
 
 책임이 다르다면 클래스를 구분하고 각기 다른 오브젝트로 만들어지는 것이 자연스럽습니다.
 
-**Info:**<br>
+<div class="notice--info" markdown="1">
 자기참조 빈을 만들어보는 것은 책임과 관심사가 복잡하게 얽혀 있어서 확장이 힘들고 변경에 취약한 클래스를 유연한 구조로 만들려고 할 때 처음 시도해볼 수 있는 방법입니다.<br>
-이를 통해 기존의 복잡하게 얽혀 있던 코드를 책임을 가진 단위로 구분해낼 수 있습니다.
-{: .notice--info}
+이를 통해 기존의 복잡하게 얽혀 있던 코드를 책임을 가진 단위로 구분해낼 수 있습니다.<br>
+</div>
 
 ### 7.2.6 디폴트의존관계
 
@@ -655,9 +655,9 @@ public class JaxbXmlSqlReader implements SqlReader {
 
 특정 의존 오브젝트가 대부분의 환경에서 디폴트라면 디폴트 의존관계를 갖는 빈을 만들어 볼 수도 있습니다.
 
-**Info:**<br>
-디폴트 의존관계란 외부에서 DI 받지 않는 경우 기본적으로 자동 적용되는 의존관계를 말합니다.
-{: .notice--info}
+<div class="notice--info" markdown="1">
+디폴트 의존관계란 외부에서 DI 받지 않는 경우 기본적으로 자동 적용되는 의존관계를 말합니다.<br>
+</div>
 
 DefaultSqlService 를 만들고 사용할 디폴트 의존 오브젝트를 스스로 DI 하는 방식을 생각해볼 수 있습니다.
 
@@ -676,13 +676,14 @@ DefaultSqlService 가 sqlmapFile 을 받아서 내부적으로 JaxbXmlSqlReader 
 
 하지만 사용여부가 불확실한 JaxbXmlSqlReader 때문에 DefaultSqlService 가 sqlmapFile 을 가지고 있는 것은 어색합니다.
 
-**Note:**<br>
-7장_ 스프링 핵심 기술의 응용, 595.<br>
+<div class="notice--primary" markdown="1">
 외부 클래스의 프로퍼티로 정의해서 전달받는 방법 자체는 나쁘지 않지만 DefaultSqlService 에 적용하기에는 적절치 않다.<br>
 디폴트라는 건 다른 명시적인 설정이 없는 경우에 기본적으로 사용하겠다는 의미다.<br>
 DefaultSqlService 는 JaxbXmlSqlReader 를 디폴트 오브젝트로 갖고 있을 뿐, 이를 사용하지 않을 수도 있다.<br>
-따라서 반드시 필요하지않은 sqlmapFile 을 프로퍼티로 등록해두는 것은 바람직하지 못하다.
-{: .notice--primary}
+따라서 반드시 필요하지않은 sqlmapFile 을 프로퍼티로 등록해두는 것은 바람직하지 못하다.<br>
+<br>
+7장_ 스프링 핵심 기술의 응용, 595.<br>
+</div>
 
 JaxbXmlSqlReader 가 sqlmapFile 의 기본값을 가진 오브젝트를 만들도록 합니다..
 

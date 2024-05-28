@@ -10,10 +10,11 @@ tags:
 
 스프링의 3대 핵심 기술인 IoC/DI, 서비스 추상화, AOP 에 대해 간단히(?) 살펴보았습니다.
 
-**Note:**<br>
-7장_ 스프링 핵심 기술의 응용, 557.<br>
+<div class="notice--primary" markdown="1">
 [![7장 스프링 핵심 기술의 응용](/assets/images/posts/2023-01-10-toby-spring-01-7-1-detach-sql-and-dao/07-simple.png)](/assets/images/posts/2023-01-10-toby-spring-01-7-1-detach-sql-and-dao/07-simple.png)
-{: .notice--primary}
+<br>
+7장_ 스프링 핵심 기술의 응용, 557.<br>
+</div>
 
 이번 장에서는 스프링이 제공하는 세 가지 기술을 필요에 따라 응용해보면서 스프링의 개발철학과 추구하는 가치에 대해 알아보겠습니다.
 
