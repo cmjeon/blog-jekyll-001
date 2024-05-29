@@ -4,7 +4,7 @@ title: "2장 테스트 - 2.4 스프링 테스트 적용"
 categories:
   - "토비의 스프링 3.1"
 tags:
-  - "spring"
+  - "테스트"
 ---
 
 [https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)

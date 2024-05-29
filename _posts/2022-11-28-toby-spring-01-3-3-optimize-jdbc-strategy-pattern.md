@@ -4,7 +4,7 @@ title: "3장 템플릿 - 3.3 JDBC 전략 패턴의 최적화"
 categories:
   - "토비의 스프링 3.1"
 tags:
-  - "spring"
+  - "템플릿"
 ---
 
 [https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)

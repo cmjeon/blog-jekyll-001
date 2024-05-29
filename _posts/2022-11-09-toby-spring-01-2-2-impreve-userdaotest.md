@@ -4,7 +4,7 @@ title: "2장 테스트 - 2.2 UserDaoTest 개선"
 categories:
   - "토비의 스프링 3.1"
 tags:
-  - "spring"
+  - "테스트"
 ---
 
 # 2장 테스트

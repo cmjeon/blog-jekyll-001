@@ -5,7 +5,7 @@ title: "4장 예외 - 4.1 사라진 SQLException"
 categories:
   - "토비의 스프링 3.1"
 tags:
-  - "서비스 추상화"
+  - "예외"
 ---
 
 ## 4.1 사라진 SQLException
