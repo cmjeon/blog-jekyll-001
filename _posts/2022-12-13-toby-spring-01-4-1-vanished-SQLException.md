@@ -54,37 +54,37 @@ public void deleteAll() {
 
 - Error
 
-첫째는 java.lang.Error 클래스의 서브클래스이다. 에러는 시스템에 비정상적인 상황이 발생했을 때 사용된다.
+    첫째는 java.lang.Error 클래스의 서브클래스이다. 에러는 시스템에 비정상적인 상황이 발생했을 때 사용된다.
 
-애플리케이션에서는 이런 에러에 대한 처리는 신경쓰지 않는다.
+    애플리케이션에서는 이런 에러에 대한 처리는 신경쓰지 않는다.
 
 - Exception 과 체크 예외
 
-java.lang.Exception 클래스와 그 서브클래스이다. 애플리케이션 코드의 작업 중에 예외상황이 발생했을 경우에 사용된다.
+    java.lang.Exception 클래스와 그 서브클래스이다. 애플리케이션 코드의 작업 중에 예외상황이 발생했을 경우에 사용된다.
 
-Exception 클래스는 다시 체크 예외와 언체크 예외 unchecked exception 으로 구분된다.
+    Exception 클래스는 다시 체크 예외와 언체크 예외 unchecked exception 으로 구분된다.
 
-체크 예외는 Exception 클래스의 서브클래스이지만 RuntimeException 을 상속하지 않은 클래스이다.
+    체크 예외는 Exception 클래스의 서브클래스이지만 RuntimeException 을 상속하지 않은 클래스이다.
 
-언체크 예외는 Exception 클래스의 서브클래스이고 RuntimeException 클래스을 상속한 클래스이다.
+    언체크 예외는 Exception 클래스의 서브클래스이고 RuntimeException 클래스을 상속한 클래스이다.
 
-일반적으로 예외라고 하면 체크 예외라고 생각해도 된다.
+    일반적으로 예외라고 하면 체크 예외라고 생각해도 된다.
 
-체크 예외가 발생할 수 있는 메소드를 사용할 때는 catch 문으로 잡든 throws 로 던지든 반드시 예외를 처리하는 코드를 함께 작성해야 한다.
+    체크 예외가 발생할 수 있는 메소드를 사용할 때는 catch 문으로 잡든 throws 로 던지든 반드시 예외를 처리하는 코드를 함께 작성해야 한다.
 
-그렇지 않으면 컴파일 에러가 발생한다.
+    그렇지 않으면 컴파일 에러가 발생한다.
 
 - RuntimeException 과 언체크/런타임 예외
 
-java.lang.RuntimeException 클래스와 그 서브클래스이다.
+    java.lang.RuntimeException 클래스와 그 서브클래스이다.
 
-명시적인 예외처리를 강제하지 않기 때문에 언체크 예외, 런타임 예외라고 불린다.
+    명시적인 예외처리를 강제하지 않기 때문에 언체크 예외, 런타임 예외라고 불린다.
 
-런타임 예외는 주로 애플리케이션의 오류가 있을 때 발생하도록 의도된 것들이다.
+    런타임 예외는 주로 애플리케이션의 오류가 있을 때 발생하도록 의도된 것들이다.
 
-대표적으로 NullPointerException, IllegalArgumentException 등이 있다.
+    대표적으로 NullPointerException, IllegalArgumentException 등이 있다.
 
-런타임 예외는 어플리케이션이 예상하지 못했던 예외상황에서 발생한 게 아니기 때문에 굳이 catch 나 throws 를 사용하지 않아도 된다.
+    런타임 예외는 어플리케이션이 예상하지 못했던 예외상황에서 발생한 게 아니기 때문에 굳이 catch 나 throws 를 사용하지 않아도 된다.
 
 
 
