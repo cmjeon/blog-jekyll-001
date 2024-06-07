@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  blog:
+    image: jekyll/jekyll
+    container_name: github-blog
+    volumes:
+      - .:/srv/jekyll
+    ports:
+      - "4000:4000"
+    command: jekyll serve --incremental --host 0.0.0.0
