@@ -22,7 +22,7 @@ subtitle: # site tagline that appears below site title in masthead
 name: "Jeon Chang Min"
 description: "Record what I learned today"
 url: "https://cmjeon.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl: # the subpath of your site, e.g. "/blog"
+baseurl: "/" # the subpath of your site, e.g. "/blog"
 repository: cmjeon/cmjeon.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo: /assets/logos/icon-96x96.png # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
