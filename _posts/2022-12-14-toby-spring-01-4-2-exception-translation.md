@@ -139,9 +139,104 @@ JdbcTemplate 과 같이 스프링의 데이터 액세스 지원 기술을 이용
 
 ### 4.2.4 기술에 독립적인 UserDao 만들기
 
+#### 인터페이스 적용
 
+인터페이스 이름은 가장 단순하게 하고 구현 클래스는 각각의 특징을 따르는 이름을 붙인다.
 
+사용자 처리 DAO 의 이름은 UserDao 라 하고, JDBC 를 이용해 구현한 클래스의 이름을 UserDaoJdbc 라고 한다.
 
+```java
+public interface UserDao {
+  void add(User user);
+  User get(String id);
+  void deleteAll();
+  int getCount();
+}
+```
+
+```java
+public class UserDaoJdbc implements UserDao {
+  // ...
+}
+```
+
+#### 테스트 보완
+
+@Autowired 는 스프링의 컨텍스트 내에서 정의된 빈 중에서 인스턴스 변수에 주입 가능한 타입의 빈을 찾아주기 때문에 변수 선언을 UserDaoJdbc 로 변경할 필요는 없다.
+
+경우에 따라서 의도적으로 UserDaoJdbc 로 선언할 수도 있다. 
+
+중요한 것은 테스트의 관심이다. 
+
+그 구현 기술에 상관없이 DAO 의 기능이 동작하는 데만 관심이 있다면, UserDao 인터페이스로 받아서 테스트하는 편이 낫다.
+
+특정 기술을 사용한 UserDao 의 구현 내용에 관심을 가지고 테스트하려면 테스트에서 @Autowired 를 사용해서 UserDaoJdbc 같은 특정 타입의 Dao 구현을 사용해야 한다.
+
+UserDaoTest 에 중복된 키를 가진 정보를 등록했을 때 발생하는 예외를 확인해보자.
+
+```java
+@Test(expected = DataAccessException.class)
+public void duplicateKey() {
+  userDao.deleteAll();
+  
+  userDao.add(user1);
+  userDao.add(user1);
+}
+```
+
+테스트는 성공하고, DataAccessException 이 발생했다는 것을 알 수 있다.
+
+구체적으로는 DuplicateKeyException 이 발행하고, DuplicateKeyException 은 DataAccessException 의 서브클래스인 DataIntegrityViolationException 의 한 종류이다.
+
+#### DataAccessException 활용 시 주의사항
+
+DataAccessException 이 기술에 상관없이 어느 정도 추상화된 공통 예외로 변환해주긴 하지만 근본적인 한계 때문에 완벽하다고 기대할 수는 없다.
+
+스프링은 SQLException 을 DataAccessException 으로 전환하는 다양한 방법을 제공하는데, 가장 보편적인 방법은 DB 에러 코드를 이용하는 것이다.
+
+SQLException 을 코드에서 직접 전환하고 싶다면 SQLExceptionTranslator 를 구현한 SQLErrorCodeSQLExceptionTranslator 를 사용하면 된다.
+
+```java
+public class UserDaoTest {
+    @Autowired
+    DataSource dataSource;
+    
+    @Test 
+    public void sqlExceptionTranslate() {
+        dao.deleteAll();
+        
+        try {
+            dao.add(user1);
+            dao.add(user1);
+        } catch (DuplicateKeyException ex) {
+            SQLException sqlEx = (SQLException) ex.getRootCause();
+            SQLExceptionTranslator set = new SQLErrorCodeSQLExceptionTranslator(this.dataSource);
+            
+            assertThat(set.translate(null, null, sqlEx), is(DuplicateKeyException.class));
+        }
+    }
+}
+```
+
+발생된 DuplicationException 예외는 중첩된 에외로 JDBC API 에서 처음 발생한 SQLEXception 을 내부에 가지고 있고, getRootCause() 메소드를 이용하면 중첩되어 있는 SQLException 을 가져올 수 있다.
+
+주입받은 dataSource 를 이용해 SQLErrorCodeSQLExceptionTranslator 오브젝트를 만든다.
+
+그리고 오브젝트의 translate() 메소드에 SQLException 을 파라미터로 넣어서 호출하면 DataAccessException 타입의 에외로 변환해준다.
+
+변환된 DataAccessException 이 정확히 DuplicateKeyException 인지 확인하면 된다.
+
+## 4.3 정리
+
+- 예외를 잡아서 아무런 조치를 취하지 않거나 의미 없는 throws 선언을 남발하는 것은 위험하다. 
+- 예외는 복구하거나 예외처리 오브젝트로 의도적으로 전달하거나 적절한 예외로 전환해야 한다.
+- 좀 더 의미 있는 예외로 변경하거나, 불필요한 catch/throws 를 피하기 위해 런타임 예외로 포장하는 두 가지 방법의 예외 전환이 있다.
+- 복구할 수 없는 예외는 가능한 한 빨리 런타임 예외로 전환하는 것이 바람직하다.
+- 애플리케이션의 로직을 담기 위한 예외는 체크 예외로 만든다.
+- JDBC 의 SOLException 은 대부분 복구할 수 없는 예외이므로 런타임 예외로 포장해야 한다.
+- SQLException 의 에러 코드는 DB에 종속되기 때문에 DB에 독립적인 예외로 전환될 필요가 있다.
+- 스프링은 DataAccessException 을 통해 DB에 독립적으로 적용 가능한 추상화된 런타임 예외 계층을 제공한다.
+- DAO 를 데이터 액세스 기술에서 독립시키려면 인터페이스 도입과 런타임 예외 전환, 기술에 독립적인 추상화된 예외로 전환이 필요하다.
 
 
 
