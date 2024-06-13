@@ -108,6 +108,32 @@ public class UserServiceImpl implements UserService {
 
 이제 트랜잭션 경계설정 기능을 담은 UserServiceTx 를 만들어보자.
 
+UserServiceTx 는 UserService 를 구현한 다른 오브젝트에게 비즈니스 작업을 위임한다.
+
+```java
+public class UserServiceTx implements UserService {
+
+    UserService userService;
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void add(User user) {
+        userService.add(user);
+    }
+
+    public void upgradeLevels() {
+        userService.upgradeLevels();
+    }
+
+}
+```
+
+UserServiceTx 는 UserService 인터페이스를 구현했으니, 클라이언트에 대해 UserService 타입 오브젝트의 하나로 행세할 수 있다.
+
+
+
 
 
 
