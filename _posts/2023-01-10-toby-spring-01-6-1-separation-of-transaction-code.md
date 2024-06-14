@@ -132,6 +132,83 @@ public class UserServiceTx implements UserService {
 
 UserServiceTx 는 UserService 인터페이스를 구현했으니, 클라이언트에 대해 UserService 타입 오브젝트의 하나로 행세할 수 있다.
 
+이제 트랜잭션 코드를 부여할 수 있다.
+
+```java
+public class UserServiceTx implements UserService {
+
+    UserService userService;
+
+    PlatformTransactionManager transactionManager;
+
+    public void setTransactionManager(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
+    }
+
+    // ...
+
+    public void upgradeLevels() {
+        TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
+        try {
+            userService.upgradeLevels();
+            this.transactionManager.commit(status);
+        } catch (RuntimeException e) {
+            this.transactionManager.rollback(status);
+            throw e;
+        }
+    }
+
+}
+```
+
+#### 트랜잭션 적용을 위한 DI 설정
+
+기존의 userService 빈이 의존하고 있던 transactionManager 는 userServiceTx 가 의존하게 하고, userDao 와 mailSender 는 userServiceImpl 빈이 의존하도록 변경한다.
+
+#### 트랜잭션 분리에 따른 테스트 수정
+
+스프링의 설정파일에는 UserService 라는 인터페이스 타입을 가진 빈이 2개 존재한다.
+
+같은 타입의 빈이 두 개라면 @Autowired 를 적용한 경우 어떤 빈을 가져올까? @Autowired 는 기본적으로 타입을 이용해 빈을 찾지만 만약 타입으로 하나의 빈을 결정할 수 없는 경우에는 필드 이름을 이용해 빈을 찾는다.
+
+MailSender 를 DI 해줄 대상을 구체적으로 알고 있어야 하기 때문에 UserServiceImpl 클래스의 오브젝트를 가져올 필요가 있다.
+
+목 오브젝트를 이용해 수동 DI 를 적용하는 테스트라면 어떤 클래스의 오브젝트인지 분명하게 알 필요가 있다.
+
+UserServiceImpl 클래스 타입의 변수를 선언하고 @Autowired 를 지정해서 해당 클래스로 만들어진 빈을 주입받도록 한다.
+
+upgradeLevels() 테스트 메소드의 MailSender 의 목 오브젝트를 userServiceImpl 빈에 설정해준다.
+
+TestService 오브젝트를 UserServiceTx 오브젝트에 수동 DI 시킨 후 트랜잭션 기능까지 포함된 UserServiceTx 의 메소드를 호출해서 테스트를 수행한다.
+
+```java
+@Test
+public void upgradeAllOrNothing() throws Exception {
+    TestUserService testUSerService = new TestUserService(users.get(3).gretId());
+    testUSerService.setUserDao(userDao);
+    testUserService.setMailSender(mailSender);
+    
+    UserServiceTx userServiceTx = new UserServiceTx();
+    userServiceTx.setTransactionManager(transactionManager);
+    userServiceTx.setUserService(testUserService);
+    
+    userDao.deleteAll();
+    for(User user : users) userDao.add(user);
+    
+    try {
+        userServiceTx.upgradeLevels();
+        fail("TestUserServiceException expected");
+    }
+    ...
+}
+```
+
+TestUserService 는 이제 UserServiceImpl 클래스를 상속하면 된다.
+
+#### 트랜잭션 경계설정 코드 분리의 장점
+
+
+
 
 
 
