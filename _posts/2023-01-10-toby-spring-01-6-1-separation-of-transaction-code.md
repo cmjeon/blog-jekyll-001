@@ -15,15 +15,17 @@ AOP 는 Ioc/DI, 서비스 추상화와 더불어 스프링의 3대 기반기술�
 
 비즈니스 로직이 주인이어야 할 메소드 안에 이름도 길고 무시무시하게 생긴 트랜잭션 코드가 더 많은 자리를 차지하고 있는 모습이 못마땅하다.
 
-트랜잭션의 경계는 분명 비즈니스 로직의 전후에 설정돼야 하는 것이 분명하니 UserService 의 메소드에 두는 것을 거부할 명분이 없다.
+그래도 트랜잭션의 경계는 분명 비즈니스 로직의 전후에 설정돼야 하는 것이 분명하니 UserService 의 메소드에 두는 것을 거부할 명분이 없다.
 
 ### 6.1.1 메소드 분리
 
 트랜잭션이 적용된 코드의 특징은 비즈니스 로직 코드를 사이에 두고 트랜잭션 시작과 종료를 담당하는 코드가 앞뒤에 위치하고 있다는 점과 트랜잭션 경계설정의 코드와 비즈니스 로직 코드 간에 서로 주고 받는 정보가 없다는 점이다.
 
-트랜잭션 코드와 비즈니스 코드는 성격이 다를 뿐 아니라 서로 주고받는 것도 없는, 완벽하게 독립적인 코드다.
+트랜잭션 코드와 비즈니스 코드는 성격이 다를 뿐 아니라 서로 주고받는 것도 없는, 서로 완벽하게 독립적인 코드다.
 
-트랜잭션 코드와 비즈니스 코드를 분리해보자
+이제 트랜잭션 코드와 비즈니스 코드를 서로 분리해보자.
+
+upgradeLevelsInternal() 메소드를 만들고 비즈니스 코드를 내부로 옮긴다.
 
 ```java
 public void upgradeLevels() throws Exception {
@@ -37,6 +39,7 @@ public void upgradeLevels() throws Exception {
     }
 }
 
+// 비즈니스 코드
 private void upgradeLevelsInternal() {
     List<User> users = userDao.getAll();
     for (User user : users) {
@@ -49,7 +52,7 @@ private void upgradeLevelsInternal() {
 
 ### 6.1.2 DI를 이용한 클래스의 분리
 
-여전히 트랜잭션 코드가 UserService 안에 있다.
+트랜잭션코드와 비즈니스 코드가 메소드로 분리되었지만, 여전히 트랜잭션 코드가 UserService 안에 있다.
 
 트랜잭션 코드를 UserService 밖으로 뽑아내 보자.
 
