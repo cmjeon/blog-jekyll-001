@@ -202,7 +202,7 @@ public void upgradeAllOrNothing() throws Exception {
         userServiceTx.upgradeLevels();
         fail("TestUserServiceException expected");
     }
-    ...
+    // ...
 }
 ```
 
@@ -210,10 +210,9 @@ TestUserService 는 이제 UserServiceImpl 클래스를 상속하면 된다.
 
 #### 트랜잭션 경계설정 코드 분리의 장점
 
+트랜잭션 경계설정 코드의 분리와 DI 를 통한 연결은 다음과 같은 장점이 있다.
 
+첫째, 이제 비즈니스 로직을 담당하고 있는 UserServiceImpl 의 코드를 작성할 때 트랜잭션 관련 내용에는 신경쓰지 않아도 된다.
 
-
-
-
-
+둘째, 비즈니스 로직 테스트를 손쉽게 만들어낼 수 있다.
 
