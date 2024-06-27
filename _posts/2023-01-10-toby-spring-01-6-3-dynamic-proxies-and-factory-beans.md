@@ -101,7 +101,8 @@ public class UserServiceTx implements UserService {
     // ...
     public void upgradeLevels() {
         // 부가기능 수행
-        TransactionStatus status = this.transactionManager.getTransaction(new DefaultTransactionDefinition());
+      TransactionStatus status = this.transactionManager
+              .getTransaction(new DefaultTransactionDefinition());
         try {
             userService.upgradeLevels(); // 타깃으로 요청을 위임
             this.transactionManager.commit(status);
@@ -147,6 +148,127 @@ int length2 = lengthMethod.invoke(name);
 
 #### 프록시 클래스
 
+다이내믹 프록시를 이용한 프록시를 만들어보자.
+
+```java
+// Hello 인터페이스
+interface Hello {
+
+  String sayHello(String name);
+
+  String sayHi(String name);
+
+  String sayThankYou(String name);
+
+}
+```
+
+```java
+// Hello 타깃 클래스
+public class HelloTarget implements Hello {
+
+  public String sayHello(String name) {
+    return "Hello " + name;
+  }
+
+  public String sayHi(String name) {
+    return "Hi " + name;
+  }
+
+  public String sayThankYou(String name) {
+    return "Thank You " + name;
+  }
+
+}
+```
+
+```java
+// 테스트
+@Test
+public void simpleProxy() {
+  Hello hello = new HelloTarget();
+  assertThat(hello.sayHello("Toby"), is("Hello Toby"));
+  assertThat(hello.sayHi("Toby"), is("Hi Toby"));
+  assertThat(hello.sayThankYou("Toby"), is("Thank You Toby"));
+}
+```
+
+타깃인 HelloTarget 에 부가기능을 추가하는 HelloUppercase 프록시를 만들어 본다.
+
+HelloUppercase 프록시는 Hello 인터페이스를 구현하고, Hello 타입의 타깃 오브젝트를 받아서 저장해둔다.
+
+프록시의 구현 메소드에서는 타깃 오브젝트의 메소드를 호출한 뒤에 결과를 대문자로 바꿔주는 부가기능을 적용한다.
+
+```java
+public class HelloUppercase implements Hello {
+
+  Hello hello;
+
+  public HelloUppercase(Hello hello) {
+    this.hello = hello;
+  }
+
+  public String sayHello(String name) {
+    String helloString = hello.sayHello(name); // 위임
+    return helloString.toUpperCase(); // 부가기능
+  }
+
+  public String sayHello(String name) {
+    String hiString = hello.sayHi(name); // 위임
+    return hiString.toUpperCase(); // 부가기능
+  }
+
+  public String sayHello(String name) {
+    String thankYouString = hello.sayThankYou(name); // 위임
+    return thankYouString.toUpperCase(); // 부가기능
+  }
+
+}
+```
+
+테스트 코드를 추가하고 프록시가 동작하는지 확인해보자
+
+```java
+@Test
+public void proxiedHello() {
+    Hello proxiedHello = new HelloUppercase(new HelloTarget());
+    assertThat(proxiedHello.sayHello("Toby"), is("HELLO TOBY"));
+    assertThat(proxiedHello.sayHi("Toby"), is("HI TOBY"));
+    assertThat(proxiedHello.sayThankYou("Toby"), is("THANK YOU TOBY"));
+}
+```
+
+이 프록시는 프록시 적용의 일반적인 문제점 두 가지를 모두 갖고 있다.
+
+인터페이스의 모든 메소드를 구현해 위임하도록 코드를 만들어야 하고, 대문자로 바꿔주는 부가기능이 모든 메소드에 중복되어 나타난다.
+
+#### 다이내믹 프록시 적용
+
+HelloUppercase 를 다이내믹 프록시를 이용해 만들어보자.
+
+다이내믹 프록시는 프록시 팩토리에 의해 런타임 시 다이내믹하게 만들어지는 오브젝트다.
+
+프록시 팩토리에게 인터페이스 정보만 제공해주면 해당 인터페이스를 구현한 프록시 오브젝트를 만들어준다.
+
+이 덕분에 프록시를 만들 때 인터페이스를 모두 구현해가면서 클래스를 정의하는 수고를 덜 수 있다.
+
+클라이언트는 여전히 인터페이스를 통해 다이내믹 프록시 오브젝트로 부가기능을 사용할 수 있다.
+
+다이내믹 프록시가 인터페이스 구현 클래스의 오브젝트를 만들어주지만, 필요하나 부가기능을 제공하는 코드는 직접 작성해야 한다.
+
+부가기능은 InvocationHandler 를 구현한 오브젝트에 작성한다.
+
+InvocationHandler 는 메소드 한 개만 가진 인터페이스이다.
+
+```java
+public Object invoke(Object proxy, Method method, Object[] args);
+```
+
+invoke() 메소드는 Method 인터페이스와 파라미터를 method 와 args 로 각각 받는다.
+
+다이내믹 프록시 오브젝트는 클라이언트의 모든 요청을 리플렉션 정보로 변환해서 invoke() 메소드로 넘기는 역할을 맡는다.
+
+이를 통해 인터페이스의 모든 요청이 하나의 메소드로 집중되기 때문에 중복을 제거할 수 있다.
 
 
 
