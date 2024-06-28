@@ -529,7 +529,35 @@ public class MessageFactoryBean implements FactoryBean<Message> {
 
 #### 팩토리 빈의 설정 방법
 
+팩토리 빈의 설정방법은 일반 빈과 다르지 않다.
 
+```xml
+<bean id="message" class="springbook.learningtest.spring.factorybean.MessageFactoryBean">
+  <property name="text" value="Factory Bean" />
+</bean>
+```
+
+다만 message 빈 오브젝트의 타입이 Message 타입이라는 점이 다르다.
+
+Message 빈의 타입은 MessageFactoryBean 의 getObjectType() 메소드가 돌려주는 타입으로 결정된다.
+
+그리고 getObjcet() 메소드가 생성해주는 오브젝트가 message 빈의 오브젝트가 된다.
+
+```java
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration
+public class FactoryBeanTest {
+    @Autowired 
+    ApplicationContext context;
+    
+    @Test 
+    public void getMessageFromFactoryBean() {
+        Object message = context.getBean("message");
+        assertThat(message, is(Message.class)); // FactoryBean 이 아니라 FactoryBean 이 생성하는 오브젝트를 가져온다.
+        assertThat(((Message) message).getText(), is("Factory Bean")); // FactoryBean 이 생성한 오브젝트의 동작을 확인한다.
+    }
+}
+```
 
 
 
