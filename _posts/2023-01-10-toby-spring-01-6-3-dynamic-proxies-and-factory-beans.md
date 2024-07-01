@@ -559,5 +559,150 @@ public class FactoryBeanTest {
 }
 ```
 
+빈 설정의 class 애트리뷰트에는 MessageFactoryBean 이지만, getBean() 이 리턴한 오브젝트는 Message 타입인 것을 확인할 수 있다.
+
+이것으로 FactoryBean 인터페이스를 구현한 클래스를 스프링 빈으로 만들어두면 getObject() 메소드가 생성해주는 오브젝트가 실제 빈으로 대치된다는 것을 알 수 있다.
+
+만약 팩토리 빈이 만들어주는 빈 오브젝트가 아닌 팩토리 빈 자체를 가져오고 싶을 때는 getBean("&message") 를 사용하면 된다.
+
+```java
+    @Test 
+    public void getMessageFromFactoryBean() {
+        Object factory = context.getBean("&message");
+        assertThat(factory, is(MessageFactoryBean.class));
+    }
+```
+
+#### 다이내믹 프록시를 만들어주는 팩토리 빈
+
+Proxy 의 newProxyInstance() 메소드를 통해서만 생성이 가능한 다이내믹 프록시 오브젝트는 팩토리 빈을 사용하여 스프링의 빈으로 만들어줄 수가 있다.
+
+스프링 빈에 팩토리 빈과 UserServiceImpl 을 등록한다.
+
+팩토리 빈은 타깃 오브젝트인 UserServiceImpl 과 부가기능에 필요한 TransactionManager 을 프로퍼티를 통해 DI 받아둔다.
+
+그리고 다이내믹 프록시 생성 시 TransactionHandler 을 생성하고, DI 받은 UserServiceImpl, TransactionManager 과 Pattern 을 설정한다.
+
+```java
+public class TxProxyFactoryBean implements FactoryBean<Object> {
+    Object target;
+    PlatformTransactionManager transactionManager;
+    String pattern;
+    Class<?> serviceInterface; // UserService 외의 인터페이스를 가진 타깃에 적용할 수 있다.
+    
+    public void setTarget(Object target) {
+        this.target = target;
+    }
+    
+    public void setTransactionManager(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
+    }
+    
+    public void setPattern(String pattern) {
+        this.pattern = pattern;
+    }
+    
+    public void setServiceInterface(Class<?> serviceInterface) {
+        this.serviceInterface = serviceInterface;
+    }
+    
+    // FactoryBean 인터페이스 구현체 생성 메소드
+    public Object getObject() throws Exception {
+        TransactionHandler txHandler = new TransactionHandler();
+        txHandler.setTarget(target);
+        txHandler.setTransactionManager(transactionManager);
+        txHandler.setPattern(pattern);
+
+        return Proxy.newProxyInstance(
+                getClass().getClassLoader(),
+                new Class[]{serviceInterface},
+                txHandler);
+    }
+    
+    public Class<?> getObjectType() {
+        return serviceInterface; // 팩토리 빈이 생성하는 오브젝트 타입은 DI 받은 인터페이스 타입에 따라 달라짐
+    }
+    
+    public boolean isSingleton() {
+        return false;
+    }
+}
+```
+
+TxProxyFactoryBean 팩토리 빈이 만드는 다이내믹 프록시는 구현 인터페이스나 타깃의 종류에 제한이 없기 때문에 트랜잭션 부가기능이 필요한 오브젝트를 위한 프록시를 만들 때 재사용이 가능하다.
+
+이제 UserServiceTx 빈 설정을 대신해 TxProxyFactoryBean 을 빈으로 등록한다.
+
+```xml
+<bean id="userService" class="springbook.user.service.TxProxyFactoryBean">
+    <property name="target" ref="userServiceImpl"/>
+    <property name="transactionManager" ref="transactionManager"/>
+    <property name="pattern" value="upgradeLevels"/>
+    <property name="serviceInterface" value="springbook.user.service.UserService"/>
+</bean>
+```
+
+serviceInterface 는 Class 타입이고, value 를 이용해 설정한다.
+
+#### 트랜잭션 프록시 팩토리 빈 테스트
+
+UserServiceTest 테스트를 살펴보자.
+
+add() 는 @Autowired 로 가져온 userService 빈을 사용하기 때문에 TxProxyFactoryBean 이 만들어주는 다이내믹 프록시를 통해  UserService 기능을 사용한다.
+
+upgradeLevels() 와 mockUpgradeLevels() 은 목 오브젝트를 이용해 트랜잭션과 무관한 단위 테스트이다.
+
+upgradeAllOrNothing() 의 경우 수동 DI 를 통해 다이내믹 프록시를 만들어 사용하니 팩토리 빈이 적용되지 않는다.
+
+TxProxyFactoryBean 이 다이내믹 프록시를 기대한대로 만들어주는지를 확인하려면 트랜잭션 기능을 테스트해봐야 한다.
+
+upgradeAllOrNothing() 을 테스트하기 위해 TestUserService 오브젝트를 타깃 오브젝트로 대신 사용해야하는데, 스프링 빈에서 생성되는 프록시 오브젝트에 대한 테스트를 해야하기 때문에 타깃 오브젝트를 바꾸기가 간단하지 않다.
+
+이를 해결하기 위해 TestUserService 를 사용하는 테스트용 설정을 별도로 만들거나 프록시 팩토리 빈 코드를 확장하는 방법도 가능하다.
+
+가장 쉬운 방법은 스프링 빈으로 등록된 TxProxyFactoryBean 을 가져와서 target 프로퍼티를 재구성해주는 방법이다.
+
+컨텍스트의 설정을 변경해버리기는 하지만 방법을 알아보자.
+
+```java
+public class UserServiceTest {
+    @Autowired 
+    ApplicationContext context;
+    
+    // ...
+    
+    @Test
+    @DirtiesContext
+    public void upgradeAllOrNothing() throws Exception {
+        TestUserService testUserService = new TestUserService(users.get(3).getId());
+        testUserService.setUserDao(userDao);
+        testUSerService.setMailSender(mailSender);
+        UserService userService = (UserService) context.getBean("userService");
+        TxProxyFactoryBean txProxyFactoryBean = context.getBean("&userService", TxProxyFactoryBean.class);
+        txProxyFactoryBean.setTarget(testUserService);
+        UserService txUserService = (UserService) txProxyFactoryBean.getObject();
+        
+        userDao.deleteAll();
+        for(User user : users) userDao.add(user);
+        
+        try {
+            txUserService.upgradeLevels();
+            fail("TestUserServiceException expected");
+        } catch(TestUserServiceException e) {
+        }
+        
+        checkLevelUpgraded(users.get(1), false);
+    }
+}
+```
+
+타깃 오브젝트를 변경해주기 위해 팩토리 빈을 활용해 프록시를 다시 생성해 주었다.
+
+TxProxyFactoryBean 은 재사용이 가능해서 트랜잭션 부가기능이 필요한 빈이 추가될 때마다 빈 설정을 추가해주면 된다.
+
+### 6.3.5 프록시 팩토리 빈 방식의 장점과 한계
+
+
+
 
 
