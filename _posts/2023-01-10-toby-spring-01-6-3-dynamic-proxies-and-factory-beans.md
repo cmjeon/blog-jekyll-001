@@ -702,7 +702,71 @@ TxProxyFactoryBean 은 재사용이 가능해서 트랜잭션 부가기능이 �
 
 ### 6.3.5 프록시 팩토리 빈 방식의 장점과 한계
 
+부가기능을 가진 프록시를 다이내믹하게 생성해주는 팩토리 빈을 만들어두면 타깃의 타입에 상관없이 재사용할 수 있는 장점이 있다.
 
+CoreServiceImpl 에 트랜잭션 부가기능을 부여하는 빈 설정을 만들어보자
 
+기존의 빈 설정은 아래와 같다.
 
+```xml
+<bean id="coreService" clas="complex.module.CoreServiceImpl">
+  <property name="coreDao" ref="coreDao"/>
+</bean>
+```
+
+TxProxyFactoryBean 을 이용해 coreServiceImpl 에 트랜잭션 부가기능을 부여한다.
+
+먼저 기존의 CoreServiceImpl 의 id 를 변경한다.
+
+```xml
+<bean id="coreServiceTarget" class="complex.module.CoreServiceImpl">
+  <property name="coreDao" ref="coreDao"/>
+</bean>
+```
+
+그리고 TxProxyFactoryBean 을 이용해 트랜잭션 부가기능을 가진 Proxy 빈을 만들어준다.
+
+```xml
+<bean id="coreService" class="springbook.service.TxProxyFactoryBean">
+    <property name="target" ref="coreServiceTarget"/>
+    <property name="transactionManager" ref="transactionManager"/>
+    <property name="pattern" value=""/>
+    <property name="serviceInterface" value="complex.module.CoreService"/>
+</bean>
+```
+
+이제 coreService 라는 빈을 DI 받아 사용하는 클라이언트는 프록시가 제공해주는 트랜잭션 부가기능이 적용된 CoreService 를 이용할 수 있게 되었다.
+
+프록시 팩토리 빈을 이용하면 프록시 기법을 아주 빠르고 효과적으로 적용할 수 있다.
+
+#### 프록시 팩토리 빈 방식의 장점
+
+데코레이터 패턴이 적용된 프록시를 활용하지 못하는 두 가지 문제점이 있다고 하였다.
+
+1. 프록시를 적용할 대상이 구현하고 있는 인터페이스를 구현하는 프록시 클래스를 일일히 만들어야 한다는 번거로움
+2. 부가적인 기능이 여러 메소드에 반복적으로 나타나는 문제
+
+프록시 팩토리 빈은 이 두가지 문제를 해결해준다.
+
+다이내믹 프록시에 팩토리 빈을 이용한 DI 까지 더해주면 번거로운 다이내믹 프록시 생성 코드를 제거할 수 있고, 다양한 타깃 오브젝트에 적용할 수 있다.
+
+게다가 하나의 핸들러 메소드를 구현하여 부가기능을 부여해줄 수 있다.
+
+#### 프록시 팩토리 빈의 한계
+
+하나의 클래스 안에 존재하는 여러 개의 메소드에 부가기능을 한 번에 제공하는 것은 프록시 팩토리 빈으로 가능하다.
+
+하지만 다양한 클래스의 메소드에 적용할 필요가 있다면 프록시 팩토리 빈의 설정이 중복된다.
+
+게다가 하나의 타깃에 여러 개이 부가기능을 적용하려고 할 때도 문제가 된다.
+
+빈 설정이 부가기능의 수만큼 필요하게 된다.
+
+코드 수정 없이 설정의 변경만으로 수천 개 이상의 메소드에 새로운 기능을 추가할 수 있다는 점은 대단한 일이지만, 결국 설정파일이 급격히 복잡해지는 것은 바람직하지 못하다.
+
+또 다른 문제는 handler 오브젝트가 프록시 팩토리 빈 개수만큼 만들어진다는 점이다.
+
+타깃 오브젝트가 달라질 때 마다 새로운 handler 오브젝트가 필요하게 된다.
+
+handler 오브젝트의 중복을 업애고 모든 타깃에 적용 가능한 싱글톤 빈으로 만드는 것을 고민해볼 수 있다.
 
