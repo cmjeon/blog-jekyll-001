@@ -160,6 +160,103 @@ DefaultAdviserAutoProxyCreator 는 한줄로 빈 등록을 해준다.
 
 #### 어드바이스와 어드바이저
 
+이제는 ProxyFactoryBean 으로 등록한 빈에서처럼 trasactionAdvisor 를 명시적으로 DI 하는 빈은 존재하지 않는다.
 
+대신 어드바이저를 이용하는 자동 프록시 생성기인 DefaultAutoProxyCreator 에 의해 자동수집되고, 프록시 대상 선정 과정에 참여하며, 자동생성된 프록시에 다이내믹하게 DI 되어 동작하는 어드바이저가 된다.
+
+#### ProxyFactoryBean 제거와 서비스 빈의 원상복구
+
+이제 더이상 명시적인 프록시를 등록할 필요가 없기 때문에 userService 는 다시 원래의 id 인 userService 로 돌아올 수 있다.
+
+```xml
+<bean id="userService" class="springbook.user.service.UserServiceImpl">
+    <property name="userDao" ref="userDao"/>
+    <property name="mailSender" ref="mailSender"/>
+</bean>
+```
+
+#### 자동 프록시 생성기를 사용하는 테스트
+
+이제 @Autowired 를 통해 컨텍스트에서 가져오는 UserService 타입 오브젝트는 트랜잭션이 적용된 프록시이어야 한다.
+
+upgradeAllOrNothing() 테스트를 위해 강제 예외 발생용 TestUserService 클래스를 빈으로 등록할 필요가 있다.
+
+TestUserService 의 이름을 TestUserServiceImpl 로 변경한다.
+
+그리고 예외를 발생시킬 대상인 네 번째 사용자 아이디를 클래스에 넣어서 고정한다.
+
+```java
+static class TestUSerServiceImpl extends UserServiceImpl {
+    private String id = "madnite1";
+    
+    protected void upgradeLevel(User user) {
+        if (user.getId().equals(this.id)) throw new TestUserServiceException();
+        super.upgradeLevel(user);
+    }
+}
+```
+
+이제 TestUserServiceImpl 을 빈으로 등록한다.
+
+```xml
+<bean id="testUserService" class="springbook.user.service.UserServiceTest$TestUserServiceImpl" parent="userService"/>
+```
+
+클래스 이름에 사용한 $ 기호는 스태틱 멤버 클래스를 지정할 때 사용하는 것이다.
+
+parent 애트리뷰트를 사용하면 다른 빈 설정의 내용을 상속받을 수 있다.
+
+클래스는 물론이고, 프로퍼티 설정도 모두 상속받는다.
+
+이제 테스트코드에서 upgradeAllOrNothing() 메소드에서는 testUserService 빈을 사용하도록 수정하자
+
+```java
+public class UserServiceTest {
+    @Autowired
+    UserService userService;
+    
+    @Autowired
+    UserService testUserService;
+    
+    @Test
+    public void upgradeAllOrNothing() {
+        userDao.deleteAll();
+        for(User user : users) userDao.add(user);
+        
+        try {
+            this.testUserService.upgradeLevels();
+            fail("TestUserServiceException expected");
+        } catch (TestUserServiceException e) {
+            // TestUserService 는 업그레이드 작업 중에 예외가 발생해야 함
+        }
+        checkLelveUpgraded(users.get(1), false);
+    }
+}
+```
+
+설정과 테스트 코드가 깔끔해졌다.
+
+#### 자동생성 프록시 확인
+
+트랜잭션 어드바이스를 적용한 프록시 자동생성기를 빈 후처리기 메커니즘을 통해 적용했다.
+
+첫째, 트랜잭션이 필요한 빈에 트랜잭션 부가기능이 적용되었는가이다.
+
+upgradeAllOrNothing() 테스트를 통해 검증이 가능하다.
+
+둘째, 아무 빈에나 트랜잭션 부가기능이 적용된 것이 아닌지 확인해야 한다.
+
+포인트컷 빈의 클래스 이름 패턴을 변경해서 testUserService 에 트랜잭션이 적용되지 않게 해보자.
+
+마지막으로 DefaultAdvisorAutoProxyCreator 에 의해 userService 빈이 프록시로 바꿔치기 되었다면 getBean("userService") 로 가져온 오브젝트는 TestUserService 타입이 아니라 JDK 의 Proxy 타입일 것이다.
+
+```java
+@Test
+public void advisorAdutoProxyCreator() {
+    assertThat(this.userService, is(java.lang.reflect.Proxy.class));
+}
+```
+
+### 6.5.3 포인트컷 표현식을 이용한 포인트컷
 
 
