@@ -259,4 +259,112 @@ public void advisorAdutoProxyCreator() {
 
 ### 6.5.3 포인트컷 표현식을 이용한 포인트컷
 
+스프링은 포인트컷의 클래스와 메소드를 선정하는 알고리즘을 작성할 수 있는 방법을 제공한다.
+
+표현식 언어를 사용해서 포인트컷을 작성할 수 있도록 하는 방법이라서 포인트컷 표현식 pointcut expression 라고 부른다.
+
+#### 포인트컷 표현식
+
+AspectJExpressionPointcut 클래스를 사용해서 포인트컷 표현식을 지원하는 포인트컷을 적용할 수 있다.
+
+AspectJExpressionPointcut 은 클래스와 메소드의 선정 알고리즘을 포인트컷 표현식을 이용해서 한 번에 지정이 가능하다.
+
+학습 테스트를 만들어보자.
+
+포인트컷의 선정 후보가 될 여러 개의 메소드를 가진 클래스를 준비한다.
+
+```java
+public class Target implements TargetInterface {
+    public void hello() {}
+    public void hello(String a) {}
+    public int minus(int a, int b) throws RuntimeException {
+        return a - b;
+    }
+    public int plus(int a, int b) {
+        return a + b;
+    }
+    public void method() {}
+}
+```
+
+여러 개의 클래스에도 포인트컷이 선정되는지 확인하기 위해 Bean 클래스를 만든다.
+
+```java
+public class Bean() {
+
+    public void method() throws RuntimeException {
+    }
+
+}
+```
+
+#### 포인트컷 표현식 문법
+
+AspectJ 포인트컷 표현식은 포인트컷 지시자를 이용해 작성하는데, 가장 대표적인 것은 execution() 이다.
+
+execution() 지시자를 사용한 포인트컷 표현식의 문법구조는 기본적으로 다음과 같다.
+
+```java
+execution([접근제한자 패턴] 리턴값 타입패턴 [패키지나 클래스 타입패턴.]이름패턴 (타입패턴|"..", ...)) [throws 예외 패턴])
+```
+
+[] 괄호는 옵션으로 생략이 가능하고, | 은 OR 조건이다.
+
+예를 들어 Target.minus() 메소드의 풀 시그니처를 확인해보자.
+
+```java
+System.out.println(Target.class.getMethod("minus", int.class, int.class));
+// public int springbook.learningtest.spring.pointcut.Target.minus(int, int) throws java.lang.RuntimeException
+```
+
+출력된 내용을 살펴본다
+
+- public
+  - 접근제한자다. public, protected, private 등이 올 수 있다. 생략하면 이 항목에 대해서 조건을 부여하지 않는다는 뜻이다.
+- int
+  - 리턴값이 타입이다. 필수항목이다. `*` 를 써서 모든 타입을 다 선택하겠다고 해도 된다.
+- springbook.learningtest.spring.pointcut.Target
+  - 패키지나 클래스 타입이다. 패키지명이나 클래스명을 지정할 수 있다. 생략하면 모든 타입을 다 허용하겠다는 뜻이다.
+  - `*` 을 사용하거나 `..` 을 사용해서 한 번에 여러 개의 패키지를 선택할 수도 있다.
+- minus
+  - 메소드 이름이다. 필수항목이다. `*` 를 써서 모든 메소드명을 다 선택하겠다고 해도 된다.
+- (int, int)
+  - 메소드 파라미터의 타입 패턴이다. 필수항목이다. `..` 을 넣으면 파라미터이 타입과 개수에 상관없이 모두 다 허용하는 패턴이 된다.
+- throws java.lang.RuntimeException
+  - 예외 패턴이다. 생략가능하다.
+
+포인트컷 표현식을 만들고 검증해보는 테스트를 작성해보자
+
+```java
+@Test
+public void methodSignaturePointcut() throws SecurityException, NoSuchMethodException {
+    AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+    pointcut.setExpression("execution(public int springbook.learningtest.spring.pointcut.Target.minus(int, int) throws java.lang.RuntimeException)");
+    
+    // Target.minus()
+    assertThat(pointcut.getClassFilter().matches(Target.class) &&
+        pointcut.getMethodMatcher().matches(
+                Target.class.getMethod("minus", int.class, int.class), null), is(true));
+    
+    // Target.plus()
+    assertThat(pointcut.getClassFilter().matches(Target.class) &&
+            pointcut.getMethodMatcher().matches(
+                    Target.class.getMethod("plus", int.class, int.class), null), is(false));
+    
+    // Bean.method()
+    assertThat(pointcut.getClassFilter().matches(Bean.class) &&
+            pointcut.getMethodMatcher().matches(
+                    Bean.class.getMethod("method"), null), is(false));
+}
+```
+
+포인트컷은 minus() 메소드의 시그니처이니 minus() 메소드와 그 클래스가 선정대상이 되어야 한다.
+
+minus() 메소드는 테스트 결과가 true 이다.
+
+반면에 Target 클래스의 다른 메소드나 Bean 클래스는 선정대상이 되지 않으므로 결과가 false 이다.
+
+#### 포인트컷 표현식 테스트
+
+
 
