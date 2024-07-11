@@ -366,5 +366,123 @@ minus() 메소드는 테스트 결과가 true 이다.
 
 #### 포인트컷 표현식 테스트
 
+포인트컷 표현식은 필수가 아닌 항목을 생략해서 간단히 할 수 있다.
+
+```java
+execution(int minus(int,int))
+```
+
+여기서 리턴타입에 대한 제한을 없애고 싶다면 리턴타입 영역에 `*` 와일드카드를 쓰자.
+
+```java
+execution(* minus(int,int))
+```
+
+파라미터의 개수와 타입을 무시하려면 () 안애 `..` 를 넣어준다.
+
+```java
+execution(* minus(..))
+```
+
+모든 메소드를 다 허용하고 싶다면 메소드 이름을 `*` 와일드카드를 쓰면 된다.
+
+```java
+execution(* *(..))
+```
+
+이렇게 하면 모든 오브젝트의 모든 메소드를 다 선택하는 가장 느슨한 포인트컷이 된다. 
+
+포인트컷과 클래스와 메소드를 비교해주는 테스트를 만들어본다.
+
+```java
+public void pointMatches(String expression, Boolean expected , Class<?> clazz, String methodName, Class<?>... args) throws Exception {
+    AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
+    pointcut.setExpression(expression);
+    
+    assertThat(pointcut.getClassFilter().matches(clazz) &&
+            pointcut.getMethodMatcher().matches(clazz.getMethod(methodName, args), null), is(expected));
+}
+
+public void targetClassPointcutMatches(String expression, boolean... expected) throws Exception {
+    pointMatches(expression, expected[0], Target.class, "hello");
+    pointMatches(expression, expected[1], Target.class, "hello", String.class);
+    pointMatches(expression, expected[2], Target.class, "plus", int.class, int.class);
+    pointMatches(expression, expected[3], Target.class, "minus", int.class, int.class);
+    pointMatches(expression, expected[4], Target.class, "method");
+    pointMatches(expression, expected[5], Bean.class, "method");
+}
+```
+
+이런식으로 포인트컷 표현식에 대해 각 오브젝트와 메소드에 적용 결과를 검증할 수 있다.
+
+
+#### 포인트컷 표현식을 이용하는 포인트컷 적용
+
+포인트컷 표현식은 메소드의 시그니처를 비교하는 방식인 execution() 외에도 몇 가지 표현식 스타일을 갖고 있다.
+
+대표적으로 bean() 이 있다. 포인트컷표현식을 `bean(*Service)` 라고 쓰면 id 가 Service 로 끝나는 모든 빈을 선택한다.
+
+또한 특정 애노테이션 적용된 것을 보고 포인트컷을 적용할 수도 있다.
+
+```java
+@annotation(org.springframework.transaction.annotation.Transactional)
+```
+
+앞에서 만든 transactionPointcut 빈은 제거한다.
+
+기존 포인트컷 빈의 표현식을 살펴보면 클래스 이름에 대한 패턴과 메소드 이름에 대한 패턴을 알 수 있다.
+
+```xml
+<property name="mappedClassName" value="*ServiceImpl"/>
+<property name="mappedName" value="upgrade*"/>
+```
+
+이제 동일한 기준의 포인트컷 표현식을 만들어보자
+
+```java
+execution(* *..*ServiceImpl.upgrade*(..))
+```
+
+이 된다.
+
+이 표현식을 사용하는 AspectJExpressionPointcut 을 빈으로 등록하자
+
+```xml
+<bean id="transactionPointcut" class="org.springframework.aop.aspectj.AspectJExpressionPointcut">
+    <property name="expression" value="execution(* *..*ServiceImpl.upgrade*(..))"/>
+</bean>
+```
+
+포인트컷 표현식을 사용하면 로직이 짧은 문자열에 담기기 때문에 클래스나 코드를 추가할 필요가 없어서 코드와 설정이 모두 단순해진다.
+
+하지만 런타임 시점까지 검증이나 기능 확인이 어렵다는 단점이 있다.
+
+따라서 충분히 학습하고, 다양한 테스트를 미리 만들어서 검증한 표현식을 사용하는 편이 좋다.
+
+스프링 개발팀이 제공하는 스프링 지원 툴을 사용해서 포인트컷이 선정한 빈이 어떤 것이 있는지 한눈에 확인하는 방법도 있다.
+
+#### 타입 패턴과 클래스 이름 패턴
+
+포인트컷 표현식의 클래스 이름에 적용되는 패턴은 클래스 이름 패턴이 아니라 타입 패턴이다.
+
+따라서 UserServiceImpl 을 상속받은 TestUserServiceImpl 의 이름을 TestUserService 로 변경해도 `execution(* *..*ServiceImpl.upgrade*(..))` 표현식에 의해 선택된다.
+
+부모클래스인 UserServiceImpl 이 ServiceImpl 로 끝나는 타입 패턴의 조건을 충족하기 때문이다.
+
+### 6.5.4 AOP란 무엇인가
+
+UserService 에 트랜잭션을 적용해온 과정을 정리해보자
+
+#### 트랜잭션 서비스 추상화
+
+트랜잭션 경제설정 코드를 비즈니스 로직이 담긴 코드에 넣으면 특정 트랜잭션 기술에 종속적인 코드가 된다.
+
+서비스 추상화 기법을 적용해서 트랜잭션 적용이라는 추상적인 작업을 유지하면서 구체적인 구현 방법에 종속되지 않도록 할 수 있었다.
+
+구체적인 구현은 런타임 시에 다이내믹하게 연결해주는 DI 를 활용한 접근 방법이었다.
+
+트랜잭션 추상화란 결국 인터페이스와 DI 를 통해 무엇을 하는지는 남기고, 그것을 어떻게 하는지를 분리한 것이었다.
+
+#### 프록시와 데코레이터 패턴
 
 
