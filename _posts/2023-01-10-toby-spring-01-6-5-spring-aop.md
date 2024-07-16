@@ -571,8 +571,116 @@ AOP 는 애플리케이션을 다양한 측면에서 독립적으로 모델링�
 
 #### 프록시를 이용한 AOP
 
+스프링은 IoC/DI 컨테이너와 다이내믹 프록시 데코레이터 패턴, 프록시 패턴, 자동 프록시 생성 기법, 빈 오브젝트의 후처리 조작 기법 등의 다양한 기술을 조합해 AOP 를 지원하고 있다.
 
+그 중 가장 핵심은 프록시를 이용하여 DI 로 연결된 빈 사이에 적용해 타깃의 메소드 호출 과정에 참여해서 부가기능을 제공한다는 것이다.
 
+그래서 스프링 AOP 는 특별한 기술이나 환경을 요구하지 않는다.
 
+스프링 AOP 의 부가기능을 담은 어드바이스가 적용되는 대상은 오브젝트의 메소드이다.
 
+독립적으로 개발한 부가기능 모듈을 다양한 타깃 오브젝트의 메소드에 다이내믹하게 적용해주기 위해 가장 중요한 역할을 맡고 있는게 바로 프록시이다.
 
+따라서 스프링 AOP 는 프록시 방식의 AOP 라고 할 수 있다.
+
+#### 바이트코드 생성과 조작을 통한 AOP
+
+AspectJ 는 프록시를 사용하지 않는 대표적인 AOP 기술이다.
+
+AspectJ 는 타깃 오브젝트를 뜯어고쳐서 부가기능을 직접 넣어주는 방법을 사용한다.
+
+컴파일된 타깃의 클래스 파일 자체를 수정하거나 클래스가 JVM 에 로딩되는 시점을 가로채서 바이트코드를 조작하여 부가기능을 제공한다.
+
+AspectJ 는 왜 클래스 파일 수정이나 바이트코드 조작같은 방법을 사용할까?
+
+첫째, 바이트코드를 조작해서 타깃 오브젝트를 직접 수정하면 스프링과 같은 DI 컨테이너의 도움을 받는 자동 프록시 생성 방식을 사용하지 않아도 AOP 를 적용할 수 있다.
+
+둘째, 프록시 방식보다 훨씬 강력하고 유연한 AOP 가 가능하다.
+
+바이트코드를 직접 조작해서 AOP 를 적용하면 오브젝트의 생성, 필드 값의 조회와 조작, 스태틱 초기화 등의 다양한 작업에 부가기능을 부여할 수 있다.
+
+클라이언트가 호출하는 메소드에만 부가기능 부여가 가능한 프록시를 사용하는 방식과 대비된다.
+
+private 메소드, 스태틱 메소드의 호출, 초기화, 필드 입출력 등에 부가기능을 부여하려면 바이트코드를 직접 조작해야만 가능하다.
+
+### 6.5.6 AOP 용어
+
+- 타깃 : 타깃은 부가기능을 부여할 대상이다.
+- 어드바이스 : 어드바이스는 타깃에 제공할 부가기능을 담은 모듈이다.
+- 조인 포인트
+  - 조인 포인트 join point 는 어드바이스가 적용될 수 있는 위치를 말한다.
+  - 스프링 프록시 AOP 에서 조인 포인트는 메소드의 실행 단계 뿐이다.
+- 포인트컷
+  - 포인트컷은 조인 포인트를 선별하는 작업 또는 그 기능을 정의한 모듈을 말한다.
+  - 스프링의 포인트컷은 메소드를 선정하는 기능을 가지고 있다.
+- 프록시
+  - 부가기능을 제공하는 오브젝트 이다.
+  - DI 를 통해 클라이언트에 주입되고, 클라이언트와 타깃의 사이에서 부가기능을 부여한다.
+- 어드바이저
+  - 어드바이저는 어떤 부가기능(어드바이스)을 어디(포인트컷)에 전달할 것인가를 알고 있는 모듈이다.
+  - 어드바이저를 AOP 작업이 정보로 활용한다.
+- 애스펙트
+  - 애스펙트는 AOP 의 기본 모듈이다.
+  - 한 개 또는 그 이상의 포인트컷과 어드바이스의 조합으로 만들어지고, 싱글톤의 형태이다.
+  - 스프링의 어드바이저는 아주 단순한 애스펙트라고 볼 수 있다.
+
+### 6.5.7 AOP 네임스페이스
+
+스프링의 프록시 방식 AOP 를 적용하려면 최소한 네 가지 빈을 등록해야 한다.
+
+- 자동 프록시 생성기
+  - 스프링의 DefaultAdvisorAutoProxyCreator 클래스를 빈으로 등록한다.
+- 어드바이스
+  - 부가기능을 구현한 클래스를 빈으로 등록한다.
+  - 직접 구현한 클래스를 사용한다.
+- 포인트컷
+  - 스프링의 AspectJExpressionPointcut 을 빈으로 등록하고 expression 프로퍼티에 포인트컷 표현식을 넣어준다.
+- 어드바이저
+  - 스프링의 DefaultPointcutAdvisor 클래스를 빈으로 등록해서 사용한다.
+
+어드바이스를 제외한 나머지는 모두 스프링이 직접 제공하는 클래스를 빈으로 등록하고 프로퍼티 설정만 해준 것이다.
+
+#### AOP 네임스페이스
+
+스프링은 AOP 와 관련된 태그를 정의해준 aop 스키마를 제공한다.
+
+aop 스키마에 정의된 태그는 별도의 네임스페이스를 지정해서 디폴트 네임스페이싀 <bean> 태그와 구분해서 사용할 수 있다.
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        ...
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+  <aop:config>
+  <aop:pointcut
+          id="transactionPointcut"
+          expression="execution(* *..*ServiceImpl.upgrade*(..))"
+  />
+  <aop:advisor
+          pointcut-ref="transactionPointcut"
+          advice-ref="transactionAdvice"
+  />
+  </aop:config>
+</beans>
+```
+<aop:config>, <aop:pointcut>, <aop:advisor> 세 가지 태그를 정의해두면 그에 따라 세 개의 빈이 자동으로 등록된다.
+
+직접 구현한 클래스로 등록한 빈인 transactionAdvice 를 제외한 AOP 관련 빈들은 의미를 잘 드러내는 독립된 전용 태그를 사용하도록 권장된다.
+
+#### 어드바이저 내장 포인트컷
+
+AspectJ 포인트컷 표현식을 활용하는 포인트컷은 스트링으로 된 표현식을 담은 expression 프로퍼티 하나만 설정해주면 사용할 수 있다.
+
+```xml
+
+<aop:config>
+    <sop:advisor
+            advice-ref="transactionAdvice"
+            pointcut="execution(* *..*ServiceImpl.upgrade*(..))"
+    />
+</aop:config>
+```
