@@ -132,3 +132,44 @@ TransactionAdvice 는 RuntimeException 이 발생하는 경우에만 트랜잭�
 특정 체크 예외의 경우에 트랜잭션을 롤백시키거나 특정 런타임 예외의 경우에 트랜잭션을 커밋시킬 수도 있다.
 
 #### 메소드 이름 패턴을 이용한 트랜잭션 속성 지정
+
+Properties 타입의 transactionAttributes 프로퍼티는 메소드 이름 패턴을 이용해서 트랜잭션 속성을 지정할 수 있다.
+
+```
+PROPAGATION_NAME, ISOLATION_NAME, readOnly, timeout_NNNN, -exception1, +Exception2
+```
+
+- PROPAGATION_NAME : 트랜잭션 전파 방식. 필수항목
+- ISOLATION_NAME : 격리수준. 생략 시 디폴트 격리 수준
+- readOnly : 읽기전용 여부. 생략 시 false
+- timeout_NNNN : 제한시간. timeout_초단위시간. 생략 시 제한시간 없음
+- -exception1 : 체크 예외 중에서 롤백 대상으로 추가할 항목. 1개 이상 등록가능
+- +Exception2 : 런타임 예외 중에서 롤백 대상에서 제외할 항목. 1개 이상 등록가능
+
+속성을 하나의 문자열로 표현하게 만든 이유는 트랜잭션 속성을 메소드 패턴에 따라 여러 개를 지정해줘야 하는데, 일일이 중첩된 태그와 프로퍼티로 설정하게 만들면 번거롭기 때문이다.
+
+```xml
+
+<bean id="transactionAdvice"
+      class="org.springframework.transaction.interceptor.TransactionInterceptor">
+    <property name="transactionManager" ref="transactionManager"/>
+    <property name="transactionAttributes">
+        <props>
+            <prop key="get*">PROPAGATION_REQUIRED,readOnly,timeout_30</prop>
+            <prop key="upgrade*">PROPAGATION_REQUIRED_NEW,ISOLATION_SERIALIZABLE</prop>
+            <prop key="*">PROPAGATION_REQUIRED</prop>
+        </props>
+    </property>
+</bean>
+```
+
+트랜잭션 속성 중 readyOnly 나 timeout 등은 트랜잭션이 처음 시작될 때가 아니면 적용되지 않는다.
+
+예컨데 get 으로 시작하는 메소드에서 트랜잭션이 시작되면 일기전용 제한시간이 적용되지만 그 외의 경우에는 진행 중인 트랜잭션의 속성을 따른다.
+
+가끔 메소드 이름이 하나 이상의 패턴과 일치하는 경우가 있다. 이 때는 메소드 이름 패턴 중에서 가장 정확히 일치하는 것이 적용된다.
+
+#### tx 네임스페이스를 이요한 설정 방법
+
+
+
