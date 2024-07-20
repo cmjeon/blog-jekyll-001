@@ -1,8 +1,8 @@
 ---
 layout: single
-title: "돈의 역사는 되풀이된다"
+title: "돈의 역사는 되풀이된다 - 홍춘욱"
 categories:
-  - "독서"
+  - "경제"
 tags:
   - "투자"
   - "환율"
