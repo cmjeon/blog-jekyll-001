@@ -2,7 +2,7 @@
 layout: single
 title: "돈의 역사는 되풀이된다"
 categories:
-  - "경제"
+  - "독서"
 tags:
   - "투자"
   - "환율"
