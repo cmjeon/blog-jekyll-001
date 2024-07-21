@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "가구, 집을 갖추다 - 김지수"
+title: "가구, 집을 갖추다"
 categories:
   - "공간"
 tags:
