@@ -149,7 +149,6 @@ PROPAGATION_NAME, ISOLATION_NAME, readOnly, timeout_NNNN, -exception1, +Exceptio
 속성을 하나의 문자열로 표현하게 만든 이유는 트랜잭션 속성을 메소드 패턴에 따라 여러 개를 지정해줘야 하는데, 일일이 중첩된 태그와 프로퍼티로 설정하게 만들면 번거롭기 때문이다.
 
 ```xml
-
 <bean id="transactionAdvice"
       class="org.springframework.transaction.interceptor.TransactionInterceptor">
     <property name="transactionManager" ref="transactionManager"/>
@@ -223,7 +222,6 @@ TransactionInterceptor 타입의 어드바이스 빈과 TransactionAttribute 타
 개발이 진행됨에 따라 단계적으로 속성을 추가해준다.
 
 ```xml
-
 <tx:advice id="transactionAdvice">
     <tx:attributes>
         <tx:method name="*" />
@@ -256,5 +254,21 @@ TransactionInterceptor 타입의 어드바이스 빈과 TransactionAttribute 타
 
 ### 6.6.4 트랜잭션 속성 적용
 
+#### 트랜잭션 경졔설정의 일원화
 
+일반적으로 특정 계층의 경계를 트랜잭션 경계와 일치시키는 것이 바람직하다.
+
+서비스 계층 오브젝트의 메소드가 트랜잭션 경계를 부여하기에 가장 적절한 대상이다.
+
+서비스 계층을 트랜잭션의 경계로 정했다면, 다른 계층이나 모듈에서 DAO 에 직접 접근하는 것은 차단해야 한다.
+
+DAO 가 제공하는 주요 기능은 서비스 계층에 위임 메소드를 만들어둘 필요가 있다.
+
+가능하면 다른 모듈의 DAO 에 접근할 때는 서비스 계층을 거치도록 하는 게 바람직하다.
+
+예를 들어 UserService 가 아니라면 UserDao 에 직접 접근하지 않고 UserService 의 메소드를 이용하는 편이 좋다.
+
+비즈니스 로직이 거의 없고 단순 DB 입출력과 검색 수준의 조화가 전부라면 서비스 계층을 없애고 DAO 를 트랜잭션 경계로 만들어도 된다.
+
+#### 서비스 빈에 적용되는 포인트컷 표현식 등록
 
