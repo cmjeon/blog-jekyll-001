@@ -272,3 +272,78 @@ DAO 가 제공하는 주요 기능은 서비스 계층에 위임 메소드를 �
 
 #### 서비스 빈에 적용되는 포인트컷 표현식 등록
 
+포인트컷 표현식을 수정해서 모든 비즈니스 로직의 서비스 빈에 트랜잭션이 적용되도록 한다.
+
+```xml
+
+<aop:config>
+    <aop:advisor
+            advice-ref="transactionAdvice"
+            pointcut="bean(*Service)"/>
+</aop:config>
+```
+
+이제 Service 로 끝나는 빈에 transactionAdvice 부가기능이 적용된다.
+
+#### 트랜잭션 속성을 가진 트랜잭션 어드바이스 등록
+
+TransactionAdvice 클래스로 정의했던 어드바이스 빈을 스프링의 TransactionInterceptor 를 이용하도록 변경한다.
+
+get 으로 시작하는 메소드는 읽기전용으로 하고 나머지는 디폴트 트랜잭션 속성을 따른다.
+
+<bean id="transactionAdvice" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+    <property name="transactionManager" ref="transactionManager"></property>
+    <property name="transactionAttributes">
+        <props>
+            <prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+            <prop key="*">PROPAGATION_REQUIRED</prop>
+        </props>
+    </property>
+</bean>
+
+어드바이스도 tx 스키마에 정의된 태그로 변경한다.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans ...
+        xmlns:tx="http://springframework.org/schema/tx"
+        xsi:schemaLocation="...
+        http://springframework.org/schema/tx
+        http://springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <tx:advice id="transactionAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+</beans>
+```
+
+#### 트랜잭션 속성 테스트
+
+UserServiceImpl 을 상속한 TestUserService 에 getAll() 메소드를 오버라이드해서 get 으로 시작하는 메소드가 읽기전용이고 쓰기작업이 허용되지 않는지 확인해보자.
+
+```java
+public class TestUserService extends UserServiceImpl { 
+    
+    //...
+  
+    @Override
+    public List<User> getAll() {
+        for(User user : super.getAll()) {
+            super.update(user);
+        }
+        return null;
+    }
+}
+```
+
+```java
+@Test(expected=TransientDataAccessResourceException.class)
+public void readOnlyTransactionAttribute() {
+    testUserService.getAll();
+}
+```
+
+getAll() 메소드를 호출했을 때 일기전용 속성으로 인해 예외가 발생한다는 것을 테스트하였다.
