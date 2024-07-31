@@ -8,30 +8,57 @@ author_profile: false
 
 웹 어플리케이션 개발자이자 프로젝트 관리자 전창민입니다.
 
-'프론트엔드와 백엔드'를 모두 경험하였으며, 결제업무에 대한 '고도화 경험'이 있습니다.
+다양한 도메인에서 프로젝트 관리 및 개발 경험을 가지고 있습니다.
 
-'개발과 프로젝트 관리의 고른 경험'으로 기능구현과 사업수행간의 균형적인 업무능력을 가지고 있습니다.
+이를 바탕으로 요구사항 정의에서 구현까지 원스탑으로 이슈를 해결한 경험이 다수 있습니다.
 
-고객과 적극적으로 소통하여 니즈를 파악하고, 납득가능한 결과를 도출할 수 있습니다.
+따라서 비즈니스 관점의 문제 발굴과 IT 관점 해결방안 수립이 가능합니다.
+
+고객과 개발자 간에 소통하며 니즈를 파악하고, 납득가능한 결과를 도출해 낼 수 있습니다.
 
 ### Contact
 
 e-mail : <chmin82@gmail.com>   
-blog : [cmjeon.github.io](https://cmjeon.github.io)   
-github : [https://github.com/cmjeon](https://github.com/cmjeon)
+blog : [cmjeon.github.io](https://cmjeon.github.io)  
+github : [https://github.com/cmjeon](https://github.com/cmjeon){:target="_blank"}
 
-### 주요 성과
+### 운영중인 서비스
 
-- 테이블 설계 및 API 개발, 화면 개발
-- 다양한 분야 프로젝트와 운영 경험
-- [DreamTodo](https://apps.apple.com/kr/app/dreamtodo-%EB%93%9C%EB%A6%BC%ED%88%AC%EB%91%90/id1617527029) 서비스를 개발하고 운영
+#### 목표관리 및 공유 앱 
+ 
+[DreamTodo](https://apps.apple.com/kr/app/dreamtodo-%EB%93%9C%EB%A6%BC%ED%88%AC%EB%91%90/id1617527029){:target="_blank"}
 
-### 기술
+- node.js, express.js 백엔드 개발
+- 테이블 설계(제3정규형 충족)
+- postgreSQL
+- mocha, jest, supertest 를 이용한 테스트케이스
+- Apple, Google 소셜로그인
+- JWT, Redis 를 이용한 토큰방식 인증체계
+- 네이버 뉴스, 통계청, 날씨, 연합뉴스, 코로나 API 연동
+- Jenkins, Docker 로 환경별 CI/CD 구축
 
-- 프론트엔드 : Vue.js, jsp, jQuery, HTML5, CSS3, javascript(es6), 
-- 백엔드 : Spring Framework 5, Spring Boot 2, java 11, node.js, Express
-- 데이터베이스 : Oracle 11g, MS-SQL, MariaDB, Redis
-- 기타 : git, AWS EC2, S3, docker, MediaWiki, JIRA & Confluence, Jekyll
+#### 금융 커뮤니티 앱
+
+[XTradingApp](https://apps.apple.com/kr/app/xtradingapp/id6450615991){:target="_blank"}
+
+- SpringBoot 3.0, Java 17 백엔드 개발
+- 테이블 설계(제3정규형 충족)
+- JPA, postgreSQL
+- Junit5, Mockito 를 이용한 테스트케이스
+- Apple, Google 소셜로그인
+- JWT, Redis 를 이용한 토큰방식 인증체계
+- UPbit, 매일경제, CoinDesk, CoinTelegraph API 연동
+- Jenkins, Docker 로 환경별 CI/CD 구축
+- Prometheus, Grafana, Promtail, Loki 를 이용한 모니터링 시스템
+- Jira, Confluence 기반 프로젝트 관리
+
+### 보유기술
+
+- 프론트엔드 : Javascript(es6), Vue.js, HTML5, CSS3, jsp, jQuery 
+- 백엔드 : Java 17, Spring Framework 6, Spring Boot 3, JPA, node.js, Express
+- 데이터베이스 : PostgreSQL, Oracle 11g, MariaDB, Redis
+- Dev/Ops : Jenkins, Docker, Prometheus, Grafana
+- 기타 : git, MediaWiki, JIRA & Confluence
 
 ### 자격증
 
@@ -41,70 +68,69 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 - 오라클 인증 자바 프로그래머 OCJP 1.6 (11.03.05)
 - 정보처리 기사 (09.06.01)
 
-### 학력
-
-- 국민대학교 정보시스템 전공
-
-## 이력
+## 이력 및 성과
 
 - 하나투어 2021년 10월 ~ 현재
 - 롯데정보통신 2010년 7월 ~ 2021년 9월
 
 ## 수행 프로젝트와 업무
 
-### 온라인서비스개발팀 (21.10 ~ 현재)
+### 온라인서비스 개발팀 (21.10 ~ 현재)
+
+#### 항공 + 호텔 예약/결제 고도화 (24.07 ~ 현재)
+
+- 역할 : 백엔드
+- 성과
+  - 호텔 다건 예약 및 취소프로세스 개발
+  - 복합 자동 예약취소 프로세스 개발
 
 #### 호텔 취소 고도화 (24.03 ~ 24.06)
 
-- 역할 : 백엔드 개발
+- 역할 : 백엔드
 - 성과
-  - 예약취소/결제취소 프로세스 개발
-  - 내부시스템 전용 취소 API 개발 
+  - 호텔 자동 예약취소 프로세스 개발
+  - 취소가능여부 기능, 취소수수료 계산 기능 구현
 
-#### 내맘대로 예약/결제 도입 (24.01 ~ 24.02)
+#### 항공 + 호텔 예약/결제 도입 (24.01 ~ 24.02)
 
-- 역할 : 백엔드 개발
-- 성과 : 
-  - 다건결제를 위한 테이블 변경 
+- 역할 : 백엔드
+- 성과
+  - 복합 결제로 전환을 위한 기존 테이블 설계 수정 및 마이그레이션 
   - 복합 예약/결제 프로세스 개발
 
-#### 상품평 고도화 (23.05 ~ 23.09)
+#### 패키지/호텔 여행후기 고도화 (23.05 ~ 23.09)
 
-- 역할 : 백엔드 개발
-- 성과 :
-  - 상품평 테이블 설계
-  - 상품평 조회 API 개발
-    - 'JPA', 'QueryDSL' 사용
-
-#### 항공부가서비스 도입 (23.03 ~ 23.04)
-
-- 역할 : 백엔드, 프론트엔드 개발
+- 역할 : 백엔드
 - 성과
-  - 부가서비스 제공사 API 연결
-    - 데이터 토큰화
-  - 항공부가서비스 화면영역 구현
+  - 여행후기 관련 데이터 모델링, 테이블 설계
+  - 여행후기 관련 API 구현
+
+#### 항공 부가서비스 도입 (23.03 ~ 23.04)
+
+- 역할 : 백엔드, 프론트엔드
+- 성과 : 부가서비스 제공사 데이터 토큰화
 
 #### 우리카드 독자 전환 (23.01 ~ 23.02)
 
-- 역할 : 프론트엔드 개발
-- 성과 : ISP 결제방식을 독자앱 결제방식으로 연결 전환
+- 역할 : 프론트엔드
+- 성과 : ISP 결제방식을 우리카드 독자앱 결제방식으로 전환
 
 #### 패키지 결제 고도화 (22.01 ~ 23.01)
 
-- 역할 : 백엔드, 프론트엔드 개발
-- 성과 : 
-  - 결제시스템 테이블 설계
-  - 기존 결제시스템의 호출 API 의 마이그레이션 개발
-  - 상품권 사용화면 개발
+- 역할 : 백엔드, 프론트엔드
+- 성과
+  - 결제관련 데이터 모델링, 테이블 설계
+  - 기존 결제시스템 호출 API 의 마이그레이션 개발
+  - 상품권 등록, 목록, 사용처리 화면 개발
 
-#### 호텔 검색개편
+#### 호텔 검색개편 (21.10 ~ 21.12)
 
 - 역할 : 호텔검색결과 및 상세페이지 개발
 - 성과 : 검색결과목록을 폴링방식에서 인피니트 스크롤 방식으로 변경하여 효율성 향상
 
 #### 운영
 
-- 레거시 결제시스템 운영, 장애대응
+- 레거시 결제시스템 운영 및 장애대응 등
 
 ### 이커머스운영팀 (21.04 ~ 21.09)
 
@@ -226,3 +252,7 @@ github : [https://github.com/cmjeon](https://github.com/cmjeon)
 
 - 영업시스템 유지운영
 - MS-SQL Stored Procedure 기반 예약시스템 관리
+
+### 학력
+
+- 국민대학교 정보시스템 전공
