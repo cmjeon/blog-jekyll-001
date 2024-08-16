@@ -7,19 +7,19 @@ tags:
   - "spring"
 ---
 
-# 1장 오브젝트와 의존관계
-
 ## 1.3 DAO 의 확장
 
 관심사에 따라 분리한 오브젝트들은 제각기 독특한 변화의 특징을 가진다.
 
 변화의 특징이 있다는 것은 변화의 이유와 시기 등이 다르다는 뜻이다.
 
-상속은 여러가지 단점이 많이 때문에 독립적인 클래스로 분리하는 것을 고민해야 한다.
+추상 클래스를 만들고 이를 상혹산 서브클래스에서 변화가 필요한 부분을 바꿔서 쓸 수 있게 만든 이유는 변화의 성격이 다른 것을 분리해서, 서로 영향을 주지 않은 채로 각각 필요한 시점에 독립적으로 변경할 수 있게 하기 위함이다.
+
+하지만 상속은 여러가지 단점이 많이 때문에 다른 방법을 고민해보아야 한다.
 
 ### 1.3.1 클래스의 분리
 
-DB 커넥션을 생성하는 기능을 가진 SimpleConnectionMaker 클래스를 만든다.
+DB 커넥션을 생성하는 기능을 가진 독립적인 SimpleConnectionMaker 클래스를 만든다.
 
 UserDao 는 new 키워드를 사용해 SimpleConnectionMaker 클래스의 객체를 만들고 add(), get() 메소드에서 필요할 때 가져다 쓰면 된다.
 
@@ -54,7 +54,7 @@ public class SimpleConnectionMaker {
 
   public Connection makeNewConnection() throws ClassNotFoundException, SQLException {
     Class.forName("com.mysql.jdbc.Driver");
-    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook?characterEncoding=UTF-8", "spring", "book");
+    Connection c = DriverManager.getConnection("jdbc:mysql://localhost/springbook", "spring", "book");
     return c;
   }
 
@@ -124,7 +124,7 @@ public class UserDao {
   private ConnectionMaker connectionMaker;
 
   public UserDao() {
-    this.connectionMaker = new DConnectionMaker();
+    this.connectionMaker = new DConnectionMaker(); // 여전히 UserDao 가 특정 커넥션 클래스에 종속됨 
   }
 
   public void add(User user) throws ClassNotFoundException, SQLException {
@@ -159,9 +159,18 @@ public class UserDao {
 
 다시 말하면 UserDao 와 UserDao 가 사용할 ConnectionMaker 의 구현 클래스 사이의 관계를 설정해주는 것에 대한 관심이다.
 
-오브젝트와 오브젝트 사이의 관계를 만들어주기 위해서는 생성자를 직접호출하는 방법도 있지만 외부에서 만든 것을 가져오는 방법도 있다.
+오브젝트와 오브젝트 사이의 관계를 만들어주기 위해서는 생성자를 직접 호출하는 방법도 있지만 외부에서 만든 것을 가져오는 방법도 있다.
 
 외부에서 만든 오브젝트를 전달받으려면 메소드 파라미터나 생성자 파라미터를 이용하면 된다.
+
+<div class="notice--primary" markdown="1">
+클래스 사이의 관계는 코드에 다른 클래스 이름이 나타나기 때문에 만들어지는 것이다.<br>
+하지만 오브젝트 사이의 관계는 그렇지 않다.<br>
+코드에서는 특정 클래스를 전혀 알 지 못하더라도 해당 클래스가 구현한 인터페이스를 사용했다면, 그 클래스의 오브젝트를 인터페이스 타입으로 받아서 사용할 수 있다.<br>
+바로 객체지향 프로그램에는 다형성이라는 특징이 있는 덕분이다.<br>
+<br>
+1장_ 오브젝트와 의존관계, 79.<br>
+</div>
 
 UserDao 의 클라이언트 오브젝트에서 UserDao 가 사용할 ConnectionMaker 의 구현 클래스를 결정하고 UserDao 에 제공해 주도록 만들어보자.
 
@@ -199,6 +208,8 @@ public class UserDaoTest {
 이제 UserDao 와 ConnectionMaker 가 잘 분리된 것 같다.
 
 UserDao 는 ConnectionMaker 라는 인터페이스를 통해 구현된 구현체만 받으면 된다.
+
+인터페이스를 도입하고 클라이언트의 도움을 얻는 방법은 상속을 사용해 비슷한 시도를 했을 경우에 비해서 훨씬 유연하다.
 
 ### 1.3.4 원칙과 패턴
 
