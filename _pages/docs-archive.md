@@ -5,4 +5,4 @@ collection: docs
 permalink: /docs/
 ---
 
-Sample document listing for the collection `_books`.
+Sample document listing for the collection `_docs`.
