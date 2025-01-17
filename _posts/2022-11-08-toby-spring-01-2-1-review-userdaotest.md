@@ -7,23 +7,25 @@ tags:
   - "테스트"
 ---
 
-[https://www.yes24.com/Product/Goods/7516911](https://www.yes24.com/Product/Goods/7516911)
-
 # 2장 테스트
 
 스프링이 개발자에게 제공하는 가장 중요한 가치는 객체지향과 테스트라고 말할 수 있다.
 
 애플리케이션은 계속 변하고 복잡해져 간다.
 
-그 변화에 대응할  수 있는 방법이 확장과 변화를 고려한 객체지향적 설계와 만들어진 코드에 확신을 줄 수 있는 테스트이다.
+그 변화에 대응할  수 있는 두가지 전략이 확장과 변화를 고려한 객체지향적 설계와 만들어진 코드에 확신을 줄 수 있는 테스트이다.
 
-<!--more-->
+테스트는 스프링을 학습하는 데 있어 가장 효과적인 방법 중 하나이다.
 
 ## 2.1 UserDaoTest 다시 보기
 
 ### 2.1.1 테스트의 유용성
 
-만든 코드는 어떤 방법으로든 테스트해야 한다.
+<div class="notice--primary" markdown="1">
+만든 코드는 어떤 방법으로든 테스트해야 한다.<br>
+<br>
+2장_ 테스트, 146.<br>
+</div>
 
 코드의 구조와 설계, 적용한 기술이 변경되더라도 처음의 기능을 잘 수행한다는 걸 테스트할 수 없다면 자신감있게 코드를 수정할 수 없다.
 
@@ -34,7 +36,7 @@ tags:
 ```java
 public class UserDaoTest {
   public static void main(String[] args) throws SQLException {
-    ApplicationContext context = new GenericXmlApplicationContext("applicationcontext.xml");
+    ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
 
     UserDao dao = context.getBean("userDao", UserDao.class);
 
