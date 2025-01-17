@@ -11,7 +11,9 @@ tags:
 
 ### 1.4.1 오브젝트 팩토리
 
-UserDaoTest 가 하던 UserDao 에 ConnectionMaker 을 등록하는 일을 맡길 UserDaoFactory 를 만든다.
+#### 팩토리
+
+UserDaoTest 가 하던 특정 ConnectionMaker 를 만들고, UserDao 에 ConnectionMaker 을 연결하는 일을 대신할 UserDaoFactory 를 만든다.
 
 ```java
 public class UserDaoFactory {
@@ -29,7 +31,7 @@ public class UserDaoFactory {
 }
 ```
 
-이제 UserDaoTest 에서는 UserDao 를 사용하기만 하면 된다.
+이제 UserDaoTest 에서는 UserDaoFactory 에서 나온 UserDao 객체를 사용하기만 하면 된다.
 
 ```java
 public class UserDaoTest {
@@ -42,15 +44,17 @@ public class UserDaoTest {
 }
 ```
 
-이제 UserDao 와 ConnectionMaker 는 각각 데이터로직와 기술로직을 담당하게 된다.
+#### 설계도로서의 팩토리
 
-UserDaoFactory 는 오브젝트간의 구조와 관계를 정의하는 역할을 맡게 된다.
+분리된 UserDao 와 ConnectionMaker 는 어플리케이션의 구성요소로 데이터로직 및 기술로직을 담당하게 된다.
 
-UserDaoFactory 를 만듦으로써 애플리케이션의 구성요소 역할을 하는 오브젝트와 구조를 결정하는 오브젝트를 분리해냈다.
+그리고 UserDaoFactory 는 이 오브젝트간의 구조와 관계를 정의하는 역할을 맡게 된다.
+
+UserDaoFactory 를 만듦으로써 애플리케이션의 구성요소 역할의 오브젝트와 구조를 결정하는 역할의 오브젝트가 구분되게 되었다.
 
 ### 1.4.2 오브젝트 팩토리의 활용
 
-만약 다른 Dao 가 추가된다면 DaoFactory 에 해당 Dao 용 ConnectionMaker 를 생성하는 코드가 반복된다.
+만약 다른 Dao 가 추가된다면 DaoFactory 에 해당 Dao 용 ConnectionMaker 를 생성하는 코드가 중복된다.
 
 ```java
 public class DaoFactory {
@@ -70,7 +74,7 @@ public class DaoFactory {
 }
 ```
 
-따라서 ConnectionMaker 를 생성하는 코드를 추출한다.
+이런 경우는 ConnectionMaker 를 생성하는 코드를 추출하여 중복을 피할 수 있다.
 
 ```java
 public class DaoFactory {

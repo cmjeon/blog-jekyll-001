@@ -31,7 +31,7 @@ tags:
 
 미래를 준비하는 데 있어 가장 중요한 과제는 변화에 대비하는 것이다.
 
-가장 좋은 대첵은 변화의 폭을 최소한으로 줄여주는 것이다.
+가장 좋은 대책은 변화의 폭을 최소한으로 줄여주는 것이다.
 
 변경이 일어날 때 필요한 작업을 최소화하고, 그 변경이 다른 곳에 문제를 일으키지 않게 하는 것은 `분리와 확장`을 고려한 설계로 가능하다.
 
@@ -39,7 +39,7 @@ tags:
 
 변화가 한 번에 한 가지 관심에 집중돼서 일어난다면, 우리가 준비해야 할 일은 한 가지 관심이 한 군데에 집중되게 만드는 것이다.
 
-프로그래밍의 기초 개념 중에  `관심사의 분리` 라는 게 있다.
+프로그래밍의 기초 개념 중에 `관심사의 분리` 라는 게 있다.
 
 이를 객체지향에 적용해보면, 관심이 같은 것끼리는 하나의 객체 안으로 모이게 하고, 관심이 다른 것은 가능한 한 따로 떨어져서 서로 영향을 주지 않도록 분리하는 것이다.
 
@@ -132,7 +132,7 @@ UserDao 를 상속하는 DUserDao 와 NUserDao 를 만들고, getConnection() �
 public class DUserDao extends UserDao {
 
   protected Connection getConnection() throws ClassNotFoundException, SQLException {
-    // D 사 DB connection 생성코드
+    // D 사의 DB connection 생성코드
   }
 
 }
@@ -142,7 +142,7 @@ public class DUserDao extends UserDao {
 public class NUserDao extends UserDao {
 
   protected Connection getConnection() throws ClassNotFoundException, SQLException {
-      // N 사 DB connection 생성코드
+      // N 사의 DB connection 생성코드
   }
 
 }
@@ -184,8 +184,10 @@ UserDao 에서는 getConnection() 으로 Connection 타입의 객체를 사용�
 
 자바는 클래스의 다중상속을 허용하지 않기 때문에 만약 상속을 사용하고 있는 부모클래스라면 다른 상속을 적용하지 못한다.
 
-게다가 상속을 통한 상하위 클래스의 관계는 생각보다 밀접하고, 두 가지 다른 관심사에 대한 긴밀한 결합을 허용한다.
+또한 상속을 통한 상하위 클래스의 관계는 생각보다 밀접하고, 두 가지 다른 관심사에 대한 긴밀한 결합을 허용한다.
 
 예컨데 자식클래스가 부모클래스의 기능을 직접 사용할 수도 있다.
 
-그리고 UserDao 외에 Dao 클래스가 만들어질 때마다 getConnection() 의 구현 코드가 매 Dao 클래스마다 중복되서 나타나야 하는 문제가 발생한다.
+부모클래스 내부의 변경이 있을 때 서브클래스를 함께 수정해야 할 수도 있다. 혹은 부모클래스가 변경되지 않도록 제약해야 할 수도 있다.
+
+DB 커넥션을 생성하는 코드를 다른 DAO 에서 재사용하지 못하는 것도 단점이다. UserDao 외에 Dao 클래스가 만들어지면 getConnection() 의 구현 코드를 Dao 클래스에 중복해줘야 하는 문제가 발생한다.

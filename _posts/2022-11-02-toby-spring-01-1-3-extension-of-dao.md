@@ -13,7 +13,7 @@ tags:
 
 변화의 특징이 있다는 것은 변화의 이유와 시기 등이 다르다는 뜻이다.
 
-추상 클래스를 만들고 이를 상혹산 서브클래스에서 변화가 필요한 부분을 바꿔서 쓸 수 있게 만든 이유는 변화의 성격이 다른 것을 분리해서, 서로 영향을 주지 않은 채로 각각 필요한 시점에 독립적으로 변경할 수 있게 하기 위함이다.
+추상 클래스를 만들고 이를 상속한 서브클래스에서 변화가 필요한 부분을 바꿔서 쓸 수 있게 만든 이유는 변화의 성격이 다른 것을 분리해서, 서로 영향을 주지 않은 채로 각각 필요한 시점에 독립적으로 변경할 수 있게 하기 위함이다.
 
 하지만 상속은 여러가지 단점이 많이 때문에 다른 방법을 고민해보아야 한다.
 
@@ -24,7 +24,7 @@ DB 커넥션을 생성하는 기능을 가진 독립적인 SimpleConnectionMaker
 UserDao 는 new 키워드를 사용해 SimpleConnectionMaker 클래스의 객체를 만들고 add(), get() 메소드에서 필요할 때 가져다 쓰면 된다.
 
 ```java
-public abstract class UserDao {
+public class UserDao {
 
   private SimpleConnectionMaker simpleConnectionMaker;
 
@@ -47,7 +47,7 @@ public abstract class UserDao {
 }
 ```
 
-SimpleConnectionMaker 클래스는 아래와 같이 구현한다.
+SimpleConnectionMaker 클래스는 아래와 같이 DB 커넥션 생성 기능을 구현한다.
 
 ```java
 public class SimpleConnectionMaker {
@@ -63,7 +63,7 @@ public class SimpleConnectionMaker {
 
 성격이 다른 코드를 분리한 것은 좋은데, 이렇게 되면 이제는 DB 커넥션 기능의 확장이 어렵다.
 
-더이상 NUserDao, DUserDao 같이 다른 getConnection() 메소드의 기능을 구현할 수가 없다.
+더 이상 NUserDao, DUserDao 같이 다른 getConnection() 메소드의 기능을 구현할 수가 없다.
 
 왜냐하면 UserDao 가 SimpleConnectionMaker 클래스에 종속되어 있기 때문이다.
 
@@ -166,13 +166,13 @@ public class UserDao {
 <div class="notice--primary" markdown="1">
 클래스 사이의 관계는 코드에 다른 클래스 이름이 나타나기 때문에 만들어지는 것이다.<br>
 하지만 오브젝트 사이의 관계는 그렇지 않다.<br>
-코드에서는 특정 클래스를 전혀 알 지 못하더라도 해당 클래스가 구현한 인터페이스를 사용했다면, 그 클래스의 오브젝트를 인터페이스 타입으로 받아서 사용할 수 있다.<br>
+코드에서는 특정 클래스를 전혀 알지 못하더라도 해당 클래스가 구현한 인터페이스를 사용했다면, 그 클래스의 오브젝트를 인터페이스 타입으로 받아서 사용할 수 있다.<br>
 바로 객체지향 프로그램에는 다형성이라는 특징이 있는 덕분이다.<br>
 <br>
 1장_ 오브젝트와 의존관계, 79.<br>
 </div>
 
-UserDao 의 클라이언트 오브젝트에서 UserDao 가 사용할 ConnectionMaker 의 구현 클래스를 결정하고 UserDao 에 제공해 주도록 만들어보자.
+UserDao 의 클라이언트에서 UserDao 가 사용할 ConnectionMaker 의 구현 클래스를 결정하고 UserDao 에 제공해 주도록 만들어보자.
 
 이를 위해 UserDao 생성자를 조금 고쳐본다.
 
@@ -191,7 +191,7 @@ public class UserDao {
 }
 ```
 
-이제 ConnectionMaker 의 생성을 UserDao 를 사용하는 쪽인 UserDaoTest 클래스에 맡긴다.
+이제 ConnectionMaker 의 생성을 UserDao 를 사용하는 클라이언트 쪽인 UserDaoTest 클래스에 맡긴다.
 
 ```java
 public class UserDaoTest {
